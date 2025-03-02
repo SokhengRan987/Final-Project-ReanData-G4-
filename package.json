@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "flowbite-react": "^0.10.2",
     "lucide-react": "^0.476.0",
     "react": "^19.0.0",
