@@ -5,12 +5,13 @@ import istadlogo from "../img/istad.png";
 export default function Footer() {
   return (
     <div>
-      <footer class="bg-white dark:bg-gray-900">
+      <hr />
+      <footer class="bg-white dark:bg-gray-900 shadow-md">
         <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-          <div class="md:flex md:justify-center gap-48">
+          <div class="md:flex md:justify-center gap-[700px]">
             <div class="mb-6 md:mb-0">
-              <a href="#" class="flex items-center mb-6">
-                <img src={istadlogo} class="h-14 me-3" alt="Reandata Logo" />
+              <a href="https://www.cstad.edu.kh/" target="_blank" class="flex items-center mb-6">
+                <img src={istadlogo} class="h-14 me-3" alt="Istad Logo" />
               </a>
               <a href="#" class="flex items-center">
                 <img src={reandatalogo} class="h-8 me-3" alt="Reandata Logo" />
