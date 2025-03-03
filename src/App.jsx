@@ -9,21 +9,21 @@ import NavbarComponent from "./components/NavbarComponent";
 
 function App() {
   const [count, setCount] = useState(0);
-  useEffect(() => {
-    const handleWheel = (event) => {
-      if (event.ctrlKey) return; // Allow zooming with Ctrl + Scroll
+  // useEffect(() => {
+  //   const handleWheel = (event) => {
+  //     if (event.ctrlKey) return; // Allow zooming with Ctrl + Scroll
   
-      event.preventDefault();
-      window.scrollBy({
-        top: event.deltaY > 0 ? 250 : -250, // Faster scrolling
-        behavior: "smooth",
-      });
-    };
+  //     event.preventDefault();
+  //     window.scrollBy({
+  //       top: event.deltaY > 0 ? 300 : -300, // Faster scrolling
+  //       behavior: "smooth",
+  //     });
+  //   };
   
-    window.addEventListener("wheel", handleWheel, { passive: false });
+  //   window.addEventListener("wheel", handleWheel, { passive: false });
   
-    return () => window.removeEventListener("wheel", handleWheel);
-  }, []);
+  //   return () => window.removeEventListener("wheel", handleWheel);
+  // }, []);
   
   
 
