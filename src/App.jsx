@@ -6,6 +6,7 @@ import About from "./pages/About";
 import Navbar from "./components/NavbarComponent";
 import Footer from "./components/Footer";
 import NavbarComponent from "./components/NavbarComponent";
+import HelpAndSupport from "./pages/HelpAndSupport";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -34,6 +35,7 @@ function App() {
         <h1 className="text-5xl text-blue-400 text-center py-4 uppercase rounded-lg h-screen">
           Kjel tver nas
         </h1>
+        <HelpAndSupport/>
       </main>
       <Footer />
     </>
