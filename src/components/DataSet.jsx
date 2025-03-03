@@ -154,8 +154,8 @@ const DataSet = () => {
         </div>
       </div>
       <div className="w-full py-8 md:py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        <div className="container mx-auto px-4 flex justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"style={{width:"1278px"}}>
             {steps.map((step, index) => (
               <div 
                 key={index}
