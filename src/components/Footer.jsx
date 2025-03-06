@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <div>
       <hr />
-      <footer className="bg-white dark:bg-gray-900 shadow-md">
+      <footer className="bg-white shadow-md">
         <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
           {/* Flex container for logo and links */}
           <div className="md:flex md:justify-between md:items-start">
@@ -29,10 +29,10 @@ export default function Footer() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12">
               {/* Features section */}
               <div>
-                <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase ">
                   Features
                 </h2>
-                <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                <ul className="text-gray-500 font-medium">
                   <li className="mb-4">
                     <a href="#" className="hover:underline">
                       Datasets
@@ -58,10 +58,10 @@ export default function Footer() {
 
               {/* Contact Us section */}
               <div>
-                <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase ">
                   Contact Us
                 </h2>
-                <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                <ul className="text-gray-500 font-medium">
                   <li className="mb-4">
                     <a
                       href="mailto:reandata.istad@gmail.com"
@@ -81,11 +81,11 @@ export default function Footer() {
           </div>
 
           {/* Divider */}
-          <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+          <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
 
           {/* Copyright section */}
           <div className="sm:flex sm:items-center sm:justify-center">
-            <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+            <span className="text-sm text-gray-500 sm:text-center ">
               © 2025{" "}
               <a href="#" className="hover:underline">
                 Reandata™

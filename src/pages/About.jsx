@@ -22,7 +22,6 @@ export default function About() {
   // }, []);
   return (
     <>
-      <NavbarComponent />
       <div class="flex min-h-screen items-center justify-center p-10">
         <div class="w-max">
           <h1 class="animate-typing overflow-hidden whitespace-nowrap border-r-4 border-r-black pr-5 text-5xl text-black font-bold">
@@ -30,8 +29,6 @@ export default function About() {
           </h1>
         </div>
       </div>
-
-      <Footer />
     </>
   );
 }
