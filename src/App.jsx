@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { Button } from "flowbite-react";
 import "./App.css";
-import About from "./pages/About";
-import Navbar from "./components/NavbarComponent";
+// import FoodAndBeverage from "./components/FoodAndBeverage";
 import Footer from "./components/Footer";
 import NavbarComponent from "./components/NavbarComponent";
 import DataSet from "./components/DataSet.JSX";
@@ -18,6 +16,7 @@ function App() {
           Kjel tver nas
         </h1> */}
         <DataSet/>
+        {/* <FoodAndBeverage/> */}
       </main>
       <Footer />
     </>
