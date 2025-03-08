@@ -1,21 +1,30 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router";
-import { Routes, Route } from "react-router";
+import { BrowserRouter } from "react-router-dom"; // Corrected import for React Router
+import { Routes, Route } from "react-router-dom"; // Corrected import for React Router
+import { Provider } from "react-redux"; // Missing import for Redux Provider
 import "./index.css";
 import App from "./App.jsx";
-import About from "./pages/About.jsx";
+import Testing from "./pages/Testing.jsx";
 import Rootlayout from "./components/Rootlayout.jsx";
+import { store } from "./redux/store.js";
+import DistributionPerContinent from "./pages/DistributionPerContinent.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <StrictMode>
-      <Routes>
-        <Route element = {<Rootlayout/>}>
-          <Route path="/" element={<App />} />
-          <Route path="/about-us" element={<About />} />
-        </Route>
-      </Routes>
-    </StrictMode>
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <StrictMode>
+        <Routes>
+          <Route element={<Rootlayout />}>
+            <Route path="/" element={<App />} />
+            <Route path="/testing" element={<Testing />} />
+            <Route
+              path="/distribution"
+              element={<DistributionPerContinent />}
+            />
+          </Route>
+        </Routes>
+      </StrictMode>
+    </BrowserRouter>
+  </Provider>
 );

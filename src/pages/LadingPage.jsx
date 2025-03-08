@@ -33,7 +33,7 @@ export default function LandingPage() {
             {/* Left Content */}
             <div className="lg:col-span-7 text-center lg:text-left">
               <h2 className="max-w-2xl mb-4 text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-medium tracking-tight">
-                Unlock Your Data Potential With{" "}
+                Unlock Your Data Potential With {" "}
                 <span className="text-[#22B04B]"> Reandata</span>
               </h2>
               <p className="max-w-2xl mb-6 text-gray-500 leading-relaxed md:text-lg lg:text-xl">
@@ -87,7 +87,7 @@ export default function LandingPage() {
               data-aos="fade-left"
             >
               <h2 className="max-w-2xl mx-auto mb-4 text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-medium tracking-tight">
-                Start Your Data Analytics Journey With{" "}
+                Start Your Data Analytics Journey With {" "}
                 <span className="text-[#3C55A5]"> Reandata</span>
               </h2>
               <p className="max-w-2xl mx-auto mb-6 text-gray-500 leading-relaxed md:text-lg lg:text-xl">
@@ -210,7 +210,7 @@ export default function LandingPage() {
               data-aos-duration="1000"
             >
               <h2 className="max-w-2xl mx-auto mb-4 text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-medium tracking-tight ">
-                Why Data Analytics{" "}
+                Why Data Analytics {" "}
                 <span className="bg-gradient-to-r from-blue-400 to-green-300 bg-clip-text text-transparent bg-[length:200%_200%] animate-gradient">
                   Matters
                 </span>
@@ -292,8 +292,8 @@ export default function LandingPage() {
                 Learn About Graphs
               </h2>
               <p className="max-w-2xl mx-auto mb-6 text-gray-500 leading-relaxed md:text-lg lg:text-xl ">
-                Graphs make data easy to understand. Here are some examples
-                we will describe briefly.
+                Graphs make data easy to understand. Here are some examples we
+                will describe briefly.
               </p>
             </div>
           </div>

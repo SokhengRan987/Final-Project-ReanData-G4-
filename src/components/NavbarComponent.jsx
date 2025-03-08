@@ -110,7 +110,7 @@ export default function NavbarComponent() {
             </li>
             <li>
               <a
-                href="/about-us"
+                href="/testing"
                 className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm md:hover:bg-transparent md:hover:text-blue-700 "
               >
                 About Us
