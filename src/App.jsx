@@ -2,13 +2,11 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Button } from "flowbite-react";
 import "./App.css";
-import About from "./pages/About";
-import Navbar from "./components/NavbarComponent";
-import Footer from "./components/Footer";
-import NavbarComponent from "./components/NavbarComponent";
+import LadingPage from "./pages/LadingPage";
 
 function App() {
   const [count, setCount] = useState(0);
+<<<<<<< HEAD
   // useEffect(() => {
   //   const handleWheel = (event) => {
   //     if (event.ctrlKey) return; // Allow zooming with Ctrl + Scroll
@@ -27,15 +25,11 @@ function App() {
   
   
 
+=======
+>>>>>>> 21a1bc76a7437ab7b2b5946b23e6ac2c644d8478
   return (
     <>
-      <NavbarComponent />
-      <main className="pt[60px]">
-        <h1 className="text-5xl text-blue-400 text-center py-4 uppercase rounded-lg h-screen">
-          Kjel tver nas
-        </h1>
-      </main>
-      <Footer />
+      <LadingPage/>
     </>
   );
 }
