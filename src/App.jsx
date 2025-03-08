@@ -6,7 +6,7 @@ import LadingPage from "./pages/LadingPage";
 
 function App() {
   const [count, setCount] = useState(0);
-<<<<<<< HEAD
+
   // useEffect(() => {
   //   const handleWheel = (event) => {
   //     if (event.ctrlKey) return; // Allow zooming with Ctrl + Scroll
@@ -25,11 +25,10 @@ function App() {
   
   
 
-=======
->>>>>>> 21a1bc76a7437ab7b2b5946b23e6ac2c644d8478
   return (
     <>
       <LadingPage/>
+      
     </>
   );
 }
