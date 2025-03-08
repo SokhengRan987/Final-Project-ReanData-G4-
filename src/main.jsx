@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router";
 import "./index.css";
 import App from "./App.jsx";
 import About from "./pages/About.jsx";
-import Rootlayout from "./pages/Rootlayout.jsx";
+import Rootlayout from "./components/Rootlayout.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>

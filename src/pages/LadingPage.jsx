@@ -2,6 +2,10 @@ import React, { useEffect } from "react";
 import heroSection from "../img/hero-section-gif.gif";
 import startYourJourney from "../img/start-your-journey.gif";
 import whyDataAnalytics from "../img/why-data.gif";
+import collectData from "../img/collect-data.gif";
+import dataCleaning from "../img/data-cleaning.gif";
+import dataAnalysis from "../img/analysis.gif";
+import visualization from "../img/visualization.gif";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 
@@ -79,19 +83,19 @@ export default function LandingPage() {
           <div className="max-w-screen-xl mx-auto lg:grid lg:grid-cols-12 gap-8 items-center">
             {/* Left Content */}
             <div
-              className="lg:col-span-7 text-center lg:text-left border-2 border-blue-100 shadow-lg shadow-blue-200/50 p-4 rounded-[20px]"
+              className="mb-4 lg:col-span-7 text-center lg:text-left border-2 border-blue-100 shadow-lg shadow-blue-200/50 p-4 rounded-[20px]"
               data-aos="fade-left"
             >
-              <h2 className="max-w-2xl mb-4 text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-medium tracking-tight">
+              <h2 className="max-w-2xl mx-auto mb-4 text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-medium tracking-tight">
                 Start Your Data Analytics Journey With{" "}
                 <span className="text-[#3C55A5]"> Reandata</span>
               </h2>
-              <p className="max-w-2xl mb-6 text-gray-500 leading-relaxed md:text-lg lg:text-xl">
+              <p className="max-w-2xl mx-auto mb-6 text-gray-500 leading-relaxed md:text-lg lg:text-xl">
                 ReanData is an easy-to-use platform designed for beginners.
                 Learn at your own pace, explore real projects, and open the door
                 to new career possibilities in data analytics.
               </p>
-              <p className="max-w-2xl mb-6 text-gray-500 leading-relaxed md:text-lg lg:text-xl">
+              <p className="max-w-2xl mx-auto mb-6 text-gray-500 leading-relaxed md:text-lg lg:text-xl">
                 Our goal is to make learning data analytics simple, fun, and
                 free for everyone. Whether you're just starting or looking to
                 improve, we have everything you need to get started.
@@ -131,7 +135,7 @@ export default function LandingPage() {
               <div
                 className="p-6 bg-white rounded-[20px] shadow-xl transition-transform transform hover:scale-[1.02] flex flex-col items-center text-center border-2 border-blue-100 hover:shadow-blue-50 hover:ring-2 hover:ring-blue-400"
                 data-aos="slide-up"
-                data-aos-delay="100"
+                data-aos-delay="25"
               >
                 <div className="text-blue-500 text-5xl mb-4">📊</div>
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">
@@ -148,7 +152,7 @@ export default function LandingPage() {
               <div
                 className="p-6 bg-white rounded-[20px] shadow-xl transition-transform transform hover:scale-[1.02] flex flex-col items-center text-center border-2 border-blue-100 hover:shadow-blue-50 hover:ring-2 hover:ring-blue-400"
                 data-aos="slide-up"
-                data-aos-delay="150"
+                data-aos-delay="75"
               >
                 <div className="text-green-500 text-5xl mb-4">⚙️</div>
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">
@@ -165,7 +169,7 @@ export default function LandingPage() {
               <div
                 className="p-6 bg-white rounded-[20px] shadow-xl transition-transform transform hover:scale-[1.02] flex flex-col items-center text-center border-2 border-blue-100 hover:shadow-blue-50 hover:ring-2 hover:ring-blue-400"
                 data-aos="slide-up"
-                data-aos-delay="200"
+                data-aos-delay="125"
               >
                 <div className="text-yellow-500 text-5xl mb-4">📈</div>
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">
@@ -194,7 +198,7 @@ export default function LandingPage() {
               <img
                 src={whyDataAnalytics} // Replace with a relevant image if you have one
                 alt="Why Data Analytics Illustration"
-                className="w-full max-w-md sm:max-w-lg lg:max-w-xl h-auto hover:scale-[1.03] hover:cursor-pointer transition-all duration-150 ease-in-out"
+                className="w-full mb-4 max-w-md sm:max-w-lg lg:max-w-xl h-auto hover:scale-[1.03] hover:cursor-pointer transition-all duration-150 ease-in-out"
               />
             </div>
 
@@ -205,19 +209,19 @@ export default function LandingPage() {
               data-aos-delay="200"
               data-aos-duration="1000"
             >
-              <h2 className="max-w-2xl mb-4 text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-medium tracking-tight ">
+              <h2 className="max-w-2xl mx-auto mb-4 text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-medium tracking-tight ">
                 Why Data Analytics{" "}
                 <span className="bg-gradient-to-r from-blue-400 to-green-300 bg-clip-text text-transparent bg-[length:200%_200%] animate-gradient">
                   Matters
                 </span>
               </h2>
-              <p className="max-w-2xl mb-6 text-gray-500 leading-relaxed md:text-lg lg:text-xl ">
+              <p className="max-w-2xl mx-auto mb-6 text-gray-500 leading-relaxed md:text-lg lg:text-xl ">
                 Data analytics empowers you to uncover hidden patterns, make
                 informed decisions, and solve real-world problems. In today's
                 data-driven world, it's a skill that opens doors to countless
                 opportunities.
               </p>
-              <p className="max-w-2xl mb-6 text-gray-500 leading-relaxed md:text-lg lg:text-xl ">
+              <p className="max-w-2xl mx-auto mb-6 text-gray-500 leading-relaxed md:text-lg lg:text-xl ">
                 Whether you're a beginner or a professional, understanding data
                 analytics helps you stay ahead, boost your career, and
                 contribute to impactful projects—all with the power of numbers.
@@ -234,46 +238,98 @@ export default function LandingPage() {
               data-aos="slide-up"
               data-aos-delay="75"
             >
-              <h2 className="mb-8 text-3xl uppercase sm:text-4xl md:text-5xl xl:text-6xl font-bold tracking-tight bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient"
-              data-aos-delay="75"
-              >
+              <h2 className="mb-8 text-3xl uppercase sm:text-4xl md:text-5xl xl:text-6xl font-bold tracking-tight bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient">
                 Basic Concepts
               </h2>
             </div>
           </div>
           {/* Card Section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-screen-xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-screen-xl mx-auto">
             {/* card 1 */}
             <BasicConceptCard
               title="Data Collection"
               description="Gather data from surveys, databases, APIs, and more."
-              icon={whyDataAnalytics}
+              icon={collectData}
               alt="whyDataAnalytics"
-              delay="100"
+              delay="25"
             />
             {/* card 2 */}
-            <BasicConceptCard 
-            title="Data Cleaning"
-            description="Handle missing data, remove duplicates, and correct errors."
-            icon={whyDataAnalytics}
-            alt="whyDataAnalytics"
-            delay="150"
+            <BasicConceptCard
+              title="Data Cleaning"
+              description="Handle missing data, remove duplicates, and correct errors."
+              icon={dataCleaning}
+              alt="whyDataAnalytics"
+              delay="75"
             />
             {/* card 3 */}
-            <BasicConceptCard 
-            title="Data Analysis"
-            description="Use techniques like descriptive statistics and regression."
-            icon={whyDataAnalytics}
-            alt= "whyDataAnalytics"
-            delay="200"
+            <BasicConceptCard
+              title="Data Analysis"
+              description="Use techniques like descriptive statistics and regression."
+              icon={dataAnalysis}
+              alt="whyDataAnalytics"
+              delay="125"
             />
             {/* card 4 */}
             <BasicConceptCard
-            title="Data visualization"
-            description="Present data using charts, graphs, and dashboards."
-            icon={whyDataAnalytics}
-            alt="whyDataAnalytics"
-            delay="250"
+              title="Data Visualization"
+              description="Present data using charts, graphs, and dashboards."
+              icon={visualization}
+              alt="whyDataAnalytics"
+              delay="175"
+            />
+          </div>
+        </section>
+        {/* Learn about graph */}
+        <section className="mb-8 px-4 py-12 md:py-16 lg:py-20">
+          <div className="max-w-screen-2xl mx-auto text-center flex flex-col items-center justify-center">
+            {/* Heading */}
+            <div
+              className="relative inline-block"
+              data-aos="slide-up"
+              data-aos-delay="75"
+            >
+              <h2 className="mb-8 text-3xl uppercase sm:text-4xl md:text-5xl xl:text-6xl font-bold tracking-tight bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient">
+                Learn About Graphs
+              </h2>
+              <p className="max-w-2xl mx-auto mb-6 text-gray-500 leading-relaxed md:text-lg lg:text-xl ">
+                Graphs make data easy to understand. Here are some examples
+                we will describe briefly.
+              </p>
+            </div>
+          </div>
+          {/* Card Section */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-screen-xl mx-auto">
+            {/* card 1 */}
+            <BasicConceptCard
+              title="Data Collection"
+              description="Gather data from surveys, databases, APIs, and more."
+              icon={collectData}
+              alt="whyDataAnalytics"
+              delay="25"
+            />
+            {/* card 2 */}
+            <BasicConceptCard
+              title="Data Cleaning"
+              description="Handle missing data, remove duplicates, and correct errors."
+              icon={dataCleaning}
+              alt="whyDataAnalytics"
+              delay="75"
+            />
+            {/* card 3 */}
+            <BasicConceptCard
+              title="Data Analysis"
+              description="Use techniques like descriptive statistics and regression."
+              icon={dataAnalysis}
+              alt="whyDataAnalytics"
+              delay="125"
+            />
+            {/* card 4 */}
+            <BasicConceptCard
+              title="Data Visualization"
+              description="Present data using charts, graphs, and dashboards."
+              icon={visualization}
+              alt="whyDataAnalytics"
+              delay="175"
             />
           </div>
         </section>
