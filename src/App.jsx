@@ -3,6 +3,10 @@ import { useEffect } from "react";
 import { Button } from "flowbite-react";
 import "./App.css";
 import LadingPage from "./pages/LadingPage";
+import SignUp from "./auth/SignUp";
+import Login from "./auth/Login";
+import ForgetPassword from "./auth/ForgetPassword";
+import ResetPassword from "./auth/ResetPassword";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -27,8 +31,11 @@ function App() {
 
   return (
     <>
-      <LadingPage/>
-      
+      {/* <LadingPage/> */}
+      {/* <Login/>
+      <ForgetPassword/>
+      <SignUp/>
+      <ResetPassword/> */}
     </>
   );
 }

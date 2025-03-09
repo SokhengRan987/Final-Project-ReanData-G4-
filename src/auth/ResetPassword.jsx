@@ -1,40 +1,51 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import { IoArrowBack } from "react-icons/io5";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { FaCheckCircle } from "react-icons/fa";
 
-// Validation schema using Yup
-const validationSchema = Yup.object({
-  code: Yup.string().required("Code is required"),
-  newPassword: Yup.string()
-    .min(8, "Password must be at least 8 characters")
-    .matches(/[a-zA-Z]/, "Password must include at least 1 letter")
-    .matches(/[0-9]/, "Password must include at least 1 number")
-    .required("New password is required"),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("newPassword"), null], "Passwords do not match")
-    .required("Confirm password is required"),
-});
-
 const ResetPassword = () => {
   const navigate = useNavigate();
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const initialValues = {
-    code: "",
-    newPassword: "",
-    confirmPassword: "",
-  };
-
-  const handleSubmit = (values, { setSubmitting }) => {
-    console.log("Password reset submitted:", values);
-    setSubmitting(false);
-    navigate("/login");
-  };
+  const formik = useFormik({
+    initialValues: {
+      code: "",
+      newPassword: "",
+      confirmPassword: "",
+    },
+    validationSchema: Yup.object({
+      code: Yup.string().required("Code is required"),
+      newPassword: Yup.string()
+        .min(8, "Password must be at least 8 characters")
+        .matches(/[a-zA-Z]/, "Password must include at least 1 letter")
+        .matches(/[0-9]/, "Password must include at least 1 number")
+        .required("New password is required"),
+      confirmPassword: Yup.string()
+        .oneOf([Yup.ref("newPassword"), null], "Passwords do not match")
+        .required("Confirm password is required"),
+    }),
+    onSubmit: async (values) => {
+      setIsLoading(true);
+      try {
+        console.log("Password reset submitted:", values);
+        formik.resetForm();
+        navigate("/login");
+      } catch (error) {
+        formik.setFieldError(
+          "apiError",
+          error.message || "An error occurred during password reset"
+        );
+      } finally {
+        setIsLoading(false);
+        formik.setSubmitting(false);
+      }
+    },
+  });
 
   return (
     <div
@@ -59,136 +70,160 @@ const ResetPassword = () => {
         </h2>
 
         {/* Form */}
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          {({ isSubmitting, errors }) => (
-            <Form className="space-y-6">
-              {/* Code Input */}
-              <div className="">
-                <div className="relative">
-                  <Field
-                    id="code"
-                    name="code"
-                    type="text"
-                    className={`peer w-full px-4 py-3 border ${
-                      errors.code ? "border-red-500" : "border-gray-300"
-                    } rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent font-description text-base text-[#0F172A]`}
-                    placeholder=" "
-                  />
-                  <label
-                    htmlFor="code"
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
-                  >
-                    Reset Code
-                  </label>
-                </div>
-                <ErrorMessage
-                  name="code"
-                  component="p"
-                  className="mt-1 text-extra-small text-red-500 font-description"
-                />
-              </div>
-
-              {/* New Password Input */}
-              <div>
-                <div className="relative">
-                  <Field
-                    id="newPassword"
-                    name="newPassword"
-                    type={showNewPassword ? "text" : "password"}
-                    className={`peer w-full px-4 py-3 border ${
-                      errors.newPassword ? "border-red-500" : "border-gray-300"
-                    } rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent font-description text-base text-[#0F172A]`}
-                    placeholder=" "
-                  />
-                  <label
-                    htmlFor="newPassword"
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
-                  >
-                    New Password
-                  </label>
-                  <button
-                    type="button"
-                    onClick={() => setShowNewPassword(!showNewPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#3C55A5] transition-colors"
-                  >
-                    {showNewPassword ? (
-                      <FiEyeOff className="h-5 w-5" />
-                    ) : (
-                      <FiEye className="h-5 w-5" />
-                    )}
-                  </button>
-                </div>
-                <ErrorMessage
-                  name="newPassword"
-                  component="p"
-                  className="mt-1 text-extra-small text-red-500 font-description"
-                />
-              </div>
-
-              {/* Confirm Password Input */}
-              <div>
-                <div className="relative">
-                  <Field
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type={showConfirmPassword ? "text" : "password"}
-                    className={`peer w-full px-4 py-3 border ${
-                      errors.confirmPassword ? "border-red-500" : "border-gray-300"
-                    } rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent font-description text-base text-[#0F172A]`}
-                    placeholder=" "
-                  />
-                  <label
-                    htmlFor="confirmPassword"
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
-                  >
-                    Confirm Password
-                  </label>
-                  <button
-                    type="button"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#3C55A5] transition-colors"
-                  >
-                    {showConfirmPassword ? (
-                      <FiEyeOff className="h-5 w-5" />
-                    ) : (
-                      <FiEye className="h-5 w-5" />
-                    )}
-                  </button>
-                </div>
-                <ErrorMessage
-                  name="confirmPassword"
-                  component="p"
-                  className="mt-1 text-extra-small text-red-500 font-description"
-                />
-              </div>
-
-              {/* Password Requirements */}
-              <div className="space-y-2 text-gray-600 font-description text-base">
-                <div className="flex items-center">
-                  <FaCheckCircle className="mr-2 text-gray-600" />
-                  <span>Password must be at least 8 characters</span>
-                </div>
-                <div className="flex items-center">
-                  <FaCheckCircle className="mr-2 text-gray-600" />
-                  <span>Include at least 1 letter and 1 number</span>
-                </div>
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-3 px-4 bg-[#3C55A5] text-white rounded-lg hover:bg-[#2A3F7A] transition-all duration-300 transform hover:scale-105 font-description text-base"
+        <form onSubmit={formik.handleSubmit} className="space-y-6">
+          {/* Code Input */}
+          <div className="">
+            <div className="relative">
+              <input
+                id="code"
+                name="code"
+                type="text"
+                {...formik.getFieldProps("code")}
+                className={`peer w-full px-4 py-3 border ${
+                  formik.touched.code && formik.errors.code
+                    ? "border-red-500"
+                    : "border-gray-300"
+                } rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent font-description text-base text-[#0F172A]`}
+                placeholder=" "
+              />
+              <label
+                htmlFor="code"
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
               >
-                Reset Password
+                Reset Code
+              </label>
+            </div>
+            {formik.touched.code && formik.errors.code && (
+              <p className="mt-1 text-extra-small text-red-500 font-description">
+                {formik.errors.code}
+              </p>
+            )}
+          </div>
+
+          {/* New Password Input */}
+          <div>
+            <div className="relative">
+              <input
+                id="newPassword"
+                name="newPassword"
+                type={showNewPassword ? "text" : "password"}
+                {...formik.getFieldProps("newPassword")}
+                className={`peer w-full px-4 py-3 border ${
+                  formik.touched.newPassword && formik.errors.newPassword
+                    ? "border-red-500"
+                    : "border-gray-300"
+                } rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent font-description text-base text-[#0F172A]`}
+                placeholder=" "
+              />
+              <label
+                htmlFor="newPassword"
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
+              >
+                New Password
+              </label>
+              <button
+                type="button"
+                onClick={() => setShowNewPassword(!showNewPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#3C55A5] transition-colors"
+              >
+                {showNewPassword ? (
+                  <FiEyeOff className="h-5 w-5" />
+                ) : (
+                  <FiEye className="h-5 w-5" />
+                )}
               </button>
-            </Form>
-          )}
-        </Formik>
+            </div>
+            {formik.touched.newPassword && formik.errors.newPassword && (
+              <p className="mt-1 text-extra-small text-red-500 font-description">
+                {formik.errors.newPassword}
+              </p>
+            )}
+          </div>
+
+          {/* Confirm Password Input */}
+          <div>
+            <div className="relative">
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type={showConfirmPassword ? "text" : "password"}
+                {...formik.getFieldProps("confirmPassword")}
+                className={`peer w-full px-4 py-3 border ${
+                  formik.touched.confirmPassword && formik.errors.confirmPassword
+                    ? "border-red-500"
+                    : "border-gray-300"
+                } rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent font-description text-base text-[#0F172A]`}
+                placeholder=" "
+              />
+              <label
+                htmlFor="confirmPassword"
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
+              >
+                Confirm Password
+              </label>
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#3C55A5] transition-colors"
+              >
+                {showConfirmPassword ? (
+                  <FiEyeOff className="h-5 w-5" />
+                ) : (
+                  <FiEye className="h-5 w-5" />
+                )}
+              </button>
+            </div>
+            {formik.touched.confirmPassword && formik.errors.confirmPassword && (
+              <p className="mt-1 text-extra-small text-red-500 font-description">
+                {formik.errors.confirmPassword}
+              </p>
+            )}
+          </div>
+
+          {/* Password Requirements */}
+          <div className="space-y-2 text-gray-600 font-description text-base">
+            <div className="flex items-center">
+              <FaCheckCircle className="mr-2 text-gray-600" />
+              <span>Password must be at least 8 characters</span>
+            </div>
+            <div className="flex items-center">
+              <FaCheckCircle className="mr-2 text-gray-600" />
+              <span>Include at least 1 letter and 1 number</span>
+            </div>
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={isLoading || formik.isSubmitting}
+            className="w-full py-3 px-4 bg-[#3C55A5] text-white rounded-lg hover:bg-[#2A3F7A] transition-all duration-300 transform hover:scale-105 font-description text-base"
+          >
+            {isLoading ? (
+              <svg
+                className="animate-spin h-5 w-5 mx-auto text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+            ) : (
+              "Reset Password"
+            )}
+          </button>
+        </form>
       </div>
 
       {/* Inline Styles */}

@@ -1,55 +1,59 @@
 import React, { useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { IoArrowBack } from "react-icons/io5";
-import LogoRd from "../img/LogoRd.png"
-
-// Validation schema using Yup
-const validationSchema = Yup.object({
-  Firstname: Yup.string().required("First Name is required"),
-  Lastname: Yup.string().required("Last Name is required"),
-  Username: Yup.string().required("Username is required"),
-  Email: Yup.string()
-    .email("Invalid email address")
-    .required("Email is required"),
-  Password: Yup.string()
-    .min(8, "Password must be at least 8 characters")
-    .required("Password is required"),
-  ConfirmPassword: Yup.string()
-    .oneOf([Yup.ref("Password"), null], "Passwords must match")
-    .required("Confirm Password is required"),
-});
+import LogoRd from "../img/LogoRd.png";
+import { useGetSignupMutation } from "../redux/services/authSlice";
+import { useFormik } from "formik";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const initialValues = {
-    Firstname: "",
-    Lastname: "",
-    Username: "",
-    Email: "",
-    Password: "",
-    ConfirmPassword: "",
-  };
-
-  const handleSubmit = async (values, { setSubmitting, setFieldError, resetForm }) => {
-    setIsLoading(true);
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      console.log("Form submitted:", values);
-      resetForm();
-    } catch (error) {
-      setFieldError("apiError", error.message || "An error occurred during signup");
-    } finally {
-      setIsLoading(false);
-      setSubmitting(false);
-    }
-  };
+  const formik = useFormik({
+    initialValues: {
+      Firstname: "",
+      Lastname: "",
+      Username: "",
+      Email: "",
+      Password: "",
+      ConfirmPassword: "",
+      terms: false,
+    },
+    validationSchema: Yup.object({
+      Firstname: Yup.string().required("First Name is required"),
+      Lastname: Yup.string().required("Last Name is required"),
+      Username: Yup.string().required("Username is required"),
+      Email: Yup.string()
+        .email("Invalid email address")
+        .required("Email is required"),
+      Password: Yup.string()
+        .min(8, "Password must be at least 8 characters")
+        .required("Password is required"),
+      ConfirmPassword: Yup.string()
+        .oneOf([Yup.ref("Password"), null], "Passwords must match")
+        .required("Confirm Password is required"),
+    }),
+    onSubmit: async (values) => {
+      setIsLoading(true);
+      try {
+        // Simulate API call
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        console.log("Form submitted:", values);
+        formik.resetForm();
+      } catch (error) {
+        formik.setFieldError(
+          "apiError",
+          error.message || "An error occurred during signup"
+        );
+      } finally {
+        setIsLoading(false);
+        formik.setSubmitting(false);
+      }
+    },
+  });
 
   const handleGoogleSignUp = () => {
     setIsLoading(true);
@@ -68,7 +72,7 @@ export default function SignUp() {
     >
       <div className="w-full max-w-5xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0 shadow-2xl rounded-3xl overflow-hidden">
-          {/* Right Column - Logo */}
+          {/* Logo section */}
           <div
             className="relative flex items-center justify-center p-6 sm:p-8 order-1 md:order-2"
             style={{
@@ -118,7 +122,7 @@ export default function SignUp() {
             </div>
           </div>
 
-          {/* Left Column - Form */}
+          {/* Form section */}
           <div className="bg-white py-8 px-6 sm:px-8 relative order-2 md:order-1">
             <div className="absolute top-4 left-4">
               <button
@@ -133,273 +137,269 @@ export default function SignUp() {
               Learn Data Now
             </h2>
 
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={handleSubmit}
-            >
-              {({ isSubmitting, errors }) => (
-                <Form className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                      <div className="relative">
-                        <Field
-                          id="Firstname"
-                          name="Firstname"
-                          type="text"
-                          className="peer w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent text-small font-description"
-                          placeholder=" "
-                        />
-                        <label
-                          htmlFor="Firstname"
-                          className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
-                        >
-                          First Name
-                        </label>
-                      </div>
-                      <ErrorMessage
-                        name="Firstname"
-                        component="div"
-                        className="text-red-500 text-extra-small mt-1 font-description"
-                      />
-                    </div>
-
-                    <div>
-                      <div className="relative">
-                        <Field
-                          id="Lastname"
-                          name="Lastname"
-                          type="text"
-                          className="peer w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent text-small font-description"
-                          placeholder=" "
-                        />
-                        <label
-                          htmlFor="Lastname"
-                          className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
-                        >
-                          Last Name
-                        </label>
-                      </div>
-                      <ErrorMessage
-                        name="Lastname"
-                        component="div"
-                        className="text-red-500 text-extra-small mt-1 font-description"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="relative">
-                      <Field
-                        id="Username"
-                        name="Username"
-                        type="text"
-                        className="peer w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent text-small font-description"
-                        placeholder=" "
-                      />
-                      <label
-                        htmlFor="Username"
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
-                      >
-                        Username
-                      </label>
-                    </div>
-                    <ErrorMessage
-                      name="Username"
-                      component="div"
-                      className="text-red-500 text-extra-small mt-1 font-description"
-                    />
-                  </div>
-
-                  <div>
-                    <div className="relative">
-                      <Field
-                        id="Email"
-                        name="Email"
-                        type="email"
-                        className="peer w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent text-small font-description"
-                        placeholder=" "
-                      />
-                      <label
-                        htmlFor="Email"
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
-                      >
-                        E-mail
-                      </label>
-                    </div>
-                    <ErrorMessage
-                      name="Email"
-                      component="div"
-                      className="text-red-500 text-extra-small mt-1 font-description"
-                    />
-                  </div>
-
-                  <div>
-                    <div className="relative">
-                      <Field
-                        id="Password"
-                        name="Password"
-                        type={showPassword ? "text" : "password"}
-                        className="peer w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent text-small font-description"
-                        placeholder=" "
-                      />
-                      <label
-                        htmlFor="Password"
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
-                      >
-                        Password
-                      </label>
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#3C55A5]"
-                      >
-                        {showPassword ? (
-                          <FiEyeOff className="h-5 w-5" />
-                        ) : (
-                          <FiEye className="h-5 w-5" />
-                        )}
-                      </button>
-                    </div>
-                    <ErrorMessage
-                      name="Password"
-                      component="div"
-                      className="text-red-500 text-extra-small mt-1 font-description"
-                    />
-                  </div>
-
-                  <div>
-                    <div className="relative">
-                      <Field
-                        id="ConfirmPassword"
-                        name="ConfirmPassword"
-                        type={showConfirmPassword ? "text" : "password"}
-                        className="peer w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent text-small font-description"
-                        placeholder=" "
-                      />
-                      <label
-                        htmlFor="ConfirmPassword"
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
-                      >
-                        Confirm Password
-                      </label>
-                      <button
-                        type="button"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#3C55A5]"
-                      >
-                        {showConfirmPassword ? (
-                          <FiEyeOff className="h-5 w-5" />
-                        ) : (
-                          <FiEye className="h-5 w-5" />
-                        )}
-                      </button>
-                    </div>
-                    <ErrorMessage
-                      name="ConfirmPassword"
-                      component="div"
-                      className="text-red-500 text-extra-small mt-1 font-description"
-                    />
-                  </div>
-
-                  {errors.apiError && (
-                    <p className="text-red-500 text-sm text-center font-description">
-                      {errors.apiError}
-                    </p>
-                  )}
-
-                  <div className="flex items-center">
-                    <Field
-                      id="terms"
-                      name="terms"
-                      type="checkbox"
-                      className="h-5 w-5 text-[#3C55A5] focus:ring-[#3C55A5] border-gray-300 rounded-[5px]"
+            <form onSubmit={formik.handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <div className="relative">
+                    <input
+                      id="Firstname"
+                      name="Firstname"
+                      type="text"
+                      {...formik.getFieldProps("Firstname")}
+                      className="peer w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent text-small font-description"
+                      placeholder=" "
                     />
                     <label
-                      htmlFor="terms"
-                      className="ml-2 text-gray-600 font-description"
-                      style={{ fontSize: "16px" }}
+                      htmlFor="Firstname"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
                     >
-                      I agree to the{" "}
-                      <a href="#" className="text-[#3C55A5] hover:text-[#2A3F7A]">
-                        Terms
-                      </a>{" "}
-                      &{" "}
-                      <a href="#" className="text-[#3C55A5] hover:text-[#2A3F7A]">
-                        Privacy
-                      </a>
+                      First Name
                     </label>
                   </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting || isLoading}
-                    className="w-full py-3 px-4 bg-[#3C55A5] text-white rounded-lg hover:bg-[#2A3F7A] transition-all duration-300 transform hover:scale-105 text-small font-description"
-                  >
-                    {isLoading ? (
-                      <svg
-                        className="animate-spin h-5 w-5 mx-auto text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
-                      </svg>
-                    ) : (
-                      "Create Account"
-                    )}
-                  </button>
-
-                  <div className="relative my-4">
-                    <div className="absolute inset-0 flex items-center">
-                      <div className="w-full border-t border-gray-200"></div>
+                  {formik.touched.Firstname && formik.errors.Firstname && (
+                    <div className="text-red-500 text-extra-small mt-1 font-description">
+                      {formik.errors.Firstname}
                     </div>
-                    <div className="relative flex justify-center text-sm">
-                      <span className="px-2 bg-white text-gray-500 text-small font-description">
-                        Or
-                      </span>
-                    </div>
+                  )}
+                </div>
+
+                <div>
+                  <div className="relative">
+                    <input
+                      id="Lastname"
+                      name="Lastname"
+                      type="text"
+                      {...formik.getFieldProps("Lastname")}
+                      className="peer w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent text-small font-description"
+                      placeholder=" "
+                    />
+                    <label
+                      htmlFor="Lastname"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
+                    >
+                      Last Name
+                    </label>
                   </div>
+                  {formik.touched.Lastname && formik.errors.Lastname && (
+                    <div className="text-red-500 text-extra-small mt-1 font-description">
+                      {formik.errors.Lastname}
+                    </div>
+                  )}
+                </div>
+              </div>
 
+              <div>
+                <div className="relative">
+                  <input
+                    id="Username"
+                    name="Username"
+                    type="text"
+                    {...formik.getFieldProps("Username")}
+                    className="peer w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent text-small font-description"
+                    placeholder=" "
+                  />
+                  <label
+                    htmlFor="Username"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
+                  >
+                    Username
+                  </label>
+                </div>
+                {formik.touched.Username && formik.errors.Username && (
+                  <div className="text-red-500 text-extra-small mt-1 font-description">
+                    {formik.errors.Username}
+                  </div>
+                )}
+              </div>
+
+              <div>
+                <div className="relative">
+                  <input
+                    id="Email"
+                    name="Email"
+                    type="email"
+                    {...formik.getFieldProps("Email")}
+                    className="peer w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent text-small font-description"
+                    placeholder=" "
+                  />
+                  <label
+                    htmlFor="Email"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
+                  >
+                    E-mail
+                  </label>
+                </div>
+                {formik.touched.Email && formik.errors.Email && (
+                  <div className="text-red-500 text-extra-small mt-1 font-description">
+                    {formik.errors.Email}
+                  </div>
+                )}
+              </div>
+
+              <div>
+                <div className="relative">
+                  <input
+                    id="Password"
+                    name="Password"
+                    type={showPassword ? "text" : "password"}
+                    {...formik.getFieldProps("Password")}
+                    className="peer w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent text-small font-description"
+                    placeholder=" "
+                  />
+                  <label
+                    htmlFor="Password"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
+                  >
+                    Password
+                  </label>
                   <button
                     type="button"
-                    onClick={handleGoogleSignUp}
-                    disabled={isLoading}
-                    className="w-full py-3 px-4 border border-gray-200 rounded-lg bg-white text-gray-700 hover:bg-gray-50 transition-all duration-300 flex items-center justify-center gap-2 text-small font-description"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#3C55A5]"
                   >
-                    <FcGoogle className="h-5 w-5" />
-                    Sign up with Google
+                    {showPassword ? (
+                      <FiEyeOff className="h-5 w-5" />
+                    ) : (
+                      <FiEye className="h-5 w-5" />
+                    )}
                   </button>
+                </div>
+                {formik.touched.Password && formik.errors.Password && (
+                  <div className="text-red-500 text-extra-small mt-1 font-description">
+                    {formik.errors.Password}
+                  </div>
+                )}
+              </div>
 
-                  <p className="text-center text-base text-gray-600 font-description">
-                    Have an account?{" "}
-                    <a
-                      href="/login"
-                      className="text-[#3C55A5] hover:text-[#2A3F7A]"
-                    >
-                      Sign in
-                    </a>
-                  </p>
-                </Form>
+              <div>
+                <div className="relative">
+                  <input
+                    id="ConfirmPassword"
+                    name="ConfirmPassword"
+                    type={showConfirmPassword ? "text" : "password"}
+                    {...formik.getFieldProps("ConfirmPassword")}
+                    className="peer w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent text-small font-description"
+                    placeholder=" "
+                  />
+                  <label
+                    htmlFor="ConfirmPassword"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
+                  >
+                    Confirm Password
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#3C55A5]"
+                  >
+                    {showConfirmPassword ? (
+                      <FiEyeOff className="h-5 w-5" />
+                    ) : (
+                      <FiEye className="h-5 w-5" />
+                    )}
+                  </button>
+                </div>
+                {formik.touched.ConfirmPassword && formik.errors.ConfirmPassword && (
+                  <div className="text-red-500 text-extra-small mt-1 font-description">
+                    {formik.errors.ConfirmPassword}
+                  </div>
+                )}
+              </div>
+
+              {formik.errors.apiError && (
+                <p className="text-red-500 text-sm text-center font-description">
+                  {formik.errors.apiError}
+                </p>
               )}
-            </Formik>
+
+              <div className="flex items-center">
+                <input
+                  id="terms"
+                  name="terms"
+                  type="checkbox"
+                  {...formik.getFieldProps("terms")}
+                  className="h-5 w-5 text-[#3C55A5] focus:ring-[#3C55A5] border-gray-300 rounded-[5px]"
+                />
+                <label
+                  htmlFor="terms"
+                  className="ml-2 text-gray-600 font-description"
+                  style={{ fontSize: "16px" }}
+                >
+                  I agree to the{" "}
+                  <a href="#" className="text-[#3C55A5] hover:text-[#2A3F7A]">
+                    Terms
+                  </a>{" "}
+                  &{" "}
+                  <a href="#" className="text-[#3C55A5] hover:text-[#2A3F7A]">
+                    Privacy
+                  </a>
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                disabled={formik.isSubmitting || isLoading}
+                className="w-full py-3 px-4 bg-[#3C55A5] text-white rounded-lg hover:bg-[#2A3F7A] transition-all duration-300 transform hover:scale-105 text-small font-description"
+              >
+                {isLoading ? (
+                  <svg
+                    className="animate-spin h-5 w-5 mx-auto text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                ) : (
+                  "Create Account"
+                )}
+              </button>
+
+              <div className="relative my-4">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-200"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white text-gray-500 text-small font-description">
+                    Or
+                  </span>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleGoogleSignUp}
+                disabled={isLoading}
+                className="w-full py-3 px-4 border border-gray-200 rounded-lg bg-white text-gray-700 hover:bg-gray-50 transition-all duration-300 flex items-center justify-center gap-2 text-small font-description"
+              >
+                <FcGoogle className="h-5 w-5" />
+                Sign up with Google
+              </button>
+
+              <p className="text-center text-base text-gray-600 font-description">
+                Have an account?{" "}
+                <a href="/login" className="text-[#3C55A5] hover:text-[#2A3F7A]">
+                  Sign in
+                </a>
+              </p>
+            </form>
           </div>
         </div>
       </div>
 
-      {/* CSS for animations and responsiveness */}
+      {/* CSS remains unchanged */}
       <style jsx>{`
         @keyframes fade-in {
           from {
@@ -464,7 +464,6 @@ export default function SignUp() {
           perspective: 1000px;
         }
 
-        /* Floating Label Logic */
         input:not(:placeholder-shown) + label {
           top: 0;
           font-size: 0.75rem;
@@ -474,7 +473,6 @@ export default function SignUp() {
           padding-right: 0.25rem;
         }
 
-        /* Responsive Adjustments */
         @media (max-width: 767px) {
           .grid-cols-1 {
             grid-template-columns: 1fr;
