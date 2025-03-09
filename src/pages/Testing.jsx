@@ -10,6 +10,10 @@ import AircraftRangeVelocityChart from "../components/AircraftRangeVelocityChart
 import AirportStatisticsBarChart from "../components/AirportStatisticsBarChart";
 import PreCheckUsagePieChart from "../components/PreCheckUsagePieChart";
 import TimeBasedBoardingAnalysis from "../components/TimeBasedBoardingAnalysis";
+import CohortAnalysis from "../components/CohortAnalysis";
+import CohortAnalysisLineChart from "../components/CohortAnalysisLineChart";
+import BubbleChart from "../components/routePopularity/BubbleChart";
+import BarChartPopularity from "../components/routePopularity/BarChartPopularity";
 
 export default function Testing() {
   const {
@@ -104,6 +108,18 @@ export default function Testing() {
       </section>
       <section className="max-w-screen-xl mx-auto p-4 overflow-x-auto my-8">
         <TimeBasedBoardingAnalysis/>
+      </section>
+      <section className="max-w-screen-xl mx-auto p-4 overflow-x-auto my-8">
+        <CohortAnalysis/>
+      </section>
+      <section className="max-w-screen-xl mx-auto p-4 overflow-x-auto my-8">
+        <CohortAnalysisLineChart/>
+      </section>
+      <section className="max-w-screen-xl mx-auto p-4 overflow-x-auto my-8">
+        <BubbleChart/>
+      </section>
+      <section className="max-w-screen-xl mx-auto p-4 overflow-x-auto my-8">
+        <BarChartPopularity/>
       </section>
     </>
   );

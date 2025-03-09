@@ -9,7 +9,6 @@ export default defineConfig({
       '/rpc': {
         target: 'https://reandata-api.istad.co',
         changeOrigin: true,
-        // Remove the rewrite rule
       },
     },
   },
