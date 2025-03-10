@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { IoArrowBack } from "react-icons/io5";
 import LogoRd from "../img/LogoRd.png";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useGetLoginMutation } from "../redux/services/authSlice";
 
 export default function Login() {
+  const navigate = useNavigate();
+  const [getLogin, { isLoading, error }] = useGetLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -20,22 +23,19 @@ export default function Login() {
         .min(8, "Password must be at least 8 characters")
         .required("Password is required"),
     }),
-    onSubmit: async (values, { resetForm }) => {
-      setIsLoading(true);
+    onSubmit: async (values) => {
       try {
-        const response = await fetch("YOUR_API_ENDPOINT", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
-        });
-        if (!response.ok) throw new Error("Invalid email or password");
-        const data = await response.json();
-        console.log("Form submitted successfully:", data);
-        resetForm();
+        const accessToken = await getLogin({
+          user_email: values?.email,
+          user_pass: values?.password,
+        }).unwrap();
+        navigate("/");
+        if (accessToken) {
+          window.location.reload();
+          localStorage.setItem("accessToken", accessToken.result.access_token);
+        }
       } catch (error) {
-        formik.setFieldError("apiError", error.message || "An error occurred during login");
-      } finally {
-        setIsLoading(false);
+        alert("Invalid email or password");
       }
     },
   });
@@ -119,7 +119,7 @@ export default function Login() {
                   name="email"
                   type="email"
                   {...formik.getFieldProps("email")}
-                  className="peer w-full px-4 py-3 border border-[#3C55A5] border-[0.5px] rounded-lg focus:border-[#3C55A5] focus:border-[0.5px] focus:ring-0 transition-all duration-300 bg-transparent font-description text-base text-[#0F172A]"
+                  className="peer w-full px-4 py-3 border border-[#3C55A5] border-[0.5px] rounded-lg focus:border-blue-500 focus:border-[0.3px] focus:ring-0 transition-all duration-300 bg-transparent font-description text-base text-[#0F172A]"
                   placeholder=" "
                 />
                 <label
@@ -130,7 +130,9 @@ export default function Login() {
                 </label>
               </div>
               {formik.touched.email && formik.errors.email && (
-                <p className="text-red-500 text-sm font-description !mt-1">{formik.errors.email}</p>
+                <p className="text-red-500 text-sm font-description !mt-1">
+                  {formik.errors.email}
+                </p>
               )}
 
               <div className="relative">
@@ -139,7 +141,7 @@ export default function Login() {
                   name="password"
                   type={showPassword ? "text" : "password"}
                   {...formik.getFieldProps("password")}
-                  className="peer w-full px-4 py-3 pr-12 border border-[#3C55A5] border-[0.5px] rounded-lg focus:border-[#3C55A5] focus:border-[0.5px] focus:ring-0 transition-all duration-300 bg-transparent font-description text-base text-[#0F172A]"
+                  className="peer w-full px-4 py-3 pr-12 border border-[#3C55A5] border-[0.5px] rounded-lg focus:border-blue-500 focus:border-[0.3px] focus:ring-0 transition-all duration-300 bg-transparent font-description text-base text-[#0F172A]"
                   placeholder=" "
                 />
                 <label
@@ -161,7 +163,9 @@ export default function Login() {
                 </button>
               </div>
               {formik.touched.password && formik.errors.password && (
-                <p className="text-red-500 text-sm font-description !mt-1">{formik.errors.password}</p>
+                <p className="text-red-500 text-sm font-description !mt-1">
+                  {formik.errors.password}
+                </p>
               )}
 
               {formik.errors.apiError && (
@@ -243,19 +247,16 @@ export default function Login() {
 
               <p className="text-center text-gray-600 font-description text-base">
                 Don't have an account?{" "}
-                <a
-                  href="/signup"
-                  className="text-[#3C55A5] hover:text-[#2A3F7A]"
-                >
-                  Sign Up
-                </a>
+                <Link to={"/signup"} className="text-[#3C55A5] hover:text-[#2A3F7A]">
+                  Sign up
+                </Link>
               </p>
             </form>
           </div>
         </div>
       </div>
 
-      {/* CSS remains unchanged */}
+      {/* CSS remains unchanged but with added focus styles */}
       <style jsx>{`
         @keyframes fade-in {
           from {

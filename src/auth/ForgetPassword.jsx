@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { IoArrowBack } from "react-icons/io5";
+import { useGetRpPasswordMutation } from "../redux/services/authSlice";
 
 const ForgetPassword = () => {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+  const [getRpPassword, { isLoading, error }] = useGetRpPasswordMutation();
 
   const formik = useFormik({
     initialValues: {
@@ -17,17 +18,26 @@ const ForgetPassword = () => {
         .email("Invalid email address")
         .required("Email is required"),
     }),
-    onSubmit: async (values, { resetForm }) => {
-      setIsLoading(true);
+    onSubmit: async (values, { setFieldError, setSubmitting, resetForm }) => {
+      setSubmitting(true);
       try {
-        // In a real app, you'd send an email here
-        console.log("Sending reset email to:", values.email);
+        const result = await getRpPassword({
+          email: values.email,
+        }).unwrap();
+
+        console.log("Password reset email sent:", result);
         resetForm();
-        navigate("/resetpassword");
+        // Pass the email to ResetPassword via navigation state
+        navigate("/resetpassword", { state: { email: values.email } });
       } catch (error) {
-        formik.setFieldError("apiError", error.message || "An error occurred while sending reset email");
+        console.error("Password reset failed:", error);
+        if (error?.data?.message) {
+          setFieldError("apiError", error.data.message);
+        } else {
+          setFieldError("apiError", "An error occurred while sending reset email. Please try again.");
+        }
       } finally {
-        setIsLoading(false);
+        setSubmitting(false);
       }
     },
   });
@@ -37,9 +47,7 @@ const ForgetPassword = () => {
       className="min-h-screen flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8"
       style={{ background: "#dde2e9" }}
     >
-      {/* Form Container */}
       <div className="relative z-10 w-full max-w-md bg-white py-8 px-6 sm:px-8 rounded-3xl shadow-2xl border border-gray-200">
-        {/* Back Arrow */}
         <div className="absolute top-4 left-4">
           <button
             onClick={() => navigate("/login")}
@@ -49,14 +57,11 @@ const ForgetPassword = () => {
           </button>
         </div>
 
-        {/* Form Header */}
         <h2 className="font-heading text-2xl sm:text-3xl text-[#3C55A5] mb-6 text-center animate-fade-in">
           Forgot Password
         </h2>
 
-        {/* Form */}
         <form onSubmit={formik.handleSubmit} className="space-y-6">
-          {/* Email Input */}
           <div className="">
             <div className="relative">
               <input
@@ -91,7 +96,6 @@ const ForgetPassword = () => {
             </p>
           )}
 
-          {/* Send Email Button */}
           <button
             type="submit"
             disabled={isLoading || formik.isSubmitting}
@@ -123,20 +127,15 @@ const ForgetPassword = () => {
             )}
           </button>
 
-          {/* Sign Up Link */}
           <p className="text-center text-gray-600 font-description text-base">
             Don’t have an account?{" "}
-            <a
-              href="/signup"
-              className="text-[#3C55A5] hover:text-[#2A3F7A]"
-            >
+            <a href="/signup" className="text-[#3C55A5] hover:text-[#2A3F7A]">
               Sign Up
             </a>
           </p>
         </form>
       </div>
 
-      {/* Inline Styles for Animations and Responsiveness */}
       <style jsx>{`
         @keyframes fade-in {
           from {
@@ -153,7 +152,6 @@ const ForgetPassword = () => {
           animation: fade-in 0.6s ease-out;
         }
 
-        /* Floating Label Logic */
         input:not(:placeholder-shown) + label {
           top: 0;
           font-size: 0.75rem;
@@ -163,7 +161,6 @@ const ForgetPassword = () => {
           padding-right: 0.25rem;
         }
 
-        /* Responsive Adjustments */
         @media (max-width: 767px) {
           .max-w-md {
             max-width: 100%;

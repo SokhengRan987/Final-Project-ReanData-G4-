@@ -6,11 +6,15 @@ import { IoArrowBack } from "react-icons/io5";
 import LogoRd from "../img/LogoRd.png";
 import { useGetSignupMutation } from "../redux/services/authSlice";
 import { useFormik } from "formik";
+import { Link, useNavigate } from "react-router-dom";
+// import { useGetauthTestApiMutation } from "../redux/services/authTestSlice";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [getSignUp, { isLoading, error }] = useGetSignupMutation();
+  // const [getSignUp,{isLoading,error}]=useGetauthTestApiMutation();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -35,22 +39,44 @@ export default function SignUp() {
       ConfirmPassword: Yup.string()
         .oneOf([Yup.ref("Password"), null], "Passwords must match")
         .required("Confirm Password is required"),
+      terms: Yup.boolean().oneOf([true], "Required"),
     }),
-    onSubmit: async (values) => {
-      setIsLoading(true);
+    onSubmit: async (values, { setFieldError, setSubmitting }) => {
       try {
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        console.log("Form submitted:", values);
-        formik.resetForm();
+        const result = await getSignUp({
+          p_first_name: values?.Firstname,
+          p_last_name: values?.Lastname,
+          p_user_name: values?.Username,
+          p_email: values?.Email,
+          p_pass: values?.Password,
+          p_confirm_pass: values?.ConfirmPassword,
+        }).unwrap();
+
+        console.log("Signup successful:", result);
+        navigate("/login");
       } catch (error) {
-        formik.setFieldError(
-          "apiError",
-          error.message || "An error occurred during signup"
-        );
+        console.error("Signup failed:", error);
+        if (error?.data?.message === "Username already exists") {
+          setFieldError(
+            "Username",
+            "Username already exists. Please choose a different username."
+          );
+        } else if (error?.data?.message === "Email already exists") {
+          setFieldError(
+            "Email",
+            "Email already exists. Please use a different email."
+          );
+        } else if (error?.data?.message === "Passwords do not match") {
+          setFieldError("ConfirmPassword", "Passwords do not match.");
+        } else {
+          setFieldError(
+            "general",
+            error?.data?.message ||
+              "An unexpected error occurred. Please try again."
+          );
+        }
       } finally {
-        setIsLoading(false);
-        formik.setSubmitting(false);
+        setSubmitting(false);
       }
     },
   });
@@ -299,11 +325,12 @@ export default function SignUp() {
                     )}
                   </button>
                 </div>
-                {formik.touched.ConfirmPassword && formik.errors.ConfirmPassword && (
-                  <div className="text-red-500 text-extra-small mt-1 font-description">
-                    {formik.errors.ConfirmPassword}
-                  </div>
-                )}
+                {formik.touched.ConfirmPassword &&
+                  formik.errors.ConfirmPassword && (
+                    <div className="text-red-500 text-extra-small mt-1 font-description">
+                      {formik.errors.ConfirmPassword}
+                    </div>
+                  )}
               </div>
 
               {formik.errors.apiError && (
@@ -312,28 +339,36 @@ export default function SignUp() {
                 </p>
               )}
 
-              <div className="flex items-center">
-                <input
-                  id="terms"
-                  name="terms"
-                  type="checkbox"
-                  {...formik.getFieldProps("terms")}
-                  className="h-5 w-5 text-[#3C55A5] focus:ring-[#3C55A5] border-gray-300 rounded-[5px]"
-                />
-                <label
-                  htmlFor="terms"
-                  className="ml-2 text-gray-600 font-description"
-                  style={{ fontSize: "16px" }}
-                >
-                  I agree to the{" "}
-                  <a href="#" className="text-[#3C55A5] hover:text-[#2A3F7A]">
-                    Terms
-                  </a>{" "}
-                  &{" "}
-                  <a href="#" className="text-[#3C55A5] hover:text-[#2A3F7A]">
-                    Privacy
-                  </a>
-                </label>
+              <div className="">
+                <div className="flex items-center">
+                  <input
+                    id="terms"
+                    name="terms"
+                    type="checkbox"
+                    checked={formik.values.terms}
+                    onChange={formik.handleChange}
+                    className="h-5 w-5 text-[#3C55A5] focus:ring-[#3C55A5] border-gray-300 rounded-[5px]"
+                  />
+                  <label
+                    htmlFor="terms"
+                    className="ml-2 text-gray-600 font-description"
+                    style={{ fontSize: "16px" }}
+                  >
+                    I agree to the{" "}
+                    <a href="#" className="text-[#3C55A5] hover:text-[#2A3F7A]">
+                      Terms
+                    </a>{" "}
+                    &{" "}
+                    <a href="#" className="text-[#3C55A5] hover:text-[#2A3F7A]">
+                      Privacy
+                    </a>
+                  </label>
+                </div>
+                {formik.touched.terms && formik.errors.terms ? (
+                  <p className="text-red-500 text-sm text-start  font-description mt-1">
+                    {formik.errors.terms}
+                  </p>
+                ) : null}
               </div>
 
               <button
@@ -390,9 +425,12 @@ export default function SignUp() {
 
               <p className="text-center text-base text-gray-600 font-description">
                 Have an account?{" "}
-                <a href="/login" className="text-[#3C55A5] hover:text-[#2A3F7A]">
-                  Sign in
-                </a>
+                <Link
+                  to={"/login"}
+                  className="text-[#3C55A5] hover:text-[#2A3F7A]"
+                >
+                  Login
+                </Link>
               </p>
             </form>
           </div>

@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
 import logo from "../img/reandata.png";
+import { useNavigate } from "react-router-dom";
+import Login from "../auth/Login";
 
 export default function NavbarComponent() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const navigate = useNavigate();
+
+  // Handle button click
+  const handleLoginRedirect = () => {
+    navigate("/login");
+  };
 
   useEffect(() => {
     const updateScrollProgress = () => {
@@ -48,6 +56,7 @@ export default function NavbarComponent() {
           <button
             type="button"
             className="text-white bg-[#3C55A5] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-[20px] text-sm px-4 py-2"
+            onClick={handleLoginRedirect} // Trigger routing on click
           >
             Login
           </button>

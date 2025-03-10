@@ -31,11 +31,11 @@ function App() {
 
   return (
     <>
-      {/* <LadingPage/> */}
-      {/* <Login/>
-      <ForgetPassword/>
-      <SignUp/>
-      <ResetPassword/> */}
+      <LadingPage/>
+      {/* <Login/> */}
+      {/* <ForgetPassword/> */}
+      {/* <SignUp/> */}
+      {/* <ResetPassword/> */}
     </>
   );
 }

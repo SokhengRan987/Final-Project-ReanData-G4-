@@ -1,16 +1,21 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom"; // Added useLocation
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { IoArrowBack } from "react-icons/io5";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { FaCheckCircle } from "react-icons/fa";
+import { useGetResetPasswordMutation } from "../redux/services/authSlice";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
+  const location = useLocation(); // Hook to access navigation state
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [getResetPassword, { isLoading, error }] = useGetResetPasswordMutation();
+
+  // Retrieve email from navigation state
+  const email = location.state?.email || "";
 
   const formik = useFormik({
     initialValues: {
@@ -30,31 +35,41 @@ const ResetPassword = () => {
         .required("Confirm password is required"),
     }),
     onSubmit: async (values) => {
-      setIsLoading(true);
       try {
-        console.log("Password reset submitted:", values);
+        await getResetPassword({
+          user_email: email, // Use the email from navigation state
+          otp_codes: values.code,
+          new_password: values.newPassword,
+          confirm_password: values.confirmPassword,
+        }).unwrap();
         formik.resetForm();
         navigate("/login");
       } catch (error) {
         formik.setFieldError(
           "apiError",
-          error.message || "An error occurred during password reset"
+          error.data?.message || "An error occurred during password reset"
         );
       } finally {
-        setIsLoading(false);
         formik.setSubmitting(false);
       }
     },
   });
+
+  // Optional: Redirect back if no email is provided
+  if (!email) {
+    return (
+      <div className="min-h-screen flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8" style={{ background: "#dde2e9" }}>
+        <p className="text-red-500">Error: No email provided. Please start from the Forgot Password page.</p>
+      </div>
+    );
+  }
 
   return (
     <div
       className="min-h-screen flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8"
       style={{ background: "#dde2e9" }}
     >
-      {/* Form Container */}
       <div className="relative z-10 w-full max-w-md bg-white py-8 px-6 sm:px-8 rounded-3xl shadow-2xl border border-gray-200">
-        {/* Back Arrow */}
         <div className="absolute top-4 left-4">
           <button
             onClick={() => navigate("/forgetpassword")}
@@ -64,12 +79,10 @@ const ResetPassword = () => {
           </button>
         </div>
 
-        {/* Form Header */}
         <h2 className="font-heading text-2xl sm:text-3xl text-[#3C55A5] mb-6 text-center animate-fade-in">
           Reset Password
         </h2>
 
-        {/* Form */}
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           {/* Code Input */}
           <div className="">
@@ -223,10 +236,16 @@ const ResetPassword = () => {
               "Reset Password"
             )}
           </button>
+
+          {/* API Error Display */}
+          {formik.errors.apiError && (
+            <p className="mt-1 text-extra-small text-red-500 font-description text-center">
+              {formik.errors.apiError}
+            </p>
+          )}
         </form>
       </div>
 
-      {/* Inline Styles */}
       <style jsx>{`
         @keyframes fade-in {
           from {

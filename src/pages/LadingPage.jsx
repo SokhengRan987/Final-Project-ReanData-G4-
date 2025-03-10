@@ -44,7 +44,7 @@ export default function LandingPage() {
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row justify-center lg:justify-start">
                 <a
-                  href="#"
+                  href="/login"
                   className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white rounded-[20px] bg-[#22B04B] opacity-90 hover:opacity-100 hover:scale-105 transition-all duration-300 ease-in-out"
                 >
                   Get started
