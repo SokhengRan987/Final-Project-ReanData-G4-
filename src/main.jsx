@@ -9,6 +9,7 @@ import Testing from "./pages/Testing.jsx";
 import Rootlayout from "./components/Rootlayout.jsx";
 import { store } from "./redux/store.js";
 import DistributionPerContinent from "./pages/DistributionPerContinent.jsx";
+import HelpAndSupport from "./pages/HelpAndSupport.jsx";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -18,6 +19,7 @@ createRoot(document.getElementById("root")).render(
           <Route element={<Rootlayout />}>
             <Route path="/" element={<App />} />
             <Route path="/testing" element={<Testing />} />
+            <Route path="/help&support" element={<HelpAndSupport />}/>
             <Route
               path="/distribution"
               element={<DistributionPerContinent />}

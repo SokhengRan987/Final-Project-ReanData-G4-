@@ -18,6 +18,11 @@ export default function NavbarComponent() {
     return () => window.removeEventListener("scroll", updateScrollProgress);
   }, []);
 
+  const [activeLink, setActiveLink] = useState ('');
+  const handleLinkClick = (link) => {
+    setActiveLink(link);
+  }
+
   return (
     <nav
       className="sticky top-0 z-50 bg-transparent shadow-md"
@@ -118,7 +123,7 @@ export default function NavbarComponent() {
             </li>
             <li>
               <a
-                href="#"
+                href="/help&support"
                 className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm md:hover:bg-transparent md:hover:text-blue-700"
               >
                 Help & Support
