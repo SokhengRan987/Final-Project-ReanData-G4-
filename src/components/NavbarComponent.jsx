@@ -4,7 +4,6 @@ import { LeafyGreen } from "lucide-react";
 
 export default function NavbarComponent() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
@@ -12,7 +11,7 @@ export default function NavbarComponent() {
       const scrollTop = window.scrollY;
       const scrollHeight =
         document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (scrollTop / scrollHeight) * 100;
+      const progress = scrollHeight === 0 ? 0 : (scrollTop / scrollHeight) * 100;
       setScrollProgress(progress);
     };
 
@@ -22,130 +21,134 @@ export default function NavbarComponent() {
 
   return (
     <nav
-      className="sticky top-0 z-50 bg-transparent shadow-md"
+      className="sticky top-0 z-50 bg-white/95 shadow-lg transition-all duration-300"
       style={{
-        backdropFilter: "blur(10px)",
-        WebkitBackdropFilter: "blur(10px)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
       }}
     >
+      {/* Progress Bar */}
       <div
-        className="absolute top-0 left-0 w-full h-1 transition-all duration-200"
-        style={{
-          width: `${scrollProgress}%`,
-          background: "#84e1bc", // Green color
-          boxShadow: "0 0 10px #84e1bc", // Glowing green effect
-        }}
-      ></div>
+        className="absolute top-0 left-0 h-1 bg-gradient-to-r from-green-400 to-teal-500 transition-all duration-300 ease-out"
+        style={{ width: `${scrollProgress}%` }}
+      />
 
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        {/* Logo */}
-        <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src={logo} alt="Reandata logo" className="h-8" />
-        </a>
-
-        {/* Right-side Buttons */}
-        <div className="flex md:order-2 space-x-3 md:space-x-2 rtl:space-x-reverse">
-          <button
-            type="button"
-            className="text-white bg-[#3C55A5] opacity-80 hover:opacity-100 font-medium rounded-[20px] text-sm px-4 py-2"
-          >
-            Login
-          </button>
-          <button
-            type="button"
-            className="text-white bg-[#22B04B] opacity-80 hover:opacity-100 font-medium rounded-[20px] text-sm px-4 py-2"
-          >
-            Get started
-          </button>
-          {/* Mobile Menu Toggle Button */}
-          <button
-            onClick={() => setDropdownOpen((prev) => !prev)}
-            type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:ring-2 focus:ring-gray-200"
-            aria-label="Toggle menu"
-            aria-expanded={dropdownOpen}
-          >
-            <svg
-              className="w-5 h-5"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 1h15M1 7h15M1 13h15"
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <a href="#" className="flex items-center space-x-2 group">
+              <img
+                src={logo}
+                alt="Reandata logo"
+                className="h-9 transition-transform duration-300 group-hover:scale-105"
               />
-            </svg>
-          </button>
+              <span className="text-xl font-semibold text-gray-800 hidden sm:inline">
+                {/* Reandata */}
+              </span>
+            </a>
+          </div>
+
+          {/* Navigation Links */}
+          <div className="hidden md:flex items-center space-x-1">
+            <ul className="flex space-x-8">
+              {["Datasets", "Documentation", "About Us", "Help & Support"].map(
+                (item) => (
+                  <li key={item}>
+                    <a
+                      href={item === "About Us" ? "/about-us" : "#"}
+                      className="text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 relative group"
+                    >
+                      {item}
+                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-green-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left"></span>
+                    </a>
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
+
+          {/* Buttons */}
+          <div className="hidden md:flex items-center space-x-3">
+            <button
+              className="text-gray-700 hover:text-green-600 px-4 py-2 text-sm font-medium transition-colors duration-200"
+            >
+              Login
+            </button>
+            <button
+              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 shadow-md hover:shadow-lg"
+            >
+              Get Started
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setDropdownOpen((prev) => !prev)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-green-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
+              aria-label="Toggle menu"
+              aria-expanded={dropdownOpen}
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {dropdownOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
 
-        {/* Navigation Links */}
-        {/* <div
-          className={`w-full md:flex md:w-auto md:order-1 ${
-            dropdownOpen ? "block" : "hidden"
-          }`}
-          id="navbar-cta"
-        >
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg bg-transparent md:flex-row md:space-x-8 md:border-0">
-            {["Datasets", "Documentation", "About Us", "Help & Support"].map(
-              (item) => (
-                <li key={item}>
-                  <a
-                    href="#"
-                    className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm md:hover:text-blue-700"
-                  >
-                    {item}
-                  </a>
-                </li>
-              )
-            )}
-          </ul>
-        </div> */}
-        <div
-          className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${
-            dropdownOpen ? "block" : "hidden"
-          }`}
-          id="navbar-cta"
-        >
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li>
-              <a
-                href="#"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                aria-current="page"
-              >
-                Datasets
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm  md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Documentation
-              </a>
-            </li>
-            <li>
-              <a
-                href="/about-us"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                About Us
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Help & Support
-              </a>
-            </li>
-          </ul>
-        </div>
+        {/* Mobile Menu */}
+        {dropdownOpen && (
+          <div className="md:hidden">
+            <ul className="px-2 pt-2 pb-3 space-y-1 bg-white shadow-lg">
+              {["Datasets", "Documentation", "About Us", "Help & Support"].map(
+                (item) => (
+                  <li key={item}>
+                    <a
+                      href={item === "About Us" ? "/about-us" : "#"}
+                      className="text-gray-700 hover:text-green-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
+                    >
+                      {item}
+                    </a>
+                  </li>
+                )
+              )}
+              <li>
+                <button
+                  className="w-full text-left text-gray-700 hover:text-green-600 hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
+                >
+                  Login
+                </button>
+              </li>
+              <li>
+                <button
+                  className="w-full bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-md text-base font-medium transition-all duration-200"
+                >
+                  Get Started
+                </button>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </nav>
   );
