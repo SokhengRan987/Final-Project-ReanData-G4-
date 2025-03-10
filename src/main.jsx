@@ -14,8 +14,7 @@ import Booking from "./pages/airdata/table/Booking.jsx";
 import Flight from "./pages/airdata/table/Flight.jsx";
 import Passenger from "./pages/airdata/table/Passenger.jsx";
 import Customer from "./pages/food/table/Customer.jsx";
-import PreferredCuisines from "./pages/food/table/PreferredCuisines.jsx";
-import PreferredPromotions from "./pages/food/table/PreferredPromotions.jsx";
+import Foodandbeverage from "./pages/food/table/fb.jsx";
 import RestaurantFactors from "./pages/food/table/RestaurantFactors.jsx";
 import TimeBasedFood from "./pages/food/table/TimeBasedFood.jsx";
 
@@ -33,14 +32,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="/air-data/passenger" element={<Passenger />} />
             <Route path="/food-beverage/customer" element={<Customer />} />
             <Route path="/food-beverage/timeBase" element={<TimeBasedFood />} />
-            <Route
-              path="/food-beverage/cuisines"
-              element={<PreferredCuisines />}
-            />
-            <Route
-              path="/food-beverage/promotions"
-              element={<PreferredPromotions />}
-            />
+            <Route path="/food-beverage/fb" element={<Foodandbeverage />} />
             <Route
               path="food-beverage/restaurant"
               element={<RestaurantFactors />}

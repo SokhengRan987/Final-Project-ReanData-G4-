@@ -137,7 +137,7 @@ export default function Booking() {
       )}
 
       {/* Table Section */}
-      <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-lg  border-gray-200 shadow-sm overflow-hidden">
         <TableComponent
           columns={columns}
           data={bookingData}

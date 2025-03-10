@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useGetAllFbQuery } from "../../../redux/services/FoodBeverage";
 import TableComponent from "../../../components/TableComponent";
-import { Users, ShoppingBag } from "lucide-react";
+import { Drumstick   } from "lucide-react";
 
-export default function Customer() {
+export default function foodandbeverage() {
   const [offset, setOffset] = useState(0);
   const [filters, setFilters] = useState({});
   const limit = 20;
@@ -35,41 +35,30 @@ export default function Customer() {
 
   const columns = [
     {
-      id: "id",
-      header: "User ID",
-      accessorKey: "id",
+      id: "preferred_cuisines",
+      header: "preferred uisines",
+      accessorKey: "preferred_cuisines",
       filterType: "text",
     },
     {
-      id: "age_range",
-      header: "Age Range",
-      accessorKey: "age_range",
+      id: "preferred_beverages",
+      header: "preferred beverages",
+      accessorKey: "preferred_beverages",
       filterType: "text",
     },
     {
-      id: "occupation",
-      header: "occupation",
-      accessorKey: "occupation",
+      id: "preferred_dining_method",
+      header: "preferred_dining_method",
+      accessorKey: "preferred_dining_method",
       filterType: "select",
     },
     {
-      id: "gender",
-      header: "Gender",
-      accessorKey: "gender",
-      filterType: "text",
+      id: "international_food_preferenc",
+      header: "international food preferenc",
+      accessorKey: "international_food_preference",
+      filterType: "select",
     },
-    {
-      id: "eating_out_frequency",
-      header: "eating out frequency",
-      accessorKey: "eating_out_frequency",
-      filterType: "text",
-    },
-    {
-      id: "preferred_promotions",
-      header: "preferred promotions",
-      accessorKey: "preferred_promotions",
-      filterType: "text",
-    },
+  
   ];
 
   // Extract data and total from response
@@ -90,11 +79,11 @@ export default function Customer() {
     <main className="flex-1 pt-20 p-5">
       <div className="flex items-center">
         <div className="bg-blue-100 p-3 rounded-lg mr-4">
-          <ShoppingBag className="h-6 w-6 text-blue-600" />
+          <Drumstick   className="h-6 w-6 text-blue-600" />
         </div>
         <div>
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
-            Customer
+          Food & Beverage (F&B)
           </h1>
         </div>
       </div>

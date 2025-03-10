@@ -122,8 +122,8 @@ export default function SlidBarComponent() {
           icon: Database,
           items: [
             { label: "Customer", path: "/food-beverage/customer" },
-            { label: "Cuisines", path: "/food-beverage/cuisines" },
-            { label: "Promotions", path: "/food-beverage/promotions" },
+            { label: "Foods", path: "/food-beverage/fb" },
+            // { label: "Promotions", path: "/food-beverage/promotions" },
             { label: "Restaurant", path: "/food-beverage/restaurant" },
             { label: "TimeBase", path: "/food-beverage/timeBase" },
           ],
