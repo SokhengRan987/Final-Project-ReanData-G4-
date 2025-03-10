@@ -4,6 +4,7 @@ import "./App.css";
 import Footer from "./components/Footer";
 import NavbarComponent from "./components/NavbarComponent";
 import DataSet from "./components/DataSet.JSX";
+import Documentation from "./components/Documentation";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -15,7 +16,8 @@ function App() {
         {/* <h1 className="text-5xl text-blue-400 text-center bg-slate-100 py-4 uppercase rounded-lg h-screen">
           Kjel tver nas
         </h1> */}
-        <DataSet/>
+        {/* <DataSet/> */}
+        <Documentation/>
         {/* <FoodAndBeverage/> */}
       </main>
       <Footer />

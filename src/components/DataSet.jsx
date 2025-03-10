@@ -70,7 +70,7 @@ const DataSet = () => {
 
 
   return (
-    <div className="flex flex-col min-h-screen ">
+    <div className="flex flex-col min-h-screen  ">
 
       {/* Hero Section */}
       <div className="w-full py-8 md:py-16 bg-gradient-to-r from-[#17203F] via-[#23315F] to-[#3C55A5] text-white text-center">
