@@ -12,6 +12,7 @@ import presentFindingImg from "../img/Present Finding.jpg";
 import collectDataImg from "../img/Collect Data.png";
 import DataVisualizationImg from "../img/Data Visualization.png";
 import PostgresAirImg from "../img/postgres_air_ERD.png";
+import FoodSurveyImg from "../img/FoodSurvey.png";
 
 const DataSet = () => {
   useEffect(() => {
@@ -152,107 +153,195 @@ const DataSet = () => {
             <h2 className="text-center text-[#3C55A5] text-2xl md:text-3xl lg:text-[38px] font-bold mb-6 leading-loose" style={{ lineHeight: "1" }}>
               Data Sources & Collection
             </h2>
-            <h3 className=" text-[#22B04B] font-bold text-lg md:text-xl lg:text-[30px]" style={{ lineHeight: "1.5", marginBottom: "0.5rem" }}>
-              Where The DataSet Comes From?
-            </h3>
+            <h3 className="text-[#22B04B] font-bold text-lg md:text-xl lg:text-[30px]" style={{ lineHeight: "1.5", marginBottom: "0.5rem" }}>
+            Where Does the Dataset Come From?
+          </h3>
 
-            <p className="  text-[#334155] text-sm md:text-base lg:text-[18px] mb-6 pl-8 md:pl-10 lg:pl-12" style={{ lineHeight: "1" }}>
-              We collected datasets from postgres_air by hettie-d and real-life surveys using Google Forms.
-            </p>
+          <div data-aos="fade-left"  className="mb-8 p-6 rounded-lg shadow-sm transition-all hover:shadow-md h-auto bg-white max-w-[100rem] mx-auto">
+            <div className="p-4">
+              <p className="text-[#334155] text-sm md:text-base lg:text-[18px] leading-relaxed">
+                We collected data from <span className="font-semibold">Postgres_Air by Hettie-D</span>,  
+                which provides structured airline-related data. Additionally, we conducted real-world surveys  
+                using <span className="font-semibold">Google Forms</span>, where participants shared insights  
+                based on their personal experiences.
+              </p>
+              <p className="text-[#334155] text-sm md:text-base lg:text-[18px] leading-relaxed mt-4">
+                To maintain data integrity, we cleaned and processed the collected information,  
+                ensuring it remains free from inconsistencies and is ready for analysis.
+              </p>
+            </div>
+          </div>
 
             <div className="mb-10">
               <h3 className=" text-[#22B04B] font-bold text-xl md:text-1xl lg:text-[30px] mb-2 leading-loose" style={{ lineHeight: "1.5" }}>
                 Data Sources
               </h3>
+              <div
+  data-aos="fade-right"
+  className="mb-12 p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white max-w-[100rem] mx-auto overflow-hidden"
+>
+  {/* Header Section */}
+  <div className="flex flex-col md:flex-row md:items-center md:gap-6 mb-8">
+    {/* Logo Section */}
+    <div className="flex justify-center md:justify-start mb-6 md:mb-0">
+      <div className="h-20 w-20 bg-gradient-to-br from-[#3C55A5] to-[#2a3f7e] text-white rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">
+        DB
+      </div>
+    </div>
+
+    {/* Content Section */}
+    <div className="flex-1">
+      <h3 className="text-[#1E293B] font-bold text-xl md:text-2xl lg:text-3xl mb-4 text-center md:text-left">
+        Postgres-Air Database
+      </h3>
+      
+      {/* Divider */}
+      <div className="w-20 h-1 bg-[#3C55A5] rounded-full mb-4 mx-auto md:mx-0"></div>
+      
+    </div>
+  </div>
+      <div className="bg-gray-50 p-6 rounded-lg">
+        <p className="text-[#334155] text-base lg:text-lg leading-relaxed">
+          A comprehensive structured dataset used for advanced analytics and performance experiments in the aviation industry. 
+          This database provides rich information about commercial flight operations including 
+          <span className="font-semibold text-[#3C55A5]"> flight schedules</span>, 
+          <span className="font-semibold text-[#3C55A5]"> ticket pricing</span>, 
+          <span className="font-semibold text-[#3C55A5]"> aircraft status</span>, and 
+          <span className="font-semibold text-[#3C55A5]"> operational metrics</span>.
+        </p>
+      </div>
+
+  {/* Features Grid */}
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+    <div className="bg-[#f0f2f9] p-5 rounded-lg border-l-4 border-[#3C55A5]">
+      <h4 className="font-semibold text-[#1E293B] text-lg mb-2">Routes & Schedules</h4>
+      <p className="text-gray-600 text-sm">Comprehensive flight path data including origin, destination, and transit timing</p>
+    </div>
+    <div className="bg-[#f0f2f9] p-5 rounded-lg border-l-4 border-[#3C55A5]">
+      <h4 className="font-semibold text-[#1E293B] text-lg mb-2">Pricing Models</h4>
+      <p className="text-gray-600 text-sm">Historical and current ticket prices with seasonal and demand-based variations</p>
+    </div>
+    <div className="bg-[#f0f2f9] p-5 rounded-lg border-l-4 border-[#3C55A5]">
+      <h4 className="font-semibold text-[#1E293B] text-lg mb-2">Fleet Management</h4>
+      <p className="text-gray-600 text-sm">Aircraft details including maintenance records, capacity, and operational status</p>
+    </div>
+    <div className="bg-[#f0f2f9] p-5 rounded-lg border-l-4 border-[#3C55A5]">
+      <h4 className="font-semibold text-[#1E293B] text-lg mb-2">Performance Metrics</h4>
+      <p className="text-gray-600 text-sm">Key indicators for on-time performance, utilization rates, and operational efficiency</p>
+    </div>
+  </div>
+
+  {/* Image Section Below Content */}
+  <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+    {/* Title */}
+    <h3 className="text-[#1E293B] text-center font-bold text-xl md:text-2xl mb-6">
+      Entity Relationship Diagram of Postgres-Air
+    </h3>
+    
+    {/* Image Container */}
+    <div className=" overflow-hidden  bg-white mb-4">
+      <div className="p-2">
+        <img
+          src={PostgresAirImg || "/api/placeholder/900/600"}
+          alt="Airline Data Visualization"
+          className="w-full h-auto "
+        />
+      </div>
+    </div>
+  </div>
+</div>
               <div 
-              data-aos="fade-right"  
-              className="mb-8 p-6 rounded-lg shadow-sm transition-all hover:shadow-md h-auto bg-white max-w-[100rem] mx-auto"
-            >
-              <div className="flex flex-col md:flex-row md:items-center">
-                {/* Logo Section */}
-                <div className="md:w-1/6 mb-6 md:mb-0">
-                  <div className="h-16 w-16 bg-[#3C55A5] text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto md:mx-0">
-                    DB
-                  </div>
-                </div>
-
-                {/* Content Section */}
-                <div className="md:w-2/3">
-                  <p className="text-[#1E293B] font-bold text-lg md:text-xl lg:text-2xl mb-3">
-                    Postgres - Air:
-                  </p>
-                  <p className="text-[#334155] text-sm md:text-base lg:text-lg mb-4 leading-relaxed">
-                    A dataset used for training and performance experiments, providing structured data. It includes information such as flight schedules, 
-                    ticket pricing, aircraft status, and operational metrics.
-                  </p>
-                </div>
-              </div>
-              </div>
-              <div 
-                data-aos="fade-left"  
-                className="mb-8 p-6 rounded-lg shadow-sm transition-all hover:shadow-md h-auto bg-white max-w-[100rem] mx-auto"
+                data-aos="fade-left" 
+                className="mb-12 p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white max-w-[100rem] mx-auto overflow-hidden"
               >
-                <div className="flex flex-col md:flex-row md:items-start">
-                  {/* Logo Section */}
-                  <div className="md:w-1/6 mb-6 md:mb-0 flex justify-center md:justify-start">
-                    <div className="h-16 w-16 bg-[#22B04B] text-white rounded-full flex items-center justify-center text-2xl font-bold">
-                      F&B
-                    </div>
-                  </div>
-
-                  {/* Content Section */}
-                  <div className="md:w-2/3">
-                    <p className="text-[#1E293B] font-bold text-lg md:text-xl lg:text-2xl mb-3">
-                      Food & Beverage Data:
-                    </p>
-                    <p className="text-[#334155] text-sm md:text-base lg:text-lg mb-4 leading-relaxed">
-                      Collected through surveys using Google Forms to gather real-life insights. For example, if we want to understand food habits in a specific area, we conduct surveys asking questions like:
-                    </p>
-                    <ul className="list-disc pl-6 md:pl-8 space-y-4 text-[#334155] text-sm md:text-base lg:text-lg">
-                      <li className="leading-relaxed">
-                        What kinds of food do people eat?
-                      </li>
-                      <li className="leading-relaxed">
-                        What beverages do they prefer?
-                      </li>
-                      <li className="leading-relaxed">
-                        Other related questions.
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="mb-8 bg-white rounded-lg shadow-md p-6 transform transition-all hover:shadow-xl hover:-translate-y-1 max-w-[100rem] mx-auto" 
-                data-aos="fade-right"
-              >
-                <div className="flex flex-col">
-                  {/* Title */}
-                  <p className="text-[#1E293B] text-center font-bold text-lg md:text-xl lg:text-[24px] mb-4 pl-8 md:pl-10 lg:pl-12" style={{ lineHeight: "2.5" }}>
-                    Relationship of AirData
-                  </p>
-
-                  {/* Image Section */}
-                  <div className="container mx-auto px-2 max-w-6xl">
-                    <div 
-                      className="relative mx-auto w-full max-w-[1200px]" 
+                <div className="flex flex-col md:flex-row-reverse md:items-start gap-10">
+                  {/* Image Section (Right) */}
+                  <div className="md:w-1/3">
+                    <div
+                      className="relative w-full max-w-md mx-auto md:mx-0 "
                       data-aos="fade-up"
                       data-aos-duration="1000"
                       data-aos-delay="200"
                     >
-                      <img
-                        src={PostgresAirImg || "/api/placeholder/900/600"}
-                        alt="Airline Data Visualization"
-                        className="w-full h-auto object-cover"
-                      />
+                      <div className=" from-[#f0f9f0] to-[#e0f5e0] p-1">
+                        <img
+                          src={FoodSurveyImg || "/api/placeholder/900/600"}
+                          alt="Food & Beverage Data"
+                          className="w-full h-auto object-cover"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Content Section (Left) */}
+                  <div className="md:w-2/3">
+                    {/* Logo and Title in same row */}
+                    <div className="flex items-center mb-6">
+                      <div className="h-16 w-16 bg-[#22B04B] text-white rounded-full flex items-center justify-center text-2xl font-bold shadow-md mr-4">
+                        F&B
+                      </div>
+                      <h3 className="text-[#1E293B] font-bold text-xl md:text-2xl lg:text-3xl">
+                        Food & Beverage Data
+                      </h3>
                     </div>
 
-                    {/* Caption */}
-                    <div className="py-3 px-4 text-center text-sm text-gray-600">
-                      Entity Relationship Diagram of Postgres-Air database
+                    {/* Divider */}
+                    <div className="w-20 h-1 bg-[#22B04B] rounded-full mb-6 opacity-70"></div>
+
+                    {/* Description */}
+                    <div className="bg-gray-50 p-6 rounded-lg mb-6">
+                      <p className="text-[#334155] text-base md:text-lg mb-4 leading-relaxed">
+                        Our comprehensive food and beverage dataset is collected through meticulously designed 
+                        <span className="font-semibold text-[#22B04B]"> Google Forms surveys </span> 
+                        to gather authentic consumer insights. This approach allows us to capture detailed information about:
+                      </p>
+                    </div>
+
+                    {/* Enhanced Bullet Points */}
+                    <div className="space-y-5 pl-2 mb-8">
+                      <div className="flex items-start">
+                        <div className="h-8 w-8 bg-[#e6f3ea] text-[#22B04B] rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">
+                          1
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-[#1E293B] text-lg mb-1">Dietary Preferences</h4>
+                          <p className="text-gray-600">What kinds of food do people eat during air travel? How do these preferences vary by flight duration and time of day?</p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start">
+                        <div className="h-8 w-8 bg-[#e6f3ea] text-[#22B04B] rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">
+                          2
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-[#1E293B] text-lg mb-1">Beverage Selection</h4>
+                          <p className="text-gray-600">What beverages do travelers prefer? Are there notable differences between business and economy class preferences?</p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start">
+                        <div className="h-8 w-8 bg-[#e6f3ea] text-[#22B04B] rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">
+                          3
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-[#1E293B] text-lg mb-1">Satisfaction Metrics</h4>
+                          <p className="text-gray-600">How does food quality affect overall travel experience? What factors have the most impact on passenger satisfaction?</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Survey Methodology Note */}
+                    <div className="bg-[#f0f9f0] border-l-4 border-[#22B04B] p-4 rounded-r-lg">
+                      <h4 className="text-[#22B04B] font-semibold text-lg mb-2">Survey Methodology</h4>
+                      <p className="text-gray-600 text-sm">
+                        Our surveys target diverse demographic groups across multiple routes and airlines, with over 2,500 responses collected. Results undergo rigorous statistical analysis and validation before integration with our broader dataset.
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
+
+           
             </div>
           </div>
         </div>
