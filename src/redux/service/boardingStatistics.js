@@ -12,7 +12,7 @@ export const boardingStatistics = createApi({
   tagTypes: ["BoardingStatistics"],
   endpoints: (builder) => ({
     getBoardingStatistics: builder.query({
-      query: () => "/rpc/get_boarding_statistics", // Matches the proxy path
+      query: () => "/rpc/get_boarding_statistics", 
       providesTags: ["BoardingStatistics"],
     }),
   }),

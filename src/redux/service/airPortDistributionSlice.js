@@ -12,7 +12,7 @@ export const airPortDistributionApi = createApi({
   tagTypes: ["AirportDistribution"],
   endpoints: (builder) => ({
     getAirPortDistribution: builder.query({
-      query: () => "/rpc/get_airport_distribution", // Matches the proxy path
+      query: () => "/rpc/get_airport_distribution", 
       providesTags: ["AirportDistribution"],
     }),
   }),

@@ -12,7 +12,7 @@ export const timeBaseAnalysis = createApi({
   tagTypes: ["TimeBaseAnalysis"],
   endpoints: (builder) => ({
     getTimeBaseAnalysis: builder.query({
-      query: () => "/rpc/get_time_based_analysis", // Matches the proxy path
+      query: () => "/rpc/get_time_based_analysis", 
       providesTags: ["TimeBaseAnalysis"],
     }),
   }),
