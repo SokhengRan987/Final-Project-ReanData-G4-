@@ -135,7 +135,7 @@ export default function NavbarComponent() {
             </li>
             <li>
               <NavLink
-                to="/help"
+                to="/help&support"
                 className={({ isActive }) =>
                   `block py-2 px-3 md:p-0 rounded-sm transition-all ${
                     isActive ? "text-blue-700 font-semibold" : "text-gray-900"
