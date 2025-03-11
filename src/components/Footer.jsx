@@ -92,8 +92,18 @@ export default function Footer() {
               </a>
               . All Rights Reserved.
             </span>
+            <div className="flex gap-6">
+              <a href="#" className="text-gray-500 hover:text-indigo-600 transition-colors duration-200">
+                <span className="text-xl">⦿</span>
+              </a>
+              <a href="#" className="text-gray-500 hover:text-indigo-600 transition-colors duration-200">
+                <span className="text-xl">⦿</span>
+              </a>
+            </div>
           </div>
         </div>
+        {/* Decorative Element */}
+        <div className="absolute bottom-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-tl-full pointer-events-none"></div>
       </footer>
     </div>
   );

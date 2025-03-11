@@ -11,7 +11,7 @@ export default function NavbarComponent() {
       const scrollTop = window.scrollY;
       const scrollHeight =
         document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (scrollTop / scrollHeight) * 100;
+      const progress = scrollHeight === 0 ? 0 : (scrollTop / scrollHeight) * 100;
       setScrollProgress(progress);
     };
 
@@ -26,10 +26,10 @@ export default function NavbarComponent() {
 
   return (
     <nav
-      className="sticky top-0 z-50 bg-transparent shadow-md"
+      className="sticky top-0 z-50 bg-white/95 shadow-lg transition-all duration-300"
       style={{
-        backdropFilter: "blur(10px)",
-        WebkitBackdropFilter: "blur(10px)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
       }}
     >
       {/* Scroll Progress Bar */}
