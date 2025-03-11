@@ -3,8 +3,6 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import "./index.css";
-import { Provider } from "react-redux";
-import { store } from "./redux/store.js";
 
 import Testing from "./pages/Testing.jsx";
 import Rootlayout from "./components/Rootlayout.jsx";
@@ -33,46 +31,55 @@ import TimeBasedFood from "./pages/food/table/TimeBasedFood.jsx";
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <Provider store={store}>
-    <BrowserRouter>
+      <BrowserRouter>
         <StrictMode>
           <Routes>
-          {/* Main Layout */}
-          <Route element={<Rootlayout />}>
-              <Route element={<RootLayoutSlidBar />}>
-            <Route path="/air-data/aircraft" element={<Aircraft />} />
-            <Route path="/air-data/airport" element={<Airport />} />
-            <Route path="/air-data/boarding-pass" element={<BoardingPass />} />
-            <Route path="/air-data/booking" element={<Booking />} />
-            <Route path="/air-data/flight" element={<Flight />} />
-            <Route path="/air-data/passenger" element={<Passenger />} />
-            <Route path="/food-beverage/customer" element={<Customer />} />
-            <Route path="/food-beverage/timeBase" element={<TimeBasedFood />} />
-            <Route path="/food-beverage/fb" element={<Foodandbeverage />} />
+            <Route element={<Rootlayout />} />
+            <Route path="/testing" element={<Testing />} />
             <Route
-              path="food-beverage/restaurant"
-              element={<RestaurantFactors />}
+              path="/distribution"
+              element={<DistributionPerContinent />}
             />
-          </Route>
-              <Route path="/testing" element={<Testing />} />
-            <Route path="/distribution" element={<DistributionPerContinent />} />
-            <Route path="/help&support" element={<HelpAndSupport />}/>
-          </Route>
+            <Route path="/help&support" element={<HelpAndSupport />} />
+            <Route />
 
-          {/* Sidebar Layout */}
-          <Route element={<RootLayoutSideBar />}>
-            <Route
-              path="/boarding-statistics"
-              element={<BoardingStatistics />}
-            />
-            <Route
-              path="/aircaft-fleet-analysis"
-              element={<AircraftFleetAnalysis />}
-            />
-            <Route path="/airport-distribution-analysis" element={< AirporrtDistributionAnalysis/>}/>
-          </Route>
+            {/* Sidebar Layout */}
+            <Route element={<RootLayoutSideBar />}>
+              <Route path="/air-data/aircraft" element={<Aircraft />} />
+              <Route path="/air-data/airport" element={<Airport />} />
+              <Route
+                path="/air-data/boarding-pass"
+                element={<BoardingPass />}
+              />
+              <Route path="/air-data/booking" element={<Booking />} />
+              <Route path="/air-data/flight" element={<Flight />} />
+              <Route path="/air-data/passenger" element={<Passenger />} />
+              <Route path="/food-beverage/customer" element={<Customer />} />
+              <Route
+                path="/food-beverage/timeBase"
+                element={<TimeBasedFood />}
+              />
+              <Route path="/food-beverage/fb" element={<Foodandbeverage />} />
+              <Route
+                path="food-beverage/restaurant"
+                element={<RestaurantFactors />}
+              />
+              <Route
+                path="/boarding-statistics"
+                element={<BoardingStatistics />}
+              />
+              <Route
+                path="/aircaft-fleet-analysis"
+                element={<AircraftFleetAnalysis />}
+              />
+              <Route
+                path="/airport-distribution-analysis"
+                element={<AirporrtDistributionAnalysis />}
+              />
+            </Route>
           </Routes>
         </StrictMode>
       </BrowserRouter>
-  </Provider>
+    </Provider>
   </Provider>
 );
