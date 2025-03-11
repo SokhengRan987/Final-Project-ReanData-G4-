@@ -8,9 +8,10 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
+import Loader from "../../loading/Loader";
 
 const AirportDistributionChart = ({ data }) => {
-  if (!data || data.length === 0) return <p>Loading...</p>;
+  if (!data || data.length === 0) return <div><Loader/></div>;
 
   // Define the order of continents for consistent x-axis mapping
   const continents = ["NA", "AS", "EU", "AF", "SA", "OC"];

@@ -12,6 +12,9 @@ import DistributionPerContinent from "./pages/DistributionPerContinent.jsx";
 import AirportStatisticsBarChart from "./components/airdata/boardingPass/AirportStatisticsBarChart.jsx";
 import RootLayoutSideBar from "./components/RootLayoutSideBar.jsx";
 import BoardingStatistics from "./pages/airdata-visualization/BoardingStatistics.jsx";
+import AircraftFleetAnalysis from "./pages/airdata-visualization/AircraftFleetAnalysis.jsx";
+import AirportDistributionChart from "./components/airdata/airportDistribution/SemiCircleBubbleChartComponent.jsx";
+import AirporrtDistributionAnalysis from "./pages/airdata-visualization/AirporrtDistributionAnalysis.jsx";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -26,7 +29,7 @@ createRoot(document.getElementById("root")).render(
               path="/distribution"
               element={<DistributionPerContinent />}
             />
-          </Route> 
+          </Route>
 
           {/* Sidebar Layout */}
           <Route element={<RootLayoutSideBar />}>
@@ -34,6 +37,11 @@ createRoot(document.getElementById("root")).render(
               path="/boarding-statistics"
               element={<BoardingStatistics />}
             />
+            <Route
+              path="/aircaft-fleet-analysis"
+              element={<AircraftFleetAnalysis />}
+            />
+            <Route path="/airport-distribution-analysis" element={< AirporrtDistributionAnalysis/>}/>
           </Route>
         </Routes>
       </StrictMode>

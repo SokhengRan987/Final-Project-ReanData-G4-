@@ -8,11 +8,12 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useGetBoardingStatisticsQuery } from "../../../redux/service/boardingStatistics";
+import Loader from "../../loading/Loader";
 
 const PreCheckUsagePieChart = () => {
   const { data, error, isLoading } = useGetBoardingStatisticsQuery();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div><Loader/></div>;
   if (error) return <div>Error loading data: {error.message}</div>;
   if (!data || !data.length) return <div>No data available</div>;
 
@@ -82,7 +83,6 @@ const PreCheckUsagePieChart = () => {
 
   return (
     <div className="w-full">
-      <h2 className="text-5xl mb-8 text-center">PreCheck Usage</h2>
       <ResponsiveContainer width="100%" height={400}>
         <PieChart>
           <Pie

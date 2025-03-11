@@ -11,13 +11,14 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts";
+import Loader from "../../loading/Loader";
 
 const AircraftFleetAnalysisComponent = () => {
   // Use the hook to fetch data from the API
   const { data, error, isLoading } = useGetAircraftFleetAnalysisQuery();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div><Loader/></div>
   }
 
   if (error) {
@@ -66,7 +67,6 @@ const AircraftFleetAnalysisComponent = () => {
 
   return (
     <div>
-      <h1 className="text-5xl mb-8 text-center">Aircraft Fleet Analysis</h1>
       <ResponsiveContainer width="100%" height={400}>
         <BarChart
           data={formattedData}

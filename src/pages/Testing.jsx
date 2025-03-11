@@ -107,6 +107,9 @@ export default function Testing() {
       <section className="max-w-screen-xl mx-auto p-4 overflow-x-auto my-8">
         <AirportStatisticsBarChart />
       </section>
+      {/* <section className="max-w-screen-xl mx-auto p-4 overflow-x-auto my-8">
+        <CohortAnalysisLineChart />
+      </section> */}
     </>
   );
 }
