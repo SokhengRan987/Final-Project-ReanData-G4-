@@ -10,6 +10,7 @@ import {
 } from "recharts";
 
 import { useGetTimeBaseAnalysisQuery } from "../../redux/service/timeBaseAnalysis";
+import Loader from "../loading/Loader";
 
 const TimeBasedBoardingAnalysis = () => {
   const [viewType, setViewType] = useState("line"); // 'line' or 'heatmap'
@@ -85,8 +86,8 @@ const TimeBasedBoardingAnalysis = () => {
 
   if (isLoading)
     return (
-      <div className="flex justify-center items-center h-64">
-        Loading boarding data...
+      <div>
+        <Loader/>
       </div>
     );
 

@@ -9,12 +9,13 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useGetChohortAnalysisQuery } from "../../../redux/service/chohortAnalysis";
+import Loader from "../../loading/Loader";
 
 export default function CohortAnalysis() {
   const { data, error, isLoading } = useGetChohortAnalysisQuery();
   console.log(data);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div><Loader/></div>;
   if (error) return <div>Error loading cohort data: {error.message}</div>;
   if (!data) return <div>No data available</div>;
 

@@ -10,11 +10,12 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useGetAircraftFleetAnalysisQuery } from "../../../redux/service/aircraftFleetAnalysis";
+import Loader from "../../loading/Loader";
 
 const AircraftRangeVelocityChart = () => {
   const { data, error, isLoading } = useGetAircraftFleetAnalysisQuery();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div><Loader/></div>;
   if (error) return <div>Error loading data: {error.message}</div>;
 
   // Map class codes to aircraft types
@@ -65,7 +66,6 @@ const AircraftRangeVelocityChart = () => {
 
   return (
     <div className="w-full">
-      <h2 className="text-5xl text-center mb-8">Aircraft Range vs Velocity</h2>
       <ResponsiveContainer width="100%" height={400}>
         <LineChart
           data={formattedData}

@@ -10,14 +10,15 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import Loader from "../../loading/Loader";
 
 export default function ContinentBarChart() {
   const { data, error, isLoading } = useGetAirPortDistributionQuery();
 
   if (isLoading)
     return (
-      <div className="flex justify-center items-center h-64 animate-pulse">
-        Loading data...
+      <div>
+        <Loader/>
       </div>
     );
   if (error)
@@ -48,10 +49,7 @@ export default function ContinentBarChart() {
     chartData?.reduce((sum, item) => sum + item.cities_served, 0) || 0;
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow-md">
-      <h2 className="text-xl font-bold mb-2 text-center">
-        Global Distribution by Continent
-      </h2>
+    <div className="p-4">
       <div className="flex justify-between mb-4">
         <div className="text-center px-4">
           <p className="text-xl font-bold text-blue-600">{totalCountries}</p>

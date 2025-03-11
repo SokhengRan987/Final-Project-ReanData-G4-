@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useGetRoutePopularityQuery } from "../../../redux/service/routePopularity";
 import { ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import Loader from '../../loading/Loader';
 
 export default function BubbleChart() {
   const { data, error, isLoading } = useGetRoutePopularityQuery();
   const [activeIndex, setActiveIndex] = useState(null);
 
-  if (isLoading) return <div className="p-4">Loading route popularity data...</div>;
+  if (isLoading) return <div><Loader/></div>;
   if (error) return <div className="p-4 text-red-600">Error loading route data: {error.message}</div>;
   if (!data || data.length === 0) return <div className="p-4">No route data available</div>;
 

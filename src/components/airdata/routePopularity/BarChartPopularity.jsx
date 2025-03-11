@@ -10,11 +10,12 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useGetRoutePopularityQuery } from "../../../redux/service/routePopularity";
+import Loader from "../../loading/Loader";
 
 export default function BarChartPopularity() {
   const { data, error, isLoading } = useGetRoutePopularityQuery();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div><Loader/></div>;
   if (error) return <div>Error loading route data: {error.message}</div>;
   if (!data) return <div>No data available</div>;
 

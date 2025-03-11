@@ -9,11 +9,17 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useGetBoardingStatisticsQuery } from "../../../redux/service/boardingStatistics";
+import Loader from "../../loading/Loader";
 
 const AirportStatisticsBarChart = () => {
   const { data, error, isLoading } = useGetBoardingStatisticsQuery();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   if (error) return <div>Error loading data: {error.message}</div>;
   if (!data || !data.length) return <div>No data available</div>;
 
@@ -48,10 +54,9 @@ const AirportStatisticsBarChart = () => {
     }
     return null;
   };
-  
+
   return (
     <div className="w-full">
-      <h2 className="text-5xl text-center mb-8">Airport Statistics</h2>
       <ResponsiveContainer width="100%" height={400}>
         <BarChart
           data={barChartData}

@@ -108,7 +108,11 @@ export default function Sidebar() {
           //   label: `Analyze ${i + 1}`,
           //   path: `/air-data/analyze-${i + 1}`,
           // })),
-          items: [{ label: "Boarding Passes", path: "/boarding-statistics" }],
+          items: [
+            {label: "Boarding Passes", path: "/boarding-statistics" },
+            {label: "Aircraft Fleet Analysis", path: "/aircaft-fleet-analysis"},
+            {label: "Airport Distribution Analysis", path: "/airport-distribution-analysis"}
+          ],
         },
       ],
     },
