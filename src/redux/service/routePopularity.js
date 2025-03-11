@@ -12,7 +12,7 @@ export const routePopularity = createApi({
   tagTypes: ["RoutePopularity"],
   endpoints: (builder) => ({
     getRoutePopularity: builder.query({
-      query: () => "/rpc/get_route_popularity", // Matches the proxy path
+      query: () => "/rpc/get_route_popularity?", 
       providesTags: ["RoutePopularity"],
     }),
   }),

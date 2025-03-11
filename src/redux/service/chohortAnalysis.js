@@ -12,7 +12,7 @@ export const chohortAnalysis = createApi({
   tagTypes: ["ChohortAnalysis"],
   endpoints: (builder) => ({
     getChohortAnalysis: builder.query({
-      query: () => "/rpc/get_cohort_analysis", // Matches the proxy path
+      query: () => "/rpc/get_cohort_analysis", 
       providesTags: ["ChohortAnalysis"],
     }),
   }),

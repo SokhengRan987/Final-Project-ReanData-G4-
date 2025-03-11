@@ -12,7 +12,7 @@ export const aircraftFleetAnalysis = createApi({
   tagTypes: ["AircraftFleetAnalysis"],
   endpoints: (builder) => ({
     getAircraftFleetAnalysis: builder.query({
-      query: () => "/rpc/get_aircraft_fleet_analysis", // Matches the proxy path
+      query: () => "/rpc/get_aircraft_fleet_analysis", 
       providesTags: ["AircraftFleetAnalysis"],
     }),
   }),

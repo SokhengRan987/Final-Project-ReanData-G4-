@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useGetRoutePopularityQuery } from '../../redux/service/routePopularity';
+import { useGetRoutePopularityQuery } from "../../../redux/service/routePopularity";
 import { ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export default function BubbleChart() {

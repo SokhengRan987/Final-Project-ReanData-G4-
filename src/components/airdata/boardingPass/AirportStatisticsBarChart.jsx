@@ -6,9 +6,9 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from "recharts";
-import { useGetBoardingStatisticsQuery } from "../redux/service/boardingStatistics";
+import { useGetBoardingStatisticsQuery } from "../../../redux/service/boardingStatistics";
 
 const AirportStatisticsBarChart = () => {
   const { data, error, isLoading } = useGetBoardingStatisticsQuery();
@@ -22,18 +22,18 @@ const AirportStatisticsBarChart = () => {
     {
       name: "Total Boardings",
       value: data[0].total_boardings,
-      fill: "#9370DB" // Purple color from image
+      fill: "#9370DB", // Purple color from image
     },
     {
       name: "Unique Passengers",
       value: data[0].unique_passengers,
-      fill: "#8FBC8F" // Green color from image
+      fill: "#8FBC8F", // Green color from image
     },
     {
       name: "Unique Flight Legs",
       value: data[0].unique_flight_legs,
-      fill: "#FFD700" // Yellow color from image
-    }
+      fill: "#FFD700", // Yellow color from image
+    },
   ];
 
   // Custom tooltip
@@ -48,7 +48,7 @@ const AirportStatisticsBarChart = () => {
     }
     return null;
   };
-
+  
   return (
     <div className="w-full">
       <h2 className="text-5xl text-center mb-8">Airport Statistics</h2>
@@ -57,18 +57,19 @@ const AirportStatisticsBarChart = () => {
           data={barChartData}
           margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" vertical={false} />
-          <XAxis 
-            dataKey="name" 
-            tick={{ fill: '#666' }}
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke="#e0e0e0"
+            vertical={false}
           />
-          <YAxis 
+          <XAxis dataKey="name" tick={{ fill: "#666" }} />
+          <YAxis
             tickFormatter={(value) => value.toLocaleString()}
-            domain={[0, 'auto']}
+            domain={[0, "auto"]}
           />
           <Tooltip content={<CustomTooltip />} />
-          <Bar 
-            dataKey="value" 
+          <Bar
+            dataKey="value"
             name="value"
             radius={[4, 4, 0, 0]} // Slightly rounded top corners
           />

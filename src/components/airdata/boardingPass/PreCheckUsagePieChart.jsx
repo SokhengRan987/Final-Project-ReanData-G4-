@@ -5,9 +5,9 @@ import {
   Cell,
   Tooltip,
   Legend,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from "recharts";
-import { useGetBoardingStatisticsQuery } from "../redux/service/boardingStatistics";
+import { useGetBoardingStatisticsQuery } from "../../../redux/service/boardingStatistics";
 
 const PreCheckUsagePieChart = () => {
   const { data, error, isLoading } = useGetBoardingStatisticsQuery();
@@ -26,14 +26,14 @@ const PreCheckUsagePieChart = () => {
       name: "PreCheck Users",
       value: preCheckPercentage,
       label: `PreCheck Users ${preCheckPercentage}%`,
-      fill: "#0088FE" // Blue color from image
+      fill: "#0088FE", // Blue color from image
     },
     {
       name: "Non-PreCheck Users",
       value: nonPreCheckPercentage,
       label: `Non-PreCheck Users ${nonPreCheckPercentage}%`,
-      fill: "#00C49F" // Teal color from image
-    }
+      fill: "#00C49F", // Teal color from image
+    },
   ];
 
   // Custom tooltip
@@ -51,7 +51,15 @@ const PreCheckUsagePieChart = () => {
   };
 
   // Custom label for the pie chart
-  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+    index,
+  }) => {
     const RADIAN = Math.PI / 180;
     const radius = outerRadius * 1.1;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -62,7 +70,7 @@ const PreCheckUsagePieChart = () => {
         x={x}
         y={y}
         fill={pieChartData[index].fill}
-        textAnchor={x > cx ? 'start' : 'end'}
+        textAnchor={x > cx ? "start" : "end"}
         dominantBaseline="central"
         fontSize="12"
         fontWeight="500"
@@ -97,7 +105,9 @@ const PreCheckUsagePieChart = () => {
             align="center"
             iconType="circle"
             formatter={(value, entry) => (
-              <span style={{ color: entry.color, marginRight: 10 }}>{value}</span>
+              <span style={{ color: entry.color, marginRight: 10 }}>
+                {value}
+              </span>
             )}
           />
         </PieChart>
