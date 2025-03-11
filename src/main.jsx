@@ -22,12 +22,18 @@ createRoot(document.getElementById("root")).render(
           <Route element={<Rootlayout />}>
             <Route path="/" element={<App />} />
             <Route path="/testing" element={<Testing />} />
-            <Route path="/distribution" element={<DistributionPerContinent />} />
-          </Route>
+            <Route
+              path="/distribution"
+              element={<DistributionPerContinent />}
+            />
+          </Route> 
 
           {/* Sidebar Layout */}
           <Route element={<RootLayoutSideBar />}>
-            <Route path="/boarding-statistics" element={<BoardingStatistics />} />
+            <Route
+              path="/boarding-statistics"
+              element={<BoardingStatistics />}
+            />
           </Route>
         </Routes>
       </StrictMode>
