@@ -7,9 +7,9 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from "recharts";
-import { useGetAircraftFleetAnalysisQuery } from "../redux/service/aircraftFleetAnalysis";
+import { useGetAircraftFleetAnalysisQuery } from "../../../redux/service/aircraftFleetAnalysis";
 
 const AircraftRangeVelocityChart = () => {
   const { data, error, isLoading } = useGetAircraftFleetAnalysisQuery();
@@ -19,23 +19,31 @@ const AircraftRangeVelocityChart = () => {
 
   // Map class codes to aircraft types
   const aircraftTypes = {
-    "0": "Small Prop",
-    "1": "Medium Jet",
-    "2": "Large Jet", 
-    "3": "Regional Jet",
-    "4": "Turboprop"
+    0: "Small Prop",
+    1: "Medium Jet",
+    2: "Large Jet",
+    3: "Regional Jet",
+    4: "Turboprop",
   };
 
   // Format data for the chart
-  const formattedData = data.map(item => ({
-    name: aircraftTypes[item.class] || `Type ${item.class}`,
-    range: item.avg_range,
-    velocity: item.avg_velocity
-  })).sort((a, b) => {
-    // Custom sort order to match the image
-    const order = ["Small Prop", "Medium Jet", "Large Jet", "Regional Jet", "Turboprop"];
-    return order.indexOf(a.name) - order.indexOf(b.name);
-  });
+  const formattedData = data
+    .map((item) => ({
+      name: aircraftTypes[item.class] || `Type ${item.class}`,
+      range: item.avg_range,
+      velocity: item.avg_velocity,
+    }))
+    .sort((a, b) => {
+      // Custom sort order to match the image
+      const order = [
+        "Small Prop",
+        "Medium Jet",
+        "Large Jet",
+        "Regional Jet",
+        "Turboprop",
+      ];
+      return order.indexOf(a.name) - order.indexOf(b.name);
+    });
 
   // Custom tooltip to show both metrics
   const CustomTooltip = ({ active, payload, label }) => {
@@ -65,37 +73,37 @@ const AircraftRangeVelocityChart = () => {
             top: 20,
             right: 30,
             left: 20,
-            bottom: 10
+            bottom: 10,
           }}
         >
           <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
-          <XAxis 
-            dataKey="name" 
-            tick={{ fill: '#666' }}
+          <XAxis
+            dataKey="name"
+            tick={{ fill: "#666" }}
             padding={{ left: 30, right: 30 }}
           />
-          <YAxis 
+          <YAxis
             yAxisId="left"
             orientation="left"
-            domain={[0, 'dataMax + 1000']}
+            domain={[0, "dataMax + 1000"]}
             tickFormatter={(value) => value.toLocaleString()}
-            label={{ 
-              value: 'Avg Range (km)', 
-              angle: -90, 
-              position: 'insideLeft',
-              style: { textAnchor: 'middle', fill: '#8884d8' }
+            label={{
+              value: "Avg Range (km)",
+              angle: -90,
+              position: "insideLeft",
+              style: { textAnchor: "middle", fill: "#8884d8" },
             }}
           />
-          <YAxis 
+          <YAxis
             yAxisId="right"
             orientation="right"
-            domain={[0, 'dataMax + 100']}
+            domain={[0, "dataMax + 100"]}
             tickFormatter={(value) => value.toLocaleString()}
-            label={{ 
-              value: 'Avg Velocity (km/h)', 
-              angle: -90, 
-              position: 'insideRight', 
-              style: { textAnchor: 'middle', fill: '#82ca9d' }
+            label={{
+              value: "Avg Velocity (km/h)",
+              angle: -90,
+              position: "insideRight",
+              style: { textAnchor: "middle", fill: "#82ca9d" },
             }}
           />
           <Tooltip content={<CustomTooltip />} />
@@ -107,7 +115,7 @@ const AircraftRangeVelocityChart = () => {
             name="Avg Range (km)"
             stroke="#8884d8"
             activeDot={{ r: 8 }}
-            dot={{ stroke: '#8884d8', strokeWidth: 2, r: 4 }}
+            dot={{ stroke: "#8884d8", strokeWidth: 2, r: 4 }}
           />
           <Line
             yAxisId="right"
@@ -116,7 +124,7 @@ const AircraftRangeVelocityChart = () => {
             name="Avg Velocity (km/h)"
             stroke="#82ca9d"
             activeDot={{ r: 8 }}
-            dot={{ stroke: '#82ca9d', strokeWidth: 2, r: 4 }}
+            dot={{ stroke: "#82ca9d", strokeWidth: 2, r: 4 }}
           />
         </LineChart>
       </ResponsiveContainer>

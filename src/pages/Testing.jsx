@@ -1,19 +1,21 @@
 // src/pages/About.jsx
 import React from "react";
 import { useGetAirPortDistributionQuery } from "../redux/service/airPortDistributionSlice";
-import Chart from "../components/Chart";
+import Chart from "../components/airdata/airportDistribution/Chart";
 import { useResizeDetector } from "react-resize-detector";
-// import SemiCircleBubbleChart from "../components/SemiCircleBubbleChart";
-import SemiCircleBubbleChartComponent from "../components/SemiCircleBubbleChartComponent";
-import HorizontalBarChartComponent from "../components/HorizontalBarChartComponent";
-import AircraftRangeVelocityChart from "../components/AircraftRangeVelocityChart";
-import AirportStatisticsBarChart from "../components/AirportStatisticsBarChart";
-import PreCheckUsagePieChart from "../components/PreCheckUsagePieChart";
-import TimeBasedBoardingAnalysis from "../components/TimeBasedBoardingAnalysis";
-import CohortAnalysis from "../components/CohortAnalysis";
-import CohortAnalysisLineChart from "../components/CohortAnalysisLineChart";
-import BubbleChart from "../components/routePopularity/BubbleChart";
-import BarChartPopularity from "../components/routePopularity/BarChartPopularity";
+import SemiCircleBubbleChartComponent from "../components/airdata/airportDistribution/SemiCircleBubbleChartComponent";
+import HorizontalBarChartComponent from "../components/airdata/aircraftFleetAnalysis/HorizontalBarChartComponent";
+import AircraftRangeVelocityChart from "../components/airdata/aircraftFleetAnalysis/AircraftRangeVelocityChart";
+import AirportStatisticsBarChart from "../components/airdata/boardingPass/AirportStatisticsBarChart";
+import PreCheckUsagePieChart from "../components/airdata/boardingPass/PreCheckUsagePieChart";
+import TimeBasedBoardingAnalysis from "../components/airdata/TimeBasedBoardingAnalysis";
+import CohortAnalysis from "../components/airdata/cohort/CohortAnalysis";
+import CohortAnalysisLineChart from "../components/airdata/cohort/CohortAnalysisLineChart";
+import BubbleChart from "../components/airdata/routePopularity/BubbleChart";
+import BarChartPopularity from "../components/airdata/routePopularity/BarChartPopularity";
+
+import BarChart from "../components/airdata/airportDistribution/BarChart";
+import Map from "../components/airdata/airportDistribution/Map";
 
 export default function Testing() {
   const {
@@ -77,8 +79,11 @@ export default function Testing() {
   return (
     <>
       <section>
-        <div className="max-w-screen-xl mx-auto p-4 overflow-x-auto my-8" ref={ref}>
-        <h2 className="text-5xl text-center">Countries and Cities Served</h2>
+        <div
+          className="max-w-screen-xl mx-auto p-4 overflow-x-auto my-8"
+          ref={ref}
+        >
+          <h2 className="text-5xl text-center">Countries and Cities Served</h2>
           <Chart
             xAxisData={continents}
             seriesData={seriesData}
@@ -93,33 +98,14 @@ export default function Testing() {
         </h2>
         <SemiCircleBubbleChartComponent data={airportData} />
       </section>
-
       <section className="max-w-screen-xl mx-auto p-4 overflow-x-auto my-8">
-        <HorizontalBarChartComponent/>
+        <BarChart />
       </section>
       <section className="max-w-screen-xl mx-auto p-4 overflow-x-auto my-8">
-        <AircraftRangeVelocityChart/>
+        <Map />
       </section>
       <section className="max-w-screen-xl mx-auto p-4 overflow-x-auto my-8">
-        <AirportStatisticsBarChart/>
-      </section>
-      <section className="max-w-screen-xl mx-auto p-4 overflow-x-auto my-8">
-        <PreCheckUsagePieChart/>
-      </section>
-      <section className="max-w-screen-xl mx-auto p-4 overflow-x-auto my-8">
-        <TimeBasedBoardingAnalysis/>
-      </section>
-      <section className="max-w-screen-xl mx-auto p-4 overflow-x-auto my-8">
-        <CohortAnalysis/>
-      </section>
-      <section className="max-w-screen-xl mx-auto p-4 overflow-x-auto my-8">
-        <CohortAnalysisLineChart/>
-      </section>
-      <section className="max-w-screen-xl mx-auto p-4 overflow-x-auto my-8">
-        <BubbleChart/>
-      </section>
-      <section className="max-w-screen-xl mx-auto p-4 overflow-x-auto my-8">
-        <BarChartPopularity/>
+        <AirportStatisticsBarChart />
       </section>
     </>
   );

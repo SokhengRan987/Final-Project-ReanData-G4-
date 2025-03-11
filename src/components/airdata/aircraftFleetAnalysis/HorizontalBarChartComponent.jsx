@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetAircraftFleetAnalysisQuery } from "../redux/service/aircraftFleetAnalysis";
+import { useGetAircraftFleetAnalysisQuery } from "../../../redux/service/aircraftFleetAnalysis";
 import {
   BarChart,
   Bar,
@@ -26,25 +26,25 @@ const AircraftFleetAnalysisComponent = () => {
 
   // Map the class values to the corresponding aircraft types
   const aircraftTypes = {
-    "0": "Private",
-    "1": "Cargo",
-    "2": "Commercial",
-    "3": "Military",
-    "4": "Other",
+    0: "Private",
+    1: "Cargo",
+    2: "Commercial",
+    3: "Military",
+    4: "Other",
   };
 
   // Colors for each aircraft type
   const colors = {
-    "Commercial": "#9370DB", // Purple
-    "Private": "#8FBC8F", // Green
-    "Military": "#FFD700", // Yellow
-    "Cargo": "#FF8C00", // Orange
-    "Other": "#90EE90", // Light green
+    Commercial: "#9370DB", // Purple
+    Private: "#8FBC8F", // Green
+    Military: "#FFD700", // Yellow
+    Cargo: "#FF8C00", // Orange
+    Other: "#90EE90", // Light green
   };
 
   // Format the API response to match the expected format for the chart
   const formattedData = data
-    .map(item => ({
+    .map((item) => ({
       name: aircraftTypes[item.class] || "Unknown",
       value: item.aircraft_count,
     }))
@@ -71,10 +71,20 @@ const AircraftFleetAnalysisComponent = () => {
         <BarChart
           data={formattedData}
           layout="vertical"
-          margin={{ top: 5, right: 30, left: 80, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
-          <XAxis type="number" domain={[0, 'dataMax + 5']} />
-          <YAxis type="category" dataKey="name" tick={{ fill: '#666' }} width={100} />
+          margin={{ top: 5, right: 30, left: 80, bottom: 5 }}
+        >
+          <CartesianGrid
+            strokeDasharray="3 3"
+            horizontal={true}
+            vertical={false}
+          />
+          <XAxis type="number" domain={[0, "dataMax + 5"]} />
+          <YAxis
+            type="category"
+            dataKey="name"
+            tick={{ fill: "#666" }}
+            width={100}
+          />
           <Tooltip content={<CustomTooltip />} />
           <Legend wrapperStyle={{ bottom: 0 }} />
           <Bar dataKey="value" name="Number of Aircraft">

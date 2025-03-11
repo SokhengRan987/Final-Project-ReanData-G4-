@@ -1,5 +1,5 @@
 import React from "react";
-import AirportDistributionChart from "../components/SemiCircleBubbleChartComponent";
+import AirportDistributionChart from "../components/airdata/airportDistribution/SemiCircleBubbleChartComponent";
 import { useGetAirPortDistributionQuery } from "../redux/service/airPortDistributionSlice";
 
 function DistributionPerContinent() {

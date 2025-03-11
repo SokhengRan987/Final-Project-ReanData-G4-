@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import logo from "../img/reandata.png";
 
 export default function NavbarComponent() {
@@ -28,35 +29,35 @@ export default function NavbarComponent() {
     >
       {/* Scroll Progress Bar */}
       <div
-        className="absolute top-0 left-0 w-full h-1 transition-all duration-200"
+        className="absolute top-0 left-0 h-1 transition-all duration-200"
         style={{
           width: `${scrollProgress}%`,
-          background: "#84e1bc", // Green color
-          boxShadow: "0 0 10px #84e1bc", // Glowing green effect
+          background: "#84e1bc",
+          boxShadow: "0 0 10px #84e1bc",
         }}
       ></div>
 
       {/* Navbar Content */}
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-4">
         {/* Logo */}
-        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <NavLink to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src={logo} alt="Reandata logo" className="h-8" />
-        </a>
+        </NavLink>
 
-        {/* Right-side Buttons (Visible on larger screens) */}
+        {/* Right-side Buttons (Desktop) */}
         <div className="hidden md:flex md:order-2 space-x-3 md:space-x-2 rtl:space-x-reverse">
-          <button
-            type="button"
+          <NavLink
+            to="/login"
             className="text-white bg-[#3C55A5] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-[20px] text-sm px-4 py-2"
           >
             Login
-          </button>
-          <button
-            type="button"
+          </NavLink>
+          <NavLink
+            to="/signup"
             className="text-white bg-[#22B04B] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-[20px] text-sm px-4 py-2"
           >
             Get started
-          </button>
+          </NavLink>
         </div>
 
         {/* Mobile Menu Toggle Button */}
@@ -92,53 +93,68 @@ export default function NavbarComponent() {
         >
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
             <li>
-              <a
-                href="#"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm md:hover:bg-transparent md:hover:text-blue-700"
-                aria-current="page"
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `block py-2 px-3 md:p-0 rounded-sm transition-all ${
+                    isActive ? "text-blue-700 font-semibold" : "text-gray-900"
+                  }`
+                }
               >
                 Datasets
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a
-                href="#"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm md:hover:bg-transparent md:hover:text-blue-700 "
+              <NavLink
+                to="/testing"
+                className={({ isActive }) =>
+                  `block py-2 px-3 md:p-0 rounded-sm transition-all ${
+                    isActive ? "text-blue-700 font-semibold" : "text-gray-900"
+                  }`
+                }
               >
                 Documentation
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a
-                href="/testing"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm md:hover:bg-transparent md:hover:text-blue-700 "
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  `block py-2 px-3 md:p-0 rounded-sm transition-all ${
+                    isActive ? "text-blue-700 font-semibold" : "text-gray-900"
+                  }`
+                }
               >
                 About Us
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a
-                href="#"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm md:hover:bg-transparent md:hover:text-blue-700"
+              <NavLink
+                to="/help"
+                className={({ isActive }) =>
+                  `block py-2 px-3 md:p-0 rounded-sm transition-all ${
+                    isActive ? "text-blue-700 font-semibold" : "text-gray-900"
+                  }`
+                }
               >
                 Help & Support
-              </a>
+              </NavLink>
             </li>
 
-            {/* Login and Get Started Buttons (Visible in dropdown on small screens) */}
+            {/* Login and Get Started Buttons (Mobile) */}
             <li className="md:hidden mt-4">
-              <button
-                type="button"
+              <NavLink
+                to="/login"
                 className="w-full text-white bg-[#3C55A5] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-[20px] text-sm px-4 py-2 mb-2"
               >
                 Login
-              </button>
-              <button
-                type="button"
+              </NavLink>
+              <NavLink
+                to="/signup"
                 className="w-full text-white bg-[#22B04B] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-[20px] text-sm px-4 py-2"
               >
                 Get started
-              </button>
+              </NavLink>
             </li>
           </ul>
         </div>
