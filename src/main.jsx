@@ -13,6 +13,9 @@ import AirportStatisticsBarChart from "./components/airdata/boardingPass/Airport
 import RootLayoutSideBar from "./components/RootLayoutSideBar.jsx";
 import BoardingStatistics from "./pages/airdata-visualization/BoardingStatistics.jsx";
 import HelpAndSupport from "./pages/HelpAndSupport.jsx";
+import Documentation from "./components/Documentation.jsx"
+import DataSet from "./components/DataSet.jsx"
+import About from "./pages/About.jsx"
 import AircraftFleetAnalysis from "./pages/airdata-visualization/AircraftFleetAnalysis.jsx";
 import AirportDistributionChart from "./components/airdata/airportDistribution/SemiCircleBubbleChartComponent.jsx";
 import AirporrtDistributionAnalysis from "./pages/airdata-visualization/AirporrtDistributionAnalysis.jsx";
@@ -40,7 +43,10 @@ createRoot(document.getElementById("root")).render(
               path="/distribution"
               element={<DistributionPerContinent />}
             />
+            <Route path="about-us" element={<About/>}/>
             <Route path="/help&support" element={<HelpAndSupport />} />
+            <Route path="documentation" element={<Documentation/>}/>
+            <Route path="dataset" element={<DataSet/>}/>
             <Route />
 
             {/* Sidebar Layout */}

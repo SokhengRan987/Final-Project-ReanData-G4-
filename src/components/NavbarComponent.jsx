@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../img/reandata.png";
+import { LeafyGreen } from "lucide-react";
 
 export default function NavbarComponent() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -99,7 +100,7 @@ export default function NavbarComponent() {
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
             <li>
               <NavLink
-                to="/"
+                to="/dataset"
                 className={({ isActive }) =>
                   `block py-2 px-3 md:p-0 rounded-sm transition-all ${
                     isActive ? "text-blue-700 font-semibold" : "text-gray-900"
@@ -111,7 +112,7 @@ export default function NavbarComponent() {
             </li>
             <li>
               <NavLink
-                to="/testing"
+                to="/documentation"
                 className={({ isActive }) =>
                   `block py-2 px-3 md:p-0 rounded-sm transition-all ${
                     isActive ? "text-blue-700 font-semibold" : "text-gray-900"
