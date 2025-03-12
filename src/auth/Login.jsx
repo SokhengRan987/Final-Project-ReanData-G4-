@@ -1,21 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { IoArrowBack } from "react-icons/io5";
+import { FcGoogle } from "react-icons/fc";
 import LogoRd from "../img/LogoRd.png";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useGetLoginMutation } from "../redux/services/authSlice";
+import {
+  useGetLoginMutation,
+  useGetSignUpwithGoogleMutation,
+} from "../redux/services/authSlice";
+import { useGoogleLogin } from "@react-oauth/google";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [getLogin, { isLoading, error }] = useGetLoginMutation();
+  const [getLogin, { isLoading: isEmailLoading }] = useGetLoginMutation();
+  const [getSignUpwithGoogle, { isLoading: isGoogleLoading }] =
+    useGetSignUpwithGoogleMutation();
   const [showPassword, setShowPassword] = useState(false);
+  const [isGoogleLoadingState, setIsGoogleLoadingState] = useState(false);
 
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
+      apiError: "",
     },
     validationSchema: Yup.object({
       email: Yup.string().email("Invalid email").required("Email is required"),
@@ -23,23 +32,200 @@ export default function Login() {
         .min(8, "Password must be at least 8 characters")
         .required("Password is required"),
     }),
-    onSubmit: async (values) => {
+    onSubmit: async (values, { setErrors }) => {
       try {
-        const accessToken = await getLogin({
-          user_email: values?.email,
-          user_pass: values?.password,
+        const response = await getLogin({
+          user_email: values.email,
+          user_pass: values.password,
         }).unwrap();
-        navigate("/");
-        if (accessToken) {
+
+        if (response?.result?.access_token) {
+          localStorage.setItem("accessToken", response.result.access_token);
+          navigate("/");
           window.location.reload();
-          localStorage.setItem("accessToken", accessToken.result.access_token);
+        } else {
+          setErrors({ apiError: "Invalid email or password" });
         }
       } catch (error) {
-        alert("Invalid email or password");
+        setErrors({ apiError: "Invalid email or password" });
       }
     },
   });
 
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (res) => {
+      setIsGoogleLoadingState(true);
+
+      if (res && res.access_token) {
+        const accessToken = res.access_token;
+        try {
+          const userData = await fetch(
+            "https://www.googleapis.com/oauth2/v1/userinfo",
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+                Accept: "application/json",
+              },
+            }
+          ).then((response) => response.json());
+
+          if (
+            userData?.given_name &&
+            userData?.family_name &&
+            userData?.email
+          ) {
+            const generatedPassword = `${userData.given_name}${
+              import.meta.env.VITE_SECRET_KEY_PW
+            }`;
+
+            try {
+              const loginResponse = await getLogin({
+                user_email: userData?.email,
+                user_pass: generatedPassword,
+              }).unwrap();
+              console.log("Login Response:", loginResponse);
+              //  check condition if user is existed in users table in api
+              if (loginResponse) {
+                // console.log("Login Response:", loginResponse?.result?.success);
+                const token =
+                  loginResponse?.access_token ||
+                  loginResponse?.result?.access_token;
+                if (token) {
+                  localStorage.setItem("accessToken", token);
+                  navigate("/");
+                  return;
+                }
+              }
+              // if user does not existed
+              if (loginResponse?.result?.success === false) {
+                const submitValues = {
+                  p_first_name: userData.given_name,
+                  p_last_name: userData.family_name,
+                  p_user_name:
+                    userData.name ||
+                    `${userData.given_name}${userData.family_name}`,
+                  p_email: userData.email,
+                  p_pass: generatedPassword,
+                  p_confirm_pass: generatedPassword,
+                  p_user_profile: userData.picture,
+                };
+
+                try {
+                  const signupResponse = await getSignUpwithGoogle(
+                    submitValues
+                  ).unwrap();
+                  console.log("Signup Response:", signupResponse);
+
+                  if (signupResponse) {
+                    const loginUserPassword = `${signupResponse?.first_name}${
+                      import.meta.env.VITE_SECRET_KEY_PW
+                    }`;
+                    console.log("loginpassword: ", loginUserPassword);
+                    const loginResponse = await getLogin({
+                      user_email: signupResponse?.email,
+                      user_pass: loginUserPassword,
+                    }).unwrap();
+
+                    if (loginResponse) {
+                      console.log(
+                        "Login Response:",
+                        loginResponse?.result?.success
+                      );
+                      const token =
+                        loginResponse?.access_token ||
+                        loginResponse?.result?.access_token;
+                      if (token) {
+                        localStorage.setItem("accessToken", token);
+                        navigate("/");
+                        return;
+                      }
+                    }
+                  }
+
+                  else {
+                    formik.setErrors({
+                      apiError:
+                        "Signup successful but no access token received",
+                    });
+                  }
+                } catch (signupError) {
+                  console.error("Error during Google signup:", signupError);
+                  formik.setErrors({
+                    apiError:
+                      signupError?.data?.message ||
+                      "Failed to create account with Google",
+                  });
+                }
+              }
+            } catch (loginError) {
+              console.log(
+                "User not found, proceeding with signup:",
+                loginError
+              );
+
+              const submitValues = {
+                p_first_name: userData.given_name,
+                p_last_name: userData.family_name,
+                p_user_name:
+                  userData.name ||
+                  `${userData.given_name}${userData.family_name}`,
+                p_email: userData.email,
+                p_pass: generatedPassword,
+                p_confirm_pass: generatedPassword,
+                p_user_profile: userData.picture,
+              };
+
+              try {
+                const signupResponse = await getSignUpwithGoogle(
+                  submitValues
+                ).unwrap();
+                console.log("Signup Response:", signupResponse);
+
+                // Check for token in signup response instead of making another login request
+                const token =
+                  signupResponse?.access_token ||
+                  signupResponse?.result?.access_token;
+                if (token) {
+                  localStorage.setItem("accessToken", token);
+                  navigate("/");
+                } else {
+                  formik.setErrors({
+                    apiError: "Signup successful but no access token received",
+                  });
+                }
+              } catch (signupError) {
+                console.error("Error during Google signup:", signupError);
+                formik.setErrors({
+                  apiError:
+                    signupError?.data?.message ||
+                    "Failed to create account with Google",
+                });
+              }
+            }
+          } else {
+            formik.setErrors({
+              apiError: "Could not retrieve required data from Google",
+            });
+          }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+          formik.setErrors({
+            apiError: "Could not fetch user data from Google",
+          });
+        }
+      } else {
+        formik.setErrors({
+          apiError: "Invalid Google authentication response",
+        });
+      }
+      setIsGoogleLoadingState(false);
+    },
+    onError: (error) => {
+      console.log("Google Login Error:", error);
+      formik.setErrors({ apiError: "Google login failed" });
+      setIsGoogleLoadingState(false);
+    },
+  });
   return (
     <div
       className="min-h-screen flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8"
@@ -47,7 +233,7 @@ export default function Login() {
     >
       <div className="w-full max-w-5xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0 shadow-2xl rounded-3xl overflow-hidden">
-          {/* Left Column - Logo (remains unchanged) */}
+          {/* Left Column - Logo (unchanged) */}
           <div
             className="relative flex items-center justify-center p-6 sm:p-8 order-1 md:order-1"
             style={{
@@ -168,12 +354,6 @@ export default function Login() {
                 </p>
               )}
 
-              {formik.errors.apiError && (
-                <p className="text-red-500 text-sm text-center font-description">
-                  {formik.errors.apiError}
-                </p>
-              )}
-
               <div className="flex justify-between items-center">
                 <label className="flex items-center text-gray-600 font-description text-base">
                   <input
@@ -192,10 +372,12 @@ export default function Login() {
 
               <button
                 type="submit"
-                disabled={isLoading || formik.isSubmitting}
+                disabled={
+                  isEmailLoading || formik.isSubmitting || isGoogleLoadingState
+                }
                 className="w-full py-3 px-4 bg-[#3C55A5] text-white rounded-lg hover:bg-[#2A3F7A] transition-all duration-300 transform hover:scale-105 font-description text-base"
               >
-                {isLoading ? (
+                {isEmailLoading ? (
                   <svg
                     className="animate-spin h-5 w-5 mx-auto text-white"
                     xmlns="http://www.w3.org/2000/svg"
@@ -221,6 +403,12 @@ export default function Login() {
                 )}
               </button>
 
+              {formik.errors.apiError && (
+                <p className="text-red-500 text-sm text-center font-description mt-4">
+                  {formik.errors.apiError}
+                </p>
+              )}
+
               <div className="relative my-4">
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-gray-200"></div>
@@ -234,20 +422,43 @@ export default function Login() {
 
               <button
                 type="button"
-                disabled={isLoading}
+                onClick={handleGoogleLogin}
+                disabled={isGoogleLoadingState || isEmailLoading}
                 className="w-full py-3 px-4 border border-gray-200 rounded-lg bg-white text-gray-700 hover:bg-gray-50 transition-all duration-300 flex items-center justify-center gap-2 font-description text-base"
               >
-                <img
-                  src="https://www.google.com/favicon.ico"
-                  alt="Google Icon"
-                  className="h-5 w-5"
-                />
-                Login with Google
+                {isGoogleLoadingState ? (
+                  <svg
+                    className="animate-spin h-5 w-5 mr-2 text-gray-700"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                ) : (
+                  <FcGoogle className="h-5 w-5 mr-2" />
+                )}
+                {isGoogleLoadingState ? "Processing..." : "Login with Google"}
               </button>
 
               <p className="text-center text-gray-600 font-description text-base">
                 Don't have an account?{" "}
-                <Link to={"/signup"} className="text-[#3C55A5] hover:text-[#2A3F7A]">
+                <Link
+                  to={"/signup"}
+                  className="text-[#3C55A5] hover:text-[#2A3F7A]"
+                >
                   Sign up
                 </Link>
               </p>
@@ -256,7 +467,6 @@ export default function Login() {
         </div>
       </div>
 
-      {/* CSS remains unchanged but with added focus styles */}
       <style jsx>{`
         @keyframes fade-in {
           from {
@@ -321,7 +531,6 @@ export default function Login() {
           perspective: 1000px;
         }
 
-        /* Floating Label Logic */
         input:not(:placeholder-shown) + label {
           top: 0;
           font-size: 0.75rem;
@@ -331,7 +540,6 @@ export default function Login() {
           padding-right: 0.25rem;
         }
 
-        /* Responsive Adjustments */
         @media (max-width: 767px) {
           .grid-cols-1 {
             grid-template-columns: 1fr;

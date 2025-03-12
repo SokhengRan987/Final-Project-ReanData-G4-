@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom"; // Added useLocation
+import { useNavigate, useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { IoArrowBack } from "react-icons/io5";
@@ -9,22 +9,21 @@ import { useGetResetPasswordMutation } from "../redux/services/authSlice";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
-  const location = useLocation(); // Hook to access navigation state
+  const location = useLocation();
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [getResetPassword, { isLoading, error }] = useGetResetPasswordMutation();
 
-  // Retrieve email from navigation state
+  // Retrieve email and OTP from navigation state
   const email = location.state?.email || "";
+  const otp = location.state?.otp || "";
 
   const formik = useFormik({
     initialValues: {
-      code: "",
       newPassword: "",
       confirmPassword: "",
     },
     validationSchema: Yup.object({
-      code: Yup.string().required("Code is required"),
       newPassword: Yup.string()
         .min(8, "Password must be at least 8 characters")
         .matches(/[a-zA-Z]/, "Password must include at least 1 letter")
@@ -37,8 +36,8 @@ const ResetPassword = () => {
     onSubmit: async (values) => {
       try {
         await getResetPassword({
-          user_email: email, // Use the email from navigation state
-          otp_codes: values.code,
+          user_email: email,
+          otp_codes: otp, // Use the OTP from navigation state
           new_password: values.newPassword,
           confirm_password: values.confirmPassword,
         }).unwrap();
@@ -55,11 +54,11 @@ const ResetPassword = () => {
     },
   });
 
-  // Optional: Redirect back if no email is provided
-  if (!email) {
+  // Redirect back if no email or OTP is provided
+  if (!email || !otp) {
     return (
       <div className="min-h-screen flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8" style={{ background: "#dde2e9" }}>
-        <p className="text-red-500">Error: No email provided. Please start from the Forgot Password page.</p>
+        <p className="text-red-500">Error: Missing email or OTP. Please start from the Forgot Password page.</p>
       </div>
     );
   }
@@ -84,35 +83,6 @@ const ResetPassword = () => {
         </h2>
 
         <form onSubmit={formik.handleSubmit} className="space-y-6">
-          {/* Code Input */}
-          <div className="">
-            <div className="relative">
-              <input
-                id="code"
-                name="code"
-                type="text"
-                {...formik.getFieldProps("code")}
-                className={`peer w-full px-4 py-3 border ${
-                  formik.touched.code && formik.errors.code
-                    ? "border-red-500"
-                    : "border-gray-300"
-                } rounded-lg focus:border-[#3C55A5] focus:ring-0 transition-all duration-300 bg-transparent font-description text-base text-[#0F172A]`}
-                placeholder=" "
-              />
-              <label
-                htmlFor="code"
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#3C55A5] peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 font-description"
-              >
-                Reset Code
-              </label>
-            </div>
-            {formik.touched.code && formik.errors.code && (
-              <p className="mt-1 text-extra-small text-red-500 font-description">
-                {formik.errors.code}
-              </p>
-            )}
-          </div>
-
           {/* New Password Input */}
           <div>
             <div className="relative">

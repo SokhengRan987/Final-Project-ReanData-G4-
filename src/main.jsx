@@ -11,9 +11,11 @@ import Login from "./auth/Login.jsx";
 import SignUp from "./auth/SignUp.jsx";
 import ForgetPassword from "./auth/ForgetPassword.jsx";
 import ResetPassword from "./auth/ResetPassword.jsx";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 createRoot(document.getElementById("root")).render(
-  <Provider store={store}> {/* Wrap App inside Provider */}
+ <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+   <Provider store={store}> {/* Wrap App inside Provider */}
     <BrowserRouter> {/* Wrap Routes inside BrowserRouter */}
       <StrictMode>
         <Routes>
@@ -30,4 +32,5 @@ createRoot(document.getElementById("root")).render(
       </StrictMode>
     </BrowserRouter>
   </Provider>
+ </GoogleOAuthProvider>
 );

@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
-import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { IoArrowBack } from "react-icons/io5";
 import LogoRd from "../img/LogoRd.png";
 import { useGetSignupMutation } from "../redux/services/authSlice";
 import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
-// import { useGetauthTestApiMutation } from "../redux/services/authTestSlice";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [getSignUp, { isLoading, error }] = useGetSignupMutation();
-  // const [getSignUp,{isLoading,error}]=useGetauthTestApiMutation();
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -53,6 +52,8 @@ export default function SignUp() {
         }).unwrap();
 
         console.log("Signup successful:", result);
+        localStorage.setItem("signUpEmail", values.Email);
+        localStorage.setItem("signUpPassword", values.Password);
         navigate("/login");
       } catch (error) {
         console.error("Signup failed:", error);
@@ -62,6 +63,10 @@ export default function SignUp() {
             "Username already exists. Please choose a different username."
           );
         } else if (error?.data?.message === "Email already exists") {
+          setPopupMessage(
+            "This email is already registered. Please login instead."
+          );
+          setShowPopup(true);
           setFieldError(
             "Email",
             "Email already exists. Please use a different email."
@@ -81,13 +86,43 @@ export default function SignUp() {
     },
   });
 
-  const handleGoogleSignUp = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      console.log("Google signup initiated");
-      setIsLoading(false);
-    }, 1500);
-  };
+  const Popup = ({ message, onClose }) => (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white rounded-lg p-8 max-w-md w-full shadow-xl transform transition-all">
+        <div className="text-center">
+          <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+            <svg
+              className="h-6 w-6 text-red-600"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+          </div>
+          <h3 className="mt-3 text-lg font-medium text-gray-900">
+            Email Already Exists
+          </h3>
+          <p className="mt-2 text-sm text-gray-500">{message}</p>
+          <div className="mt-4">
+            <button
+              type="button"
+              onClick={onClose}
+              className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-[#3C55A5] border border-transparent rounded-md hover:bg-[#2A3F7A] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div
@@ -96,9 +131,21 @@ export default function SignUp() {
         background: "linear-gradient(135deg, #E8ECEF 0%, #D5DCE5 100%)",
       }}
     >
+      {showPopup && (
+        <Popup
+          message={popupMessage}
+          onClose={() => {
+            setShowPopup(false);
+            if (popupMessage.includes("already registered")) {
+              navigate("/login");
+            }
+          }}
+        />
+      )}
+
       <div className="w-full max-w-5xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0 shadow-2xl rounded-3xl overflow-hidden">
-          {/* Logo section */}
+          {/* Logo section remains unchanged */}
           <div
             className="relative flex items-center justify-center p-6 sm:p-8 order-1 md:order-2"
             style={{
@@ -164,6 +211,7 @@ export default function SignUp() {
             </h2>
 
             <form onSubmit={formik.handleSubmit} className="space-y-6">
+              {/* Form fields remain unchanged */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <div className="relative">
@@ -365,7 +413,7 @@ export default function SignUp() {
                   </label>
                 </div>
                 {formik.touched.terms && formik.errors.terms ? (
-                  <p className="text-red-500 text-sm text-start  font-description mt-1">
+                  <p className="text-red-500 text-sm text-start font-description mt-1">
                     {formik.errors.terms}
                   </p>
                 ) : null}
@@ -400,27 +448,6 @@ export default function SignUp() {
                 ) : (
                   "Create Account"
                 )}
-              </button>
-
-              <div className="relative my-4">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-200"></div>
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500 text-small font-description">
-                    Or
-                  </span>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={handleGoogleSignUp}
-                disabled={isLoading}
-                className="w-full py-3 px-4 border border-gray-200 rounded-lg bg-white text-gray-700 hover:bg-gray-50 transition-all duration-300 flex items-center justify-center gap-2 text-small font-description"
-              >
-                <FcGoogle className="h-5 w-5" />
-                Sign up with Google
               </button>
 
               <p className="text-center text-base text-gray-600 font-description">

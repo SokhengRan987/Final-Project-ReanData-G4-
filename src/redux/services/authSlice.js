@@ -24,13 +24,40 @@ const authApi = createApi({
           p_email,
           p_pass,
           p_confirm_pass,
-        },  
+        },
+      }),
+    }),
+    getSignUpwithGoogle: builder.mutation({
+      query: ({
+        p_first_name,
+        p_last_name,
+        p_user_name,
+        p_email,
+        p_pass,
+        p_confirm_pass,
+        p_user_profile,
+      }) => ({
+        url: "/rpc/signup_user_with_google",
+        method: "POST",
+        body: {
+          p_first_name,
+          p_last_name,
+          p_user_name,
+          p_email,
+          p_pass,
+          p_confirm_pass,
+          p_user_profile,
+        },
       }),
     }),
     getLogin: builder.mutation({
       query: ({ user_email, user_pass }) => ({
-        url: `/rpc/login?user_email=${user_email}&user_pass=${user_pass}`,
-        method: "GET",
+        url: `/rpc/login`,
+        method: "POST",
+        body: {
+          user_email,
+          user_pass,
+        },
       }),
     }),
     getRpPassword: builder.mutation({
@@ -56,6 +83,7 @@ export const {
   useGetLoginMutation,
   useGetRpPasswordMutation,
   useGetResetPasswordMutation,
+  useGetSignUpwithGoogleMutation,
 } = authApi;
 
 export default authApi;

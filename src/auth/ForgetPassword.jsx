@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -21,14 +21,22 @@ const ForgetPassword = () => {
     onSubmit: async (values, { setFieldError, setSubmitting, resetForm }) => {
       setSubmitting(true);
       try {
+        // Send request to initiate password reset
         const result = await getRpPassword({
           email: values.email,
         }).unwrap();
 
-        console.log("Password reset email sent:", result);
+        console.log("Password reset initiated:", result);
+
+        // Assuming the API returns the OTP in the response
+        const otp = result.otp; // Adjust based on your API response structure
+        if (!otp) {
+          throw new Error("OTP not received from the server.");
+        }
+
         resetForm();
-        // Pass the email to ResetPassword via navigation state
-        navigate("/resetpassword", { state: { email: values.email } });
+        // Pass both email and OTP to ResetPassword via navigation state
+        navigate("/resetpassword", { state: { email: values.email, otp } });
       } catch (error) {
         console.error("Password reset failed:", error);
         if (error?.data?.message) {
