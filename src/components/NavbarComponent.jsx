@@ -150,7 +150,7 @@ export default function NavbarComponent() {
                 Login
               </NavLink>
               <NavLink
-                to="/signup"
+                to="/boarding-statistics"
                 className="w-full text-white bg-[#22B04B] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-[20px] text-sm px-4 py-2"
               >
                 Get started
