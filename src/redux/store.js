@@ -1,3 +1,18 @@
+import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query";
+import { airPortDistributionApi } from "./service/airPortDistributionSlice";
+import { aircraftFleetAnalysis } from "./service/aircraftFleetAnalysis";
+import { boardingStatistics } from "./service/boardingStatistics";
+import { timeBaseAnalysis } from "./service/timeBaseAnalysis";
+import { chohortAnalysis } from "./service/chohortAnalysis";
+import { routePopularity } from "./service/routePopularity";
+import { airportApi } from "./services/AirportSlice";
+import { bookingApi } from "./services/BookingSlice";
+import { passengerApi } from "./services/PassengerSlice";
+import { flightApi } from "./services/Flight";
+import { aircraftApi } from "./services/Aircraft";
+import { boardingpassApi } from "./services/BoardingPass";
+import { fbApi } from "./services/FoodBeverage";
 export const store = configureStore({
   reducer: {
     [airPortDistributionApi.reducerPath]: airPortDistributionApi.reducer,

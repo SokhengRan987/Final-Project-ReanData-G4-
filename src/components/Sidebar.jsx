@@ -1,7 +1,6 @@
 import logo from "../img/reandata.png";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Outlet } from "react-router-dom";
 import {
   ChevronDown,
   ChevronRight,
@@ -92,12 +91,12 @@ export default function Sidebar() {
           key: "airDataTable",
           icon: Database,
           items: [
-            { label: "Aircraft", path: "/aircraft" },
-            { label: "Airport", path: "/airport" },
-            { label: "Boarding Pass", path: "/boarding-pass" },
-            { label: "Booking", path: "/booking" },
-            { label: "Flight", path: "/flight" },
-            { label: "Passenger", path: "/passenger" },
+            { label: "Aircraft", path: "air-data/aircraft" },
+            { label: "Airport", path: "/air-data/airport" },
+            { label: "Boarding Pass", path: "/air-data/boarding-pass" },
+            { label: "Booking", path: "/air-data/booking" },
+            { label: "Flight", path: "/air-data/flight" },
+            { label: "Passenger", path: "/air-data/passenger" },
           ],
         },
         {

@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const flightApi = createApi({
   reducerPath: "flightApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_ENDPOINT, // Ensure this is defined in your .env file
+    baseUrl: import.meta.env.VITE_API_ENDPOINT2, // Ensure this is defined in your .env file
   }),
   endpoints: (builder) => ({
     getAllFlight: builder.query({

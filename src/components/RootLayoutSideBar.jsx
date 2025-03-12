@@ -1,18 +1,21 @@
 import React from "react";
-import Sidebar from "./Sidebar";
+import SideBar from "../components/Sidebar";
 import { Outlet } from "react-router-dom";
+import NavbarSlidComponent from "./NavbarSlidComponent";
 
-export default function RootLayoutSideBar() {
+export default function RootLayoutSlidBar() {
   return (
-    <main className="flex h-screen overflow-hidden">
-      {/* Fixed Sidebar */}
-      <div className="h-screen fixed w-64 bg-white shadow-md">
-        <Sidebar />
+    <main className="flex h-screen">
+      <div className="h-screen fixed w-64">
+        <SideBar />
       </div>
-
-      {/* Content Section */}
-      <div className="flex-1 pl-64 overflow-y-auto" style={{ paddingTop: '10px' }}>
-        <Outlet />
+      
+      <div className="flex-1 ml-64 flex flex-col">
+        <NavbarSlidComponent />
+        
+        <div className="overflow-auto mt-16">
+          <Outlet />
+        </div>
       </div>
     </main>
   );

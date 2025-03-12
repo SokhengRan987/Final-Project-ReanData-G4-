@@ -14,6 +14,8 @@ import CohortAnalysisLineChart from "../components/airdata/cohort/CohortAnalysis
 import BubbleChart from "../components/airdata/routePopularity/BubbleChart";
 import BarChartPopularity from "../components/airdata/routePopularity/BarChartPopularity";
 
+import NavbarComponent from "../components/NavbarComponent";
+
 import BarChart from "../components/airdata/airportDistribution/BarChart";
 import Map from "../components/airdata/airportDistribution/Map";
 

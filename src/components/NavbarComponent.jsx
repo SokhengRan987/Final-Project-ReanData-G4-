@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../img/reandata.png";
-import { LeafyGreen } from "lucide-react";
 
 export default function NavbarComponent() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -12,7 +11,7 @@ export default function NavbarComponent() {
       const scrollTop = window.scrollY;
       const scrollHeight =
         document.documentElement.scrollHeight - window.innerHeight;
-      const progress = scrollHeight === 0 ? 0 : (scrollTop / scrollHeight) * 100;
+      const progress = (scrollTop / scrollHeight) * 100;
       setScrollProgress(progress);
     };
 
@@ -20,17 +19,12 @@ export default function NavbarComponent() {
     return () => window.removeEventListener("scroll", updateScrollProgress);
   }, []);
 
-  const [activeLink, setActiveLink] = useState ('');
-  const handleLinkClick = (link) => {
-    setActiveLink(link);
-  }
-
   return (
     <nav
-      className="sticky top-0 z-50 bg-white/95 shadow-lg transition-all duration-300"
+      className="sticky top-0 z-50 bg-transparent shadow-md"
       style={{
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
+        backdropFilter: "blur(10px)",
+        WebkitBackdropFilter: "blur(10px)",
       }}
     >
       {/* Scroll Progress Bar */}
@@ -124,7 +118,7 @@ export default function NavbarComponent() {
             </li>
             <li>
               <NavLink
-                to="/about"
+                to="/about-us"
                 className={({ isActive }) =>
                   `block py-2 px-3 md:p-0 rounded-sm transition-all ${
                     isActive ? "text-blue-700 font-semibold" : "text-gray-900"

@@ -121,13 +121,13 @@ function HelpAndSupport() {
   };
 
   return (
-    <div className="bg-white min-h-screen w-full px-20">
+    <div className="bg-white min-h-screen max-w-screen-xl mx-auto">
       {/* FAQ Section */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="container mx-auto py-12 px-6 max-w-5xl"
+        className="container mx-auto my-8"
       >
         <h1 className="text-[50px] font-bold text-gray-800 text-center mb-16">
           Frequently Asked Questions
@@ -245,7 +245,7 @@ function HelpAndSupport() {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="container mx-auto py-12 px-6 max-w-5xl"
+        className="container mx-auto my-8"
       >
         <h1 className="text-[50px] font-bold text-gray-800 text-center mb-16">
           Contact Us
