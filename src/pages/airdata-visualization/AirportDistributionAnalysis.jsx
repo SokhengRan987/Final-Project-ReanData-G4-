@@ -7,9 +7,8 @@ import { useResizeDetector } from "react-resize-detector";
 import Loader from "../../components/loading/Loader";
 import SemiCircleBubbleChartComponent from "../../components/airdata/airportDistribution/SemiCircleBubbleChartComponent";
 import BarChart from "../../components/airdata/airportDistribution/BarChart";
-import { data } from "autoprefixer";
 
-export default function AirporrtDistributionAnalysis() {
+export default function AirportDistributionAnalysis() {
   const {
     data: airports,
     isError,
@@ -105,14 +104,14 @@ export default function AirporrtDistributionAnalysis() {
             </h3>
             <div className="space-y-3 text-gray-700">
               <p>
-                <span className="font-semibold">Airport per Contient: </span>
-                Helps us to understand airport density in different regions.
+                <span className="font-semibold">Airports per Continent: </span>
+                Helps us understand airport density in different regions.
               </p>
               <p>
                 <span className="font-semibold">
                   Countries and Cities Served:{" "}
                 </span>
-                Indicates the breadth of the airport network.
+                Indicates the extent of the airport network.
               </p>
             </div>
           </div>
@@ -124,8 +123,8 @@ export default function AirporrtDistributionAnalysis() {
             <p className="text-gray-700">
               The airport distribution analysis shows where the network is most
               concentrated and how widespread the services are globally. It
-              provides a view of the airport's internatioal reach and helps
-              indentify regions where further expansion might be benificial.{" "}
+              provides a view of the airport's international reach and helps
+              identify regions where further expansion might be beneficial.
             </p>
           </div>
         </section>

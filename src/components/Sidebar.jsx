@@ -111,7 +111,12 @@ export default function Sidebar() {
           items: [
             {label: "Boarding Passes", path: "/boarding-statistics" },
             {label: "Aircraft Fleet Analysis", path: "/aircaft-fleet-analysis"},
-            {label: "Airport Distribution Analysis", path: "/airport-distribution-analysis"}
+            {label: "Airport Distribution Analysis", path: "/airport-distribution-analysis"},
+            {label: "Time Base Analysis", path: "/time-base-analysis"},
+            {label: "Cohort Analysis for Frequent Flyers", path: "/cohort-analysis"},
+            {label: "Route Popularity", path: "/route-popularity"},
+            {label: "Peak Travel Time", path: "/peak-travel-time"},
+            {label: "Connection Analysis", path: "/connection-analysis"},
           ],
         },
       ],
@@ -137,10 +142,13 @@ export default function Sidebar() {
           label: "Analyze",
           key: "foodBeverageAnalyze",
           icon: BarChart2,
-          items: Array.from({ length: 8 }, (_, i) => ({
-            label: `Analyze ${i + 1}`,
-            path: `/food-beverage/analyze-${i + 1}`,
-          })),
+          items: [
+            {label: "Age Range Distribution", path: "/age-range-distribution"},
+            {label: "Gender Distribution", path: "/gender-distribution"},
+            {label: "Preferred Cuisine Frequency", path: "/preferred-cuisine-frequency"},
+            {label: "Eating Out Frequency", path: "/eating-out-frequency"},
+            {label: "Average Spending by Value Priorities", path: "/average-spending-by-value-priorities"},
+          ]
         },
       ],
     },
