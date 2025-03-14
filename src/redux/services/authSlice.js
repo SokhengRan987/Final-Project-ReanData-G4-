@@ -74,6 +74,40 @@ const authApi = createApi({
         body: { user_email, otp_codes, new_password, confirm_password },
       }),
     }),
+    getUpdateUser: builder.mutation({
+      query: ({
+        first_name_input,
+        last_name_input,
+        user_name_input,
+        user_uuid_input,
+      }) => ({
+        url: "/rpc/update_user",
+        method: "POST",
+        body: {
+          first_name_input,
+          last_name_input,
+          user_name_input,
+          user_uuid_input,
+        },
+      }),
+    }),
+    getChangePassword: builder.mutation({
+      query: ({
+        user_email,
+        current_password,
+        new_password,
+        new_confirm_password,
+      }) => ({
+        url: "/rpc/change_password",
+        method: "POST",
+        body: {
+          user_email,
+          current_password,
+          new_password,
+          new_confirm_password,
+        },
+      }),
+    }),
   }),
 });
 
@@ -84,6 +118,8 @@ export const {
   useGetRpPasswordMutation,
   useGetResetPasswordMutation,
   useGetSignUpwithGoogleMutation,
+  useGetChangePasswordMutation,
+  useGetUpdateUserMutation,
 } = authApi;
 
 export default authApi;
