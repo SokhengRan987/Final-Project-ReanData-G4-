@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
-import AirportStatisticsBarChart from "../../components/airdata/boardingPass/AirportStatisticsBarChart";
-import PreCheckUsagePieChart from "../../components/airdata/boardingPass/PreCheckUsagePieChart";
+import React from "react";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
+import { useEffect } from "react";
+import TimeBasedBoardingAnalysis from "../../components/airdata/TimeBasedBoardingAnalysis";
 
-export default function BoardingStatistics() {
-  // Initialize AOS when the component mounts
+export default function TimeBaseAnalysis() {
   useEffect(() => {
     AOS.init({
       duration: 900, // Default duration for all animations
@@ -23,21 +22,15 @@ export default function BoardingStatistics() {
       <div className="max-w-screen-xl mx-auto">
         {/* Charts Section */}
         <section
-          className="grid grid-cols-1 lg:grid-cols-2 gap-6 border-2 border-gray-200 rounded-[20px] p-6 bg-white shadow-md"
+          className="grid grid-cols-1 border-2 border-gray-200 rounded-[20px] p-6 bg-white shadow-md"
           data-aos="fade-up" // Animation for the charts section
           data-aos-delay="100" // Slight delay for smooth entry
         >
           <div className="w-full" data-aos="zoom-in" data-aos-delay="75">
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              Airport Statistics
+              Boarding Analysis by Hours
             </h2>
-            <AirportStatisticsBarChart />
-          </div>
-          <div className="w-full" data-aos="zoom-in" data-aos-delay="300">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              PreCheck Usage
-            </h2>
-            <PreCheckUsagePieChart />
+            <TimeBasedBoardingAnalysis />
           </div>
         </section>
 
@@ -49,21 +42,8 @@ export default function BoardingStatistics() {
             </h3>
             <div className="space-y-3 text-gray-700">
               <p>
-                <span className="font-semibold">Total Boardings:</span>{" "}
-                Indicates overall passenger activity across the airport.
-              </p>
-              <p>
-                <span className="font-semibold">Unique Passengers:</span>
-                Shows the number of distinct passengers flying.
-              </p>
-              <p>
-                <span className="font-semibold">Unique Flight Legs:</span>{" "}
-                Represents the variety of routes flown.
-              </p>
-              <p>
-                <span className="font-semibold">PreCheck Percentage:</span>{" "}
-                Highlights the percentage of passengers who utilize PreCheck for
-                a smoother boarding process.
+                This function helps track the number of boardings by hour of the
+                day.
               </p>
             </div>
           </div>
@@ -73,11 +53,11 @@ export default function BoardingStatistics() {
               Storytelling
             </h3>
             <p className="text-gray-700">
-              The boarding statistics provide a clear snapshot of airport
-              operations. They reveal the volume of flights, the number of
-              unique passengers, and the efficiency of security processes
-              through PreCheck usage, offering valuable insights for operational
-              improvements.
+              The time-based analysis reveals the busiest hours at the airport.
+              It helps with staffing, resource allocation, and improving
+              passenger flow management. For instance, if there is high traffic
+              at certain hours, additional support may be required at check-in
+              counters or security.
             </p>
           </div>
         </section>

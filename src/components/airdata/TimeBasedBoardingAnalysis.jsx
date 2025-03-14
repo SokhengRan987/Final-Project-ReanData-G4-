@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -14,24 +14,53 @@ import Loader from "../loading/Loader";
 
 const TimeBasedBoardingAnalysis = () => {
   const [viewType, setViewType] = useState("line"); // 'line' or 'heatmap'
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [availableDates, setAvailableDates] = useState([]);
+
+  // Helper function to format hour display - defined at the top so it can be used throughout the component
+  const formatHourDisplay = (hour) => {
+    if (hour === 0) return "12 AM";
+    if (hour < 12) return `${hour} AM`;
+    if (hour === 12) return "12 PM";
+    return `${hour - 12} PM`;
+  };
 
   // Use the provided API query hook
   const { data = [], isLoading, error } = useGetTimeBaseAnalysisQuery();
 
-  // Get current hour
-  const currentHour = new Date().getHours();
+  // Extract available dates from the API data
+  useEffect(() => {
+    if (data && data.length > 0) {
+      // Get unique dates from the data
+      const uniqueDates = [...new Set(data.map(item => {
+        const date = new Date(item.hour_of_day);
+        return date.toISOString().split('T')[0]; // YYYY-MM-DD format
+      }))].sort();
+      
+      setAvailableDates(uniqueDates);
+      
+      // Set the default selected date to the most recent date
+      if (!selectedDate && uniqueDates.length > 0) {
+        setSelectedDate(uniqueDates[uniqueDates.length - 1]);
+      }
+    }
+  }, [data, selectedDate]);
+
+  // Filter data for the selected date
+  const filteredData = data.filter(item => {
+    if (!selectedDate) return true;
+    const date = new Date(item.hour_of_day);
+    return date.toISOString().split('T')[0] === selectedDate;
+  });
 
   // Process data for visualization
-  const processedData = data.map((item) => {
+  const processedData = filteredData.map((item) => {
     // Parse hour from API data
     const date = new Date(item.hour_of_day);
     const hour = date.getHours();
 
-    // Format hour for display
-    const hourFormatted =
-      hour < 12
-        ? `${hour === 0 ? 12 : hour} AM`
-        : `${hour === 12 ? 12 : hour - 12} PM`;
+    // Format hour for display - ensuring 12 AM is properly displayed
+    const hourFormatted = formatHourDisplay(hour);
 
     return {
       hour: hourFormatted,
@@ -41,48 +70,35 @@ const TimeBasedBoardingAnalysis = () => {
     };
   });
 
-  // Create a complete 10-hour range dataset
+  // Create a complete 24-hour range dataset for selected date
   const completeHourRange = [];
-  for (let i = 0; i <= 10; i++) {
-    const hourValue = (currentHour + i) % 24;
-    const hourFormatted =
-      hourValue < 12
-        ? `${hourValue === 0 ? 12 : hourValue} AM`
-        : `${hourValue === 12 ? 12 : hourValue - 12} PM`;
-
+  for (let i = 0; i < 24; i++) {
     // Find if we have data for this hour
-    const hourData = processedData.find((item) => item.hourValue === hourValue);
+    const hourData = processedData.find((item) => item.hourValue === i);
 
     completeHourRange.push({
-      hour: hourFormatted,
-      hourValue: hourValue,
+      hour: formatHourDisplay(i),
+      hourValue: i,
       count: hourData ? hourData.count : 0, // Use 0 if no data for this hour
       originalTime: hourData ? hourData.originalTime : null,
     });
   }
 
-  // Sort data by hour (should already be in order, but just to be safe)
-  const sortedData = [...completeHourRange].sort((a, b) => {
-    // Custom sort to keep hours in chronological order starting from current hour
-    const hourDiffA = (a.hourValue - currentHour + 24) % 24;
-    const hourDiffB = (b.hourValue - currentHour + 24) % 24;
-    return hourDiffA - hourDiffB;
-  });
+  // Sort data by hour
+  const sortedData = [...completeHourRange].sort((a, b) => a.hourValue - b.hourValue);
 
   // Determine color intensity for heatmap
   const maxCount = Math.max(...sortedData.map((item) => item.count), 1);
 
-  // Generate end hour for display
-  const endHourValue = (currentHour + 10) % 24;
-  const endHourFormatted =
-    endHourValue < 12
-      ? `${endHourValue === 0 ? 12 : endHourValue} AM`
-      : `${endHourValue === 12 ? 12 : endHourValue - 12} PM`;
-
-  const startHourFormatted =
-    currentHour < 12
-      ? `${currentHour === 0 ? 12 : currentHour} AM`
-      : `${currentHour === 12 ? 12 : currentHour - 12} PM`;
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric' 
+    });
+  };
 
   if (isLoading)
     return (
@@ -97,7 +113,7 @@ const TimeBasedBoardingAnalysis = () => {
   return (
     <div className="w-full bg-white rounded-[20px] shadow p-6">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-5xl mb-8">Boarding Analysis by Hour</h2>
+        {/* <h2 className="text-5xl mb-8">Boarding Analysis by Hour</h2> */}
         <div className="flex space-x-2">
           <button
             className={`px-4 py-2 rounded-[20px] ${
@@ -118,8 +134,27 @@ const TimeBasedBoardingAnalysis = () => {
         </div>
       </div>
 
+      {/* Date selection dropdown */}
+      <div className="mb-6">
+        <label htmlFor="date-select" className="block text-sm font-medium text-gray-700 mb-2">
+          Select Date:
+        </label>
+        <select
+          id="date-select"
+          value={selectedDate || ""}
+          onChange={(e) => setSelectedDate(e.target.value)}
+          className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+        >
+          {availableDates.map((date) => (
+            <option key={date} value={date}>
+              {formatDate(date)}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div className="text-sm text-gray-600 mb-4">
-        Showing data from {startHourFormatted} to {endHourFormatted}
+        {selectedDate ? `Showing data for ${formatDate(selectedDate)}` : "Select a date to view data"}
       </div>
 
       {viewType === "line" ? (
@@ -137,6 +172,7 @@ const TimeBasedBoardingAnalysis = () => {
                   position: "insideBottomRight",
                   offset: -5,
                 }}
+                tick={{ fontSize: 11 }}
               />
               <YAxis
                 label={{
@@ -172,7 +208,7 @@ const TimeBasedBoardingAnalysis = () => {
             </thead>
             <tbody>
               {sortedData.map((item, index) => (
-                <tr key={index}>
+                <tr key={index} className={item.hourValue === 0 ? "bg-gray-50" : ""}>
                   <td className="px-4 py-2 border">{item.hour}</td>
                   <td className="px-4 py-2 border text-center">{item.count}</td>
                   <td className="px-4 py-2 border">
@@ -195,7 +231,7 @@ const TimeBasedBoardingAnalysis = () => {
       )}
 
       <div className="mt-4 text-sm text-gray-500">
-        Total Boardings (next 10 hours):{" "}
+        Total Boardings for {formatDate(selectedDate)}:{" "}
         {sortedData.reduce((sum, item) => sum + item.count, 0)}
       </div>
     </div>
