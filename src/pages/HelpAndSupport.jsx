@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import emailjs from '@emailjs/browser';
 
 function HelpAndSupport() {
   // Contact form state
@@ -8,6 +9,12 @@ function HelpAndSupport() {
     email: "",
     message: "",
   });
+
+  // Form submission states
+  const [contactSubmitting, setContactSubmitting] = useState(false);
+  const [contactStatus, setContactStatus] = useState(null);
+  const [questionSubmitting, setQuestionSubmitting] = useState(false);
+  const [questionStatus, setQuestionStatus] = useState(null);
 
   // FAQ accordion state
   const [activeIndex, setActiveIndex] = useState(null);
@@ -89,15 +96,42 @@ function HelpAndSupport() {
     }));
   }
 
-  function handleSubmit(e) {
+  // Handle contact form submission
+  async function handleSubmit(e) {
     e.preventDefault();
+    setContactSubmitting(true);
+    setContactStatus(null);
+    
     if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      alert("Please enter a valid email.");
+      setContactStatus({ success: false, message: "Please enter a valid email." });
+      setContactSubmitting(false);
       return;
     }
-    console.log("Form submitted:", formData);
-    alert("Thank you for your message!");
-    setFormData({ name: "", email: "", message: "" });
+    
+    try {
+      // Send email using EmailJS
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        to_email: 'reandata.istad@gmail.com',
+      };
+      
+      await emailjs.send(
+        'service_npgxki8',        // Replace with your EmailJS service ID
+        'template_3bx95if',       // Replace with your EmailJS template ID
+        templateParams,
+        '3b1ms6vHDzEn2xtoG'            // Replace with your EmailJS user ID
+      );
+      
+      setContactStatus({ success: true, message: "Thank you for your message! We'll get back to you soon." });
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("Error sending email:", error);
+      setContactStatus({ success: false, message: "Failed to send message. Please try again later." });
+    } finally {
+      setContactSubmitting(false);
+    }
   }
 
   // Toggle accordion
@@ -111,23 +145,45 @@ function HelpAndSupport() {
   };
 
   // Submit user question
-  const submitUserQuestion = (e) => {
+  const submitUserQuestion = async (e) => {
     e.preventDefault();
     if (userQuestion.trim() === "") return;
-
-    console.log("User question submitted:", userQuestion);
-    alert("Thank you for your question! Our team will get back to you soon.");
-    setUserQuestion("");
+    
+    setQuestionSubmitting(true);
+    setQuestionStatus(null);
+    
+    try {
+      // Send email using EmailJS
+      const templateParams = {
+        question: userQuestion,
+        to_email: 'reandata.istad@gmail.com',
+      };
+      
+      await emailjs.send(
+        'service_npgxki8',        // Replace with your EmailJS service ID
+        'template_3bx95if', // Use a separate template for questions
+        templateParams,
+        '3b1ms6vHDzEn2xtoG'            // Replace with your EmailJS user ID
+      );
+      
+      setQuestionStatus({ success: true, message: "Thank you for your question! Our team will get back to you soon." });
+      setUserQuestion("");
+    } catch (error) {
+      console.error("Error sending question:", error);
+      setQuestionStatus({ success: false, message: "Failed to send question. Please try again later." });
+    } finally {
+      setQuestionSubmitting(false);
+    }
   };
 
   return (
-    <div className="bg-white min-h-screen max-w-screen-xl mx-auto">
+    <div className="bg-white min-h-screen w-full px-20">
       {/* FAQ Section */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="container mx-auto my-8"
+        className="container mx-auto py-12 px-6 max-w-5xl"
       >
         <h1 className="text-[50px] font-bold text-gray-800 text-center mb-16">
           Frequently Asked Questions
@@ -158,6 +214,13 @@ function HelpAndSupport() {
               <p className="text-left text-[#1E293B] mb-2 text-[20px]">
                 Let me know
               </p>
+              
+              {questionStatus && (
+                <div className={`mb-4 p-3 rounded-md ${questionStatus.success ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                  {questionStatus.message}
+                </div>
+              )}
+              
               <form onSubmit={submitUserQuestion} className="w-full">
                 <div className="relative">
                   <input
@@ -183,13 +246,13 @@ function HelpAndSupport() {
                   type="submit"
                   className={`bg-[#3C55A5] text-white font-medium py-3 px-10 mt-4 text-[18px]
                      rounded-full transition duration-300 flex flex-col items-center text-center ${
-                       !userQuestion
+                       !userQuestion || questionSubmitting
                          ? " cursor-not-allowed"
                          : "hover:bg-green-600"
                      }`}
-                  disabled={!userQuestion}
+                  disabled={!userQuestion || questionSubmitting}
                 >
-                  Submit
+                  {questionSubmitting ? "Sending..." : "Submit"}
                 </motion.button>
               </form>
             </div>
@@ -245,7 +308,7 @@ function HelpAndSupport() {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="container mx-auto my-8"
+        className="container mx-auto py-12 px-6 max-w-5xl"
       >
         <h1 className="text-[50px] font-bold text-gray-800 text-center mb-16">
           Contact Us
@@ -277,13 +340,19 @@ function HelpAndSupport() {
               We're here to help! Send us your query via the form below or send
               us an email at{" "}
               <a
-                href="mailto:helpdesk@gstudio.com"
+                href="mailto:reandata.istad@gmail.com"
                 className="text-[#3C55A5] hover:underline"
               >
-                helpdesk@gstudio.com
+                reandata.istad@gmail.com
               </a>{" "}
               for any issue you're facing.
             </p>
+            
+            {contactStatus && (
+              <div className={`mb-6 p-4 rounded-md ${contactStatus.success ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                {contactStatus.message}
+              </div>
+            )}
 
             <form onSubmit={handleSubmit}>
               <div className="mb-6">
@@ -348,15 +417,15 @@ function HelpAndSupport() {
                   type="submit"
                   className={`bg-[#3C55A5] text-white font-medium py-3 px-10 text-[18x]
                      rounded-full transition duration-300 ${
-                       !formData.name || !formData.email || !formData.message
+                       !formData.name || !formData.email || !formData.message || contactSubmitting
                          ? " cursor-not-allowed"
                          : "hover:bg-green-500"
                      }`}
                   disabled={
-                    !formData.name || !formData.email || !formData.message
+                    !formData.name || !formData.email || !formData.message || contactSubmitting
                   }
                 >
-                  Submit
+                  {contactSubmitting ? "Sending..." : "Submit"}
                 </motion.button>
               </div>
             </form>
