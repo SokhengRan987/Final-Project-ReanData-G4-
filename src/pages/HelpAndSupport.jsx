@@ -177,13 +177,13 @@ function HelpAndSupport() {
   };
 
   return (
-    <div className="bg-white min-h-screen w-full px-20">
+    <div className="min-h-screen max-w-screen-xl mx-auto">
       {/* FAQ Section */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="container mx-auto py-12 px-6 max-w-5xl"
+        className="container mx-auto"
       >
         <h1 className="text-[50px] font-bold text-gray-800 text-center mb-16">
           Frequently Asked Questions
@@ -308,13 +308,13 @@ function HelpAndSupport() {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="container mx-auto py-12 px-6 max-w-5xl"
+        className="mx-auto"
       >
         <h1 className="text-[50px] font-bold text-gray-800 text-center mb-16">
           Contact Us
         </h1>
 
-        <div className="flex flex-col md:flex-row items-start gap-12">
+        <div className="flex flex-col justify-between md:flex-row items-start ">
           {/* Left side with illustration */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
@@ -334,7 +334,7 @@ function HelpAndSupport() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="w-full md:w-1/2 bg-white p-6 rounded-lg"
+            className="w-full md:w-1/2 rounded-lg"
           >
             <p className="text-gray-600 leading-relaxed mb-8 text-[22px]">
               We're here to help! Send us your query via the form below or send

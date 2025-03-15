@@ -51,6 +51,7 @@ import RadarChart from "./components/typeOfGraphs/RadarChart.jsx";
 import ScatterPlot from "./components/typeOfGraphs/ScatterPlot.jsx";
 import StackedBarChart from "./components/typeOfGraphs/StackedBarChart.jsx";
 import ColumnChart from "./components/typeOfGraphs/ColumnChart.jsx";
+import InternationalFoodPreference from "./pages/food-beverages/InternationalFoodPreference.jsx";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -96,6 +97,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="/preferred-cuisine-frequency" element={<PreferredCuisineFrequency/>}/>
             <Route path="/eating-out-frequency" element={<EatingOut/>}/>
             <Route path="/average-spending-by-value-priorities" element={<AverageSpending/>}/>
+            <Route path="/international-food-preference" element={<InternationalFoodPreference/>}/>
 
             {/* type of chart */}
             <Route path="/chart-AreaChart" element={<AreaChart/>}/>

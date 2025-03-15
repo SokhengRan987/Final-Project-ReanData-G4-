@@ -148,6 +148,7 @@ export default function Sidebar() {
             {label: "Preferred Cuisine Frequency", path: "/preferred-cuisine-frequency"},
             {label: "Eating Out Frequency", path: "/eating-out-frequency"},
             {label: "Average Spending by Value Priorities", path: "/average-spending-by-value-priorities"},
+            {label: "International Food Preference", path: "/international-food-preference"}
           ]
         },
       ],

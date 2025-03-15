@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 export default function About() {
   return (
     <>
-      <main className="overflow-hidden">
+      <main className="max-w-screen-2xl mx-auto">
         {/* Hero Carousel Section */}
         <section>
           <div className="h-[400px] sm:h-64 xl:h-[400px] 2xl:h-[490px]">
