@@ -14,6 +14,7 @@ import {
   LineChartIcon as ChartLine,
   Database,
 } from "lucide-react";
+import { label } from "framer-motion/client";
 
 const useSidebarState = () => {
   const [expanded, setExpanded] = useState({
@@ -155,10 +156,20 @@ export default function Sidebar() {
       label: "Chart",
       key: "chart",
       icon: ChartLine,
-      subItems: Array.from({ length: 8 }, (_, i) => ({
-        label: `Chart ${i + 1}`,
-        path: `/chart-${i + 1}`,
-      })),
+      subItems: [
+        {label: "Area Chart", path: "/chart-AreaChart"},
+        {label: "Bar Chart", path: "/chart-BarChart"},
+        {label: "Bubble Chart", path: "/chart-BubbleChart"},
+        {label: "Column Chart", path: "/chart-ColumnChart"},
+        {label: "Doughnut Chart", path: "/chart-DoughnutChart"},
+        {label: "Gauges Chart", path: "/chart-GaugesChart"},
+        {label: "Histogram Chart", path: "/chart-HistogramChart"},
+        {label: "Line Chart", path: "/chart-LineChart"},
+        {label: "Pie Chart", path: "/chart-PieChart"},
+        {label: "Radar Chart", path: "/chart-RadarChart"},
+        {label: "ScatterPlot", path: "/chart-ScatterPlot"},
+        {label: "StackedBar Chart", path: "/chart-StackedBarChart"}
+      ]
     },
   ];
 

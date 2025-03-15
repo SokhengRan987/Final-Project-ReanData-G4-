@@ -39,6 +39,18 @@ import GenderDistribution from "./pages/food-beverages/GenderDistribution.jsx";
 import PreferredCuisineFrequency from "./pages/food-beverages/PreferredCuisineFrequency.jsx";
 import EatingOut from "./pages/food-beverages/EatingOut.jsx";
 import AverageSpending from "./pages/food-beverages/AverageSpending.jsx";
+import AreaChart from "./components/typeOfGraphs/AreaChart.jsx";
+import Bar from "./components/typeOfGraphs/BarChart2.jsx";
+import BubbleChart from "./components/typeOfGraphs/BubbleChart.jsx";
+import DoughnutChart from "./components/typeOfGraphs/DoughnutChart.jsx";
+import GaugesChart from "./components/typeOfGraphs/GaugesChart.jsx";
+import Histogram from "./components/typeOfGraphs/Histogram.jsx";
+import Line from "./components/typeOfGraphs/Line.jsx";
+import PieChart from "./components/typeOfGraphs/Pie.jsx";
+import RadarChart from "./components/typeOfGraphs/RadarChart.jsx";
+import ScatterPlot from "./components/typeOfGraphs/ScatterPlot.jsx";
+import StackedBarChart from "./components/typeOfGraphs/StackedBarChart.jsx";
+import ColumnChart from "./components/typeOfGraphs/ColumnChart.jsx";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -84,6 +96,20 @@ createRoot(document.getElementById("root")).render(
             <Route path="/preferred-cuisine-frequency" element={<PreferredCuisineFrequency/>}/>
             <Route path="/eating-out-frequency" element={<EatingOut/>}/>
             <Route path="/average-spending-by-value-priorities" element={<AverageSpending/>}/>
+
+            {/* type of chart */}
+            <Route path="/chart-AreaChart" element={<AreaChart/>}/>
+            <Route path="/chart-BarChart" element={<Bar/>}/>
+            <Route path="/chart-BubbleChart" element={<BubbleChart/>}/>
+            <Route path="/chart-ColumnChart" element={<ColumnChart/>}/>
+            <Route path="/chart-DoughnutChart" element={<DoughnutChart/>}/>
+            <Route path="/chart-GaugesChart" element={<GaugesChart/>}/>
+            <Route path="/chart-HistogramChart" element={<Histogram/>}/>
+            <Route path="/chart-LineChart" element={<Line/>}/>
+            <Route path="/chart-PieChart" element={<PieChart/>}/>
+            <Route path="/chart-RadarChart" element={<RadarChart/>}/>
+            <Route path="/chart-ScatterPlot" element={<ScatterPlot/>}/>
+            <Route path="/chart-StackedBarChart" element={<StackedBarChart/>}/>
           </Route>
         </Routes>
       </StrictMode>
