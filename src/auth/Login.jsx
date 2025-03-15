@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { IoArrowBack } from "react-icons/io5";
@@ -39,14 +39,50 @@ export default function Login() {
           user_pass: values.password,
         }).unwrap();
 
+        console.log("Login Response:", response); // Log the full response for debugging
+
         if (response?.result?.access_token) {
           localStorage.setItem("accessToken", response.result.access_token);
-          navigate("/");
-          window.location.reload();
+
+          // Extract user_uuid from the nested structure
+          const userUuid =
+            response.result?.user?.user_uuid || // Corrected path based on previous logs
+            response.result.user_uuid ||
+            response.user_uuid ||
+            response.uuid;
+
+          if (userUuid) {
+            localStorage.setItem("userUuid", userUuid);
+            console.log("Stored userUuid:", userUuid);
+
+            // Optionally store other user data in localStorage
+            const userData = response.result?.user || {};
+            console.log(userData.user_name)
+            // console.log(userData)
+            localStorage.setItem(
+              "userData",
+              JSON.stringify({
+                user_uuid: userUuid,
+                firstName: userData.first_name || "",
+                lastName: userData.last_name || "",
+                email: userData.email || "",
+                profileImage: userData.profile_img || userData.p_user_profile || null,
+                username: userData.user_name  || "pongkdor",
+              })
+            );
+          } else {
+            console.warn("user_uuid not found in login response:", response);
+            setErrors({ apiError: "Login successful but user ID not found" });
+            return;
+          }
+
+          navigate("/profile");
+          // Remove window.location.reload() to avoid unnecessary reloads
         } else {
           setErrors({ apiError: "Invalid email or password" });
         }
       } catch (error) {
+        console.error("Login Error:", error);
         setErrors({ apiError: "Invalid email or password" });
       }
     },
@@ -84,24 +120,52 @@ export default function Login() {
                 user_pass: generatedPassword,
               }).unwrap();
               console.log("Login Response:", loginResponse);
-              //  check condition if user is existed in users table in api
+
               if (loginResponse) {
-                // console.log("Login Response:", loginResponse?.result?.success);
                 const token =
                   loginResponse?.access_token ||
                   loginResponse?.result?.access_token;
                 if (token) {
                   localStorage.setItem("accessToken", token);
-                  navigate("/");
+
+                  // Extract user_uuid from the nested structure
+                  const userUuid =
+                    loginResponse.result?.user?.user_uuid || // Corrected path
+                    loginResponse.result.user_uuid ||
+                    loginResponse.user_uuid ||
+                    loginResponse.uuid;
+
+                  if (userUuid) {
+                    localStorage.setItem("userUuid", userUuid);
+                    console.log("Stored userUuid:", userUuid);
+
+                    // Store user data
+                    const userData = loginResponse.result?.user || {};
+                    localStorage.setItem(
+                      "userData",
+                      JSON.stringify({
+                        user_uuid: userUuid,
+                        firstName: userData.first_name || userData.given_name || "",
+                        lastName: userData.last_name || userData.family_name || "",
+                        email: userData.email || "",
+                        profileImage: userData.profile_img || userData.p_user_profile || userData.picture || null,
+                        username: userData.role_name || userData.p_user_name || userData.name || "",
+                      })
+                    );
+                  } else {
+                    console.warn("user_uuid not found in login response:", loginResponse);
+                  }
+
+                  navigate("/profile");
                   return;
                 }
               }
-              // if user does not existed
+
               if (loginResponse?.result?.success === false) {
                 const submitValues = {
                   p_first_name: userData.given_name,
                   p_last_name: userData.family_name,
-                  p_user_name:
+                  p_user_name: 
                     userData.name ||
                     `${userData.given_name}${userData.family_name}`,
                   p_email: userData.email,
@@ -120,29 +184,51 @@ export default function Login() {
                     const loginUserPassword = `${signupResponse?.first_name}${
                       import.meta.env.VITE_SECRET_KEY_PW
                     }`;
-                    console.log("loginpassword: ", loginUserPassword);
                     const loginResponse = await getLogin({
                       user_email: signupResponse?.email,
                       user_pass: loginUserPassword,
                     }).unwrap();
 
                     if (loginResponse) {
-                      console.log(
-                        "Login Response:",
-                        loginResponse?.result?.success
-                      );
                       const token =
                         loginResponse?.access_token ||
                         loginResponse?.result?.access_token;
                       if (token) {
                         localStorage.setItem("accessToken", token);
-                        navigate("/");
+
+                        // Extract user_uuid from the nested structure
+                        const userUuid =
+                          loginResponse.result?.user?.user_uuid || // Corrected path
+                          loginResponse.result.user_uuid ||
+                          loginResponse.user_uuid ||
+                          loginResponse.uuid;
+
+                        if (userUuid) {
+                          localStorage.setItem("userUuid", userUuid);
+                          console.log("Stored userUuid:", userUuid);
+
+                          // Store user data
+                          const userData = loginResponse.result?.user || {};
+                          localStorage.setItem(
+                            "userData",
+                            JSON.stringify({
+                              user_uuid: userUuid,
+                              firstName: userData.first_name || signupResponse.first_name || "",
+                              lastName: userData.last_name || signupResponse.last_name || "",
+                              email: userData.email || signupResponse.email || "",
+                              profileImage: userData.profile_img || signupResponse.p_user_profile || null,
+                              username: userData.role_name || signupResponse.p_user_name || "",
+                            })
+                          );
+                        } else {
+                          console.warn("user_uuid not found in login response:", loginResponse);
+                        }
+
+                        navigate("/profile");
                         return;
                       }
                     }
-                  }
-
-                  else {
+                  } else {
                     formik.setErrors({
                       apiError:
                         "Signup successful but no access token received",
@@ -181,13 +267,40 @@ export default function Login() {
                 ).unwrap();
                 console.log("Signup Response:", signupResponse);
 
-                // Check for token in signup response instead of making another login request
                 const token =
                   signupResponse?.access_token ||
                   signupResponse?.result?.access_token;
                 if (token) {
                   localStorage.setItem("accessToken", token);
-                  navigate("/");
+
+                  // Extract user_uuid from the nested structure
+                  const userUuid =
+                    signupResponse.result?.user?.user_uuid || // Corrected path
+                    signupResponse.result.user_uuid ||
+                    signupResponse.user_uuid ||
+                    signupResponse.uuid;
+
+                  if (userUuid) {
+                    localStorage.setItem("userUuid", userUuid);
+                    console.log("Stored userUuid:", userUuid);
+
+                    // Store user data
+                    localStorage.setItem(
+                      "userData",
+                      JSON.stringify({
+                        user_uuid: userUuid,
+                        firstName: signupResponse.first_name || userData.given_name || "",
+                        lastName: signupResponse.last_name || userData.family_name || "",
+                        email: signupResponse.email || userData.email || "",
+                        profileImage: signupResponse.p_user_profile || userData.picture || null,
+                        username: signupResponse.p_user_name || userData.name || "",
+                      })
+                    );
+                  } else {
+                    console.warn("user_uuid not found in signup response:", signupResponse);
+                  }
+
+                  navigate("/profile");
                 } else {
                   formik.setErrors({
                     apiError: "Signup successful but no access token received",
@@ -226,7 +339,9 @@ export default function Login() {
       setIsGoogleLoadingState(false);
     },
   });
+
   return (
+    // [Your existing JSX remains unchanged]
     <div
       className="min-h-screen flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8"
       style={{ background: "#dde2e9" }}

@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/rpc': {
-        target:'https://reandata-api.istad.co',
+        target:'https://reandata-api.istad.co:443',
         changeOrigin: true,
       }
     }

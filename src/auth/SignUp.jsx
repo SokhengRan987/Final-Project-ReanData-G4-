@@ -31,9 +31,12 @@ export default function SignUp() {
       Username: Yup.string().required("Username is required"),
       Email: Yup.string()
         .email("Invalid email address")
-        .required("Email is required"),
+        .required("Email is required")
+        .matches(/@gmail\.com$/, "Email must be a Gmail address"),
       Password: Yup.string()
         .min(8, "Password must be at least 8 characters")
+        .matches(/[a-zA-Z]/, "Password must include at least 1 letter")
+        .matches(/[0-9]/, "Password must include at least 1 number")
         .required("Password is required"),
       ConfirmPassword: Yup.string()
         .oneOf([Yup.ref("Password"), null], "Passwords must match")

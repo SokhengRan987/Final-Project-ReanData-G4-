@@ -1,11 +1,54 @@
+// src/redux/services/authSlice.js
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+// Helper function to validate UUID format
+const isValidUuid = (uuid) => {
+  const uuidRegex =
+    /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+  return uuidRegex.test(uuid);
+};
 
 const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_ENDPOINT,
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("accessToken");
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
+    // Login endpoint that stores userUuid after successful login
+    getLogin: builder.mutation({
+      query: ({ user_email, user_pass }) => ({
+        url: "/rpc/login",
+        method: "POST",
+        body: {
+          user_email,
+          user_pass,
+        },
+      }),
+      // Handle the response to store userUuid and accessToken
+      onQueryStarted: async (arg, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          // Assuming the login response contains accessToken and user_uuid
+          if (data?.accessToken) {
+            localStorage.setItem("accessToken", data.accessToken);
+          }
+          if (data?.user_uuid) {
+            localStorage.setItem("userUuid", data.user_uuid);
+          } else {
+            console.warn("user_uuid not found in login response:", data);
+          }
+        } catch (error) {
+          console.error("Login failed:", error);
+        }
+      },
+    }),
     getSignup: builder.mutation({
       query: ({
         p_first_name,
@@ -47,16 +90,6 @@ const authApi = createApi({
           p_pass,
           p_confirm_pass,
           p_user_profile,
-        },
-      }),
-    }),
-    getLogin: builder.mutation({
-      query: ({ user_email, user_pass }) => ({
-        url: `/rpc/login`,
-        method: "POST",
-        body: {
-          user_email,
-          user_pass,
         },
       }),
     }),
