@@ -12,7 +12,7 @@ const ResetPassword = () => {
   const location = useLocation();
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [getResetPassword, { isLoading, error }] = useGetResetPasswordMutation();
+  const [getResetPassword, { isLoading, error, isError }] = useGetResetPasswordMutation();
 
   // Retrieve email and OTP from navigation state
   const email = location.state?.email || "";
@@ -35,19 +35,25 @@ const ResetPassword = () => {
     }),
     onSubmit: async (values) => {
       try {
-        await getResetPassword({
+        if (!email || !otp) {
+          throw new Error("Missing email or OTP. Please start from the Forgot Password page.");
+        }
+        const response = await getResetPassword({
           user_email: email,
-          otp_codes: otp, // Use the OTP from navigation state
+          otp_codes: otp,
           new_password: values.newPassword,
           confirm_password: values.confirmPassword,
         }).unwrap();
         formik.resetForm();
-        navigate("/login");
+        navigate("/login", { state: { successMessage: "Password reset successfully!" } });
       } catch (error) {
-        formik.setFieldError(
-          "apiError",
-          error.data?.message || "An error occurred during password reset"
-        );
+        let errorMessage = "An error occurred during password reset";
+        if (error.status === 401) {
+          errorMessage = "Invalid or expired OTP. Please request a new one.";
+        } else if (error.data?.message) {
+          errorMessage = error.data.message;
+        }
+        formik.setFieldError("apiError", errorMessage);
       } finally {
         formik.setSubmitting(false);
       }
@@ -208,9 +214,9 @@ const ResetPassword = () => {
           </button>
 
           {/* API Error Display */}
-          {formik.errors.apiError && (
+          {(formik.errors.apiError || (isError && error)) && (
             <p className="mt-1 text-extra-small text-red-500 font-description text-center">
-              {formik.errors.apiError}
+              {formik.errors.apiError || (error?.data?.message || "An unexpected error occurred")}
             </p>
           )}
         </form>

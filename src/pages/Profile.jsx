@@ -1,12 +1,15 @@
-"use client";
-
+// src/pages/Profile.jsx
 import { useState, useEffect, useRef } from "react";
-import { useGetUpdateUserMutation } from "../redux/services/authSlice";
+import { useNavigate } from "react-router-dom"; // Add react-router-dom for navigation
+import { useUpdateUserMutation, useUpdateUserProfileImageMutation, isValidUuid } from "../redux/services/authSlice";
 
 const Profile = () => {
+  const navigate = useNavigate(); // Add navigation
   const [isEditing, setIsEditing] = useState(false);
   const [animateIn, setAnimateIn] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [photoErrorMessage, setPhotoErrorMessage] = useState("");
   const [profileData, setProfileData] = useState({
     firstName: "",
     lastName: "",
@@ -14,6 +17,7 @@ const Profile = () => {
     profileImage: null,
     email: "",
   });
+  const [originalProfileData, setOriginalProfileData] = useState(null);
 
   const fileInputRef = useRef(null);
 
@@ -29,150 +33,42 @@ const Profile = () => {
         email: data.email || "",
       };
     }
-    return {
-      user_uuid: "",
-      firstName: "",
-      lastName: "",
-      username: "",
-      profileImage: null,
-      email: "",
-    };
+    return { user_uuid: "", firstName: "", lastName: "", username: "", profileImage: null, email: "" };
   });
 
   const userUuid = localStorage.getItem("userUuid") || storedUserData.user_uuid;
 
-  const {
-    data: userData,
-    isLoading: isFetching,
-    error: fetchError,
-    refetch,
-  } = (userUuid,
-  {
-    skip: !userUuid,
-  });
-
-  const [updateUser, { isLoading: isUpdating, error: updateError, isSuccess }] =
-    useGetUpdateUserMutation();
+  const [updateUser, { isLoading: isUpdatingUser, error: updateUserError, isSuccess: isUserSuccess }] =
+    useUpdateUserMutation();
+  const [updateUserProfileImage, { isLoading: isUpdatingImage, error: updateImageError, isSuccess: isImageSuccess }] =
+    useUpdateUserProfileImageMutation();
 
   useEffect(() => {
     console.log("Initial userUuid:", userUuid);
     if (userUuid) {
-      setProfileData({
+      const initialData = {
         firstName: storedUserData.firstName,
         lastName: storedUserData.lastName,
-        username:storedUserData.username?storedUserData.username: storedUserData.lastName+"168",
+        username: storedUserData.username || storedUserData.lastName + "168",
         profileImage: storedUserData.profileImage,
         email: storedUserData.email,
-      });
+      };
+      setProfileData(initialData);
+      setOriginalProfileData(initialData);
       setAnimateIn(true);
     } else {
-      setProfileData({
-        firstName: "Guest",
-        lastName: "User",
-        username: "guest",
-        profileImage: null,
-        email: "",
-      });
-      setAnimateIn(true);
+      // Redirect to login if not logged in
+      navigate("/login");
     }
-  }, [userUuid]);
+  }, [userUuid, navigate]);
 
   useEffect(() => {
-    if (userData) {
-      console.log("API User Data:", userData);
-      const updatedProfile = {
-        firstName:
-          userData.first_name ||
-          userData.firstName ||
-          storedUserData.firstName ||
-          "",
-        lastName:
-          userData.last_name ||
-          userData.lastName ||
-          storedUserData.lastName ||
-          "",
-        username:
-          userData.user_name ||
-          userData.username ||
-          storedUserData.username ||
-          "",
-        profileImage:
-          userData.profile_image ||
-          userData.user_profile ||
-          storedUserData.profileImage ||
-          null,
-        email:
-          userData.email || userData.user_email || storedUserData.email || "",
-      };
-
-      setProfileData(updatedProfile);
-      const newStoredData = {
-        user_uuid: userUuid,
-        firstName: updatedProfile.firstName,
-        lastName: updatedProfile.lastName,
-        username: updatedProfile.username,
-        profileImage: updatedProfile.profileImage,
-        email: updatedProfile.email,
-      };
-      localStorage.setItem("userData", JSON.stringify(newStoredData));
-      setStoredUserData(newStoredData);
-    } else if (fetchError) {
-      console.error("Fetch Error:", fetchError);
-      setProfileData({
-        firstName: storedUserData.firstName || "Guest",
-        lastName: storedUserData.lastName || "User",
-        username: storedUserData.username || "guest",
-        profileImage: storedUserData.profileImage || null,
-        email: storedUserData.email || "",
-      });
-    }
-  }, [userData, fetchError]);
-
-  useEffect(() => {
-    if (isSuccess) {
-      setSuccessMessage("Profile updated successfully!");
+    if (isImageSuccess || isUserSuccess) {
+      setSuccessMessage("Successfully updated!");
+      setErrorMessage("");
+      setPhotoErrorMessage("");
       setTimeout(() => setSuccessMessage(""), 3000);
-    }
-  }, [isSuccess]);
-
-  useEffect(() => {
-    if (updateError) {
-      console.error("Update Error:", updateError);
-    }
-  }, [updateError]);
-
-  const handleImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfileData({ ...profileData, profileImage: reader.result });
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setProfileData({ ...profileData, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!userUuid) {
-      console.error("Cannot update profile: No user logged in");
-      return;
-    }
-    try {
-      const payload = {
-        first_name_input: profileData.firstName,
-        last_name_input: profileData.lastName,
-        user_name_input: profileData.username,
-        user_uuid_input: userUuid,
-        profile_image_input: profileData.profileImage,
-        email_input: profileData.email,
-      };
-      await updateUser(payload).unwrap();
+      setOriginalProfileData({ ...profileData });
 
       const updatedUserData = {
         user_uuid: userUuid,
@@ -184,17 +80,141 @@ const Profile = () => {
       };
       localStorage.setItem("userData", JSON.stringify(updatedUserData));
       setStoredUserData(updatedUserData);
+    }
+  }, [isImageSuccess, isUserSuccess, profileData, userUuid]);
+
+  useEffect(() => {
+    if (updateImageError || updateUserError) {
+      const error = updateImageError || updateUserError;
+      console.error("Update Error Details:", error);
+      let detailedMessage = "An unexpected error occurred. Please try again or contact support.";
+
+      if (error?.status === 404) {
+        detailedMessage = "Endpoint not found. Please check the server configuration.";
+      } else if (error?.status === 409 && error?.data?.details?.includes("Key (user_name)=")) {
+        detailedMessage = "The username is already taken. Please choose a different username (e.g., @polin169 or @chaingpolin1).";
+      } else if (error.status === "FETCH_ERROR") {
+        detailedMessage = "Network error. Please check your internet connection and try again.";
+      } else if (error.status === 400) {
+        detailedMessage = "Invalid input. Please check your data and try again.";
+      } else if (error.status === 401) {
+        detailedMessage = "Unauthorized. Please log in again.";
+        navigate("/login"); // Redirect to login on 401
+      } else if (error.status === 500) {
+        detailedMessage = "Server error. Please try again later.";
+      }
+
+      setErrorMessage(detailedMessage);
+      setSuccessMessage("");
+      setProfileData({ ...originalProfileData });
+    }
+  }, [updateImageError, updateUserError, navigate, originalProfileData]);
+
+  const handleImageChange = (e) => {
+    setPhotoErrorMessage("");
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      // Validate file type and size
+      const validTypes = ["image/jpeg", "image/png", "image/gif"];
+      if (!validTypes.includes(file.type)) {
+        setPhotoErrorMessage("Please upload a valid image (JPEG, PNG, or GIF).");
+        setTimeout(() => setPhotoErrorMessage(""), 3000);
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) { // 5MB limit
+        setPhotoErrorMessage("Image size must be less than 5MB.");
+        setTimeout(() => setPhotoErrorMessage(""), 3000);
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        console.log("Image selected, updating profileData.profileImage");
+        setProfileData({ ...profileData, profileImage: reader.result });
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setPhotoErrorMessage("No new photo selected. Please choose a photo to upload.");
+      setTimeout(() => setPhotoErrorMessage(""), 3000);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setProfileData({ ...profileData, [name]: value });
+  };
+
+  const validateProfileData = () => {
+    if (!profileData.firstName || profileData.firstName.trim() === "") return "First name is required.";
+    if (profileData.firstName.length > 50) return "First name must be less than 50 characters.";
+    if (!profileData.lastName || profileData.lastName.trim() === "") return "Last name is required.";
+    if (profileData.lastName.length > 50) return "Last name must be less than 50 characters.";
+    if (!profileData.username || profileData.username.trim() === "") return "Username is required.";
+    if (profileData.username.length > 30) return "Username must be less than 30 characters.";
+    if (!/^@?[\w\d]+$/.test(profileData.username)) return "Username must contain only letters, numbers, or underscores.";
+    return null;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!userUuid) {
+      setErrorMessage("Cannot update profile: No user logged in.");
+      navigate("/login");
+      return;
+    }
+
+    const validationError = validateProfileData();
+    if (validationError) {
+      setErrorMessage(validationError);
+      setSuccessMessage("");
+      return;
+    }
+
+    try {
+      // Validate userUuid format
+      if (!isValidUuid(userUuid)) {
+        throw new Error("Invalid user UUID format");
+      }
+
+      // Only update user data if there are changes
+      const hasChanges =
+        profileData.firstName !== originalProfileData.firstName ||
+        profileData.lastName !== originalProfileData.lastName ||
+        profileData.username !== originalProfileData.username;
+
+      if (hasChanges) {
+        const userPayload = {
+          first_name_input: profileData.firstName,
+          last_name_input: profileData.lastName,
+          user_name_input: profileData.username,
+          user_uuid_input: userUuid,
+        };
+        console.log("Submitting user update with payload:", userPayload);
+        await updateUser(userPayload).unwrap();
+      } else {
+        console.log("No changes detected in user data, skipping updateUser");
+      }
+
+      // Update profile image if it has changed
+      if (profileData.profileImage && profileData.profileImage !== originalProfileData.profileImage) {
+        const imagePayload = {
+          image: profileData.profileImage,
+          p_user_uuid: userUuid,
+        };
+        console.log("Submitting profile image update with payload:", imagePayload);
+        await updateUserProfileImage(imagePayload).unwrap();
+      }
 
       setIsEditing(false);
-      refetch();
       console.log("Profile data saved:", profileData);
     } catch (err) {
-      console.error("Failed to update profile:", err);
+      console.error("Update failed:", err);
     }
   };
 
   const handleProfileClick = () => {
     if (isLoggedIn) {
+      fileInputRef.current.value = "";
       fileInputRef.current.click();
     }
   };
@@ -203,12 +223,6 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen bg-white flex items-start justify-start p-4 sm:p-6 md:p-8">
-      {isFetching && <div className="text-center py-8">Loading profile...</div>}
-      {fetchError && (
-        <div className="text-center py-8 text-red-600">
-          Error loading profile: {fetchError?.data?.message || "Unknown error"}
-        </div>
-      )}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary-500/20 rounded-full opacity-40 blur-xl"></div>
         <div className="absolute top-1/4 left-12 w-64 h-64 bg-primary-500/15 rounded-full opacity-30 blur-xl"></div>
@@ -232,9 +246,7 @@ const Profile = () => {
                     height: `${Math.random() * 20 + 5}px`,
                     left: `${Math.random() * 100}%`,
                     top: `${Math.random() * 100}%`,
-                    animation: `float${i % 3} ${
-                      Math.random() * 10 + 5
-                    }s linear infinite`,
+                    animation: `float${i % 3} ${Math.random() * 10 + 5}s linear infinite`,
                     animationDelay: `${Math.random() * 5}s`,
                   }}
                 />
@@ -260,10 +272,7 @@ const Profile = () => {
                       />
                     ) : (
                       <span className="flex items-center justify-center h-full w-full">
-                        {isLoggedIn
-                          ? (profileData.firstName[0] || "") +
-                            (profileData.lastName[0] || "")
-                          : "?"}
+                        {isLoggedIn ? (profileData.firstName[0] || "") + (profileData.lastName[0] || "") : "?"}
                       </span>
                     )}
                   </div>
@@ -278,14 +287,11 @@ const Profile = () => {
 
                 <div className="mt-6 md:mt-0 md:ml-8 text-center md:text-left">
                   <h1 className="text-h4 font-heading text-primary-500">
-                    {profileData.firstName || "Guest"}{" "}
-                    {profileData.lastName || "User"}
+                    {profileData.firstName || "Guest"} {profileData.lastName || "User"}
                   </h1>
                   <p className="font-description text-base text-text-700 flex items-center justify-center md:justify-start">
                     <span className="mr-1 text-primary-500">@</span>
-                    <span className="truncate">
-                      {profileData.username || "guest"}
-                    </span>
+                    <span className="truncate">{profileData.username || "guest"}</span>
                   </p>
                   {profileData.email ? (
                     <p className="font-description text-base text-text-700 flex items-center justify-center md:justify-start mt-2">
@@ -300,6 +306,11 @@ const Profile = () => {
                   {!isLoggedIn && (
                     <p className="font-description text-base text-text-500 flex items-center justify-center md:justify-start mt-2">
                       Please log in to edit your profile
+                    </p>
+                  )}
+                  {photoErrorMessage && (
+                    <p className="font-description text-base text-red-600 flex items-center justify-center md:justify-start mt-2">
+                      {photoErrorMessage}
                     </p>
                   )}
                 </div>
@@ -337,23 +348,11 @@ const Profile = () => {
                   }`}
                 >
                   <form onSubmit={handleSubmit} className="w-full mx-auto">
-                    {updateError && (
-                      <div className="mb-4 text-red-600">
-                        Error updating profile:{" "}
-                        {updateError.data?.message || "Unknown error"}
-                      </div>
-                    )}
-                    {successMessage && (
-                      <div className="mb-4 text-green-600">
-                        {successMessage}
-                      </div>
-                    )}
+                    {errorMessage && <div className="mb-4 text-red-600">{errorMessage}</div>}
+                    {successMessage && <div className="mb-4 text-green-600">{successMessage}</div>}
                     <div className="space-y-4 sm:space-y-5 md:space-y-6">
                       <div className="group">
-                        <label
-                          htmlFor="firstName"
-                          className="block text-small font-description text-text-700 mb-1.5 group-focus-within:text-primary-500 transition-colors duration-200"
-                        >
+                        <label htmlFor="firstName" className="block text-small font-description text-text-700 mb-1.5 group-focus-within:text-primary-500 transition-colors duration-200">
                           First Name
                         </label>
                         <input
@@ -363,14 +362,11 @@ const Profile = () => {
                           value={profileData.firstName}
                           onChange={handleInputChange}
                           className="block w-full px-4 py-3 bg-white border border-text-300 rounded-xl text-text-800 placeholder-text-400 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 transition-all duration-300 hover:bg-primary-100/50 font-description text-small"
+                          disabled={isUpdatingUser || isUpdatingImage}
                         />
                       </div>
-
                       <div className="group">
-                        <label
-                          htmlFor="lastName"
-                          className="block text-small font-description text-text-700 mb-1.5 group-focus-within:text-primary-500 transition-colors duration-200"
-                        >
+                        <label htmlFor="lastName" className="block text-small font-description text-text-700 mb-1.5 group-focus-within:text-primary-500 transition-colors duration-200">
                           Last Name
                         </label>
                         <input
@@ -380,14 +376,11 @@ const Profile = () => {
                           value={profileData.lastName}
                           onChange={handleInputChange}
                           className="block w-full px-4 py-3 bg-white border border-text-300 rounded-xl text-text-800 placeholder-text-400 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 transition-all duration-300 hover:bg-primary-100/50 font-description text-small"
+                          disabled={isUpdatingUser || isUpdatingImage}
                         />
                       </div>
-
                       <div className="group">
-                        <label
-                          htmlFor="username"
-                          className="block text-small font-description text-text-700 mb-1.5 group-focus-within:text-primary-500 transition-colors duration-200"
-                        >
+                        <label htmlFor="username" className="block text-small font-description text-text-700 mb-1.5 group-focus-within:text-primary-500 transition-colors duration-200">
                           Username
                         </label>
                         <div className="relative rounded-xl shadow-sm">
@@ -401,28 +394,54 @@ const Profile = () => {
                             value={profileData.username}
                             onChange={handleInputChange}
                             className="block w-full pl-8 pr-4 py-3 bg-white border border-text-300 rounded-xl text-text-800 placeholder-text-400 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 transition-all duration-300 hover:bg-primary-100/50 font-description text-small"
+                            disabled={isUpdatingUser || isUpdatingImage}
                           />
                         </div>
                       </div>
                     </div>
-
                     <div className="mt-6 sm:mt-7 md:mt-8 flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-3">
                       <button
                         type="button"
                         onClick={() => setIsEditing(false)}
                         className="w-full sm:w-auto px-4 sm:px-5 py-2.5 border-2 rounded-[10px] shadow-sm text-sm sm:text-base font-heading text-text-700 bg-white hover:bg-text-100 transition-all duration-300 hover:shadow-md"
                         style={{ borderColor: "#E5E7EB" }}
+                        disabled={isUpdatingUser || isUpdatingImage}
                       >
                         Cancel
                       </button>
                       <button
                         type="submit"
-                        disabled={isUpdating}
+                        disabled={isUpdatingUser || isUpdatingImage}
                         className={`w-full sm:w-auto px-4 sm:px-5 py-2.5 border rounded-[10px] shadow-md text-sm sm:text-base font-heading text-white transition-all duration-300 hover:shadow-md bg-primary-500 border-primary-500 ${
-                          isUpdating ? "opacity-50 cursor-not-allowed" : ""
+                          (isUpdatingUser || isUpdatingImage) ? "opacity-50 cursor-not-allowed" : ""
                         }`}
                       >
-                        {isUpdating ? "Saving..." : "Save Profile"}
+                        {isUpdatingUser || isUpdatingImage ? (
+                          <span className="flex items-center">
+                            <svg
+                              className="animate-spin h-5 w-5 mr-2"
+                              viewBox="0 0 24 24"
+                            >
+                              <circle
+                                className="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                strokeWidth="4"
+                                fill="none"
+                              />
+                              <path
+                                className="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8v8h8a8 8 0 01-16 0z"
+                              />
+                            </svg>
+                            Saving...
+                          </span>
+                        ) : (
+                          "Save Profile"
+                        )}
                       </button>
                     </div>
                   </form>
@@ -433,50 +452,25 @@ const Profile = () => {
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes float0 {
-          0% {
-            transform: translateY(0) rotate(0deg);
-            opacity: 0.7;
+      <style>
+        {`
+          @keyframes float0 {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.3; }
+            100% { transform: translateY(-40px) rotate(360deg); opacity: 0; }
           }
-          50% {
-            transform: translateY(-20px) rotate(180deg);
-            opacity: 0.3;
+          @keyframes float1 {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-30px) translateX(20px) rotate(180deg); opacity: 0.3; }
+            100% { transform: translateY(-60px) translateX(40px) rotate(360deg); opacity: 0; }
           }
-          100% {
-            transform: translateY(-40px) rotate(360deg);
-            opacity: 0;
+          @keyframes float2 {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-40px) translateX(-20px) rotate(180deg); opacity: 0.3; }
+            100% { transform: translateY(-80px) translateX(-40px) rotate(360deg); opacity: 0; }
           }
-        }
-        @keyframes float1 {
-          0% {
-            transform: translateY(0) translateX(0) rotate(0deg);
-            opacity: 0.7;
-          }
-          50% {
-            transform: translateY(-30px) translateX(20px) rotate(180deg);
-            opacity: 0.3;
-          }
-          100% {
-            transform: translateY(-60px) translateX(40px) rotate(360deg);
-            opacity: 0;
-          }
-        }
-        @keyframes float2 {
-          0% {
-            transform: translateY(0) translateX(0) rotate(0deg);
-            opacity: 0.7;
-          }
-          50% {
-            transform: translateY(-40px) translateX(-20px) rotate(180deg);
-            opacity: 0.3;
-          }
-          100% {
-            transform: translateY(-80px) translateX(-40px) rotate(360deg);
-            opacity: 0;
-          }
-        }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };

@@ -67,7 +67,7 @@ export default function Login() {
                 lastName: userData.last_name || "",
                 email: userData.email || "",
                 profileImage: userData.profile_img || userData.p_user_profile || null,
-                username: userData.user_name  || "pongkdor",
+                username: userData.user_name  || "Reandata168",
               })
             );
           } else {
