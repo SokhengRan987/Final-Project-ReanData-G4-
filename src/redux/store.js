@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
+
 import { airPortDistributionApi } from "./service/airPortDistributionSlice";
 import { aircraftFleetAnalysis } from "./service/aircraftFleetAnalysis";
 import { boardingStatistics } from "./service/boardingStatistics";
@@ -13,6 +14,15 @@ import { flightApi } from "./services/Flight";
 import { aircraftApi } from "./services/Aircraft";
 import { boardingpassApi } from "./services/BoardingPass";
 import { fbApi } from "./services/FoodBeverage";
+import { peakTravelTime } from "./service/peakTravelTime";
+import { connectionAnalysis } from "./service/connectionAnalysis";
+
+import { ageRangeDistribution } from "./service/food-beverages/ageRangeDistribution";
+import { genderDistribution } from "./service/food-beverages/genderDistribution";
+import { preferredCuisineFrequency } from "./service/food-beverages/preferredCuisineFrequency";
+import { eatingOut } from "./service/food-beverages/eatingOut";
+import { averageSpending } from "./service/food-beverages/averageSpending";
+
 export const store = configureStore({
   reducer: {
     [airPortDistributionApi.reducerPath]: airPortDistributionApi.reducer,
@@ -28,6 +38,13 @@ export const store = configureStore({
     [aircraftApi.reducerPath]: aircraftApi.reducer,
     [boardingpassApi.reducerPath]: boardingpassApi.reducer,
     [fbApi.reducerPath]: fbApi.reducer,
+    [peakTravelTime.reducerPath]: peakTravelTime.reducer,
+    [connectionAnalysis.reducerPath]: connectionAnalysis.reducer,
+    [ageRangeDistribution.reducerPath]: ageRangeDistribution.reducer,
+    [genderDistribution.reducerPath]: genderDistribution.reducer,
+    [preferredCuisineFrequency.reducerPath]: preferredCuisineFrequency.reducer,
+    [eatingOut.reducerPath]: eatingOut.reducer,
+    [averageSpending.reducerPath]: averageSpending.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -43,7 +60,14 @@ export const store = configureStore({
       .concat(flightApi.middleware)
       .concat(aircraftApi.middleware)
       .concat(boardingpassApi.middleware)
-      .concat(fbApi.middleware),
+      .concat(fbApi.middleware)
+      .concat(peakTravelTime.middleware)
+      .concat(connectionAnalysis.middleware)
+      .concat(ageRangeDistribution.middleware)
+      .concat(genderDistribution.middleware)
+      .concat(preferredCuisineFrequency.middleware)
+      .concat(eatingOut.middleware)
+      .concat(averageSpending.middleware)
 });
 
 setupListeners(store.dispatch);

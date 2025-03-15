@@ -50,13 +50,14 @@ export default function AircraftFleetAnalysis() {
             </h3>
             <div className="space-y-3 text-gray-700">
               <p>
-                The aircraft count per class helps determine the size of the
-                fleet in each category.
+                The aircraft count per class helps determine the fleet size in
+                each category.
               </p>
               <p>
                 <span className="font-semibold">Avg Range</span> and{" "}
-                <span className="font-semibold">Avg Velocity</span> can tell us
-                about the fleet's capabillities in terms of speed distance.
+                <span className="font-semibold">Avg Velocity</span>
+                provide insights into the fleet's capabilities in terms of speed
+                and distance.
               </p>
             </div>
           </div>
@@ -66,11 +67,11 @@ export default function AircraftFleetAnalysis() {
               Storytelling
             </h3>
             <p className="text-gray-700">
-              The aircraft fleet analysis provides insights into strength and
-              diversity of the fleet. For example, a large count of certain
-              classes may indicate a focus on specific routes, while higher
+              The aircraft fleet analysis provides insights into the strength
+              and diversity of the fleet. For example, a large number of certain
+              classes may indicate a focus on specific routes, while greater
               range and velocity could suggest the fleet's readiness for
-              long-hual flights.
+              long-haul flights.
             </p>
           </div>
         </section>
