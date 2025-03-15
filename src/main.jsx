@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
-
+import App from "./App.jsx"
 import About from "./pages/About.jsx";
 import RootLayoutSlidBar from "./components/RootLayoutSlidBar.jsx";
 import Aircraft from "./pages/airdata/table/Aircraft.jsx";
@@ -17,13 +17,16 @@ import Customer from "./pages/food/table/Customer.jsx";
 import Foodandbeverage from "./pages/food/table/fb.jsx";
 import RestaurantFactors from "./pages/food/table/RestaurantFactors.jsx";
 import TimeBasedFood from "./pages/food/table/TimeBasedFood.jsx";
+import Profile from "./pages/Profile.jsx";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <BrowserRouter>
       <StrictMode>
         <Routes>
+          <Route path="/" element={<App/>}/>
           <Route element={<RootLayoutSlidBar />}>
+          <Route path="/profile" element={<Profile/>} />
             <Route path="/air-data/aircraft" element={<Aircraft />} />
             <Route path="/air-data/airport" element={<Airport />} />
             <Route path="/air-data/boarding-pass" element={<BoardingPass />} />
