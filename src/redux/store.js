@@ -15,6 +15,7 @@ import { genderDistribution } from "./service/food-beverages/genderDistribution"
 import { preferredCuisineFrequency } from "./service/food-beverages/preferredCuisineFrequency";
 import { eatingOut } from "./service/food-beverages/eatingOut";
 import { averageSpending } from "./service/food-beverages/averageSpending";
+import { preferredPromotion } from "./service/food-beverages/preferredPromotion";
 
 export const store = configureStore({
   reducer: {
@@ -31,6 +32,7 @@ export const store = configureStore({
     [preferredCuisineFrequency.reducerPath]: preferredCuisineFrequency.reducer,
     [eatingOut.reducerPath]: eatingOut.reducer,
     [averageSpending.reducerPath]: averageSpending.reducer,
+    [preferredPromotion.reducerPath]: preferredPromotion.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -47,6 +49,7 @@ export const store = configureStore({
       .concat(preferredCuisineFrequency.middleware)
       .concat(eatingOut.middleware)
       .concat(averageSpending.middleware)
+      .concat(preferredPromotion.middleware)
 });
 
 setupListeners(store.dispatch);

@@ -29,7 +29,7 @@ export default function RoutePopularity() {
         >
           <div className="w-full" data-aos="zoom-in" data-aos-delay="75">
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              Route Popularity
+              Top 10 Popular Flight Routes
             </h2>
             <BubbleChart />
           </div>

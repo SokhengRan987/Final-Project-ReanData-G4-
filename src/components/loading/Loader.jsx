@@ -3,69 +3,135 @@ import styled from 'styled-components';
 
 const Loader = () => {
   return (
-    <StyledWrapper className='max-w-screen-xl mx-auto mt-64'>
-      <div className="loader">
-        <div className="waves" />
+    <StyledWrapper className='h-96 flex flex-col justify-center items-center'>
+      <div className="container">
+        <div className="item item-1" />
+        <div className="item item-2" />
+        <div className="item item-3" />
+        <div className="item item-4" />
       </div>
-      <p className='text-center text-xl animate-pulse'>Loading...</p>
+      <p className='text-xl mt-36 animate-pulse'>Loading...</p>
     </StyledWrapper>
   );
 }
 
 const StyledWrapper = styled.div`
-  .loader {
+  .container {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    overflow: hidden;
-    height: 80px;
-    width: 80px;
-    border: 1px solid transparent;
-    box-shadow: 0 0 0 2px rgb(25, 116, 253);
-    border-radius: 50%;
-  }
-
-  .waves {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: rgb(30, 146, 255);
-    box-shadow: inset 0 0 50px rgb(0,0,0,.3);
-  }
-
-  .waves::before,
-  .waves::after {
-    content: '';
-    position: absolute;
-    width: 200%;
-    height: 200%;
+    width: 100px;
+    height: 100px;
     top: 0;
-    left: 50%;
-    transform: translate(-50%, -75%);
-    background: #000;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
   }
 
-  .waves::before {
-    border-radius: 45%;
-    background: rgb(248, 248, 248);
-    animation: wave91234 5s linear infinite;
+  .item {
+    width: 50px;
+    height: 50px;
+    position: absolute;
   }
 
-  .waves::after {
-    border-radius: 40%;
-    background: rgb(255,255,255,.5);
-    animation: wave91234 10s linear infinite;
+  .item-1 {
+    background-color: rgb(250, 87, 103);
+    top: 0;
+    left: 0;
+    z-index: 1;
+    animation: item-1_move 1.8s cubic-bezier(.6,.01,.4,1) infinite;
   }
 
-  @keyframes wave91234 {
-    0% {
-      transform: translate(-50%, -75%) rotate(0deg);
+  .item-2 {
+    background-color: rgb(121, 68, 228);
+    top: 0;
+    right: 0;
+    animation: item-2_move 1.8s cubic-bezier(.6,.01,.4,1) infinite;
+  }
+
+  .item-3 {
+    background-color: rgb(27, 145, 247);
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    animation: item-3_move 1.8s cubic-bezier(.6,.01,.4,1) infinite;
+  }
+
+  .item-4 {
+    background-color: rgb(250, 194, 76);
+    bottom: 0;
+    left: 0;
+    animation: item-4_move 1.8s cubic-bezier(.6,.01,.4,1) infinite;
+  }
+
+  @keyframes item-1_move {
+    0%, 100% {
+      transform: translate(0, 0)
     }
 
-    100% {
-      transform: translate(-50%, -75%) rotate(360deg);
+    25% {
+      transform: translate(0, 50px)
+    }
+
+    50% {
+      transform: translate(50px, 50px)
+    }
+
+    75% {
+      transform: translate(50px, 0)
+    }
+  }
+
+  @keyframes item-2_move {
+    0%, 100% {
+      transform: translate(0, 0)
+    }
+
+    25% {
+      transform: translate(-50px, 0)
+    }
+
+    50% {
+      transform: translate(-50px, 50px)
+    }
+
+    75% {
+      transform: translate(0, 50px)
+    }
+  }
+
+  @keyframes item-3_move {
+    0%, 100% {
+      transform: translate(0, 0)
+    }
+
+    25% {
+      transform: translate(0, -50px)
+    }
+
+    50% {
+      transform: translate(-50px, -50px)
+    }
+
+    75% {
+      transform: translate(-50px, 0)
+    }
+  }
+
+  @keyframes item-4_move {
+    0%, 100% {
+      transform: translate(0, 0)
+    }
+
+    25% {
+      transform: translate(50px, 0)
+    }
+
+    50% {
+      transform: translate(50px, -50px)
+    }
+
+    75% {
+      transform: translate(0, -50px)
     }
   }`;
 

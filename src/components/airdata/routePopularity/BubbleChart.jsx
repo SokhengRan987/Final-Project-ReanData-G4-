@@ -39,8 +39,7 @@ export default function BubbleChart() {
   };
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow">
-      <h2 className="text-xl font-bold mb-4">Top 10 Popular Flight Routes</h2>
+    <div className="">
       <div className="h-96 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart

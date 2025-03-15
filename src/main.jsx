@@ -24,6 +24,7 @@ import GenderDistribution from "./pages/food-beverages/GenderDistribution.jsx";
 import PreferredCuisineFrequency from "./pages/food-beverages/PreferredCuisineFrequency.jsx";
 import EatingOut from "./pages/food-beverages/EatingOut.jsx";
 import AverageSpending from "./pages/food-beverages/AverageSpending.jsx";
+import PreferredPromotion from "./pages/food-beverages/PreferredPromotion.jsx";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -53,6 +54,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="/preferred-cuisine-frequency" element={<PreferredCuisineFrequency/>}/>
             <Route path="/eating-out-frequency" element={<EatingOut/>}/>
             <Route path="/average-spending-by-value-priorities" element={<AverageSpending/>}/>
+            <Route path="/preferred-promotion" element={<PreferredPromotion/>}/>
           </Route>
         </Routes>
       </StrictMode>
