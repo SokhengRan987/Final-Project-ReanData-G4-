@@ -12,19 +12,10 @@ const ScatterPlot = () => {
     // Transform spending ranges to numerical values for plotting
     return data.map(item => {
       const range = item.p_spending_range;
-      let avgSpending;
       
-      // Convert spending ranges to their midpoints
-      if (range === "$5-$10") avgSpending = 7.5;
-      else if (range === "$10-$15") avgSpending = 12.5;
-      else if (range === "$5-$15") avgSpending = 10;
-      else if (range === "$10-$20") avgSpending = 15;
-      else if (range === "$15-$20") avgSpending = 17.5;
-      else if (range === "$15-$25") avgSpending = 20;
-      else if (range === "$20-$30") avgSpending = 25;
-      else if (range === "$25-$40") avgSpending = 32.5;
-      else if (range === "$30-$50") avgSpending = 40;
-      else avgSpending = 0;
+      // Extract range values and calculate midpoint
+      const rangeValues = range.replace('$', '').split('-').map(val => parseFloat(val.replace('$', '')));
+      const avgSpending = (rangeValues[0] + rangeValues[1]) / 2;
       
       return {
         priority: item.p_value_priority,
@@ -35,18 +26,23 @@ const ScatterPlot = () => {
     });
   }, [data]);
   
-  // Group data by priority for coloring
+  // Group data by priority and filter out priorities with very low counts
   const priorityGroups = useMemo(() => {
     if (!processedData.length) return [];
     
-    const groups = {};
+    // Calculate total count for each priority
+    const priorityCounts = {};
     processedData.forEach(item => {
-      if (!groups[item.priority]) {
-        groups[item.priority] = true;
+      if (!priorityCounts[item.priority]) {
+        priorityCounts[item.priority] = 0;
       }
+      priorityCounts[item.priority] += item.count;
     });
     
-    return Object.keys(groups);
+    // Only include priorities with total count >= 3
+    return Object.keys(priorityCounts)
+      .filter(priority => priorityCounts[priority] >= 3)
+      .sort();
   }, [processedData]);
   
   // Generate colors for each priority group
@@ -65,22 +61,29 @@ const ScatterPlot = () => {
     return map;
   }, [priorityGroups]);
   
+  // Filter data to only include significant priorities
+  const filteredData = useMemo(() => {
+    return processedData.filter(item => priorityGroups.includes(item.priority));
+  }, [processedData, priorityGroups]);
+  
   if (isLoading) {
     return <Loader />;
   }
   
   if (error) {
-    return <div className="p-4 text-red-500">Error loading data</div>;
+    return <div className="p-4 text-red-500">Error loading data: {error.message || 'Unknown error'}</div>;
   }
   
-  const priorityCategories = [...new Set(processedData.map(item => item.priority))].sort();
+  if (!data || data.length === 0) {
+    return <div className="p-4">No data available</div>;
+  }
   
   return (
     <div className="w-full h-full">
       <div className="h-96 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart
-            margin={{ top: 20, right: 30, bottom: 20, left: 20 }}
+            margin={{ top: 20, right: 30, bottom: 20, left: 30 }}
           >
             <CartesianGrid strokeDasharray="3 3" opacity={0.4} />
             <XAxis 
@@ -92,53 +95,59 @@ const ScatterPlot = () => {
               textAnchor="end"
               interval={0}
               tick={{ fontSize: 12 }}
-              height={70}
+              height={80}
+              label={{ value: "Value Priority", position: "insideBottom", offset: -5, dy: 70 }}
             />
             <YAxis 
               dataKey="spending" 
               name="Avg. Spending ($)" 
-              domain={[0, 45]} 
+              domain={[0, 'dataMax + 5']}
               tickFormatter={(value) => `$${value}`}
+              label={{ value: "Average Spending ($)", angle: -90, position: "insideLeft", dx: -10 }}
             />
             <ZAxis 
               dataKey="count" 
-              range={[30, 250]} 
+              range={[40, 300]} 
               name="Count"
             />
             <Tooltip 
-              formatter={(value, name) => {
-                if (name === "Avg. Spending ($)") return [`$${value}`, name];
-                return [value, name];
-              }}
+              cursor={{ strokeDasharray: '3 3' }}
               content={({ active, payload }) => {
                 if (active && payload && payload.length) {
                   const data = payload[0].payload;
                   return (
-                    <div className="bg-white p-2 border rounded shadow-lg">
-                      <p className="font-bold">{data.priority}</p>
-                      <p>Range: {data.originalRange}</p>
-                      <p>Count: {data.count}</p>
+                    <div className="bg-white p-3 border rounded shadow-lg">
+                      <p className="font-bold text-base mb-1">{data.priority}</p>
+                      <p className="text-sm">Spending Range: {data.originalRange}</p>
+                      <p className="text-sm">Average: ${data.spending.toFixed(2)}</p>
+                      <p className="text-sm">Count: {data.count}</p>
                     </div>
                   );
                 }
                 return null;
               }}
             />
-            <Legend />
+            <Legend 
+              layout="horizontal"
+              verticalAlign="top"
+              align="center"
+              wrapperStyle={{ paddingBottom: 10 }}
+            />
             
             {priorityGroups.map(priority => (
               <Scatter
                 key={priority}
                 name={priority}
-                data={processedData.filter(item => item.priority === priority)} 
+                data={filteredData.filter(item => item.priority === priority)} 
                 fill={colorMap[priority]}
               />
             ))}
           </ScatterChart>
         </ResponsiveContainer>
       </div>
-      <div className="mt-4 text-sm text-gray-600">
-        <p>Bubble size indicates the number of customers in each category</p>
+      
+      <div className="mt-4 text-sm text-gray-600 flex justify-center">
+        <p>Bubble size represents the number of customers in each category</p>
       </div>
     </div>
   );
