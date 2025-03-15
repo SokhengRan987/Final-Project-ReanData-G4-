@@ -7,6 +7,13 @@ import { boardingStatistics } from "./service/boardingStatistics";
 import { timeBaseAnalysis } from "./service/timeBaseAnalysis";
 import { chohortAnalysis } from "./service/chohortAnalysis";
 import { routePopularity } from "./service/routePopularity";
+import { airportApi } from "./services/AirportSlice";
+import { bookingApi } from "./services/BookingSlice";
+import { passengerApi } from "./services/PassengerSlice";
+import { flightApi } from "./services/Flight";
+import { aircraftApi } from "./services/Aircraft";
+import { boardingpassApi } from "./services/BoardingPass";
+import { fbApi } from "./services/FoodBeverage";
 import { peakTravelTime } from "./service/peakTravelTime";
 import { connectionAnalysis } from "./service/connectionAnalysis";
 
@@ -15,6 +22,7 @@ import { genderDistribution } from "./service/food-beverages/genderDistribution"
 import { preferredCuisineFrequency } from "./service/food-beverages/preferredCuisineFrequency";
 import { eatingOut } from "./service/food-beverages/eatingOut";
 import { averageSpending } from "./service/food-beverages/averageSpending";
+import { internationalFoodPreference } from "./service/food-beverages/internationFoodPreference";
 import { preferredPromotion } from "./service/food-beverages/preferredPromotion";
 
 export const store = configureStore({
@@ -25,6 +33,13 @@ export const store = configureStore({
     [timeBaseAnalysis.reducerPath]: timeBaseAnalysis.reducer,
     [chohortAnalysis.reducerPath]: chohortAnalysis.reducer,
     [routePopularity.reducerPath]: routePopularity.reducer,
+    [airportApi.reducerPath]: airportApi.reducer,
+    [bookingApi.reducerPath]: bookingApi.reducer,
+    [passengerApi.reducerPath]: passengerApi.reducer,
+    [flightApi.reducerPath]: flightApi.reducer,
+    [aircraftApi.reducerPath]: aircraftApi.reducer,
+    [boardingpassApi.reducerPath]: boardingpassApi.reducer,
+    [fbApi.reducerPath]: fbApi.reducer,
     [peakTravelTime.reducerPath]: peakTravelTime.reducer,
     [connectionAnalysis.reducerPath]: connectionAnalysis.reducer,
     [ageRangeDistribution.reducerPath]: ageRangeDistribution.reducer,
@@ -32,7 +47,6 @@ export const store = configureStore({
     [preferredCuisineFrequency.reducerPath]: preferredCuisineFrequency.reducer,
     [eatingOut.reducerPath]: eatingOut.reducer,
     [averageSpending.reducerPath]: averageSpending.reducer,
-    [preferredPromotion.reducerPath]: preferredPromotion.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -42,6 +56,13 @@ export const store = configureStore({
       .concat(timeBaseAnalysis.middleware)
       .concat(chohortAnalysis.middleware)
       .concat(routePopularity.middleware)
+      .concat(airportApi.middleware)
+      .concat(bookingApi.middleware)
+      .concat(passengerApi.middleware)
+      .concat(flightApi.middleware)
+      .concat(aircraftApi.middleware)
+      .concat(boardingpassApi.middleware)
+      .concat(fbApi.middleware)
       .concat(peakTravelTime.middleware)
       .concat(connectionAnalysis.middleware)
       .concat(ageRangeDistribution.middleware)
@@ -49,7 +70,6 @@ export const store = configureStore({
       .concat(preferredCuisineFrequency.middleware)
       .concat(eatingOut.middleware)
       .concat(averageSpending.middleware)
-      .concat(preferredPromotion.middleware)
 });
 
 setupListeners(store.dispatch);

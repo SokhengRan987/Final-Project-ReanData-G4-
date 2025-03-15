@@ -1,10 +1,13 @@
+import React from "react";
 import "./App.css";
-import LadingPage from "./pages/LadingPage";
+import LandingPage from "./pages/LadingPage";
+import "./App.css";
 
 function App() {
+
   return (
     <>
-      <LadingPage/>
+      <LandingPage />
     </>
   );
 }

@@ -1,7 +1,6 @@
 import logo from "../img/reandata.png";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Outlet } from "react-router-dom";
 import {
   ChevronDown,
   ChevronRight,
@@ -15,6 +14,7 @@ import {
   LineChartIcon as ChartLine,
   Database,
 } from "lucide-react";
+import { label } from "framer-motion/client";
 
 const useSidebarState = () => {
   const [expanded, setExpanded] = useState({
@@ -92,12 +92,12 @@ export default function Sidebar() {
           key: "airDataTable",
           icon: Database,
           items: [
-            { label: "Aircraft", path: "/aircraft" },
-            { label: "Airport", path: "/airport" },
-            { label: "Boarding Pass", path: "/boarding-pass" },
-            { label: "Booking", path: "/booking" },
-            { label: "Flight", path: "/flight" },
-            { label: "Passenger", path: "/passenger" },
+            { label: "Aircraft", path: "air-data/aircraft" },
+            { label: "Airport", path: "/air-data/airport" },
+            { label: "Boarding Pass", path: "/air-data/boarding-pass" },
+            { label: "Booking", path: "/air-data/booking" },
+            { label: "Flight", path: "/air-data/flight" },
+            { label: "Passenger", path: "/air-data/passenger" },
           ],
         },
         {
@@ -149,6 +149,7 @@ export default function Sidebar() {
             {label: "Eating Out Frequency", path: "/eating-out-frequency"},
             {label: "Average Spending by Value Priorities", path: "/average-spending-by-value-priorities"},
             {label: "Preferred Promotion", path: "/preferred-promotion"},
+            {label: "International Food Preference", path: "/international-food-preference"}
           ]
         },
       ],
@@ -157,10 +158,20 @@ export default function Sidebar() {
       label: "Chart",
       key: "chart",
       icon: ChartLine,
-      subItems: Array.from({ length: 8 }, (_, i) => ({
-        label: `Chart ${i + 1}`,
-        path: `/chart-${i + 1}`,
-      })),
+      subItems: [
+        {label: "Area Chart", path: "/chart-AreaChart"},
+        {label: "Bar Chart", path: "/chart-BarChart"},
+        {label: "Bubble Chart", path: "/chart-BubbleChart"},
+        {label: "Column Chart", path: "/chart-ColumnChart"},
+        {label: "Doughnut Chart", path: "/chart-DoughnutChart"},
+        {label: "Gauges Chart", path: "/chart-GaugesChart"},
+        {label: "Histogram Chart", path: "/chart-HistogramChart"},
+        {label: "Line Chart", path: "/chart-LineChart"},
+        {label: "Pie Chart", path: "/chart-PieChart"},
+        {label: "Radar Chart", path: "/chart-RadarChart"},
+        {label: "ScatterPlot", path: "/chart-ScatterPlot"},
+        {label: "StackedBar Chart", path: "/chart-StackedBarChart"}
+      ]
     },
   ];
 
