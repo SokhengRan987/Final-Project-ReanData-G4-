@@ -2,14 +2,9 @@ import React, { useEffect } from "react";
 import heroSection from "../img/hero-section-gif.gif";
 import startYourJourney from "../img/start-your-journey.gif";
 import whyDataAnalytics from "../img/why-data.gif";
-import collectData from "../img/collect-data.gif";
-import dataCleaning from "../img/data-cleaning.gif";
-import dataAnalysis from "../img/analysis.gif";
-import visualization from "../img/visualization.gif";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 
-import BasicConceptCard from "../components/landingPageComs/BasicConceptCard";
 
 export default function LandingPage() {
   // Initialize AOS when the component mounts

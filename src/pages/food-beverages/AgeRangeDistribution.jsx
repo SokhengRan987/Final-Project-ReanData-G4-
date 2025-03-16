@@ -31,7 +31,10 @@ export default function AgeRangeDistribution() {
           data-aos-delay="100" // Slight delay for smooth entry
         >
           {/* Chart Type Toggle */}
-          <div className="flex justify-end mb-4">
+          <div className="flex justify-between mb-4">
+          <h2 className="text-2xl font-medium text-gray-800">
+              Age Range Distribution
+            </h2>
             <div className="inline-flex shadow-sm">
               <button
                 onClick={() => setChartType("bar")}
@@ -68,9 +71,7 @@ export default function AgeRangeDistribution() {
 
           {/* Chart Title */}
           <div className="w-full" data-aos="zoom-in" data-aos-delay="75">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              Age Range Distribution
-            </h2>
+
           </div>
 
           {/* Render Selected Chart */}

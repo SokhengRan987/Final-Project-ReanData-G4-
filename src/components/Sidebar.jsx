@@ -148,8 +148,10 @@ export default function Sidebar() {
             {label: "Preferred Cuisine Frequency", path: "/preferred-cuisine-frequency"},
             {label: "Eating Out Frequency", path: "/eating-out-frequency"},
             {label: "Average Spending by Value Priorities", path: "/average-spending-by-value-priorities"},
+            {label: "Preferred Dining Location", path: "/preferred-dining-location"},
             {label: "Preferred Promotion", path: "/preferred-promotion"},
-            {label: "International Food Preference", path: "/international-food-preference"}
+            {label: "International Food Preference", path: "/international-food-preference"},
+            {label: "Preferred Beverages by Occupation", path: "/preferred-beverages-by-occupation"},
           ]
         },
       ],

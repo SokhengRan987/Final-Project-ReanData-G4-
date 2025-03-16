@@ -40,7 +40,10 @@ export default function AverageSpending() {
           data-aos-delay="100"
         >
           {/* Graph Selection Toggle */}
-          <div className="flex justify-end mb-4">
+          <div className="flex justify-between mb-4">
+          <h2 className="text-2xl font-medium text-gray-800">
+              Average Spending by Value Priority
+            </h2>
             <div className="inline-flex shadow-sm">
               <button
                 type="button" // Added for accessibility
@@ -71,9 +74,6 @@ export default function AverageSpending() {
 
           {/* Chart Title */}
           <div className="w-full" data-aos="zoom-in" data-aos-delay="75">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              Average Spending by Value Priority
-            </h2>
           </div>
 
           {/* Render Selected Graph */}

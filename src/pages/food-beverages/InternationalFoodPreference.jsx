@@ -21,12 +21,12 @@ export default function InternationalFoodPreference() {
       <div className="max-w-screen-xl mx-auto">
         {/* Charts Section */}
         <section
-          className="grid grid-cols-1 border-2 border-gray-200 rounded-[20px] p-6 bg-white shadow-md"
+          className="grid grid-cols-1 border-2 border-gray-200 rounded-[20px] p-6 bg-white shadow-sm"
           data-aos="fade-up" // Animation for the charts section
           data-aos-delay="100" // Slight delay for smooth entry
         >
           <div className="w-full" data-aos="zoom-in" data-aos-delay="75">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+            <h2 className="text-2xl font-medium text-gray-800 mb-4">
               International Food Preference
             </h2>
             <StackedBarChart />
@@ -42,7 +42,7 @@ export default function InternationalFoodPreference() {
             <p className="text-gray-700">
               This graph compares international food preferences and order
               frequency. It helps determine which international cuisines are
-              ordered most frequently and by whom. You can use it to make global
+              ordered most frequently. You can use it to make global
               menu decisions or plan promotions.
             </p>
           </div>

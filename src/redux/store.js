@@ -24,6 +24,8 @@ import { eatingOut } from "./service/food-beverages/eatingOut";
 import { averageSpending } from "./service/food-beverages/averageSpending";
 import { internationalFoodPreference } from "./service/food-beverages/internationFoodPreference";
 import { preferredPromotion } from "./service/food-beverages/preferredPromotion";
+import { preferredBeverages } from "./service/food-beverages/preferredBeverages";
+import { preferredDiningLocation } from "./service/food-beverages/preferredDiningLocation";
 
 export const store = configureStore({
   reducer: {
@@ -47,6 +49,10 @@ export const store = configureStore({
     [preferredCuisineFrequency.reducerPath]: preferredCuisineFrequency.reducer,
     [eatingOut.reducerPath]: eatingOut.reducer,
     [averageSpending.reducerPath]: averageSpending.reducer,
+    [internationalFoodPreference.reducerPath]: internationalFoodPreference.reducer,
+    [preferredPromotion.reducerPath]: preferredPromotion.reducer,
+    [preferredBeverages.reducerPath]: preferredBeverages.reducer,
+    [preferredDiningLocation.reducerPath]: preferredDiningLocation.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -70,6 +76,10 @@ export const store = configureStore({
       .concat(preferredCuisineFrequency.middleware)
       .concat(eatingOut.middleware)
       .concat(averageSpending.middleware)
+      .concat(internationalFoodPreference.middleware)
+      .concat(preferredPromotion.middleware)
+      .concat(preferredBeverages.middleware)
+      .concat(preferredDiningLocation.middleware)
 });
 
 setupListeners(store.dispatch);

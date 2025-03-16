@@ -61,7 +61,7 @@ export default function ContinentBarChart() {
         </div>
       </div>
 
-      <div className="h-74">
+      <div className="h-96">
         <ResponsiveContainer width="100%" height={350}>
           <BarChart
             data={chartData}

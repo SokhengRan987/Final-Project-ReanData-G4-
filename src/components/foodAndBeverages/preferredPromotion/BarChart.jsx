@@ -1,11 +1,22 @@
 import React, { useState } from 'react';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,
+  LabelList
+} from 'recharts';
 import Loader from "../../../components/loading/Loader";
 import { useGetPreferredPromotionQuery } from '../../../redux/service/food-beverages/preferredPromotion';
 
-export default function BarChart() {
+export default function PreferredPromotionsChart() {
   const { data, error, isLoading } = useGetPreferredPromotionQuery();
   const [sortOrder, setSortOrder] = useState('desc');
-  const [hoveredItem, setHoveredItem] = useState(null);
+  const [hoveredBar, setHoveredBar] = useState(null);
   
   if (isLoading) {
     return <Loader />;
@@ -24,62 +35,91 @@ export default function BarChart() {
     return sortOrder === 'desc' ? b.count - a.count : a.count - b.count;
   });
   
-  // Find the maximum count to calculate percentages for bars
-  const maxCount = Math.max(...sortedData.map(item => item.count));
+  const totalCount = sortedData.reduce((sum, item) => sum + item.count, 0);
   
   const handleSort = () => {
     setSortOrder(sortOrder === 'desc' ? 'asc' : 'desc');
   };
-  
+
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      const data = payload[0].payload;
+      const percentage = ((data.count / totalCount) * 100).toFixed(1);
+      
+      return (
+        <div className="bg-white p-2 border border-gray-200 shadow-lg rounded">
+          <p className="font-medium text-gray-800">{data.promotion}</p>
+          <p className="text-blue-600">{data.count} selections</p>
+          <p className="text-gray-600">{percentage}% of total</p>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
-    <div className="">
-      <div className="flex justify-end mb-6">
+    <div className="w-full">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-medium text-gray-800">Preferred Promotions</h2>
         <button 
           onClick={handleSort}
-          className="px-4 py-2 bg-blue-50 text-blue-600 rounded-[20px] hover:bg-blue-100 transition-colors"
+          className="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors flex items-center gap-2"
         >
-          Sort {sortOrder === 'desc' ? '↑' : '↓'}
+          Sort {sortOrder === 'desc' ? 'Ascending' : 'Descending'}
+          <span>{sortOrder === 'desc' ? '↑' : '↓'}</span>
         </button>
       </div>
       
-      <div className="space-y-4">
-        {sortedData.map((item) => (
-          <div 
-            key={item.promotion} 
-            className="flex justify-between items-center group cursor-pointer"
-            onMouseEnter={() => setHoveredItem(item.promotion)}
-            onMouseLeave={() => setHoveredItem(null)}
+      <div className="h-96">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            data={sortedData}
+            layout="vertical"
+            margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
+            onMouseMove={(e) => {
+              if (e && e.activePayload) {
+                setHoveredBar(e.activePayload[0]?.payload.promotion);
+              }
+            }}
+            onMouseLeave={() => setHoveredBar(null)}
           >
-            <div className={`w-48 ${hoveredItem === item.promotion ? 'text-blue-700 font-medium' : 'text-gray-700'} transition-colors`}>
-              {item.promotion}
-            </div>
-            <div className="flex-1 flex items-center">
-              <div className="relative flex-1 h-8">
-                <div 
-                  className={`absolute top-0 left-0 h-full ${hoveredItem === item.promotion ? 'bg-blue-600' : 'bg-blue-500'} rounded transition-all duration-200 ease-in-out`}
-                  style={{ 
-                    width: `${(item.count / maxCount) * 100}%`,
-                    transform: hoveredItem === item.promotion ? 'scaleY(1.1)' : 'scaleY(1)'
-                  }}
-                >
-                  {hoveredItem === item.promotion && (
-                    <div className="absolute -top-8 right-0 bg-blue-800 text-white px-2 py-1 rounded text-xs whitespace-nowrap">
-                      {((item.count / sortedData.reduce((sum, i) => sum + i.count, 0)) * 100).toFixed(1)}% of total
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className={`w-12 text-right ${hoveredItem === item.promotion ? 'text-blue-700 font-bold' : 'text-gray-700 font-medium'} ml-4 transition-colors`}>
-                {item.count}
-              </div>
-            </div>
-          </div>
-        ))}
+            <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
+            <XAxis type="number" />
+            <YAxis 
+              dataKey="promotion" 
+              type="category" 
+              tick={{ fill: '#4B5563', fontSize: 12 }}
+              width={100}
+            />
+            <Tooltip content={<CustomTooltip />} />
+            <Bar 
+              dataKey="count" 
+              fill="#3B82F6"
+              radius={[0, 4, 4, 0]}
+            >
+              {sortedData.map((entry) => (
+                <Cell 
+                  key={entry.promotion}
+                  fill={hoveredBar === entry.promotion ? '#2563EB' : '#3B82F6'}
+                  cursor="pointer"
+                />
+              ))}
+              <LabelList 
+                dataKey="count" 
+                position="right" 
+                fill="#4B5563"
+                formatter={(value) => value}
+                style={{ fontWeight: 500 }}
+              />
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
       </div>
       
-      <p className="mt-8 text-sm text-gray-500">
-        This visualization helps identify which promotional strategies are most preferred by customers.
-      </p>
+      {/* <div className="mt-4 text-sm text-gray-500">
+        <p>This visualization shows which promotional strategies are most preferred by customers.</p>
+        <p className="mt-1">Most popular: Loyalty Points ({((sortedData[0].count / totalCount) * 100).toFixed(1)}% of selections)</p>
+      </div> */}
     </div>
   );
 }

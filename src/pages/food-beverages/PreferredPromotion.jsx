@@ -28,9 +28,6 @@ export default function PreferredPromotion() {
           data-aos-delay="100" // Slight delay for smooth entry
         >
           <div className="w-full" data-aos="zoom-in" data-aos-delay="75">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              Preferred Promotion
-            </h2>
             <BarChart />
           </div>
         </section>

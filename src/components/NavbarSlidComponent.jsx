@@ -52,12 +52,12 @@ const NavbarSlidComponent = () => {
 
   return (
     <nav 
-      className="fixed left-64 right-0 z-50 border-b border-gray-200/30"
+      className="fixed left-64 right-0 z-[1206] border-b border-gray-200"
       style={{
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
         // backgroundColor: "rgba(255, 255, 255, 0.6)",
-        boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)"
+        // boxShadow: "0 4px 8px -1px rgba(0, 0, 0, 0.05), 0 2px 1px -1px rgba(0, 0, 0, 0.03)"
       }}
     >
       <div 

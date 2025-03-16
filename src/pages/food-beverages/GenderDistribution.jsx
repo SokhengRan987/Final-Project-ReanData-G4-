@@ -29,7 +29,10 @@ export default function GenderDistribution() {
           data-aos-delay="100"
         >
           {/* Chart Type Toggle */}
-          <div className="flex justify-end mb-4">
+          <div className="flex justify-between mb-4">
+          <h2 className="text-2xl font-medium text-gray-800">
+              Gender Distribution
+            </h2>
             <div className="inline-flex shadow-sm">
               <button
                 onClick={() => setChartType("bar")}
@@ -54,13 +57,6 @@ export default function GenderDistribution() {
             </div>
           </div>
 
-          {/* Chart Title */}
-          <div className="w-full" data-aos="zoom-in" data-aos-delay="75">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              Gender Distribution
-            </h2>
-          </div>
-
           {/* Render Selected Chart */}
           <div className="w-full" data-aos="fade-up" data-aos-delay="200">
             {chartType === "bar" && <BarChart />}
@@ -72,8 +68,6 @@ export default function GenderDistribution() {
         <section className="mt-8 overflow-visible">
           <div 
             className="border-2 border-blue-100 rounded-[20px] p-6 bg-blue-50 shadow-sm"
-            data-aos="fade-up"
-            data-aos-delay="300"
           >
             <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient">
               Storytelling

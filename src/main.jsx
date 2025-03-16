@@ -53,6 +53,8 @@ import ScatterPlot from "./components/typeOfGraphs/ScatterPlot.jsx";
 import StackedBarChart from "./components/typeOfGraphs/StackedBarChart.jsx";
 import ColumnChart from "./components/typeOfGraphs/ColumnChart.jsx";
 import InternationalFoodPreference from "./pages/food-beverages/InternationalFoodPreference.jsx";
+import PreferredBeverages from "./pages/food-beverages/PreferredBeverages.jsx";
+import PreferredDiningLocation from "./pages/food-beverages/PreferredDiningLocation.jsx";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -98,8 +100,10 @@ createRoot(document.getElementById("root")).render(
             <Route path="/preferred-cuisine-frequency" element={<PreferredCuisineFrequency/>}/>
             <Route path="/eating-out-frequency" element={<EatingOut/>}/>
             <Route path="/average-spending-by-value-priorities" element={<AverageSpending/>}/>
+            <Route path="/preferred-dining-location" element={<PreferredDiningLocation/>}/>
             <Route path="/preferred-promotion" element={<PreferredPromotion/>}/>
             <Route path="/international-food-preference" element={<InternationalFoodPreference/>}/>
+            <Route path="/preferred-beverages-by-occupation" element={<PreferredBeverages/>}/>
 
             {/* type of chart */}
             <Route path="/chart-AreaChart" element={<AreaChart/>}/>
