@@ -1,113 +1,77 @@
-import React from "react";
-import reandatalogo from "../img/reandataicon2.png";
-import istadlogo from "../img/istad.png";
+"use client"
+import reandatalogo from "../img/Rd.png"
+import istadlogo from "../img/istad.png"
+import { Mail, Phone, ChevronRight, ArrowUpRight } from "lucide-react"
 
 export default function Footer() {
   return (
     <div className="relative">
-      <hr className="border-gray-200" />
-      <footer className="bg-white text-gray-800 shadow-lg">
-        <div className="mx-auto w-full max-w-7xl px-6 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-            {/* Redesigned Logo Section - Clean Version */}
-            <div>
-              <div className="relative overflow-hidden rounded-lg border border-indigo-100 p-5">
-                {/* Decorative elements */}
-                <div className="absolute -top-10 -right-10 h-20 w-20 rounded-full bg-indigo-100 opacity-50"></div>
-                <div className="absolute -bottom-8 -left-8 h-16 w-16 rounded-full bg-indigo-50 opacity-70"></div>
-                
-                {/* Logo with elegant styling */}
-                <div className="relative z-10 flex flex-col items-start space-y-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="h-10 w-1 bg-gradient-to-b from-indigo-400 to-indigo-600 rounded-full"></div>
-                    <a href="#" className="transition-transform duration-300 hover:translate-x-1">
-                      <img 
-                        src={reandatalogo || "/placeholder.svg"} 
-                        className="h-28 object-contain" 
-                        alt="Reandata Logo" 
-                      />
-                    </a>
-                  </div>
-                  
-                  {/* Tagline with underline effect */}
-                  <h3 className="font-medium text-indigo-700 relative pb-2 text-lg">
-                    Cambodia's Open Data Platform
-                    <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-indigo-400"></span>
-                  </h3>
-                  
-                  {/* Description with improved typography */}
-                  {/* <p className="text-gray-600 text-sm leading-relaxed">
-                    Reandata provides high-quality datasets for researchers, developers, and policymakers 
-                    across Cambodia, enabling data-driven innovation and informed decision-making.
-                  </p> */}
-                  
-                  {/* Call to action button instead of social icons */}
-                  {/* <a 
-                    href="#" 
-                    className="mt-2 inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors"
-                  >
-                    Learn more about our mission
-                    <svg 
-                      xmlns="http://www.w3.org/2000/svg" 
-                      className="ml-1 h-4 w-4" 
-                      fill="none" 
-                      viewBox="0 0 24 24" 
-                      stroke="currentColor"
-                    >
-                      <path 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round" 
-                        strokeWidth={2} 
-                        d="M14 5l7 7m0 0l-7 7m7-7H3" 
-                      />
-                    </svg>
-                  </a> */}
-                </div>
-              </div>
+      <footer className="bg-white text-gray-800 pb-10">
+        <div className="mx-auto w-full max-w-7xl px-6">
+          {/* Main footer links section */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 py-16">
+            <div className="space-y-5">
+              <a href="#" className="inline-block">
+                <img
+                  src={reandatalogo || "/placeholder.svg?height=112&width=200"}
+                  className="h-[110px] object-contain"
+                  alt="Reandata Logo"
+                />
+              </a>
+
+              <h3 className="font-medium text-indigo-600 text-xl">Cambodia's Open Data Platform</h3>
             </div>
 
             {/* Features Section */}
             <div>
-              <h2 className="mb-6 text-lg font-bold tracking-wide uppercase text-indigo-600">
+              <h2 className="text-lg font-bold mb-6 text-gray-800 relative inline-block">
                 Features
+                <span className="absolute -bottom-2 left-0 w-12 h-1 bg-indigo-500"></span>
               </h2>
               <ul className="space-y-4">
-                {["Datasets", "Documentation","About Us", "Help & Support"].map((item) => (
-                  <li key={item}>
-                    <a 
-                      href="#" 
+                {[
+                  { name: "Datasets", link: "#datasets" },
+                  { name: "Documentation", link: "#docs" },
+                  { name: "About Us", link: "#about" },
+                  { name: "Help & Support", link: "#support" },
+                ].map((item) => (
+                  <li key={item.name}>
+                    <a
+                      href={item.link}
                       className="text-gray-600 hover:text-indigo-600 transition-colors duration-200 flex items-center gap-2 group"
                     >
-                      <span className="w-1.5 h-1.5 bg-indigo-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                      {item}
+                      <ChevronRight
+                        size={16}
+                        className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 text-indigo-600"
+                      />
+                      {item.name}
                     </a>
                   </li>
                 ))}
               </ul>
             </div>
-
-            {/* Contact Section */}
             <div>
-              <h2 className="mb-6 text-lg font-bold tracking-wide uppercase text-indigo-600">
+              <h2 className="text-lg font-bold mb-6 text-gray-800 relative inline-block">
                 Contact Us
+                <span className="absolute -bottom-2 left-0 w-12 h-1 bg-indigo-500"></span>
               </h2>
-              <ul className="space-y-4">
+              <ul className="space-y-5">
                 <li>
                   <a
                     href="mailto:reandata.istad@gmail.com"
-                    className="text-gray-600 hover:text-indigo-600 transition-colors duration-200 flex items-center gap-2 group"
+                    className="text-gray-600 hover:text-indigo-600 transition-colors duration-200 flex items-start gap-3 group"
                   >
-                    <span className="w-1.5 h-1.5 bg-indigo-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                    reandata.istad@gmail.com
+                    <Mail size={18} className="text-indigo-500 mt-0.5" />
+                    <span>reandata.istad@gmail.com</span>
                   </a>
                 </li>
                 <li>
                   <a
-                    href="tel:+8551234567"
-                    className="text-gray-600 hover:text-indigo-600 transition-colors duration-200 flex items-center gap-2 group"
+                    href="tel:+85512456789"
+                    className="text-gray-600 hover:text-indigo-600 transition-colors duration-200 flex items-start gap-3 group"
                   >
-                    <span className="w-1.5 h-1.5 bg-indigo-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                    (+855) 12 456 789
+                    <Phone size={18} className="text-indigo-500 mt-0.5" />
+                    <span>(+855) 12 456 789</span>
                   </a>
                 </li>
               </ul>
@@ -115,49 +79,72 @@ export default function Footer() {
 
             {/* Company Section */}
             <div>
-              <h2 className="mb-6 text-lg font-bold tracking-wide uppercase text-indigo-600">
-              Organized By
+              <h2 className="text-lg font-bold mb-6 text-gray-800 relative inline-block">
+                Organized By
+                <span className="absolute -bottom-2 left-0 w-12 h-1 bg-indigo-500"></span>
               </h2>
-              <div className="flex flex-col items-start gap-6">
-                <a 
-                  href="https://www.cstad.edu.kh/" 
-                  target="_blank" 
-                  className="group flex items-center transition-transform duration-300 hover:scale-105"
-                >
-                  <img 
-                    src={istadlogo || "/placeholder.svg"} 
-                    className="h-16 transform transition-transform group-hover:rotate-3" 
-                    alt="Istad Logo" 
-                  />
+              <div className="space-y-6">
+                <a href="https://www.cstad.edu.kh/" target="_blank" rel="noopener noreferrer" className="group block">
+                  <div className="bg-gray-100 rounded-lg p-5 transition-all duration-300 group-hover:bg-gray-200 border border-gray-200 group-hover:border-indigo-200">
+                    <img
+                      src={istadlogo || "/placeholder.svg?height=64&width=150"}
+                      className="h-14 transform transition-transform group-hover:scale-105"
+                      alt="Istad Logo"
+                    />
+                  </div>
+                  <div className="flex items-center text-sm text-indigo-600 mt-3 group-hover:text-indigo-800 transition-colors">
+                    <span>Visit ISTAD website</span>
+                    <ArrowUpRight size={14} className="ml-1" />
+                  </div>
                 </a>
               </div>
             </div>
-
           </div>
 
           {/* Bottom Section */}
-          <hr className="my-8 border-gray-200" />
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <span className="text-sm text-gray-500">
-              © 2025{" "}
-              <a href="#" className="hover:text-indigo-600 transition-colors duration-200">
-                Reandata™
-              </a>
-              . All Rights Reserved.
-            </span>
-            <div className="flex gap-6">
-              <a href="#" className="text-gray-500 hover:text-indigo-600 transition-colors duration-200">
-                <span className="text-xl">⦿</span>
-              </a>
-              <a href="#" className="text-gray-500 hover:text-indigo-600 transition-colors duration-200">
-                <span className="text-xl">⦿</span>
-              </a>
+          <div className="border-t border-gray-200">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <span className="text-sm text-gray-500">
+                  © {new Date().getFullYear()}{" "}
+                  <a
+                    href="#"
+                    className="text-indigo-600 hover:text-indigo-800 font-medium transition-colors duration-200"
+                  >
+                    Reandata™
+                  </a>
+                </span>
+                <span className="hidden sm:block text-gray-400">|</span>
+                <span className="text-sm text-gray-500">All Rights Reserved</span>
+              </div>
+              <div className="mt-6 text-center sm:text-right">
+                <button
+                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                  className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-indigo-600 transition-colors duration-200"
+                >
+                  Back to top
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-arrow-up"
+                  >
+                    <path d="m5 12 7-7 7 7" />
+                    <path d="M12 19V5" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        {/* Decorative Element */}
-        <div className="absolute bottom-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-tl-full pointer-events-none"></div>
       </footer>
     </div>
-  );
+  )
 }
+
