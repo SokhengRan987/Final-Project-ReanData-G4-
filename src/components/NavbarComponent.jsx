@@ -11,8 +11,7 @@ export default function NavbarComponent() {
   useEffect(() => {
     const updateScrollProgress = () => {
       const scrollTop = window.scrollY;
-      const scrollHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
       setScrollProgress(progress);
     };
@@ -51,7 +50,7 @@ export default function NavbarComponent() {
     >
       {/* Scroll Progress Bar */}
       <div
-        className="absolute top-0 left-0 h-1 transition-all duration-200"
+        className="absolute top-0 left-0 h-1 transition-all duration-100"
         style={{
           width: `${scrollProgress}%`,
           background: "#84e1bc",

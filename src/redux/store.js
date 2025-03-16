@@ -28,6 +28,7 @@ import { preferredBeverages } from "./service/food-beverages/preferredBeverages"
 import { preferredDiningLocation } from "./service/food-beverages/preferredDiningLocation";
 import { aircraftUtilization } from "./service/aircraftUtilization";
 import { airportTraffic } from "./service/airportTraffic";
+import { diningMethod } from "./service/food-beverages/diningMethod";
 
 export const store = configureStore({
   reducer: {
@@ -57,6 +58,7 @@ export const store = configureStore({
     [preferredDiningLocation.reducerPath]: preferredDiningLocation.reducer,
     [aircraftUtilization.reducerPath]: aircraftUtilization.reducer,
     [airportTraffic.reducerPath]: airportTraffic.reducer,
+    [diningMethod.reducerPath]: diningMethod.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -86,6 +88,7 @@ export const store = configureStore({
       .concat(preferredDiningLocation.middleware)
       .concat(aircraftUtilization.middleware)
       .concat(airportTraffic.middleware)
+      .concat(diningMethod.middleware)
 });
 
 setupListeners(store.dispatch);

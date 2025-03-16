@@ -2,21 +2,34 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { 
   Bell, 
-  Search, 
   User, 
   Settings, 
   LogOut, 
   ChevronDown,
-  Sun,
-  Moon
 } from "lucide-react";
 
 const NavbarSlidComponent = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const profileRef = useRef(null);
   const notificationRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check screen size on mount and when window resizes
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkScreenSize();
+    
+    // Add resize listener
+    window.addEventListener('resize', checkScreenSize);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   const toggleProfile = () => {
     setIsProfileOpen(!isProfileOpen);
@@ -26,11 +39,6 @@ const NavbarSlidComponent = () => {
   const toggleNotifications = () => {
     setIsNotificationsOpen(!isNotificationsOpen);
     setIsProfileOpen(false);
-  };
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    // Implement dark mode functionality here
   };
 
   // Close dropdowns when clicking outside
@@ -52,17 +60,16 @@ const NavbarSlidComponent = () => {
 
   return (
     <nav 
-    className="fixed left-64 right-0 z-[2147483647] border-b border-gray-200"
+      className={`fixed right-0 left-0 md:left-64 z-30 border-b border-gray-200`}
       style={{
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
-        // backgroundColor: "rgba(255, 255, 255, 0.6)",
-        // boxShadow: "0 4px 8px -1px rgba(0, 0, 0, 0.05), 0 2px 1px -1px rgba(0, 0, 0, 0.03)"
       }}
     >
-      <div 
-        className="px-4 py-3 flex justify-end items-center"
-      >
+      <div className="px-4 py-3 flex justify-between md:justify-end items-center">
+        {/* Empty div for spacing on mobile */}
+        {isMobile && <div className="w-8"></div>}
+        
         {/* Right Side Icons */}
         <div className="flex items-center space-x-4">
           {/* Profile Menu */}

@@ -57,6 +57,7 @@ import PreferredBeverages from "./pages/food-beverages/PreferredBeverages.jsx";
 import PreferredDiningLocation from "./pages/food-beverages/PreferredDiningLocation.jsx";
 import AircraftUtilization from "./pages/airdata-visualization/AircraftUtilization.jsx";
 import AirportTraffic from "./pages/airdata-visualization/AirportTraffic.jsx";
+import DiningMethod from "./pages/food-beverages/DiningMethod.jsx";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -107,6 +108,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="/preferred-dining-location" element={<PreferredDiningLocation/>}/>
             <Route path="/preferred-promotion" element={<PreferredPromotion/>}/>
             <Route path="/international-food-preference" element={<InternationalFoodPreference/>}/>
+            <Route path="/dinging-method" element={<DiningMethod/>}/>
             <Route path="/preferred-beverages-by-occupation" element={<PreferredBeverages/>}/>
 
             {/* type of chart */}

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Label } from 'recharts';
 import Loader from "../../loading/Loader";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Label } from 'recharts';
 import { useGetAverageSpendingQuery } from "../../../redux/service/food-beverages/averageSpending";
 
 export default function AverageSpendingByPriorityChart() {
