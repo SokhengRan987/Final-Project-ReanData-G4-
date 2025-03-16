@@ -30,4 +30,13 @@
     background: #555;
   }
   
+  /* Hide the logo container when in mobile sidebar mode */
+.mobile-sidebar-container .border-b.border-gray-200.flex.justify-center.items-center:first-child {
+  display: none;
+}
+
+/* Optional: Adjust padding/spacing since we removed the logo */
+.mobile-sidebar-container nav {
+  padding-top: 0;
+}
   

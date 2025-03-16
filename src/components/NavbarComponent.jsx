@@ -43,7 +43,7 @@ export default function NavbarComponent() {
   return (
     <nav
       id="navbar-container"
-      className="sticky top-0 z-50 bg-white bg-opacity-75 shadow-md"
+      className="sticky top-0 z-50 bg-white shadow-md"
       style={{
         backdropFilter: "blur(10px)",
         WebkitBackdropFilter: "blur(10px)",
