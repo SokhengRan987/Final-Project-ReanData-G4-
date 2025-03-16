@@ -23,7 +23,7 @@ export default function PreferredPromotion() {
       <div className="max-w-screen-xl mx-auto">
         {/* Charts Section */}
         <section
-          className="grid grid-cols-1 border-2 border-gray-200 rounded-[20px] p-6"
+          className="grid grid-cols-1 border-2 border-gray-100 bg-white shadow-sm rounded-[20px] p-6"
           data-aos="fade-up" // Animation for the charts section
           data-aos-delay="100" // Slight delay for smooth entry
         >

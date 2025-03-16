@@ -55,6 +55,8 @@ import ColumnChart from "./components/typeOfGraphs/ColumnChart.jsx";
 import InternationalFoodPreference from "./pages/food-beverages/InternationalFoodPreference.jsx";
 import PreferredBeverages from "./pages/food-beverages/PreferredBeverages.jsx";
 import PreferredDiningLocation from "./pages/food-beverages/PreferredDiningLocation.jsx";
+import AircraftUtilization from "./pages/airdata-visualization/AircraftUtilization.jsx";
+import AirportTraffic from "./pages/airdata-visualization/AirportTraffic.jsx";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -94,6 +96,8 @@ createRoot(document.getElementById("root")).render(
             <Route path="/route-popularity" element={< RoutePopularity/>}/>
             <Route path="/peak-travel-time" element={<PeakTravelTime/>}/>
             <Route path="/connection-analysis" element={<ConnectionAnalysis/>}/>
+            <Route path="/aircraft-utilization" element={<AircraftUtilization/>}/>
+            <Route path="/airport-traffic" element={<AirportTraffic/>}/>
             {/* food and beverages */}
             <Route path="/age-range-distribution" element={<AgeRangeDistribution/>}/>
             <Route path="/gender-distribution" element={<GenderDistribution/>}/>

@@ -35,7 +35,7 @@ export default function AverageSpending() {
       <div className="max-w-screen-xl mx-auto">
         {/* Charts Section */}
         <section
-          className="grid grid-cols-1 border-2 border-gray-200 rounded-[20px] p-6 bg-white shadow-md"
+          className="grid grid-cols-1 border-2 border-gray-100 rounded-[20px] p-6 bg-white shadow-sm"
           data-aos="fade-up"
           data-aos-delay="100"
         >

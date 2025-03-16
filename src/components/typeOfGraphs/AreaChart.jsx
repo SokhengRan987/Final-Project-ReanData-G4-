@@ -254,8 +254,8 @@ export default function AreaChart() {
             )}
           </div>
         </div>
-        <div className="flex flex-col gap-6 items-start self-stretch grow shrink-0 basis-0 flex-nowrap relative z-[8]">
-          <div className="self-stretch grow shrink-0 basis-0 rounded-lg relative z-[9] border shadow-sm overflow-hidden transition-all duration-500 hover:shadow-md">
+        <div className="flex flex-col gap-6 items-start self-stretch grow shrink-0 basis-0 flex-nowrap relative">
+          <div className="self-stretch grow shrink-0 basis-0 rounded-lg relative border shadow-sm overflow-hidden transition-all duration-500 hover:shadow-md">
             {/* Chart.js Canvas */}
             <canvas ref={chartRef} className="w-full h-full"></canvas>
           </div>

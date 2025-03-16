@@ -60,34 +60,6 @@ export default function EnhancedFoodPreferencesChart() {
   return (
     <div className="w-full">
       
-      {/* <div className="mb-4 flex flex-wrap gap-2 justify-end">
-        <span className="font-medium">Sort by:</span>
-        <div className="flex gap-2">
-          <button 
-            onClick={() => setSortBy('total')}
-            className={`px-2 py-1 text-sm rounded ${sortBy === 'total' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
-          >
-            Total Orders
-          </button>
-          <button 
-            onClick={() => setSortBy('name')}
-            className={`px-2 py-1 text-sm rounded ${sortBy === 'name' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
-          >
-            Alphabetical
-          </button>
-          {frequencyOrder.map(freq => (
-            <button
-              key={freq}
-              onClick={() => setSortBy(freq)}
-              className={`px-2 py-1 text-sm rounded ${sortBy === freq ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
-              style={{ borderLeft: `4px solid ${frequencyColors[freq]}` }}
-            >
-              {freq}
-            </button>
-          ))}
-        </div>
-      </div> */}
-      
       <div className="w-full h-96">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart

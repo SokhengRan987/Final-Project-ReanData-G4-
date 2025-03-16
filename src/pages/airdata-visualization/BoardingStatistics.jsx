@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import AirportStatisticsBarChart from "../../components/airdata/boardingPass/AirportStatisticsBarChart";
-import PreCheckUsagePieChart from "../../components/airdata/boardingPass/PreCheckUsagePieChart";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
+import PreCheckUsagePieChart from "../../components/airdata/boardingPass/PreCheckUsagePieChart";
+import AirportStatisticsBarChart from "../../components/airdata/boardingPass/AirportStatisticsBarChart";
 
 export default function BoardingStatistics() {
   // Initialize AOS when the component mounts
@@ -23,7 +23,7 @@ export default function BoardingStatistics() {
       <div className="max-w-screen-xl mx-auto">
         {/* Charts Section */}
         <section
-          className="grid grid-cols-1 lg:grid-cols-2 gap-6 border-2 border-gray-200 rounded-[20px] p-6 bg-white shadow-md"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6 border-2 border-gray-100 rounded-[20px] p-6 bg-white shadow-sm"
           data-aos="fade-up" // Animation for the charts section
           data-aos-delay="100" // Slight delay for smooth entry
         >

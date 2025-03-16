@@ -20,7 +20,7 @@ export default function EatingOut() {
       <div className="max-w-screen-xl mx-auto">
         {/* Charts Section */}
         <section
-          className="grid grid-cols-1 border-2 border-gray-200 rounded-[20px] p-6 bg-white shadow-md"
+          className="grid grid-cols-1 border-2 border-gray-100 rounded-[20px] p-6 bg-white shadow-sm"
           data-aos="fade-up" // Animation for the charts section
           data-aos-delay="100" // Slight delay for smooth entry
         >

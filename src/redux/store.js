@@ -26,6 +26,8 @@ import { internationalFoodPreference } from "./service/food-beverages/internatio
 import { preferredPromotion } from "./service/food-beverages/preferredPromotion";
 import { preferredBeverages } from "./service/food-beverages/preferredBeverages";
 import { preferredDiningLocation } from "./service/food-beverages/preferredDiningLocation";
+import { aircraftUtilization } from "./service/aircraftUtilization";
+import { airportTraffic } from "./service/airportTraffic";
 
 export const store = configureStore({
   reducer: {
@@ -53,6 +55,8 @@ export const store = configureStore({
     [preferredPromotion.reducerPath]: preferredPromotion.reducer,
     [preferredBeverages.reducerPath]: preferredBeverages.reducer,
     [preferredDiningLocation.reducerPath]: preferredDiningLocation.reducer,
+    [aircraftUtilization.reducerPath]: aircraftUtilization.reducer,
+    [airportTraffic.reducerPath]: airportTraffic.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -80,6 +84,8 @@ export const store = configureStore({
       .concat(preferredPromotion.middleware)
       .concat(preferredBeverages.middleware)
       .concat(preferredDiningLocation.middleware)
+      .concat(aircraftUtilization.middleware)
+      .concat(airportTraffic.middleware)
 });
 
 setupListeners(store.dispatch);

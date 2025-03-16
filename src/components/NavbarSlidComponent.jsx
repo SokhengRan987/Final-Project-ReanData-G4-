@@ -52,7 +52,7 @@ const NavbarSlidComponent = () => {
 
   return (
     <nav 
-      className="fixed left-64 right-0 z-[1206] border-b border-gray-200"
+    className="fixed left-64 right-0 z-[2147483647] border-b border-gray-200"
       style={{
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",

@@ -115,11 +115,6 @@ export default function PreferredPromotionsChart() {
           </BarChart>
         </ResponsiveContainer>
       </div>
-      
-      {/* <div className="mt-4 text-sm text-gray-500">
-        <p>This visualization shows which promotional strategies are most preferred by customers.</p>
-        <p className="mt-1">Most popular: Loyalty Points ({((sortedData[0].count / totalCount) * 100).toFixed(1)}% of selections)</p>
-      </div> */}
     </div>
   );
 }

@@ -5,16 +5,24 @@ import NavbarSlidComponent from "./NavbarSlidComponent";
 
 export default function RootLayoutSlidBar() {
   return (
-    <main className="flex h-screen">
-      <div className="h-screen fixed w-64">
+    <main className="flex min-h-screen bg-gray-100">
+      {/* Sidebar Container */}
+      <div className="hidden md:block md:w-64 flex-shrink-0 bg-white shadow-lg">
         <SideBar />
       </div>
       
-      <div className="flex-1 ml-64 flex flex-col">
-        <NavbarSlidComponent />
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col w-full">
+        {/* Navbar */}
+        <div className="fixed top-0 left-0 right-0 md:left-64 z-30 bg-white shadow-md">
+          <NavbarSlidComponent />
+        </div>
         
-        <div className="overflow-auto mt-16">
-          <Outlet />
+        {/* Content Outlet with Padding and Responsive Chart Container */}
+        <div className="flex-1 mt-16 overflow-auto p-4">
+          <div className="max-w-7xl mx-auto">
+            <Outlet />
+          </div>
         </div>
       </div>
     </main>

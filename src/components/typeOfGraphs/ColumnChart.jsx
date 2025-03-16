@@ -213,25 +213,25 @@ export default function ColumnChart() {
   };
 
   return (
-    <div className="main-container w-full max-w-screen-xl h-auto bg-gradient-to-br relative mx-auto my-0 p-6 rounded-xl">
+    <div className="max-w-screen-xl h-auto bg-gradient-to-br relative mx-auto my-0 p-6 rounded-xl bg-white">
       <span className="block font-['Inter'] text-2xl font-bold leading-10 text-[#0f172a] relative text-left whitespace-nowrap mt-6 ml-8 before:content-[''] before:absolute before:w-2 before:h-8 before:bg-[#3C55A5] before:left-[-16px] before:top-1 before:rounded-sm">
         Column Chart
       </span>
-      <div className="flex w-full max-w-4xl h-[482px] pt-6 pr-8 pb-8 pl-8 flex-col gap-4 justify-center items-center flex-nowrap rounded-lg relative  z-[1] mt-9 mx-auto transition-all duration-500 border border-[#3C55A5]">
-        <div className="flex gap-2 items-center self-stretch shrink-0 flex-nowrap relative z-[2]">
-          <span className="h-[25px] grow shrink-0 basis-auto font-['Inter'] text-2xl leading-6 text-[#343a40] relative text-left whitespace-nowrap z-[3]">
+      <div className="flex w-full max-w-4xl h-[482px] pt-6 pr-8 pb-8 pl-8 flex-col gap-4 justify-center items-center flex-nowrap rounded-lg relative mt-9 mx-auto transition-all duration-500 border border-[#3C55A5]">
+        <div className="flex gap-2 items-center self-stretch shrink-0 flex-nowrap relative ">
+          <span className="h-[25px] grow shrink-0 basis-auto font-['Inter'] text-2xl leading-6 text-[#343a40] relative text-left whitespace-nowrap">
             {dataSet} Visualization
           </span>
           <div className="relative">
             <div
-              className="flex opacity-0 px-4 py-2 gap-1 items-center shrink-0 flex-nowrap bg-white rounded-lg relative z-[4] hover:shadow-lg transition-all duration-300 cursor-pointer border border-[#e9ecef]"
+              className="flex opacity-0 px-4 py-2 gap-1 items-center shrink-0 flex-nowrap bg-white rounded-lg relative hover:shadow-lg transition-all duration-300 cursor-pointer border border-[#e9ecef]"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
-              <span className="flex w-48 h-[18px] justify-end items-start shrink-0 font-['Inter'] text-sm font-medium leading-[17.5px] text-[#343a40] relative text-right whitespace-nowrap z-[5]">
+              <span className="flex w-48 h-[18px] justify-end items-start shrink-0 font-['Inter'] text-sm font-medium leading-[17.5px] text-[#343a40] relative text-right whitespace-nowrap">
                 {dataSet}
               </span>
               <div
-                className={`w-4 h-4 shrink-0 relative z-[6] transition-transform duration-300 transform ${
+                className={`w-4 h-4 shrink-0 relative transition-transform duration-300 transform ${
                   isDropdownOpen ? "rotate-180" : ""
                 }`}
               >
@@ -253,7 +253,7 @@ export default function ColumnChart() {
               </div>
             </div>
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-1 bg-white rounded-lg shadow-lg z-50 overflow-hidden transition-all duration-300 w-48">
+              <div className="absolute right-0 mt-1 bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 w-48">
                 <ul className="py-1">
                   {[
                     "Technology Companies",
@@ -277,12 +277,12 @@ export default function ColumnChart() {
             )}
           </div>
         </div>
-        <div className="flex flex-col gap-6 items-start self-stretch grow shrink-0 basis-0 flex-nowrap relative z-[8]">
-          <div className="self-stretch grow shrink-0 basis-0 rounded-lg relative z-[9] border shadow-sm overflow-hidden transition-all duration-500 hover:shadow-md">
+        <div className="flex flex-col gap-6 items-start self-stretch grow shrink-0 basis-0 flex-nowrap relative">
+          <div className="self-stretch grow shrink-0 basis-0 rounded-lg relative border shadow-sm overflow-hidden transition-all duration-500 hover:shadow-md">
             {/* Chart.js Canvas */}
             <canvas ref={chartRef} className="w-full h-full"></canvas>
           </div>
-          <div className="flex justify-between items-center self-stretch shrink-0 flex-nowrap relative z-[10] bg-[#f8f9fa] p-4 rounded-lg">
+          <div className="flex justify-between items-center self-stretch shrink-0 flex-nowrap relative bg-[#f8f9fa] p-4 rounded-lg">
             <div className="flex flex-col gap-1 items-start shrink-0 flex-nowrap relative">
               <span className="font-['Inter'] text-xs text-[#6c757d]">
                 Dataset
@@ -310,7 +310,7 @@ export default function ColumnChart() {
           </div>
         </div>
       </div>
-      <div className="w-full max-w-4xl font-['Roboto'] text-2xl font-normal leading-8 relative text-left z-[59] mt-2 mx-auto p-1 transition-all duration-500">
+      <div className="w-full max-w-4xl font-['Roboto'] text-2xl font-normal leading-8 relative text-left mt-2 mx-auto p-1 transition-all duration-500">
         <span className="font-['Inter'] text-2xl leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
           1. What is a Column Chart?
         </span>

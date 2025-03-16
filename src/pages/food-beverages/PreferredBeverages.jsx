@@ -22,7 +22,7 @@ export default function PreferredBeverages() {
       <div className="max-w-screen-xl mx-auto">
         {/* Charts Section */}
         <section
-          className="border-2 rounded-[20px]"
+          className="border-2 border-gray-100 rounded-[20px] shadow-sm"
           data-aos="fade-up" // Animation for the charts section
           data-aos-delay="100" // Slight delay for smooth entry
         >

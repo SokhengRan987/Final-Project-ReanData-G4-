@@ -22,7 +22,7 @@ export default function PreferredDiningLocation() {
       <div className="max-w-screen-xl mx-auto">
         {/* Charts Section */}
         <section
-          className="grid grid-cols-1 border-2 border-gray-200 rounded-[20px] p-6"
+          className="grid grid-cols-1 border-2 bg-white border-gray-100 shadow-sm rounded-[20px] p-6"
           data-aos="fade-up" // Animation for the charts section
           data-aos-delay="100" // Slight delay for smooth entry
         >
