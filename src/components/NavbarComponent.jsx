@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import logo from "../img/reandata.png";
+import { useNavigate } from "react-router-dom";
+import Login from "../auth/Login";
 
 export default function NavbarComponent() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Handle button click
+  const handleLoginRedirect = () => {
+    navigate("/login");
+  };
 
   // Scroll progress effect
   useEffect(() => {
@@ -70,6 +77,7 @@ export default function NavbarComponent() {
           <NavLink
             to="/login"
             className="text-white bg-[#3C55A5] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-[20px] text-sm px-4 py-2"
+            onClick={handleLoginRedirect} // Trigger routing on click
           >
             Login
           </NavLink>

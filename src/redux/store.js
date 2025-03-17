@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
+import authApi from "./services/authSlice";
 import { airPortDistributionApi } from "./service/airPortDistributionSlice";
 import { aircraftFleetAnalysis } from "./service/aircraftFleetAnalysis";
 import { boardingStatistics } from "./service/boardingStatistics";
@@ -59,6 +60,7 @@ export const store = configureStore({
     [aircraftUtilization.reducerPath]: aircraftUtilization.reducer,
     [airportTraffic.reducerPath]: airportTraffic.reducer,
     [diningMethod.reducerPath]: diningMethod.reducer,
+    [authApi.reducerPath]: authApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -89,6 +91,7 @@ export const store = configureStore({
       .concat(aircraftUtilization.middleware)
       .concat(airportTraffic.middleware)
       .concat(diningMethod.middleware)
+      .concat(authApi.middleware)
 });
 
 setupListeners(store.dispatch);

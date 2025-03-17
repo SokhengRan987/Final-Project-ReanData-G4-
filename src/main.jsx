@@ -2,9 +2,11 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
+import store from "./redux/store";
 import "./index.css";
-
-import Testing from "./pages/Testing.jsx";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import Profile from "./pages/Profile.jsx";
+import ChangePassword from "./pages/ChangePassword.jsx";
 import Rootlayout from "./components/Rootlayout.jsx";
 import { store } from "./redux/store.js";
 
@@ -58,12 +60,21 @@ import PreferredDiningLocation from "./pages/food-beverages/PreferredDiningLocat
 import AircraftUtilization from "./pages/airdata-visualization/AircraftUtilization.jsx";
 import AirportTraffic from "./pages/airdata-visualization/AirportTraffic.jsx";
 import DiningMethod from "./pages/food-beverages/DiningMethod.jsx";
+import Login from "./auth/Login.jsx";
+import SignUp from "./auth/SignUp.jsx";
+import ForgetPassword from "./auth/ForgetPassword.jsx";
+import ResetPassword from "./auth/ResetPassword.jsx";
 
 createRoot(document.getElementById("root")).render(
+  <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
   <Provider store={store}>
     <BrowserRouter>
       <StrictMode>
         <Routes>
+        <Route path="/" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/forgetpassword" element={<ForgetPassword />} />
+            <Route path="/resetpassword" element={<ResetPassword />} />
           <Route path="/" element={<Rootlayout />}>
             <Route index element={<LandingPage />} />
             <Route path="testing" element={<Testing />} />
@@ -76,6 +87,8 @@ createRoot(document.getElementById("root")).render(
 
           {/* Sidebar Layout */}
           <Route path="/" element={<RootLayoutSideBar />}>
+          <Route path="/profile" element={<Profile />} />
+              <Route path="/password" element={<ChangePassword />} />
             <Route path="air-data/aircraft" element={<Aircraft />} />
             <Route path="air-data/airport" element={<Airport />} />
             <Route path="air-data/boarding-pass" element={<BoardingPass />} />
@@ -129,4 +142,7 @@ createRoot(document.getElementById("root")).render(
       </StrictMode>
     </BrowserRouter>
   </Provider>
+  </GoogleOAuthProvider>
+
+  
 );
