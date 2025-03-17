@@ -75,11 +75,6 @@ createRoot(document.getElementById("root")).render(
             <Route path="/resetpassword" element={<ResetPassword />} />
             <Route path="/" element={<Rootlayout />}>
               <Route index element={<LandingPage />} />
-              {/* <Route path="testing" element={<Testing />} /> */}
-              <Route
-                path="distribution"
-                element={<DistributionPerContinent />}
-              />
               <Route path="about-us" element={<About />} />
               <Route path="help&support" element={<HelpAndSupport />} />
               <Route path="documentation" element={<Documentation />} />

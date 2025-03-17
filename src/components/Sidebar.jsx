@@ -196,7 +196,7 @@ export default function Sidebar() {
       `}>
         <div className="p-4 border-b border-gray-200 flex justify-center items-center">
           <Link to="/" onClick={() => handleNavClick('/')} className="flex items-center">
-            <img src={logo} alt="ReAnData Logo" className="h-10 object-contain" />
+            <img src= {logo} alt="ReAnData Logo" className="h-10 object-contain" />
           </Link>
         </div>
 
