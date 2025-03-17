@@ -15,6 +15,7 @@ const NavbarSlidComponent = () => {
   const notificationRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
 
+  
   // Check screen size on mount and when window resizes
   useEffect(() => {
     const checkScreenSize = () => {

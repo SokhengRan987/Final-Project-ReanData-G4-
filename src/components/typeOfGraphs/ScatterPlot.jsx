@@ -128,7 +128,7 @@ export default function ScatterPlot() {
               display: true,
               text: 'Marketing Spend ($)',
               font: {
-                family: 'Inter',
+                family: 'Roboto',
                 size: 14
               },
               padding: 10
@@ -148,7 +148,7 @@ export default function ScatterPlot() {
               display: true,
               text: 'Sales Revenue ($)',
               font: {
-                family: 'Inter',
+                family: 'Roboto',
                 size: 14
               },
               padding: 10
@@ -166,7 +166,7 @@ export default function ScatterPlot() {
         },
         hover: {
           mode: "nearest",
-          intersect: true,
+          Robotosect: true,
           animationDuration: 150
         },
         plugins: {
@@ -289,10 +289,10 @@ export default function ScatterPlot() {
     
     // Calculate linear regression (y = mx + b)
     const slope = sumXY / sumX2;
-    const intercept = meanY - slope * meanX;
+    const Robotocept = meanY - slope * meanX;
     
     return {
-      trendline: { slope, intercept },
+      trendline: { slope, Robotocept },
       correlation: correlation.toFixed(2)
     };
   };
@@ -300,21 +300,21 @@ export default function ScatterPlot() {
   const stats = calculateStats();
 
   return (
-    <div className="main-container w-full max-w-screen-xl h-auto text-[24px] bg-gradient-to-br  relative mx-auto my-0 p-6 rounded-xl">
+    <div className="main-container w-full max-w-6xl h-auto text-[24px] bg-gradient-to-br  relative mx-auto my-0 p-6 rounded-xl">
       <span className="block font-['Roboto'] text-[24px] font-bold leading-10 text-[#0f172a] relative text-left whitespace-nowrap mt-6 ml-8 before:content-[''] before:absolute before:w-2 before:h-8 before:bg-[#3C55A5] before:left-[-16px] before:top-1 before:rounded-sm">
         Scatter Plot
       </span>
       <div className="flex w-full max-w-4xl h-[482px] pt-6 pr-8 pb-8 pl-8 flex-col gap-4 justify-center items-center flex-nowrap bg-white rounded-lg relative  z-[1] mt-9 mx-auto transition-all duration-500  border border-[#3C55A5]">
         <div className="flex gap-2 items-center self-stretch shrink-0 flex-nowrap relative z-[2]">
-          <span className="h-[25px] grow shrink-0 basis-auto font-['Inter'] text-[24px] leading-6 text-[#343a40] relative text-left whitespace-nowrap z-[3]">
+          <span className="h-[25px] grow shrink-0 basis-auto font-['Roboto'] text-[24px] leading-6 text-[#343a40] relative text-left whitespace-nowrap z-[3]">
             Sales vs Marketing Spend
           </span>
           <div className="relative">
             <div 
-              className="flex opacity-0 px-4 py-2 gap-1 items-center shrink-0 flex-nowrap bg-white rounded-lg relative shadow-md z-[4] hover:shadow-lg transition-all duration-300 cursor-pointer"
+              className="flex opacity-0 px-4 py-2 gap-1 items-center shrink-0 flex-nowrap bg-white rounded-lg relative shadow-md z-[4] hover:shadow-lg transition-all duration-300 cursor-poRoboto"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
-              <span className="flex w-16 h-[18px] justify-end items-start shrink-0 basis-auto font-['Inter'] text-sm font-medium leading-[17.5px] text-[#343a40] relative text-right whitespace-nowrap z-[5]">
+              <span className="flex w-16 h-[18px] justify-end items-start shrink-0 basis-auto font-['Roboto'] text-sm font-medium leading-[17.5px] text-[#343a40] relative text-right whitespace-nowrap z-[5]">
                 {timeRange}
               </span>
               <div className={`w-4 h-4 shrink-0 relative z-[6] transition-transform duration-300 transform ${isDropdownOpen ? 'rotate-180' : ''}`}>
@@ -329,7 +329,7 @@ export default function ScatterPlot() {
                   {["3 months", "6 months", "12 months"].map((range) => (
                     <li 
                       key={range}
-                      className={`px-4 py-2 text-sm font-medium cursor-pointer hover:bg-[#f8f9fa] transition-colors duration-150 ${range === timeRange ? 'bg-[#f0f4ff] text-[#3C55A5]' : 'text-[#343a40]'}`}
+                      className={`px-4 py-2 text-sm font-medium cursor-poRoboto hover:bg-[#f8f9fa] transition-colors duration-150 ${range === timeRange ? 'bg-[#f0f4ff] text-[#3C55A5]' : 'text-[#343a40]'}`}
                       onClick={() => handleTimeRangeChange(range)}
                     >
                       {range}
@@ -347,19 +347,19 @@ export default function ScatterPlot() {
           </div>
           <div className="flex justify-between items-center self-stretch shrink-0 flex-nowrap relative z-50">
             <div className="flex gap-2 items-center shrink-0 flex-nowrap relative z-[51]">
-              <span className={`shrink-0 basis-auto font-['Inter'] text-lg font-bold leading-5 tracking-[-0.16px] relative text-left whitespace-nowrap z-[52] transition-all duration-1000 ${isLoaded ? 'text-[#343a40]' : 'text-[#a8a8a8]'}`}>
+              <span className={`shrink-0 basis-auto font-['Roboto'] text-lg font-bold leading-5 tracking-[-0.16px] relative text-left whitespace-nowrap z-[52] transition-all duration-1000 ${isLoaded ? 'text-[#343a40]' : 'text-[#a8a8a8]'}`}>
                 {pointInfo}
               </span>
             </div>
             <div className="flex gap-2 justify-center items-center shrink-0 flex-nowrap relative z-[56]">
-              <div className="flex gap-1 justify-center items-center shrink-0 flex-nowrap relative bg-[#f8f9fa] px-3 py-1 rounded-full transition-all duration-300 hover:bg-[#e9ecef] cursor-pointer group">
+              <div className="flex gap-1 justify-center items-center shrink-0 flex-nowrap relative bg-[#f8f9fa] px-3 py-1 rounded-full transition-all duration-300 hover:bg-[#e9ecef] cursor-poRoboto group">
                 <div className="w-3 h-3 shrink-0 rounded-full bg-[#3C55A5] relative group-hover:animate-pulse"></div>
-                <span className="shrink-0 basis-auto font-['Inter'] text-xs font-semibold leading-3 text-[#5f666c] relative text-left whitespace-nowrap ml-1">
+                <span className="shrink-0 basis-auto font-['Roboto'] text-xs font-semibold leading-3 text-[#5f666c] relative text-left whitespace-nowrap ml-1">
                   Data Points
                 </span>
               </div>
               <div className="flex gap-1 justify-center items-center shrink-0 flex-nowrap relative bg-[#f8f9fa] px-3 py-1 rounded-full">
-                <span className="shrink-0 basis-auto font-['Inter'] text-xs font-semibold leading-3 text-[#5f666c] relative text-left whitespace-nowrap">
+                <span className="shrink-0 basis-auto font-['Roboto'] text-xs font-semibold leading-3 text-[#5f666c] relative text-left whitespace-nowrap">
                   Correlation: {stats.correlation}
                 </span>
               </div>
@@ -368,13 +368,13 @@ export default function ScatterPlot() {
         </div>
       </div>
       <div className="w-full max-w-4xl font-['Roboto'] text-[24px] font-normal leading-8 relative text-left z-[59] mt-2 mx-auto p-1 transition-all duration-500">
-        <span className="font-['Inter'] text-[24px] leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
+        <span className="font-['Roboto'] text-[24px] leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
          1. What is a Scatter Plot?
         </span>
-        <span className="font-['Inter'] text-[20px] font-normal leading-8 text-[#1e293b] relative text-left block mt-3">
+        <span className="font-['Roboto'] text-[20px] font-normal leading-8 text-[#1e293b] relative text-left block mt-3">
         A scatter plot is a type of graph that shows the relationship between two numerical variables by plotting individual data points on an X-Y coordinate system.
         </span>
-        <span className="font-['Inter'] text-[24px] leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
+        <span className="font-['Roboto'] text-[24px] leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
           2. What Kind of Data is Perfect for a Scatter Plot?
         </span>
         <ul className="mt-4 space-y-2">
@@ -403,7 +403,7 @@ export default function ScatterPlot() {
             <span className="ml-3 text-[20px] text-[#334155]">Advertising Spend vs. Revenue (e.g., does more marketing lead to higher sales?)</span>
           </li>
         </ul>
-        <span className="font-['Inter'] text-[24px] leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
+        <span className="font-['Roboto'] text-[24px] leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
           3. The importance of using scatter plot ?
         </span>
         <ul className="mt-6 space-y-2">
@@ -411,19 +411,19 @@ export default function ScatterPlot() {
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-[20px] text-[#334155]">Identifying Relationships - Helps determine if two variables are positively correlated, negatively correlated, or have no relationship.</span>
+            <span className="ml-3 text-[20px] text-[#334155]">Identifying Relationships – Helps determine if two variables are positively correlated, negatively correlated, or have no relationship.</span>
           </li>
           <li className="flex items-start">
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-[20px] text-[#334155]">Detecting Trends and Patterns - Reveals linear or nonlinear trends (e.g., exponential growth, clusters).</span>
+            <span className="ml-3 text-[20px] text-[#334155]">Detecting Trends and Patterns – Reveals linear or nonlinear trends (e.g., exponential growth, clusters).</span>
           </li>
           <li className="flex items-start">
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-[20px] text-[#334155]">Spotting Outliers - Highlights data points that don’t fit the general pattern, which may indicate errors or special cases.</span>
+            <span className="ml-3 text-[20px] text-[#334155]">Spotting Outliers – Highlights data points that don’t fit the general pattern, which may indicate errors or special cases.</span>
           </li>
         </ul>
       </div>

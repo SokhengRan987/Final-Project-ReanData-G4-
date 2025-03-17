@@ -183,7 +183,7 @@ export default function Line() {
         },
         hover: {
           mode: "nearest",
-          intersect: false,
+          Robotosect: false,
           animationDuration: 150
         },
         plugins: {
@@ -193,7 +193,7 @@ export default function Line() {
           tooltip: {
             enabled: true,
             mode: "index",
-            intersect: false,
+            Robotosect: false,
             backgroundColor: "rgba(255, 255, 255, 0.95)",
             titleColor: "#333",
             bodyColor: "#666",
@@ -238,7 +238,7 @@ export default function Line() {
             },
             ticks: {
               font: {
-                family: "Inter",
+                family: "Roboto",
                 size: 12,
                 weight: "600",
               },
@@ -257,7 +257,7 @@ export default function Line() {
             },
             ticks: {
               font: {
-                family: "Inter",
+                family: "Roboto",
                 size: 12,
                 weight: "600",
               },
@@ -276,9 +276,9 @@ export default function Line() {
             }
           },
         },
-        interaction: {
+        Robotoaction: {
           mode: 'index',
-          intersect: false,
+          Robotosect: false,
         },
         elements: {
           line: {
@@ -336,10 +336,10 @@ export default function Line() {
       
       pulsePoint();
       
-      // Pulse animation interval
-      const pulseInterval = setInterval(pulsePoint, 2000);
+      // Pulse animation Robotoval
+      const pulseRobotoval = setRobotoval(pulsePoint, 2000);
       
-      return () => clearInterval(pulseInterval);
+      return () => clearRobotoval(pulseRobotoval);
     }
   }, [highlightedPoint, chartData]);
 
@@ -351,21 +351,21 @@ export default function Line() {
   };
 
   return (
-    <div className="main-container w-full max-w-screen-xl h-auto text-[24px] relative mx-auto my-0 p-6 ">
+    <div className="main-container w-full max-w-6xl h-auto text-[24px] relative mx-auto my-0 p-6 ">
       <span className="block font-['Roboto'] text-[24px] font-bold leading-10 text-[#0f172a] relative text-left whitespace-nowrap mt-6 ml-8 before:content-[''] before:absolute before:w-2 before:h-8  before:left-[-16px] before:top-1  before:bg-[#3C55A5]  before:rounded-sm">
          Line Chart
       </span>
       <div className="flex w-full max-w-4xl h-[482px] pt-6 pr-8 pb-8 pl-8 flex-col gap-4 justify-center items-center flex-nowrap bg-white rounded-lg relative  z-[1] mt-9 mx-auto transition-all duration-500  border border-[#3C55A5]">
         <div className="flex gap-2 items-center self-stretch shrink-0 flex-nowrap relative z-[2]">
-          <span className="h-[25px] grow shrink-0 basis-auto font-['Inter'] text-[24px]  leading-6 text-[#343a40] relative text-left whitespace-nowrap z-[3]">
+          <span className="h-[25px] grow shrink-0 basis-auto font-['Roboto'] text-[24px]  leading-6 text-[#343a40] relative text-left whitespace-nowrap z-[3]">
             Revenue Trends
           </span>
           <div className="relative">
             <div 
-              className="flex px-4 py-2 opacity-0 gap-1 items-center shrink-0 flex-nowrap bg-white rounded-lg relative shadow-md z-[4] hover:shadow-lg transition-all duration-300 cursor-pointer"
+              className="flex px-4 py-2 opacity-0 gap-1 items-center shrink-0 flex-nowrap bg-white rounded-lg relative shadow-md z-[4] hover:shadow-lg transition-all duration-300 cursor-poRoboto"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
-              <span className="flex w-16 h-[18px] justify-end items-start shrink-0 basis-auto font-['Inter'] text-sm font-medium leading-[17.5px] text-[#343a40] relative text-right whitespace-nowrap z-[5]">
+              <span className="flex w-16 h-[18px] justify-end items-start shrink-0 basis-auto font-['Roboto'] text-sm font-medium leading-[17.5px] text-[#343a40] relative text-right whitespace-nowrap z-[5]">
                 {timeRange}
               </span>
               <div className={`w-4 h-4 shrink-0 relative z-[6] transition-transform duration-300 transform ${isDropdownOpen ? 'rotate-180' : ''}`}>
@@ -380,7 +380,7 @@ export default function Line() {
                   {["3 months", "6 months", "12 months"].map((range) => (
                     <li 
                       key={range}
-                      className={`px-4 py-2 text-sm font-medium cursor-pointer hover:bg-[#f8f9fa] transition-colors duration-150 ${range === timeRange ? 'bg-[#f0f4ff] text-[#3C55A5]' : 'text-[#343a40]'}`}
+                      className={`px-4 py-2 text-sm font-medium cursor-poRoboto hover:bg-[#f8f9fa] transition-colors duration-150 ${range === timeRange ? 'bg-[#f0f4ff] text-[#3C55A5]' : 'text-[#343a40]'}`}
                       onClick={() => handleTimeRangeChange(range)}
                     >
                       {range}
@@ -398,11 +398,11 @@ export default function Line() {
           </div>
           <div className="flex justify-between items-center self-stretch shrink-0 flex-nowrap relative z-50">
             <div className="flex gap-2 items-center shrink-0 flex-nowrap relative z-[51]">
-              <span className={`shrink-0 basis-auto font-['Inter'] text-lg font-bold leading-5 tracking-[-0.16px] relative text-left whitespace-nowrap z-[52] transition-all duration-1000 ${isLoaded ? 'text-[#343a40]' : 'text-[#a8a8a8]'}`}>
+              <span className={`shrink-0 basis-auto font-['Roboto'] text-lg font-bold leading-5 tracking-[-0.16px] relative text-left whitespace-nowrap z-[52] transition-all duration-1000 ${isLoaded ? 'text-[#343a40]' : 'text-[#a8a8a8]'}`}>
                 {currentValue}
               </span>
               <div className="flex gap-1 items-end shrink-0 flex-nowrap relative z-[53]">
-                <span className={`flex justify-center items-start shrink-0 basis-auto font-['Inter'] text-xs font-semibold leading-4 relative text-center whitespace-nowrap z-[54] transition-all duration-1000 ${isPositive ? 'text-[#28a745]' : 'text-[#dc3545]'}`}>
+                <span className={`flex justify-center items-start shrink-0 basis-auto font-['Roboto'] text-xs font-semibold leading-4 relative text-center whitespace-nowrap z-[54] transition-all duration-1000 ${isPositive ? 'text-[#28a745]' : 'text-[#dc3545]'}`}>
                   {isPositive ? "+" : ""}{percentChange}
                 </span>
                 {/* Arrow icon based on trend with animation */}
@@ -422,10 +422,10 @@ export default function Line() {
                 </svg>
               </div>
             </div>
-            <div className="flex gap-1 justify-center items-center shrink-0 flex-nowrap relative z-[56] bg-[#f8f9fa] px-3 py-1 rounded-full transition-all duration-300 hover:bg-[#e9ecef] cursor-pointer group">
+            <div className="flex gap-1 justify-center items-center shrink-0 flex-nowrap relative z-[56] bg-[#f8f9fa] px-3 py-1 rounded-full transition-all duration-300 hover:bg-[#e9ecef] cursor-poRoboto group">
               {/* Legend color indicator with pulse animation */}
               <div className="w-3 h-3 shrink-0 rounded-full bg-[#3C55A5] relative z-[57] group-hover:animate-pulse"></div>
-              <span className="shrink-0 basis-auto font-['Inter'] text-xs font-semibold leading-3 text-[#5f666c] relative text-left whitespace-nowrap z-[58] ml-1">
+              <span className="shrink-0 basis-auto font-['Roboto'] text-xs font-semibold leading-3 text-[#5f666c] relative text-left whitespace-nowrap z-[58] ml-1">
                 Product
               </span>
             </div>
@@ -433,13 +433,13 @@ export default function Line() {
         </div>
       </div>
       <div className="w-full max-w-4xl font-['Roboto'] text-[24px] font-normal leading-8 relative text-left z-[59] mt-2 mx-auto  p-1  transition-all duration-500 ">
-        <span className="font-['Inter'] text-[24px]  leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
+        <span className="font-['Roboto'] text-[24px]  leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
          1.What is Line Chart ?
         </span>
-        <span className="font-['Inter'] text-[20px] font-normal leading-8 text-[#1e293b] relative text-left block mt-3">
+        <span className="font-['Roboto'] text-[20px] font-normal leading-8 text-[#1e293b] relative text-left block mt-3">
         A line chart is a type of graph that represents data points connected by a line, showing trends and changes over time. It is commonly used to display continuous data.
         </span>
-        <span className="font-['Inter'] text-[24px]  leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
+        <span className="font-['Roboto'] text-[24px]  leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
           2. What kind of data that perfect for line  chart ?
         </span>
         <ul className="mt-4 space-y-2">
@@ -447,23 +447,23 @@ export default function Line() {
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-[20px] text-[#334155]">Time Series Data -  This is one of the most common uses for line charts, such as(Example:Monthly sales figures)</span>
+            <span className="ml-3 text-[20px] text-[#334155]">Time Series Data –  This is one of the most common uses for line charts, such as(Example:Monthly sales figures)</span>
           </li>
           <li className="flex items-start">
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
             <span className="ml-3
-             text-[20px] text-[#334155]">Trends and Patterns- Data that shows a gradual increase, decrease, or cyclical pattern over time.</span>
+             text-[20px] text-[#334155]">Trends and Patterns– Data that shows a gradual increase, decrease, or cyclical pattern over time.</span>
           </li>
           <li className="flex items-start">
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-[20px] text-[#334155]">Comparisons Over Time - Line charts can display multiple datasets on the same graph to compare their trends over the same period.</span>
+            <span className="ml-3 text-[20px] text-[#334155]">Comparisons Over Time – Line charts can display multiple datasets on the same graph to compare their trends over the same period.</span>
           </li>
         </ul>
-        <span className="font-['Inter'] text-[24px]  leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
+        <span className="font-['Roboto'] text-[24px]  leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
           3. The importance of using Bar chart ?
         </span>
         <ul className="mt-6 space-y-2">
@@ -471,19 +471,19 @@ export default function Line() {
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-[20px] text-[#334155]">Clarity of Trends - Line charts clearly show how data changes over time, making it easy to identify trends (e.g., increasing or decreasing patterns)</span>
+            <span className="ml-3 text-[20px] text-[#334155]">Clarity of Trends – Line charts clearly show how data changes over time, making it easy to identify trends (e.g., increasing or decreasing patterns)</span>
           </li>
           <li className="flex items-start">
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-[20px] text-[#334155]">Comparing Multiple Data Sets - With multiple lines on the same chart, you can easily compare trends between different data sets, such as comparing sales for two products or performance across different regions.</span>
+            <span className="ml-3 text-[20px] text-[#334155]">Comparing Multiple Data Sets – With multiple lines on the same chart, you can easily compare trends between different data sets, such as comparing sales for two products or performance across different regions.</span>
           </li>
           <li className="flex items-start">
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-[20px] text-[#334155]">Predictive Insights - By showing the historical trend, line charts can be used to make forecasts about future data points, helping in planning and forecasting.</span>
+            <span className="ml-3 text-[20px] text-[#334155]">Predictive Insights – By showing the historical trend, line charts can be used to make forecasts about future data points, helping in planning and forecasting.</span>
           </li>
         </ul>
       </div>

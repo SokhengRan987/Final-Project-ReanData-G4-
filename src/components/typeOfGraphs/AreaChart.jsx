@@ -135,7 +135,7 @@ export default function AreaChart() {
             position: 'top',
             labels: {
               font: {
-                family: "Inter",
+                family: "Roboto",
                 size: 12,
                 weight: "600",
               },
@@ -214,36 +214,36 @@ export default function AreaChart() {
   };
   
   return (
-    <div className="main-container w-full max-w-screen-xl h-auto bg-gradient-to-br  relative mx-auto my-0 p-6 rounded-xl">
-      <span className="block font-['Inter'] text-[24px] font-bold leading-10 text-[#0f172a] relative text-left whitespace-nowrap mt-6 ml-8 before:content-[''] before:absolute before:w-2 before:h-8 before:bg-[#3C55A5] before:left-[-16px] before:top-1 before:rounded-sm">
+    <div className="main-container w-full max-w-screen-xl h-auto bg-gradient-to-br   relative mx-auto rounded-xl">
+      <span className="block font-['Roboto'] text-[24px] font-bold leading-10 text-[#0f172a] relative text-left whitespace-nowrap mt-6 ml-8 before:content-[''] before:absolute before:w-2 before:h-8 before:bg-[#3C55A5] before:left-[-16px] before:top-1 before:rounded-sm">
         Area Chart
       </span>
-      <div className="flex w-full max-w-4xl h-[482px] pt-6 pr-8 pb-8 pl-8 flex-col gap-4 justify-center items-center flex-nowrap rounded-lg relative  z-[1] mt-9 mx-auto transition-all duration-500  border border-[#3C55A5]">
-        <div className="flex gap-2 items-center self-stretch shrink-0 flex-nowrap relative z-[2]">
-          <span className="h-[25px] grow shrink-0 basis-auto font-['Inter'] text-[24px] leading-6 text-[#343a40] relative text-left whitespace-nowrap z-[3]">
+      <div className="flex w-full max-w-4xl h-[482px] pt-6 pr-8 pb-8 pl-8 flex-col gap-4 justify-center items-center flex-nowrap rounded-lg relative mt-9 mx-auto transition-all duration-500  border border-[#3C55A5]">
+        <div className="flex gap-2 items-center self-stretch shrink-0 flex-nowrap relative">
+          <span className="h-[25px] grow shrink-0 basis-auto font-['Roboto'] text-[24px] leading-6 text-[#343a40] relative text-left whitespace-nowrap">
             {dataSet} Trends
           </span>
           <div className="relative">
             <div 
-              className="flex px-4 py-2 gap-1 opacity-0 items-center shrink-0 flex-nowrap bg-white rounded-lg relative z-[4] hover:shadow-lg transition-all duration-300 cursor-pointer border border-[#e9ecef]"
+              className="flex px-4 py-2 gap-1 opacity-0 items-center shrink-0 flex-nowrap bg-white rounded-lg relative hover:shadow-lg transition-all duration-300 cursor-poRoboto border border-[#e9ecef]"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
-              <span className="flex w-40 h-[18px] justify-end items-start shrink-0 font-['Inter'] text-sm font-medium leading-[17.5px] text-[#343a40] relative text-right whitespace-nowrap z-[5]">
+              <span className="flex w-40 h-[18px] justify-end items-start shrink-0 font-['Roboto'] text-sm font-medium leading-[17.5px] text-[#343a40] relative text-right whitespace-nowrap">
                 {dataSet}
               </span>
-              <div className={`w-4 h-4 shrink-0 relative z-[6] transition-transform duration-300 transform ${isDropdownOpen ? 'rotate-180' : ''}`}>
+              <div className={`w-4 h-4 shrink-0 relative transition-transform duration-300 transform ${isDropdownOpen ? 'rotate-180' : ''}`}>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4 6L8 10L12 6" stroke="#343A40" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
             </div>
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-1 bg-white rounded-lg shadow-lg z-50 overflow-hidden transition-all duration-300 animate-fadeIn w-48">
+              <div className="absolute right-0 mt-1 bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-300 animate-fadeIn w-48">
                 <ul className="py-1">
                   {["Monthly Revenue", "Website Traffic", "User Engagement"].map((set) => (
                     <li 
                       key={set}
-                      className={`px-4 py-2 text-sm font-medium cursor-pointer hover:bg-[#f8f9fa] transition-colors duration-150 ${set === dataSet ? 'bg-[#f0f4ff] text-[#3C55A5]' : 'text-[#343a40]'}`}
+                      className={`px-4 py-2 text-sm font-medium cursor-poRoboto hover:bg-[#f8f9fa] transition-colors duration-150 ${set === dataSet ? 'bg-[#f0f4ff] text-[#3C55A5]' : 'text-[#343a40]'}`}
                       onClick={() => handleDataSetChange(set)}
                     >
                       {set}
@@ -259,42 +259,42 @@ export default function AreaChart() {
             {/* Chart.js Canvas */}
             <canvas ref={chartRef} className="w-full h-full"></canvas>
           </div>
-          <div className="flex justify-between items-center self-stretch shrink-0 flex-nowrap relative z-[10] bg-[#f8f9fa] p-4 rounded-lg">
+          <div className="flex justify-between items-center self-stretch shrink-0 flex-nowrap relativebg-[#f8f9fa] p-4 rounded-lg">
             <div className="flex flex-col gap-1 items-start shrink-0 flex-nowrap relative">
-              <span className="font-['Inter'] text-xs text-[#6c757d]">
+              <span className="font-['Roboto'] text-xs text-[#6c757d]">
                 Total
               </span>
-              <span className="font-['Inter'] text-lg font-bold text-[#343a40]">
+              <span className="font-['Roboto'] text-lg font-bold text-[#343a40]">
                 {statistics.total}
               </span>
             </div>
             <div className="flex flex-col gap-1 items-start shrink-0 flex-nowrap relative">
-              <span className="font-['Inter'] text-xs text-[#6c757d]">
+              <span className="font-['Roboto'] text-xs text-[#6c757d]">
                 Average
               </span>
-              <span className="font-['Inter'] text-lg font-bold text-[#343a40]">
+              <span className="font-['Roboto'] text-lg font-bold text-[#343a40]">
                 {statistics.average}
               </span>
             </div>
             <div className="flex flex-col gap-1 items-start shrink-0 flex-nowrap relative">
-              <span className="font-['Inter'] text-xs text-[#6c757d]">
+              <span className="font-['Roboto'] text-xs text-[#6c757d]">
                 Annual Growth
               </span>
-              <span className="font-['Inter'] text-lg font-bold text-[#343a40]">
+              <span className="font-['Roboto'] text-lg font-bold text-[#343a40]">
                 {statistics.growth}
               </span>
             </div>
           </div>
         </div>
       </div>
-      <div className="w-full max-w-4xl font-['Roboto'] text-[24px] font-normal leading-8 relative text-left z-[59] mt-2 mx-auto p-1 transition-all duration-500">
-        <span className="font-['Inter'] text-[24px] leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
+      <div className="w-full max-w-4xl font-['Roboto'] text-[24px] font-normal leading-8 relative text-left mt-2 mx-auto p-1 transition-all duration-500">
+        <span className="font-['Roboto'] text-[24px] leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
           1. What is an Area Chart?
         </span>
-        <span className="font-['Inter'] text-[20px] leading-8 text-[#334155] relative text-left block mt-3">
+        <span className="font-['Roboto'] text-[20px] leading-8 text-[#334155] relative text-left block mt-3">
         An area chart is similar to a line chart, but the area beneath the line is filled with color. It is used to represent quantities over time and helps show trends while also emphasizing the magnitude of values.
         </span>
-        <span className="font-['Inter'] text-[24px] leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
+        <span className="font-['Roboto'] text-[24px] leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
           2. What Kind of Data is Perfect for an Area Chart?
         </span>
         <ul className="mt-4 space-y-2">
@@ -319,7 +319,7 @@ export default function AreaChart() {
             </span>
           </li>
         </ul>
-        <span className="font-['Inter'] text-[24px] leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
+        <span className="font-['Roboto'] text-[24px] leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
           3. The importance of using area chart ?
         </span>
         <ul className="mt-6 space-y-2">
@@ -327,19 +327,19 @@ export default function AreaChart() {
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-[20px] text-[#334155]">Shows Trends Clearly - Emphasizes the rise and fall of values over time.</span>
+            <span className="ml-3 text-[20px] text-[#334155]">Shows Trends Clearly – Emphasizes the rise and fall of values over time.</span>
           </li>
           <li className="flex items-start">
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-[20px] text-[#334155]">Highlights Magnitude - By filling the area under the line, it visually shows how much a value changes.</span>
+            <span className="ml-3 text-[20px] text-[#334155]">Highlights Magnitude – By filling the area under the line, it visually shows how much a value changes.</span>
           </li>
           <li className="flex items-start">
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-[20px] text-[#334155]">Compares Multiple Data Series - A stacked area chart can show how different categories contribute to a total.</span>
+            <span className="ml-3 text-[20px] text-[#334155]">Compares Multiple Data Series – A stacked area chart can show how different categories contribute to a total.</span>
           </li>
         </ul>
       </div>

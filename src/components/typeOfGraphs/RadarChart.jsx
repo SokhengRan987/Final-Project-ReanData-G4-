@@ -169,7 +169,7 @@ export default function RadarChart() {
             pointLabels: {
               font: {
                 size: 12,
-                family: "Inter, sans-serif"
+                family: "Roboto, sans-serif"
               },
               color: "#333"
             }
@@ -181,7 +181,7 @@ export default function RadarChart() {
             labels: {
               font: {
                 size: 12,
-                family: "Inter, sans-serif"
+                family: "Roboto, sans-serif"
               },
               boxWidth: 15,
               padding: 15
@@ -246,21 +246,21 @@ export default function RadarChart() {
   };
   
   return (
-    <div className="main-container w-full max-w-screen-xl h-auto bg-gradient-to-br  relative mx-auto my-0 p-6 rounded-xl">
-      <span className="block font-['Inter'] text-2xl font-bold leading-10 text-[#0f172a] relative text-left whitespace-nowrap mt-6 ml-8 before:content-[''] before:absolute before:w-2 before:h-8 before:bg-[#3C55A5] before:left-[-16px] before:top-1 before:rounded-sm">
+    <div className="main-container w-full max-w-6xl h-auto bg-gradient-to-br  relative mx-auto my-0 p-6 rounded-xl">
+      <span className="block font-['Roboto'] text-2xl font-bold leading-10 text-[#0f172a] relative text-left whitespace-nowrap mt-6 ml-8 before:content-[''] before:absolute before:w-2 before:h-8 before:bg-[#3C55A5] before:left-[-16px] before:top-1 before:rounded-sm">
         Radar/Spider Chart
       </span>
       <div className="flex w-full max-w-4xl h-[550px] pt-6 pr-8 pb-8 pl-8 flex-col gap-4 justify-center items-center flex-nowrap bg-white rounded-lg relative  z-[1] mt-9 mx-auto transition-all duration-500  border border-[#3C55A5]">
         <div className="flex gap-2 items-center self-stretch shrink-0 flex-nowrap relative z-[2]">
-          <span className="h-[25px] grow shrink-0 basis-auto font-['Inter'] text-2xl leading-6 text-[#343a40] relative text-left whitespace-nowrap z-[3]">
+          <span className="h-[25px] grow shrink-0 basis-auto font-['Roboto'] text-2xl leading-6 text-[#343a40] relative text-left whitespace-nowrap z-[3]">
             {dataSet} Comparison
           </span>
           <div className="relative">
             <div 
-              className="flex opacity-0 px-4 py-2 gap-1 items-center shrink-0 flex-nowrap bg-white rounded-lg relative z-[4] hover:shadow-lg transition-all duration-300 cursor-pointer border border-[#e9ecef]"
+              className="flex opacity-0 px-4 py-2 gap-1 items-center shrink-0 flex-nowrap bg-white rounded-lg relative z-[4] hover:shadow-lg transition-all duration-300 cursor-poRoboto border border-[#e9ecef]"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
-              <span className="flex w-48 h-[18px] justify-end items-start shrink-0 font-['Inter'] text-sm font-medium leading-[17.5px] text-[#343a40] relative text-right whitespace-nowrap z-[5]">
+              <span className="flex w-48 h-[18px] justify-end items-start shrink-0 font-['Roboto'] text-sm font-medium leading-[17.5px] text-[#343a40] relative text-right whitespace-nowrap z-[5]">
                 {dataSet}
               </span>
               <div className={`w-4 h-4 shrink-0 relative z-[6] transition-transform duration-300 transform ${isDropdownOpen ? 'rotate-180' : ''}`}>
@@ -275,7 +275,7 @@ export default function RadarChart() {
                   {["Technology Companies", "World Cities", "Education Performance"].map((set) => (
                     <li 
                       key={set}
-                      className={`px-4 py-2 text-sm font-medium cursor-pointer hover:bg-[#f8f9fa] transition-colors duration-150 ${set === dataSet ? 'bg-[#f0f4ff] text-[#3C55A5]' : 'text-[#343a40]'}`}
+                      className={`px-4 py-2 text-sm font-medium cursor-poRoboto hover:bg-[#f8f9fa] transition-colors duration-150 ${set === dataSet ? 'bg-[#f0f4ff] text-[#3C55A5]' : 'text-[#343a40]'}`}
                       onClick={() => handleDataSetChange(set)}
                     >
                       {set}
@@ -293,26 +293,26 @@ export default function RadarChart() {
           </div>
           <div className="flex justify-between items-center self-stretch shrink-0 flex-nowrap relative z-[10] bg-[#f8f9fa] p-4 rounded-lg">
             <div className="flex flex-col gap-1 items-start shrink-0 flex-nowrap relative">
-              <span className="font-['Inter'] text-xs text-[#6c757d]">
+              <span className="font-['Roboto'] text-xs text-[#6c757d]">
                 Dataset
               </span>
-              <span className="font-['Inter'] text-lg font-bold text-[#343a40]">
+              <span className="font-['Roboto'] text-lg font-bold text-[#343a40]">
                 {dataSet}
               </span>
             </div>
             <div className="flex flex-col gap-1 items-start shrink-0 flex-nowrap relative">
-              <span className="font-['Inter'] text-xs text-[#6c757d]">
+              <span className="font-['Roboto'] text-xs text-[#6c757d]">
                 Entities
               </span>
-              <span className="font-['Inter'] text-lg font-bold text-[#343a40]">
+              <span className="font-['Roboto'] text-lg font-bold text-[#343a40]">
                 {getEntitiesCount()}
               </span>
             </div>
             <div className="flex flex-col gap-1 items-start shrink-0 flex-nowrap relative">
-              <span className="font-['Inter'] text-xs text-[#6c757d]">
+              <span className="font-['Roboto'] text-xs text-[#6c757d]">
                 Metrics
               </span>
-              <span className="font-['Inter'] text-lg font-bold text-[#343a40]">
+              <span className="font-['Roboto'] text-lg font-bold text-[#343a40]">
                 {getMetricsCount()}
               </span>
             </div>
@@ -320,13 +320,13 @@ export default function RadarChart() {
         </div>
       </div>
       <div className="w-full max-w-4xl font-['Roboto'] text-2xl font-normal leading-8 relative text-left z-[59] mt-2 mx-auto p-1 transition-all duration-500">
-        <span className="font-['Inter'] text-2xl leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
+        <span className="font-['Roboto'] text-2xl leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
          1.What is a Radar (Spider) Chart?
         </span>
-        <span className="font-['Inter'] text-xl leading-8 text-[#334155] relative text-left block mt-3">
+        <span className="font-['Roboto'] text-xl leading-8 text-[#334155] relative text-left block mt-3">
         A Radar Chart, also called a Spider Chart or Web Chart, is a graphical method used to display multivariate data in a two-dimensional format. 
         </span>
-        <span className="font-['Inter'] text-2xl leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full mt-6">
+        <span className="font-['Roboto'] text-2xl leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full mt-6">
          2. What Kind of Data is Perfect for a Radar/Spider Chart?
         </span>
         <ul className="mt-4 space-y-2">
@@ -355,7 +355,7 @@ export default function RadarChart() {
             <span className="ml-3 text-xl text-[#334155]">Market Research (e.g., comparing customer satisfaction factors across different products)</span>
           </li>
         </ul>
-        <span className="font-['Inter'] text-2xl leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full mt-6">
+        <span className="font-['Roboto'] text-2xl leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full mt-6">
          3. The importance of using Radar/Spider Charts  ?
         </span>
         <ul className="mt-4 space-y-2">
@@ -363,19 +363,19 @@ export default function RadarChart() {
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-xl text-[#334155]">Easy Comparison of Multiple Variables - Helps in visually comparing strengths and weaknesses of different subjects.</span>
+            <span className="ml-3 text-xl text-[#334155]">Easy Comparison of Multiple Variables – Helps in visually comparing strengths and weaknesses of different subjects.</span>
           </li>
           <li className="flex items-start">
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-xl text-[#334155]">Shows Patterns and Relationships - Highlights how different attributes relate to each other within a dataset.</span>
+            <span className="ml-3 text-xl text-[#334155]">Shows Patterns and Relationships – Highlights how different attributes relate to each other within a dataset.</span>
           </li>
           <li className="flex items-start">
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-xl text-[#334155]">Effective for Ranking and Scoring - Useful for evaluating performance across different criteria (e.g., rating different products).</span>
+            <span className="ml-3 text-xl text-[#334155]">Effective for Ranking and Scoring – Useful for evaluating performance across different criteria (e.g., rating different products).</span>
           </li>
         </ul>
       </div>
