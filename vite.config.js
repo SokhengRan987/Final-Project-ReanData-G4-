@@ -7,12 +7,3 @@ export default defineConfig({
     include: ["@emailjs/browser"]  // Ensure it's bundled
   }
 });
-
-// server: {
-//   proxy: {
-//     '/rpc': {
-//       target: 'https://reandata-api.istad.co',
-//       changeOrigin: true,
-//     },
-//   },
-// },

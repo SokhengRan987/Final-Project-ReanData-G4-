@@ -111,9 +111,9 @@ const TimeBasedBoardingAnalysis = () => {
     return <div className="text-red-500 p-4">Error loading boarding data</div>;
 
   return (
-    <div className="w-full bg-white rounded-[20px] shadow p-6">
+    <div className="w-full">
       <div className="flex justify-between items-center mb-6">
-        {/* <h2 className="text-5xl mb-8">Boarding Analysis by Hour</h2> */}
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Boarding Analysis by Hour</h2>
         <div className="flex space-x-2">
           <button
             className={`px-4 py-2 rounded-[20px] ${

@@ -139,7 +139,7 @@ export default function BarChartTraffic() {
   return (
     <div>
       <div className="flex flex-col mb-4 md:flex-row md:justify-between md:items-center">
-        <h2 className="text-xl font-bold mb-4 md:mb-0">Airport Traffic Analysis</h2>
+        <h2 className="text-2xl font-medium mb-4 md:mb-0">Airport Traffic Analysis</h2>
         
         <div className="flex flex-col space-y-3 md:flex-row md:space-y-0 md:space-x-4">
           {/* View Mode Buttons */}

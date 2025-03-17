@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 import ScatterPlotUtilization from "../../components/airdata/aircraft-utilization/ScatterPlotUtilization";
+import BubbleChartUtilization from "../../components/airdata/aircraft-utilization/BubbleChartUtilization";
 
 export default function AircraftUtilization() {
   // Initialize AOS when the component mounts

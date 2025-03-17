@@ -14,10 +14,10 @@ import {
 import Loader from "../../loading/Loader";
 import { useGetAircraftUtilizationQuery } from "../../../redux/service/aircraftUtilization";
 
-export default function ScatterPlotUtilization() {
+export default function BubbleChartUtilization() {
   const { data, isLoading, error } = useGetAircraftUtilizationQuery();
 
-  // Process data to create a more suitable format for the scatter plot
+  // Process data to create a more suitable format for the bubble chart
   const processedData = useMemo(() => {
     if (!data || data.length === 0) return [];
 
@@ -32,14 +32,16 @@ export default function ScatterPlotUtilization() {
     }));
   }, [data]);
 
-  // Dynamic ZAxis range based on data
+  // Dynamic ZAxis range for bubble sizes
   const zRange = useMemo(() => {
-    if (!processedData.length) return [20, 100];
+    if (!processedData.length) return [50, 400];
     const counts = processedData.map(d => d.z);
-    return [Math.min(20, ...counts), Math.max(100, ...counts)];
+    const minSize = 50; // Minimum bubble size
+    const maxSize = 400; // Maximum bubble size
+    return [minSize, maxSize];
   }, [processedData]);
 
-  // Create color map for different aircraft classes with fallback
+  // Color map with fallback
   const colorMap = {
     0: "#6366F1",
     1: "#10B981",
@@ -50,6 +52,7 @@ export default function ScatterPlotUtilization() {
 
   const getColor = (classKey) => colorMap[classKey] || "#999999";
 
+  // Class descriptions
   const classDescriptions = {
     0: "Long-range, low-frequency",
     1: "Ultra-long-range, high-capacity",
@@ -111,6 +114,7 @@ export default function ScatterPlotUtilization() {
     return null;
   };
 
+  // Format large number ticks
   const formatYAxisTick = (value) => {
     if (value >= 1000000) return `${(value / 1000000).toFixed(1)}M`;
     if (value >= 1000) return `${(value / 1000).toFixed(0)}K`;
@@ -125,7 +129,7 @@ export default function ScatterPlotUtilization() {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-2 text-gray-800">
-        Aircraft Class Utilization
+        Aircraft Class Utilization (Bubble Chart)
       </h2>
       <p className="text-gray-600 mb-6 text-sm">
         Helps assess how efficiently the fleet is being used by showing the
@@ -136,7 +140,7 @@ export default function ScatterPlotUtilization() {
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart
             margin={{ top: 20, right: 30, bottom: 10, left: 80 }}
-            aria-label="Aircraft utilization scatter plot"
+            aria-label="Aircraft utilization bubble chart"
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
             <XAxis
@@ -204,8 +208,10 @@ export default function ScatterPlotUtilization() {
                   name={`Class ${classKey}`}
                   data={filteredData}
                   fill={getColor(classKey)}
+                  fillOpacity={0.7} // Slightly transparent for bubble effect
                   stroke="#fff"
                   strokeWidth={1}
+                  shape="circle" // Explicitly set to circle for bubble look
                   legendType="circle"
                 />
               );
