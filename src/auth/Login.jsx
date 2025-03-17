@@ -76,7 +76,7 @@ export default function Login() {
             return;
           }
 
-          navigate("/profile");
+          navigate("/boarding-statistics");
           // Remove window.location.reload() to avoid unnecessary reloads
         } else {
           setErrors({ apiError: "Invalid email or password" });
@@ -156,7 +156,7 @@ export default function Login() {
                     console.warn("user_uuid not found in login response:", loginResponse);
                   }
 
-                  navigate("/profile");
+                  navigate("/boarding-statistics");
                   return;
                 }
               }

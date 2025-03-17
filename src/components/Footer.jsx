@@ -6,7 +6,7 @@ import { Mail, Phone, ChevronRight, ArrowUpRight } from "lucide-react"
 
 export default function Footer() {
   return (
-    <div className="border-green-200 border-t-[2px] mt-10">
+    <div className="border-green-100 border-t-[2px] mt-10">
       <footer className="shadow-md text-gray-800 pb-10">
         <div className="mx-auto w-full max-w-7xl px-6">
           {/* Main footer links section */}

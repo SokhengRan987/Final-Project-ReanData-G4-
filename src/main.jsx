@@ -2,14 +2,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import { store } from "./redux/store.js";
 import "./index.css";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Profile from "./pages/Profile.jsx";
 import ChangePassword from "./pages/ChangePassword.jsx";
 import Rootlayout from "./components/Rootlayout.jsx";
-import { store } from "./redux/store.js";
-
 
 import DistributionPerContinent from "./pages/DistributionPerContinent.jsx";
 import RootLayoutSideBar from "./components/RootLayoutSideBar.jsx";
@@ -67,82 +65,131 @@ import ResetPassword from "./auth/ResetPassword.jsx";
 
 createRoot(document.getElementById("root")).render(
   <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-  <Provider store={store}>
-    <BrowserRouter>
-      <StrictMode>
-        <Routes>
-        <Route path="/" element={<Login />} />
+    <Provider store={store}>
+      <BrowserRouter>
+        <StrictMode>
+          <Routes>
+            <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/forgetpassword" element={<ForgetPassword />} />
             <Route path="/resetpassword" element={<ResetPassword />} />
-          <Route path="/" element={<Rootlayout />}>
-            <Route index element={<LandingPage />} />
-            <Route path="testing" element={<Testing />} />
-            <Route path="distribution" element={<DistributionPerContinent />} />
-            <Route path="about-us" element={<About />} />
-            <Route path="help&support" element={<HelpAndSupport />} />
-            <Route path="documentation" element={<Documentation />} />
-            <Route path="dataset" element={<DataSet />} />
-          </Route>
+            <Route path="/" element={<Rootlayout />}>
+              <Route index element={<LandingPage />} />
+              {/* <Route path="testing" element={<Testing />} /> */}
+              <Route
+                path="distribution"
+                element={<DistributionPerContinent />}
+              />
+              <Route path="about-us" element={<About />} />
+              <Route path="help&support" element={<HelpAndSupport />} />
+              <Route path="documentation" element={<Documentation />} />
+              <Route path="dataset" element={<DataSet />} />
+            </Route>
 
-          {/* Sidebar Layout */}
-          <Route path="/" element={<RootLayoutSideBar />}>
-          <Route path="/profile" element={<Profile />} />
+            {/* Sidebar Layout */}
+            <Route path="/" element={<RootLayoutSideBar />}>
+              <Route path="/profile" element={<Profile />} />
               <Route path="/password" element={<ChangePassword />} />
-            <Route path="air-data/aircraft" element={<Aircraft />} />
-            <Route path="air-data/airport" element={<Airport />} />
-            <Route path="air-data/boarding-pass" element={<BoardingPass />} />
-            <Route path="air-data/booking" element={<Booking />} />
-            <Route path="air-data/flight" element={<Flight />} />
-            <Route path="air-data/passenger" element={<Passenger />} />
-            <Route path="food-beverage/customer" element={<Customer />} />
-            <Route path="food-beverage/timeBase" element={<TimeBasedFood />} />
-            <Route path="food-beverage/fb" element={<Foodandbeverage />} />
-            <Route
-              path="food-beverage/restaurant"
-              element={<RestaurantFactors />}
-            />
-            <Route path="/boarding-statistics" element={<BoardingStatistics />}/>
-            <Route path="/aircaft-fleet-analysis" element={<AircraftFleetAnalysis />}/>
-            <Route path="/airport-distribution-analysis" element={< AirportDistributionAnalysis/>}/>
-            <Route path="/time-base-analysis" element={<TimeBaseAnalysis/>}/>
-            <Route path="/cohort-analysis" element={<CohortAnalysisPage/>}/>
-            <Route path="/route-popularity" element={< RoutePopularity/>}/>
-            <Route path="/peak-travel-time" element={<PeakTravelTime/>}/>
-            <Route path="/connection-analysis" element={<ConnectionAnalysis/>}/>
-            <Route path="/aircraft-utilization" element={<AircraftUtilization/>}/>
-            <Route path="/airport-traffic" element={<AirportTraffic/>}/>
-            {/* food and beverages */}
-            <Route path="/age-range-distribution" element={<AgeRangeDistribution/>}/>
-            <Route path="/gender-distribution" element={<GenderDistribution/>}/>
-            <Route path="/preferred-cuisine-frequency" element={<PreferredCuisineFrequency/>}/>
-            <Route path="/eating-out-frequency" element={<EatingOut/>}/>
-            <Route path="/average-spending-by-value-priorities" element={<AverageSpending/>}/>
-            <Route path="/preferred-dining-location" element={<PreferredDiningLocation/>}/>
-            <Route path="/preferred-promotion" element={<PreferredPromotion/>}/>
-            <Route path="/international-food-preference" element={<InternationalFoodPreference/>}/>
-            <Route path="/dinging-method" element={<DiningMethod/>}/>
-            <Route path="/preferred-beverages-by-occupation" element={<PreferredBeverages/>}/>
+              <Route path="air-data/aircraft" element={<Aircraft />} />
+              <Route path="air-data/airport" element={<Airport />} />
+              <Route path="air-data/boarding-pass" element={<BoardingPass />} />
+              <Route path="air-data/booking" element={<Booking />} />
+              <Route path="air-data/flight" element={<Flight />} />
+              <Route path="air-data/passenger" element={<Passenger />} />
+              <Route path="food-beverage/customer" element={<Customer />} />
+              <Route
+                path="food-beverage/timeBase"
+                element={<TimeBasedFood />}
+              />
+              <Route path="food-beverage/fb" element={<Foodandbeverage />} />
+              <Route
+                path="food-beverage/restaurant"
+                element={<RestaurantFactors />}
+              />
+              <Route
+                path="/boarding-statistics"
+                element={<BoardingStatistics />}
+              />
+              <Route
+                path="/aircaft-fleet-analysis"
+                element={<AircraftFleetAnalysis />}
+              />
+              <Route
+                path="/airport-distribution-analysis"
+                element={<AirportDistributionAnalysis />}
+              />
+              <Route
+                path="/time-base-analysis"
+                element={<TimeBaseAnalysis />}
+              />
+              <Route path="/cohort-analysis" element={<CohortAnalysisPage />} />
+              <Route path="/route-popularity" element={<RoutePopularity />} />
+              <Route path="/peak-travel-time" element={<PeakTravelTime />} />
+              <Route
+                path="/connection-analysis"
+                element={<ConnectionAnalysis />}
+              />
+              <Route
+                path="/aircraft-utilization"
+                element={<AircraftUtilization />}
+              />
+              <Route path="/airport-traffic" element={<AirportTraffic />} />
+              {/* food and beverages */}
+              <Route
+                path="/age-range-distribution"
+                element={<AgeRangeDistribution />}
+              />
+              <Route
+                path="/gender-distribution"
+                element={<GenderDistribution />}
+              />
+              <Route
+                path="/preferred-cuisine-frequency"
+                element={<PreferredCuisineFrequency />}
+              />
+              <Route path="/eating-out-frequency" element={<EatingOut />} />
+              <Route
+                path="/average-spending-by-value-priorities"
+                element={<AverageSpending />}
+              />
+              <Route
+                path="/preferred-dining-location"
+                element={<PreferredDiningLocation />}
+              />
+              <Route
+                path="/preferred-promotion"
+                element={<PreferredPromotion />}
+              />
+              <Route
+                path="/international-food-preference"
+                element={<InternationalFoodPreference />}
+              />
+              <Route path="/dinging-method" element={<DiningMethod />} />
+              <Route
+                path="/preferred-beverages-by-occupation"
+                element={<PreferredBeverages />}
+              />
 
-            {/* type of chart */}
-            <Route path="/chart-AreaChart" element={<AreaChart/>}/>
-            <Route path="/chart-BarChart" element={<Bar/>}/>
-            <Route path="/chart-BubbleChart" element={<BubbleChart/>}/>
-            <Route path="/chart-ColumnChart" element={<ColumnChart/>}/>
-            <Route path="/chart-DoughnutChart" element={<DoughnutChart/>}/>
-            <Route path="/chart-GaugesChart" element={<GaugesChart/>}/>
-            <Route path="/chart-HistogramChart" element={<Histogram/>}/>
-            <Route path="/chart-LineChart" element={<Line/>}/>
-            <Route path="/chart-PieChart" element={<PieChart/>}/>
-            <Route path="/chart-RadarChart" element={<RadarChart/>}/>
-            <Route path="/chart-ScatterPlot" element={<ScatterPlot/>}/>
-            <Route path="/chart-StackedBarChart" element={<StackedBarChart/>}/>
-          </Route>
-        </Routes>
-      </StrictMode>
-    </BrowserRouter>
-  </Provider>
+              {/* type of chart */}
+              <Route path="/chart-AreaChart" element={<AreaChart />} />
+              <Route path="/chart-BarChart" element={<Bar />} />
+              <Route path="/chart-BubbleChart" element={<BubbleChart />} />
+              <Route path="/chart-ColumnChart" element={<ColumnChart />} />
+              <Route path="/chart-DoughnutChart" element={<DoughnutChart />} />
+              <Route path="/chart-GaugesChart" element={<GaugesChart />} />
+              <Route path="/chart-HistogramChart" element={<Histogram />} />
+              <Route path="/chart-LineChart" element={<Line />} />
+              <Route path="/chart-PieChart" element={<PieChart />} />
+              <Route path="/chart-RadarChart" element={<RadarChart />} />
+              <Route path="/chart-ScatterPlot" element={<ScatterPlot />} />
+              <Route
+                path="/chart-StackedBarChart"
+                element={<StackedBarChart />}
+              />
+            </Route>
+          </Routes>
+        </StrictMode>
+      </BrowserRouter>
+    </Provider>
   </GoogleOAuthProvider>
-
-  
 );
