@@ -127,11 +127,10 @@ export default function Sidebar() {
           key: "foodBeverageTable",
           icon: Database,
           items: [
-            { label: "View", path: "/food-beverage/view" },
-            { label: "Edit", path: "/food-beverage/edit" },
-            { label: "Export", path: "/food-beverage/export" },
-            { label: "Roth", path: "/food-beverage/export" },
-            { label: "Polin", path: "/food-beverage/export" },
+            { label: "Customer", path: "/food-beverage/customer" },
+            { label: "Foods", path: "/food-beverage/fb" },
+            { label: "Restaurant", path: "/food-beverage/restaurant" },
+            { label: "TimeBase", path: "/food-beverage/timeBase" },
           ],
         },
         {
