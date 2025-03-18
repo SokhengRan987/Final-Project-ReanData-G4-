@@ -121,7 +121,7 @@ export default function Booking() {
   }
 
   return (
-    <main className="flex-1 pt-20 p-5">
+    <main className="flex-1 p-5">
       <div className="mb-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
           <div className="flex items-center">

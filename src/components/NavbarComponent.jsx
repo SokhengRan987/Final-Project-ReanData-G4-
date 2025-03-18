@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import logo from "../img/reandata.png";
-import { LeafyGreen } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import Login from "../auth/Login";
 
 export default function NavbarComponent() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const navigate = useNavigate();
 
+  // Handle button click
+  const handleLoginRedirect = () => {
+    navigate("/login");
+  };
+
+  // Scroll progress effect
   useEffect(() => {
     const updateScrollProgress = () => {
       const scrollTop = window.scrollY;
-      const scrollHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const progress = scrollHeight === 0 ? 0 : (scrollTop / scrollHeight) * 100;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
       setScrollProgress(progress);
     };
 
@@ -19,136 +27,172 @@ export default function NavbarComponent() {
     return () => window.removeEventListener("scroll", updateScrollProgress);
   }, []);
 
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setDropdownOpen(false); // Close mobile menu on navigation
+  }, [location.pathname]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const navbarElement = document.getElementById("navbar-container");
+      if (navbarElement && !navbarElement.contains(event.target) && dropdownOpen) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [dropdownOpen]);
+
   return (
     <nav
-      className="sticky top-0 z-50 bg-white/95 shadow-lg transition-all duration-300"
+      id="navbar-container"
+      className="sticky top-0 z-50 border-b border-gray-200"
       style={{
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
       }}
     >
-      {/* Progress Bar */}
+      {/* Scroll Progress Bar */}
       <div
-        className="absolute top-0 left-0 h-1 bg-gradient-to-r from-green-400 to-teal-500 transition-all duration-300 ease-out"
-        style={{ width: `${scrollProgress}%` }}
-      />
+        className="absolute top-0 left-0 h-1 transition-all duration-100"
+        style={{
+          width: `${scrollProgress}%`,
+          background: "#84e1bc",
+          boxShadow: "0 0 10px #84e1bc",
+        }}
+      ></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <a href="#" className="flex items-center space-x-2 group">
-              <img
-                src={logo}
-                alt="Reandata logo"
-                className="h-9 transition-transform duration-300 group-hover:scale-105"
-              />
-              <span className="text-xl font-semibold text-gray-800 hidden sm:inline">
-                {/* Reandata */}
-              </span>
-            </a>
-          </div>
+      {/* Navbar Content */}
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 py-4">
+        {/* Logo */}
+        <NavLink to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <img src={logo} alt="Reandata logo" className="h-8" />
+        </NavLink>
 
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-1">
-            <ul className="flex space-x-8">
-              {["Datasets", "Documentation", "About Us", "Help & Support"].map(
-                (item) => (
-                  <li key={item}>
-                    <a
-                      href={item === "About Us" ? "/about-us" : "#"}
-                      className="text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 relative group"
-                    >
-                      {item}
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-green-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left"></span>
-                    </a>
-                  </li>
-                )
-              )}
-            </ul>
-          </div>
-
-          {/* Buttons */}
-          <div className="hidden md:flex items-center space-x-3">
-            <button
-              className="text-gray-700 hover:text-green-600 px-4 py-2 text-sm font-medium transition-colors duration-200"
-            >
-              Login
-            </button>
-            <button
-              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 shadow-md hover:shadow-lg"
-            >
-              Get Started
-            </button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setDropdownOpen((prev) => !prev)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-green-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
-              aria-label="Toggle menu"
-              aria-expanded={dropdownOpen}
-            >
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {dropdownOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
-              </svg>
-            </button>
-          </div>
+        {/* Right-side Buttons (Desktop) */}
+        <div className="hidden md:flex md:order-2 space-x-3 md:space-x-2 rtl:space-x-reverse">
+          <NavLink
+            to="/login"
+            className="text-white bg-[#3C55A5] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-[20px] text-sm px-4 py-2"
+            onClick={handleLoginRedirect} // Trigger routing on click
+          >
+            Login
+          </NavLink>
+          <NavLink
+            to="/boarding-statistics"
+            className="text-white bg-[#22B04B] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-[20px] text-sm px-4 py-2"
+          >
+            Get started
+          </NavLink>
         </div>
 
-        {/* Mobile Menu */}
-        {dropdownOpen && (
-          <div className="md:hidden">
-            <ul className="px-2 pt-2 pb-3 space-y-1 bg-white shadow-lg">
-              {["Datasets", "Documentation", "About Us", "Help & Support"].map(
-                (item) => (
-                  <li key={item}>
-                    <a
-                      href={item === "About Us" ? "/about-us" : "#"}
-                      className="text-gray-700 hover:text-green-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                )
-              )}
-              <li>
-                <button
-                  className="w-full text-left text-gray-700 hover:text-green-600 hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
-                >
-                  Login
-                </button>
-              </li>
-              <li>
-                <button
-                  className="w-full bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-md text-base font-medium transition-all duration-200"
-                >
-                  Get Started
-                </button>
-              </li>
-            </ul>
-          </div>
-        )}
+        {/* Mobile Menu Toggle Button */}
+        <button
+          onClick={() => setDropdownOpen((prev) => !prev)}
+          type="button"
+          className="inline-flex items-center p-2 w-10 h-10 justify-center text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+          aria-label="Toggle menu"
+          aria-expanded={dropdownOpen}
+        >
+          <svg
+            className="w-5 h-5"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 17 14"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d={dropdownOpen ? "M1 1L16 14M1 14L16 1" : "M1 1h15M1 7h15M1 13h15"}
+            />
+          </svg>
+        </button>
+
+        {/* Dropdown Menu */}
+        <div
+          className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${
+            dropdownOpen ? "block" : "hidden"
+          } md:block transition-all duration-300`}
+          id="navbar-cta"
+        >
+          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-200 rounded-lg md:bg-transparent md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+            <li>
+              <NavLink
+                to="/dataset"
+                className={({ isActive }) =>
+                  `block py-2 px-3 md:p-0 rounded-sm transition-all ${
+                    isActive ? "text-blue-700 font-semibold" : "text-gray-900 hover:text-blue-600"
+                  }`
+                }
+                onClick={() => setDropdownOpen(false)}
+              >
+                Datasets
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/documentation"
+                className={({ isActive }) =>
+                  `block py-2 px-3 md:p-0 rounded-sm transition-all ${
+                    isActive ? "text-blue-700 font-semibold" : "text-gray-900 hover:text-blue-600"
+                  }`
+                }
+                onClick={() => setDropdownOpen(false)}
+              >
+                Documentation
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/about-us"
+                className={({ isActive }) =>
+                  `block py-2 px-3 md:p-0 rounded-sm transition-all ${
+                    isActive ? "text-blue-700 font-semibold" : "text-gray-900 hover:text-blue-600"
+                  }`
+                }
+                onClick={() => setDropdownOpen(false)}
+              >
+                About Us
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/help&support"
+                className={({ isActive }) =>
+                  `block py-2 px-3 md:p-0 rounded-sm transition-all ${
+                    isActive ? "text-blue-700 font-semibold" : "text-gray-900 hover:text-blue-600"
+                  }`
+                }
+                onClick={() => setDropdownOpen(false)}
+              >
+                Help & Support
+              </NavLink>
+            </li>
+
+            {/* Login and Get Started Buttons (Mobile) */}
+            <li className="md:hidden mt-4 flex">
+              <NavLink
+                to="/login"
+                className="block text-center text-white bg-[#3C55A5] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-[20px] text-sm px-4 py-2 mr-2"
+                onClick={() => setDropdownOpen(false)}
+              >
+                Login
+              </NavLink>
+              <NavLink
+                to="/boarding-statistics"
+                className="block text-center text-white bg-[#22B04B] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-[20px] text-sm px-4 py-2"
+                onClick={() => setDropdownOpen(false)}
+              >
+                Get started
+              </NavLink>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
   );

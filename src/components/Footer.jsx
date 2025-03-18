@@ -1,12 +1,13 @@
 "use client"
-import reandatalogo from "../img/Rd.png"
+
+import reandatalogo from "../img/Logo/LogoRD.png"
 import istadlogo from "../img/istad.png"
 import { Mail, Phone, ChevronRight, ArrowUpRight } from "lucide-react"
 
 export default function Footer() {
   return (
-    <div className="relative">
-      <footer className="bg-white text-gray-800 pb-10">
+    <div className="border-green-100 border-t-[2px] mt-10">
+      <footer className="shadow-md text-gray-800 pb-10">
         <div className="mx-auto w-full max-w-7xl px-6">
           {/* Main footer links section */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 py-16">
@@ -19,7 +20,7 @@ export default function Footer() {
                 />
               </a>
 
-              <h3 className="font-medium text-indigo-600 text-xl">Cambodia's Open Data Platform</h3>
+              <h3 className="font-medium text-indigo-600 text-xl">Rean Data PlatForm</h3>
             </div>
 
             {/* Features Section */}
@@ -30,10 +31,10 @@ export default function Footer() {
               </h2>
               <ul className="space-y-4">
                 {[
-                  { name: "Datasets", link: "#datasets" },
-                  { name: "Documentation", link: "#docs" },
-                  { name: "About Us", link: "#about" },
-                  { name: "Help & Support", link: "#support" },
+                  { name: "Datasets", link: "/dataset" },
+                  { name: "Documentation", link: "/documentation" },
+                  { name: "About Us", link: "/about-us" },
+                  { name: "Help & Support", link: "help&support" },
                 ].map((item) => (
                   <li key={item.name}>
                     <a
@@ -85,7 +86,7 @@ export default function Footer() {
               </h2>
               <div className="space-y-6">
                 <a href="https://www.cstad.edu.kh/" target="_blank" rel="noopener noreferrer" className="group block">
-                  <div className="bg-gray-100 rounded-lg p-5 transition-all duration-300 group-hover:bg-gray-200 border border-gray-200 group-hover:border-indigo-200">
+                  <div className="bg-white rounded-lg p-5 transition-all duration-300 group-hover:bg-gray-100 border border-gray-200 group-hover:border-indigo-200">
                     <img
                       src={istadlogo || "/placeholder.svg?height=64&width=150"}
                       className="h-14 transform transition-transform group-hover:scale-105"

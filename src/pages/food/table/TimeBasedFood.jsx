@@ -120,7 +120,7 @@ export default function TimeBasedFood() {
 
   if (isError) {
     return (
-      <main className="flex-1 pt-20 p-5">
+      <main className="flex-1 p-5">
         <div className="text-red-500">
           Error loading data: {error?.message || "Unknown error"}
         </div>

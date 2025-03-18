@@ -1,41 +1,16 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import { Button } from "flowbite-react";
+import React from "react";
 import "./App.css";
-import About from "./pages/About";
-import Navbar from "./components/NavbarComponent";
-import Footer from "./components/Footer";
-import NavbarComponent from "./components/NavbarComponent";
+import LandingPage from "./pages/LadingPage";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-  // useEffect(() => {
-  //   const handleWheel = (event) => {
-  //     if (event.ctrlKey) return; // Allow zooming with Ctrl + Scroll
-  
-  //     event.preventDefault();
-  //     window.scrollBy({
-  //       top: event.deltaY > 0 ? 250 : -250, // Faster scrolling
-  //       behavior: "smooth",
-  //     });
-  //   };
-  
-  //   window.addEventListener("wheel", handleWheel, { passive: false });
-  
-  //   return () => window.removeEventListener("wheel", handleWheel);
-  // }, []);
-  
+
   return (
     <>
-      <NavbarComponent />
-      <main className="pt[60px]">
-        <h1 className="text-5xl text-blue-400 text-center py-4 uppercase rounded-lg h-screen">
-          Kjel tver nas
-        </h1>
-      </main>
-      <Footer />
+      <LandingPage />
     </>
   );
 }
 
 export default App;
+
