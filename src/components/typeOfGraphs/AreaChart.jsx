@@ -214,11 +214,11 @@ export default function AreaChart() {
   };
   
   return (
-    <div className="main-container w-full max-w-screen-xl h-auto bg-gradient-to-br   relative mx-auto rounded-xl">
+    <div className="main-container w-full max-w-screen-xl h-auto bg-gradient-to-br relative mx-auto my-8">
       <span className="block font-['Roboto'] text-[24px] font-bold leading-10 text-[#0f172a] relative text-left whitespace-nowrap mt-6 ml-8 before:content-[''] before:absolute before:w-2 before:h-8 before:bg-[#3C55A5] before:left-[-16px] before:top-1 before:rounded-sm">
         Area Chart
       </span>
-      <div className="flex w-full max-w-4xl h-[482px] pt-6 pr-8 pb-8 pl-8 flex-col gap-4 justify-center items-center flex-nowrap rounded-lg relative mt-9 mx-auto transition-all duration-500  border border-[#3C55A5]">
+      <div className="flex w-full max-w-screen-xl h-[482px] pt-6 pr-8 pb-8 pl-8 flex-col gap-4 justify-center items-center flex-nowrap rounded-lg relative mt-9 mx-auto transition-all duration-500  border border-[#3C55A5]">
         <div className="flex gap-2 items-center self-stretch shrink-0 flex-nowrap relative">
           <span className="h-[25px] grow shrink-0 basis-auto font-['Roboto'] text-[24px] leading-6 text-[#343a40] relative text-left whitespace-nowrap">
             {dataSet} Trends
@@ -287,17 +287,17 @@ export default function AreaChart() {
           </div>
         </div>
       </div>
-      <div className="w-full max-w-4xl font-['Roboto'] text-[24px] font-normal leading-8 relative text-left mt-2 mx-auto p-1 transition-all duration-500">
+      <div className="w-full max-w-screen-xl font-['Roboto'] text-[24px] font-normal leading-8 relative text-left mt-2 mx-auto p-1 transition-all duration-500">
         <span className="font-['Roboto'] text-[24px] leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
           1. What is an Area Chart?
         </span>
-        <span className="font-['Roboto'] text-[20px] leading-8 text-[#334155] relative text-left block mt-3">
+        <span className="font-['Roboto'] text-[20px] leading-8 text-[#334155] relative text-left block mt-4 mb-6">
         An area chart is similar to a line chart, but the area beneath the line is filled with color. It is used to represent quantities over time and helps show trends while also emphasizing the magnitude of values.
         </span>
         <span className="font-['Roboto'] text-[24px] leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
           2. What Kind of Data is Perfect for an Area Chart?
         </span>
-        <ul className="mt-4 space-y-2">
+        <ul className="mt-4 space-y-2 mb-6">
           <li className="flex items-start">
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
@@ -322,7 +322,7 @@ export default function AreaChart() {
         <span className="font-['Roboto'] text-[24px] leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
           3. The importance of using area chart ?
         </span>
-        <ul className="mt-6 space-y-2">
+        <ul className="mt-4 space-y-2">
           <li className="flex items-start">
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
