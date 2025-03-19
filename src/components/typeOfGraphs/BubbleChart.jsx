@@ -222,57 +222,27 @@ export default function BubbleChart() {
   };
   
   return (
-    <div className="main-container w-full max-w-6xl h-auto bg-gradient-to-br  relative mx-auto my-0 p-6 rounded-xl">
-      <span className="block font-['Roboto'] text-2xl font-bold leading-10 text-[#0f172a] relative text-left whitespace-nowrap mt-6 ml-8 before:content-[''] before:absolute before:w-2 before:h-8 before:bg-[#3C55A5] before:left-[-16px] before:top-1 before:rounded-sm">
+    <div className="main-container w-full max-w-screen-xl h-auto bg-gradient-to-br relative mx-auto my-8 px-2 sm:px-4 lg:px-8">
+      <span className="block font-['Roboto'] text-[18px] sm:text-[20px] md:text-[24px] font-bold leading-8 sm:leading-10 text-[#0f172a] relative text-left whitespace-nowrap mt-4 sm:mt-6 ml-3 sm:ml-4 before:content-[''] before:absolute before:w-2 before:h-6 sm:before:h-8 before:bg-[#3C55A5] before:left-[-12px] sm:before:left-[-16px] before:top-1 before:rounded-sm">
         Bubble Chart
       </span>
-      <div className="flex w-full max-w-4xl h-[482px] pt-6 pr-8 pb-8 pl-8 flex-col gap-4 justify-center items-center flex-nowrap bg-white rounded-lg relative mt-9 mx-auto transition-all duration-500  border border-[#3C55A5]">
+      <div className="flex w-full max-w-screen-xl h-[450px] sm:h-[550px] pt-4 sm:pt-6 pr-4 sm:pr-8 pb-4 sm:pb-8 pl-4 sm:pl-8 flex-col gap-4 justify-center items-center flex-nowrap bg-white rounded-lg relative mt-4 sm:mt-6 mx-auto transition-all duration-500 border border-[#3C55A5]">
         <div className="flex gap-2 items-center self-stretch shrink-0 flex-nowrap relative">
-          <span className="h-[25px] grow shrink-0 basis-auto font-['Roboto'] text-2xl leading-6 text-[#343a40] relative text-left whitespace-nowrap">
+          <span className="h-[20px] sm:h-[25px] grow shrink-0 basis-auto font-['Roboto'] text-base sm:text-lg md:text-xl leading-6 text-[#343a40] relative text-left whitespace-nowrap">
             {dataSet} Visualization
           </span>
-          <div className="relative">
-            <div 
-              className="flex opacity-0 px-4 py-2 gap-1 items-center shrink-0 flex-nowrap bg-white rounded-lg relative hover:shadow-lg transition-all duration-300 cursor-poRoboto border border-[#e9ecef]"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            >
-              <span className="flex w-48 h-[18px] justify-end items-start shrink-0 font-['Roboto'] text-sm font-medium leading-[17.5px] text-[#343a40] relative text-right whitespace-nowrap">
-                {dataSet}
-              </span>
-              <div className={`w-4 h-4 shrink-0 relative transition-transform duration-300 transform ${isDropdownOpen ? 'rotate-180' : ''}`}>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4 6L8 10L12 6" stroke="#343A40" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-            </div>
-            {isDropdownOpen && (
-              <div className="absolute right-0 mt-1 bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 w-48">
-                <ul className="py-1">
-                  {["Technology Companies", "World Cities", "Scientific Research"].map((set) => (
-                    <li 
-                      key={set}
-                      className={`px-4 py-2 text-sm font-medium cursor-poRoboto hover:bg-[#f8f9fa] transition-colors duration-150 ${set === dataSet ? 'bg-[#f0f4ff] text-[#3C55A5]' : 'text-[#343a40]'}`}
-                      onClick={() => handleDataSetChange(set)}
-                    >
-                      {set}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
         </div>
-        <div className="flex flex-col gap-6 items-start self-stretch grow shrink-0 basis-0 flex-nowrap relative">
-          <div className="self-stretch grow shrink-0 basis-0 rounded-lg relative border shadow-sm overflow-hidden transition-all duration-500 hover:shadow-md">
+        <div className="grid grid-cols-1 w-full sm:gap-6 items-start​​​​​​​ ​s​​elf-stretch grow shrink-0 basis-0 flex-nowrap relative ">
+          <div className="self-stretch h-80 sm:h-96 grow shrink-0 basis-0 rounded-lg relative border shadow-sm transition-all duration-500 hover:shadow-md">
             {/* Chart.js Canvas */}
             <canvas ref={chartRef} className="w-full h-full"></canvas>
           </div>
-          <div className="flex justify-between items-center self-stretch shrink-0 flex-nowrap relative bg-[#f8f9fa] p-4 rounded-lg">
+          <div className="flex justify-between items-center self-stretch shrink-0 flex-nowrap relative">
             <div className="flex flex-col gap-1 items-start shrink-0 flex-nowrap relative">
               <span className="font-['Roboto'] text-xs text-[#6c757d]">
                 Dataset
               </span>
-              <span className="font-['Roboto'] text-lg font-bold text-[#343a40]">
+              <span className="font-['Roboto'] text-sm sm:text-lg font-bold text-[#343a40]">
                 {dataSet}
               </span>
             </div>
@@ -280,7 +250,7 @@ export default function BubbleChart() {
               <span className="font-['Roboto'] text-xs text-[#6c757d]">
                 Type
               </span>
-              <span className="font-['Roboto'] text-lg font-bold text-[#343a40]">
+              <span className="font-['Roboto'] text-sm sm:text-lg font-bold text-[#343a40]">
                 Bubble Chart
               </span>
             </div>
@@ -288,64 +258,65 @@ export default function BubbleChart() {
               <span className="font-['Roboto'] text-xs text-[#6c757d]">
                 Items
               </span>
-              <span className="font-['Roboto'] text-lg font-bold text-[#343a40]">
+              <span className="font-['Roboto'] text-sm sm:text-lg font-bold text-[#343a40]">
                 7
               </span>
             </div>
           </div>
         </div>
       </div>
-      <div className="w-full max-w-4xl font-['Roboto'] text-2xl font-normal leading-8 relative text-left mt-2 mx-auto p-1 transition-all duration-500">
-        <span className="font-['Roboto'] text-2xl leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
+      
+      <div className="w-full max-w-screen-xl font-['Roboto'] text-[18px] sm:text-[20px] md:text-[24px] font-normal leading-6 sm:leading-8 relative text-left mt-4 sm:mt-6 mx-auto p-1 transition-all duration-500">
+        <span className="font-['Roboto'] text-[18px] sm:text-[20px] md:text-[24px] leading-8 sm:leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-8 sm:before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
          1. What is a Bubble Chart?
         </span>
-        <span className="font-['Roboto'] text-xl leading-8 text-[#334155] relative text-left block mt-3">
+        <span className="font-['Roboto'] text-[16px] sm:text-[18px] md:text-[20px] leading-6 sm:leading-8 text-[#334155] relative text-left block mt-3 sm:mt-4 mb-4 sm:mb-6">
         A bubble chart is an advanced version of a scatter plot, where each data point is represented by a bubble, and the size of the bubble represents a third variable. .
         </span>
-        <span className="font-['Roboto'] text-2xl leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full mt-6">
+        <span className="font-['Roboto'] text-[18px] sm:text-[20px] md:text-[24px] leading-8 sm:leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-8 sm:before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
          2.What Kind of Data is Perfect for a Bubble Chart?
         </span>
-        <ul className="mt-4 space-y-2">
+        <ul className="mt-3 sm:mt-4 space-y-2 mb-4 sm:mb-6">
           <li className="flex items-start">
-            <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
+            <div className="flex-shrink-0 h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-xl text-[#334155]">Economic Data (e.g., GDP per capita vs. life expectancy, with population size as bubble size)</span>
+            <span className="ml-2 sm:ml-3 text-sm sm:text-base md:text-lg text-[#334155] mb-2">Economic Data (e.g., GDP per capita vs. life expectancy, with population size as bubble size)</span>
           </li>
           <li className="flex items-start">
-            <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
+            <div className="flex-shrink-0 h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-xl text-[#334155]">Marketing Performance (e.g., ad spend vs. revenue, with number of customers as bubble size)</span>
+            <span className="ml-2 sm:ml-3 text-sm sm:text-base md:text-lg text-[#334155] mb-2">Marketing Performance (e.g., ad spend vs. revenue, with number of customers as bubble size)</span>
           </li>
           <li className="flex items-start">
-            <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
+            <div className="flex-shrink-0 h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-xl text-[#334155]">Sales Analysis (e.g., product price vs. sales, with market share as bubble size)</span>
+            <span className="ml-2 sm:ml-3 text-sm sm:text-base md:text-lg text-[#334155] mb-2">Sales Analysis (e.g., product price vs. sales, with market share as bubble size)</span>
           </li>
         </ul>
-        <span className="font-['Roboto'] text-2xl leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full mt-6">
-         2.The importance of using bubble  chart  ?
+        <span className="font-['Roboto'] text-[18px] sm:text-[20px] md:text-[24px] leading-8 sm:leading-10 text-[#1e293b] relative text-left block before:content-[''] before:absolute before:w-8 sm:before:w-10 before:h-1 before:bg-[#3C55A5] before:bottom-[-4px] before:left-0 before:rounded-full">
+         3.The importance of using bubble  chart  ?
         </span>
         <ul className="mt-4 space-y-2">
           <li className="flex items-start">
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-xl text-[#334155]">Visualizing Three Variables at Once – Unlike scatter plots, bubble charts show an extra dimension (bubble size), making them useful for complex data analysis.</span>
+            <span className="ml-2 sm:ml-3 text-sm sm:text-base md:text-lg text-[#334155] mb-2">Visualizing Three Variables at Once – Unlike scatter plots, bubble charts show an extra dimension (bubble size), making them useful for complex data analysis.</span>
           </li>
           <li className="flex items-start">
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-xl text-[#334155]">Comparing Data Points Easily – Helps compare multiple entities in terms of size, position, and trends.</span>
+            <span className="ml-2 sm:ml-3 text-sm sm:text-base md:text-lg text-[#334155] mb-2">Comparing Data Points Easily – Helps compare multiple entities in terms of size, position, and trends.</span>
           </li>
           <li className="flex items-start">
             <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[rgba(60,85,165,0.15)] flex items-center justify-center mt-1">
               <div className="h-2 w-2 rounded-full bg-[#3C55A5]"></div>
             </div>
-            <span className="ml-3 text-xl text-[#334155]">Highlighting Relationships and Trends – Shows correlations between variables and how one influences another.</span>
+            <span className="ml-2 sm:ml-3 text-sm sm:text-base md:text-lg text-[#334155] mb-2">Highlighting Relationships and Trends – Shows correlations between variables and how one influences another.</span>
           </li>
         </ul>
       </div>
