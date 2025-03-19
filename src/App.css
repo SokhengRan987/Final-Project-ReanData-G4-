@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dashboard-title{
+    @apply text-2xl font-bold;
+}
