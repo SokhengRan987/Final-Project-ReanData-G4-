@@ -1,41 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import Dropdown from './Dropdown';
-import ChartToggle from './ChartToggle';
-import MetricsCard from './MetricsCard';
-import GenderChart from './GenderChart';
-import AgeChart from './AgeChart';
-import DataTable from './DataTable';
-
+import React, { useState, useEffect } from "react";
+import Dropdown from "./Dropdown";
+import ChartToggle from "./ChartToggle";
+import MetricsCard from "./MetricsCard";
+import GenderChart from "./GenderChart";
+import AgeChart from "./AgeChart";
+import DataTable from "./DataTable";
+import DoughnutChart from "../components/foodAndBeverages/genderDistribution/DoughnutChart";
+import BarChart from "../components/foodAndBeverages/ageRangeDistribution/BarChart";
+import TimeBasedFood from "../pages/food/table/TimeBasedFood";
+import AircraftRangeVelocityChart from "../components/airdata/aircraftFleetAnalysis/AircraftRangeVelocityChart";
+import BeveragesBarChart from "../components/foodAndBeverages/preferenceBeverages/BarChart";
 const Dashboard = () => {
   const [filters, setFilters] = useState({
-    age_range: 'gte.18 and lte.24',
-    occupation: '',
-    eating_out_frequency: '',
-    preferred_cuisines: '',
-    average_spending_range: '',
+    age_range: "gte.18 and lte.24",
+    occupation: "",
+    eating_out_frequency: "",
+    preferred_cuisines: "",
+    average_spending_range: "",
   });
 
-
   const [ageData] = useState([
-    { name: '18-24', value: 20 },
-    { name: '25-34', value: 30 },
-    { name: '35-44', value: 40 },
-    { name: '45-54', value: 50 },
-    { name: '55-64', value: 60 },
-    { name: '65+', value: 70 },
+    { name: "18-24", value: 20 },
+    { name: "25-34", value: 30 },
+    { name: "35-44", value: 40 },
+    { name: "45-54", value: 50 },
+    { name: "55-64", value: 60 },
+    { name: "65+", value: 70 },
   ]);
   const genderData = [
-    { name: 'Male', value: 50, color: '#8884d8' },
-    { name: 'Female', value: 50, color: '#83d0ff' },
-    { name: 'Other', value: 0, color: '#ff8370' },
+    { name: "Male", value: 50, color: "#8884d8" },
+    { name: "Female", value: 50, color: "#83d0ff" },
+    { name: "Other", value: 0, color: "#ff8370" },
   ];
   const cuisineData = [
-    { name: 'American', value: 10 },
-    { name: 'Mexican', value: 20 },
-    { name: 'Italian', value: 30 },
-    { name: 'Chinese', value: 40 },
-    { name: 'Indian', value: 50 },
-    { name: 'Other', value: 0 },
+    { name: "American", value: 10 },
+    { name: "Mexican", value: 20 },
+    { name: "Italian", value: 30 },
+    { name: "Chinese", value: 40 },
+    { name: "Indian", value: 50 },
+    { name: "Other", value: 0 },
   ];
 
   const subOptionDict = {
@@ -56,24 +59,22 @@ const Dashboard = () => {
       { name: "Monthly", value: "monthly" },
     ],
   };
-  
+
   const [filterOpen, setFilterOpen] = useState(false);
   const [dateRange] = useState("Mar 28, 2022 - Apr 29, 2022");
-  const [activeTab, setActiveTab] = useState("Overview");
+  const [activeTab, setActiveTab] = useState("Food & Beverages");
   const [selectedFilter, setSelectedFilter] = useState("age");
   const [subFilterOpen, setSubFilterOpen] = useState(false);
   const [selectedSubOption, setSelectedSubOption] = useState("18-24");
   const [genderChartType, setGenderChartType] = useState("pie");
   const [ageChartType, setAgeChartType] = useState("bar");
-  const [subOptions, setSubOptions] = useState(
-    
-  );
+  const [subOptions, setSubOptions] = useState();
 
   const filterOptions = {
-    "age": "age_range",
-    "maj": "occupation",
-    "eat": "eating_out_frequency",
-    "avg": "average_spending_range"
+    age: "age_range",
+    maj: "occupation",
+    eat: "eating_out_frequency",
+    avg: "average_spending_range",
   };
 
   const handleFilterSelect = (option) => {
@@ -87,29 +88,65 @@ const Dashboard = () => {
 
   const onFilterSubOptionChange = (option) => {
     setSelectedSubOption(option);
-    const selectedValue = subOptionDict[selectedFilter].find(obj => obj.name === option).value;
-    setFilters(prevFilters => ({
+    const selectedValue = subOptionDict[selectedFilter].find(
+      (obj) => obj.name === option
+    ).value;
+    setFilters((prevFilters) => ({
       ...prevFilters,
-      [filterOptions[selectedFilter]]: selectedValue
+      [filterOptions[selectedFilter]]: selectedValue,
     }));
     setSubFilterOpen(false);
     refetch();
   };
   const dataTab = [
-    { age: '18-24', major: 'Engineering', sales: 100, evening: 50, foodcountry: 'American', pice: 10 },
-    { age: '25-34', major: 'Business', sales: 150, evening: 70, foodcountry: 'American', pice: 15 },
-    { age: '35-44', major: 'Arts', sales: 200, evening: 100, foodcountry: 'American', pice: 20 },
-    { age: '45-55', major: 'Engineering', sales: 250, evening: 120, foodcountry: 'American', pice: 25 },
-    { age: '55-68', major: 'Business', sales: 100, evening: 50, foodcountry: 'Mexican', pice: 10 },
+    {
+      age: "18-24",
+      major: "Engineering",
+      sales: 100,
+      evening: 50,
+      foodcountry: "American",
+      pice: 10,
+    },
+    {
+      age: "25-34",
+      major: "Business",
+      sales: 150,
+      evening: 70,
+      foodcountry: "American",
+      pice: 15,
+    },
+    {
+      age: "35-44",
+      major: "Arts",
+      sales: 200,
+      evening: 100,
+      foodcountry: "American",
+      pice: 20,
+    },
+    {
+      age: "45-55",
+      major: "Engineering",
+      sales: 250,
+      evening: 120,
+      foodcountry: "American",
+      pice: 25,
+    },
+    {
+      age: "55-68",
+      major: "Business",
+      sales: 100,
+      evening: 50,
+      foodcountry: "Mexican",
+      pice: 10,
+    },
   ];
-
 
   return (
     <div className="min-h-screen max-w-screen-xl m-8">
       <div className="mx-auto">
         {/* Header Section */}
         <div className="flex justify-between items-center mb-6">
-          <h1 className="dashboard-title flex-1">Dashboard</h1>
+          <h3 className="dashboard-title flex-1 text-3xl">Dashboard</h3>
           <div className="flex flex-wrap gap-3">
             {/* <Dropdown 
               isOpen={filterOpen}
@@ -127,7 +164,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Metrics Section */}
+        {/* Metrics Section
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <MetricsCard
             title="Total Sales"
@@ -153,11 +190,11 @@ const Dashboard = () => {
             change="+0% from previous period"
             textColor="text-blue-600"
           />
-        </div>
+        </div> */}
 
         {/* Tabs */}
         <div className="bg-white rounded-t-lg shadow mb-6 flex overflow-x-auto">
-          {["Overview", "Food", "Beverages"].map((tab) => (
+          {["Overview", "Food & Beverages", "Airdata"].map((tab) => (
             <button
               key={tab}
               className={`px-6 py-4 text-sm font-medium whitespace-nowrap ${
@@ -175,37 +212,27 @@ const Dashboard = () => {
         {/* Charts */}
         {activeTab === "Overview" && (
           <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <GenderChart
-                data={genderData}
-                chartType={genderChartType}
-                setChartType={handleFilterSelect}
-              />
-              <AgeChart
-                data={ageData}
-                chartType={ageChartType}
-                setChartType={setAgeChartType}
-              />
+            <div className="grid grid-cols-1 p-4 gap-6 mb-6 border rounded-[20px]">
+              {/* <DoughnutChart />
+              <BarChart /> */}
+              <h3 className="text-2xl font-medium text-gray-800">
+                Airport Statistics
+              </h3>
+              <AircraftRangeVelocityChart />
+              <BeveragesBarChart />
             </div>
           </div>
         )}
-        {activeTab === "Food" && (
+        {activeTab === "Food & Beverages" && (
           <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <AgeChart
-                data={ageData}
-                chartType={ageChartType}
-                setChartType={onabort}
-              />
-              <GenderChart
-                setChartType={setGenderChartType}
-                data={genderData}
-                chartType={genderChartType}
-              />
+            <div className="grid grid-cols-1 md:grid-cols-2 border rounded-[20px] gap-6 mb-6">
+              <DoughnutChart />
+              <BarChart />
             </div>
+            <TimeBasedFood />
           </div>
         )}
-        {activeTab === "Beverages" && (
+        {activeTab === "Airdata" && (
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <GenderChart
@@ -222,11 +249,11 @@ const Dashboard = () => {
           </div>
         )}
         {/* DataTable */}
-        <div>
+        {/* <div>
           <DataTable
             data={dataTab}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

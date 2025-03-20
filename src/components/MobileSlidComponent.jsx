@@ -80,7 +80,7 @@ const MobileSlidComponent = ({ isOpen, onClose }) => {
       label: "Dashboard",
       key: "dashboard",
       icon: Home,
-      path: "/"
+      path: "/dashboard"
     },
     {
       label: "Air Data",

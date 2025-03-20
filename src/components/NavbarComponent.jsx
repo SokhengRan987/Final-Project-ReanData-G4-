@@ -20,7 +20,7 @@ export default function NavbarComponent() {
   // Handle "Get Started" button click
   const handleGetStartedClick = () => {
     if (hasAccessToken) {
-      navigate("/boarding-statistics");
+      navigate("/dashboard");
     } else {
       navigate("/login");
     }

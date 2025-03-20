@@ -1,15 +1,27 @@
 import React from "react";
-import { NavLink } from "react-router";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+
+const storedData = localStorage.getItem("userData");
+const userDataInitial = storedData ? JSON.parse(storedData) : {};
+const hasAccessToken = !!localStorage.getItem("accessToken"); // Check if logged in
+
 const GetStartedButton = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // ✅ Move inside the component
+
+  const handleGetStartedClick = () => {
+    const hasAccessToken = !!localStorage.getItem("accessToken");
+
+    if (hasAccessToken) {
+      navigate("/dashboard");
+    } else {
+      navigate("/login");
+    }
+  };
   return (
     <StyledWrapper className="">
-      <button
-        className="animated-button"
-        onClick={() => navigate("/boarding-statistics")}
-      >
+      <button className="animated-button" onClick={handleGetStartedClick}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="arr-2"

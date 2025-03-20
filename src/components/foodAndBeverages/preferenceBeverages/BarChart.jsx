@@ -83,7 +83,7 @@ export default function BeverageBarChart() {
   return (
     <div className="p-4 rounded-lg shadow-sm border border-gray-100">
       <div className="mb-4 flex justify-between items-center">
-        <h3 className="text-2xl font-medium text-gray-800">Preferred Beverages by Occupation</h3>
+        <h3 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">Preferred Beverages by Occupation</h3>
         
         <div className="flex items-center">
           <label htmlFor="occupation-select" className="mr-2 font-medium text-gray-600">

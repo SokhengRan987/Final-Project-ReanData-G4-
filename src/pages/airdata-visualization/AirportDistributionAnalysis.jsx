@@ -89,7 +89,7 @@ export default function AirportDistributionAnalysis() {
             <BarChart />
           </div>
           <div className="w-full">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">
               Airport Distribution By Continent
             </h2>
             <SemiCircleBubbleChartComponent data={airportData} />
@@ -98,7 +98,7 @@ export default function AirportDistributionAnalysis() {
 
         {/* Analysis and Storytelling Section */}
         <section className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-visible">
-          <div className="border-2 border-blue-100 rounded-[20px] p-6 bg-blue-50 shadow-sm">
+          <div className="border-2 border-blue-100 rounded-[20px] p-6 shadow-sm">
             <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient">
               Analysis
             </h3>
@@ -116,7 +116,7 @@ export default function AirportDistributionAnalysis() {
             </div>
           </div>
 
-          <div className="border-2 border-blue-100 rounded-[20px] p-6 bg-blue-50 shadow-sm">
+          <div className="border-2 border-blue-100 rounded-[20px] p-6 shadow-sm">
             <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient">
               Storytelling
             </h3>

@@ -113,7 +113,7 @@ const TimeBasedBoardingAnalysis = () => {
   return (
     <div className="w-full">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Boarding Analysis by Hour</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">Boarding Analysis by Hour</h2>
         <div className="flex space-x-2">
           <button
             className={`px-4 py-2 rounded-[20px] ${

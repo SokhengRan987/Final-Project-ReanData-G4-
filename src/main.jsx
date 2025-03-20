@@ -62,6 +62,7 @@ import SignUp from "./auth/SignUp.jsx";
 import ForgetPassword from "./auth/ForgetPassword.jsx";
 import ResetPassword from "./auth/ResetPassword.jsx";
 import Card from "./components/CardAnimation/HeroBannerInLanding.jsx";
+import Dashboard from "./components/Dashboard.jsx";
 
 createRoot(document.getElementById("root")).render(
   <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
@@ -86,6 +87,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="/" element={<RootLayoutSideBar />}>
               <Route path="/profile" element={<Profile />} />
               <Route path="/password" element={<ChangePassword />} />
+              <Route path="/dashboard" element={<Dashboard/>}/>
               <Route path="air-data/aircraft" element={<Aircraft />} />
               <Route path="air-data/airport" element={<Airport />} />
               <Route path="air-data/boarding-pass" element={<BoardingPass />} />

@@ -60,10 +60,10 @@ export default function PreferredPromotionsChart() {
   return (
     <div className="w-full">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-medium text-gray-800">Preferred Promotions</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">Preferred Promotions</h2>
         <button 
           onClick={handleSort}
-          className="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors flex items-center gap-2"
+          className="px-4 py-2 bg-blue-50 text-blue-600 rounded-[20px] hover:bg-blue-100 transition-colors flex items-center gap-2"
         >
           Sort {sortOrder === 'desc' ? 'Ascending' : 'Descending'}
           <span>{sortOrder === 'desc' ? '↑' : '↓'}</span>

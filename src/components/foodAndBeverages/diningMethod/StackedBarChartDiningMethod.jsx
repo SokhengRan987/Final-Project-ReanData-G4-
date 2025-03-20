@@ -41,12 +41,12 @@ export default function StackedBarChartDiningMethod() {
   }, [data]);
 
   if (isLoading) return <Loader />;
-  if (error) return <div className="text-red-500">Error loading data</div>;
+  if (error) return <div className="text-red-500">{error}</div>;  
   if (!data || data.length === 0) return <div className="text-gray-500">No data available</div>;
 
   return (
     <div className="w-full bg-white p-6 rounded-lg shadow-sm">
-      <h2 className="text-2xl font-bold mb-6">Dining Method vs. Willingness to Recommend</h2>
+      <h2 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">Dining Method vs Willingness to Recommend</h2>
       <ResponsiveContainer width="100%" height={350}>
         <BarChart
           data={formattedData}
@@ -85,7 +85,7 @@ export default function StackedBarChartDiningMethod() {
         </BarChart>
       </ResponsiveContainer>
       <div className="mt-8 border-t pt-4">
-        <h3 className="text-xl font-semibold mb-2">Key Insights:</h3>
+        <h3 className="text-xl font-medium mb-2">Key Insights:</h3>
         <ul className="space-y-2">
           {formattedData.map(item => (
             <li key={item.dining_method} className="flex items-center">

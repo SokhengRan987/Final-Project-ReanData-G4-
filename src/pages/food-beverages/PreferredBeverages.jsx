@@ -33,7 +33,7 @@ export default function PreferredBeverages() {
 
         {/* Storytelling Section */}
         <section className="mt-8 overflow-visible">
-          <div className="border-2 border-blue-100 rounded-[20px] p-6 bg-blue-50 shadow-sm">
+          <div className="border-2 border-blue-100 rounded-[20px] p-6 shadow-sm">
             <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient">
               Storytelling
             </h3>

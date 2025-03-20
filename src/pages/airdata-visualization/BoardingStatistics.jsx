@@ -28,13 +28,13 @@ export default function BoardingStatistics() {
           data-aos-delay="100" // Slight delay for smooth entry
         >
           <div className="w-full" data-aos="zoom-in" data-aos-delay="75">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">
               Airport Statistics
             </h2>
             <AirportStatisticsBarChart />
           </div>
           <div className="w-full" data-aos="zoom-in" data-aos-delay="300">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">
               PreCheck Usage
             </h2>
             <PreCheckUsagePieChart />
@@ -43,7 +43,7 @@ export default function BoardingStatistics() {
 
         {/* Analysis and Storytelling Section */}
         <section className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-visible">
-          <div className="border-2 border-blue-100 rounded-[20px] p-6 bg-blue-50 shadow-sm">
+          <div className="border-2 border-blue-100 rounded-[20px] p-6 shadow-sm">
             <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient">
               Analysis
             </h3>
@@ -68,7 +68,7 @@ export default function BoardingStatistics() {
             </div>
           </div>
 
-          <div className="border-2 border-blue-100 rounded-[20px] p-6 bg-blue-50 shadow-sm">
+          <div className="border-2 border-blue-100 rounded-[20px] p-6 shadow-sm">
             <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient">
               Storytelling
             </h3>

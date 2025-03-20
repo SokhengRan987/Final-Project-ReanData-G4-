@@ -5,6 +5,7 @@ import { useGetAllAircraftsQuery } from "../../../redux/services/Aircraft";
 import TableComponent from "../../../components/TableComponent";
 import { Plane, Globe, MapPin, Wind } from "lucide-react";
 import { data } from "autoprefixer";
+import Loader from "../../../components/loading/Loader";
 
 export default function Aircraft() {
   const [offset, setOffset] = useState(0);
@@ -126,9 +127,9 @@ export default function Aircraft() {
                 <p className="text-sm font-medium text-gray-500">
                   Total Aircraft
                 </p>
-                <p className="text-2xl font-semibold mt-1">
-                  {isError ? "Error" : isLoading ? "Loading..." : totalCount}
-                </p>
+                {/* <p className="text-2xl font-semibold mt-1">
+                  {isError ? "Error" : isLoading ? <Loader/> : totalCount}
+                </p> */}
               </div>
               <div className="bg-blue-100 h-12 w-12 rounded-lg flex items-center justify-center">
                 <Plane className="h-6 w-6 text-blue-600" />

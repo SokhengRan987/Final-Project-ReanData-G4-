@@ -5,7 +5,7 @@ import { IoArrowBack } from "react-icons/io5";
 import LogoRd from "../img/LogoRd.png";
 import { useGetSignupMutation } from "../redux/services/authSlice";
 import { useFormik } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);

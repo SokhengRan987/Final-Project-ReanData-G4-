@@ -29,13 +29,13 @@ export default function AircraftFleetAnalysis() {
           data-aos-delay="100" // Slight delay for smooth entry
         >
           <div className="w-full" data-aos="zoom-in" data-aos-delay="200">
-            <h2 className="text-lg sm:text-2xl font-medium text-gray-600 mb-4">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">
               Airport Statistics
             </h2>
             <AircraftRangeVelocityChart />
           </div>
           <div className="w-full">
-            <h2 className="text-lg sm:text-2xl font-medium text-gray-600 mb-4">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">
               PreCheck Usage
             </h2>
             <HorizontalBarChartComponent />

@@ -156,7 +156,7 @@ export default function Login() {
                     console.warn("user_uuid not found in login response:", loginResponse);
                   }
 
-                  navigate("/boarding-statistics");
+                  navigate("/dashboard");
                   return;
                 }
               }
@@ -420,7 +420,7 @@ export default function Login() {
                   name="email"
                   type="email"
                   {...formik.getFieldProps("email")}
-                  className="peer w-full px-4 py-3 border border-[#3C55A5] border-[0.5px] rounded-lg focus:border-blue-500 focus:border-[0.3px] focus:ring-0 transition-all duration-300 bg-transparent font-description text-base text-[#0F172A]"
+                  className="peer w-full px-4 py-3 border border-[#3C55A5] rounded-lg focus:border-blue-500 focus:border-[0.3px] focus:ring-0 transition-all duration-300 bg-transparent font-description text-base text-[#0F172A]"
                   placeholder=" "
                 />
                 <label
@@ -442,7 +442,7 @@ export default function Login() {
                   name="password"
                   type={showPassword ? "text" : "password"}
                   {...formik.getFieldProps("password")}
-                  className="peer w-full px-4 py-3 pr-12 border border-[#3C55A5] border-[0.5px] rounded-lg focus:border-blue-500 focus:border-[0.3px] focus:ring-0 transition-all duration-300 bg-transparent font-description text-base text-[#0F172A]"
+                  className="peer w-full px-4 py-3 pr-12 border border-[#3C55A5] rounded-lg focus:border-blue-500 focus:border-[0.3px] focus:ring-0 transition-all duration-300 bg-transparent font-description text-base text-[#0F172A]"
                   placeholder=" "
                 />
                 <label

@@ -40,7 +40,6 @@ export default function CohortAnalysis() {
 
   return (
     <div className="cohort-analysis">
-      <h2>Cohort Analysis</h2>
       <div style={{ width: "100%", height: 400 }}>
         <ResponsiveContainer>
           <AreaChart
