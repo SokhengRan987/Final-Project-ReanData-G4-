@@ -62,7 +62,7 @@ import Login from "./auth/Login.jsx";
 import SignUp from "./auth/SignUp.jsx";
 import ForgetPassword from "./auth/ForgetPassword.jsx";
 import ResetPassword from "./auth/ResetPassword.jsx";
-import Profile from "./pages/Profile.jsx";
+// import Profile from "./pages/Profile.jsx";
 
 createRoot(document.getElementById("root")).render(
   <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
