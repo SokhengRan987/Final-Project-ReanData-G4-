@@ -15,7 +15,7 @@ export default function Footer() {
               <a href="#" className="inline-block">
                 <img
                   src={reandatalogo || "/placeholder.svg?height=112&width=200"}
-                  className="h-[110px] object-contain"
+                  className="h-[70px] sm:h-[100px] object-contain"
                   alt="Reandata Logo"
                 />
               </a>
@@ -68,11 +68,11 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="tel:+85512456789"
+                    href="tel:+85577554335"
                     className="text-gray-600 hover:text-indigo-600 transition-colors duration-200 flex items-start gap-3 group"
                   >
                     <Phone size={18} className="text-indigo-500 mt-0.5" />
-                    <span>(+855) 12 456 789</span>
+                    <span>(+855) 77 554 335</span>
                   </a>
                 </li>
               </ul>

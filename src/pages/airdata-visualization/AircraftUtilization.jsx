@@ -18,9 +18,9 @@ export default function AircraftUtilization() {
   }, []);
 
   return (
-    <div className="my-8 px-4 sm:px-6 lg:px-8">
+    <div className="my-6">
       {/* Container for the entire page */}
-      <div className="max-w-screen-xl mx-auto">
+      <div className="w-full max-w-screen-xl mx-auto">
         {/* Charts Section */}
         <section
           className="border-2 border-gray-100 rounded-[20px] p-6 bg-white shadow-sm"
@@ -35,10 +35,10 @@ export default function AircraftUtilization() {
         {/* Analysis and Storytelling Section */}
         <section className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-visible">
           <div className="border-2 border-blue-100 rounded-[20px] p-6 bg-blue-50 shadow-sm">
-            <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient">
-              Analysis
+          <h3 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">
+          Analysis
             </h3>
-            <div className="space-y-3 text-gray-700">
+            <div className="text-sm leading-6 sm:text-lg sm:leading-8 space-y-3 text-gray-700">
               <p>
                 Helps assess how efficiently the fleet is being used by showing
                 the number of flights per aircraft and the average number of
@@ -48,10 +48,10 @@ export default function AircraftUtilization() {
           </div>
 
           <div className="border-2 border-blue-100 rounded-[20px] p-6 bg-blue-50 shadow-sm">
-            <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient">
+          <h3 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">
               Storytelling
             </h3>
-            <p className="text-gray-700">
+            <p className="text-sm leading-6 sm:text-lg sm:leading-8 space-y-3 text-gray-700">
               The aircraft utilization analysis reveals whether the fleet is
               underutilized or overused. If certain aircraft classes have low
               utilization, it may indicate inefficiencies in fleet allocation or

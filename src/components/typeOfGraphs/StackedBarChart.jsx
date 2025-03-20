@@ -276,7 +276,7 @@ export default function StackedBarChart() {
   };
 
   return (
-    <div className="main-container w-[90%] sm:w-full max-w-screen-xl h-auto bg-gradient-to-br relative mx-auto my-8 lg:px-8">
+    <div className="main-container w-full max-w-screen-xl h-auto bg-gradient-to-br relative mx-auto my-8 lg:px-8">
       <span className="block font-['Roboto'] text-[18px] sm:text-[20px] md:text-[24px] font-bold leading-8 sm:leading-10 text-[#0f172a] relative text-left whitespace-nowrap mt-4 sm:mt-6 ml-3 sm:ml-4 before:content-[''] before:absolute before:w-2 before:h-6 sm:before:h-8 before:bg-[#3C55A5] before:left-[-12px] sm:before:left-[-16px] before:top-1 before:rounded-sm">
         Stacked Bar Chart
       </span>

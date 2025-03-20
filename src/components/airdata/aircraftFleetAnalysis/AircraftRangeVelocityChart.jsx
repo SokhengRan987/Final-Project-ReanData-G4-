@@ -50,8 +50,8 @@ const AircraftRangeVelocityChart = () => {
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white p-3 border border-gray-200 shadow-md rounded">
-          <p className="font-bold text-gray-700">{label}</p>
+        <div className="bg-white text-sm sm:text-md p-3 border border-gray-200 shadow-md rounded">
+          <p className="font-medium text-gray-700">{label}</p>
           <p className="text-purple-600">
             Avg Range: {Number(payload[0].value).toLocaleString()} km
           </p>
@@ -65,14 +65,12 @@ const AircraftRangeVelocityChart = () => {
   };
 
   return (
-    <div className="w-full">
-      <ResponsiveContainer width="100%" height={400}>
+    <div className="w-full h-64 sm:h-80 md:h-96">
+      <ResponsiveContainer width="100%" height="100%">
         <LineChart
           data={formattedData}
           margin={{
-            top: 20,
-            right: 30,
-            left: 20,
+            top: 10,
             bottom: 10,
           }}
         >
@@ -80,7 +78,7 @@ const AircraftRangeVelocityChart = () => {
           <XAxis
             dataKey="name"
             tick={{ fill: "#666" }}
-            padding={{ left: 30, right: 30 }}
+            padding={{ left: 10, right: 10 }}
           />
           <YAxis
             yAxisId="left"

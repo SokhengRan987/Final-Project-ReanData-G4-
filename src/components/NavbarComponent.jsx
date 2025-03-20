@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import logo from "../img/reandata.png";
 import { useNavigate } from "react-router-dom";
-import Login from "../auth/Login";
 
 export default function NavbarComponent() {
+  const location = useLocation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const navigate = useNavigate();
@@ -46,6 +46,11 @@ export default function NavbarComponent() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [dropdownOpen]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setDropdownOpen(false); // Close mobile menu on navigation
+  }, [location.pathname]); // Now properly using location object
+
   return (
     <nav
       id="navbar-container"
@@ -57,7 +62,7 @@ export default function NavbarComponent() {
     >
       {/* Scroll Progress Bar */}
       <div
-        className="absolute top-0 left-0 h-1 transition-all duration-100"
+        className="absolute top-0 left-0 h-1 transition-all"
         style={{
           width: `${scrollProgress}%`,
           background: "#84e1bc",
@@ -68,7 +73,7 @@ export default function NavbarComponent() {
       {/* Navbar Content */}
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 py-4">
         {/* Logo */}
-        <NavLink to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <NavLink to="/" className="flex b items-center space-x-3 rtl:space-x-reverse">
           <img src={logo} alt="Reandata logo" className="h-8" />
         </NavLink>
 

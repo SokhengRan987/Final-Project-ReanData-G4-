@@ -1,37 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 * {
-    font-family: "Roboto", sans-serif;
-    font-style: normal;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
 }
 
 /* Add this to your existing CSS file */
 .custom-scrollbar::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 4px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
-  
-  /* Hide the logo container when in mobile sidebar mode */
-.mobile-sidebar-container .border-b.border-gray-200.flex.justify-center.items-center:first-child {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Hide the logo container when in mobile sidebar mode */
+.mobile-sidebar-container
+  .border-b.border-gray-200.flex.justify-center.items-center:first-child {
   display: none;
 }
 
@@ -39,5 +40,61 @@
 .mobile-sidebar-container nav {
   padding-top: 0;
 }
-  
-  
+
+/* Gradient animation for the heading */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradient 4s ease infinite;
+}
+
+/* Animated gradient border for cards on hover */
+.card-hover {
+  position: relative;
+}
+
+.card-hover:hover {
+  border: 2px solid transparent;
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(45deg, #3b82f6, #22c55e) border-box;
+  animation: borderRun 2s infinite alternate;
+}
+
+@keyframes borderRun {
+  0% {
+    background: linear-gradient(white, white) padding-box,
+      linear-gradient(45deg, #3b82f6, #22c55e) border-box;
+  }
+  50% {
+    background: linear-gradient(white, white) padding-box,
+      linear-gradient(135deg, #22c55e, #3b82f6) border-box;
+  }
+  100% {
+    background: linear-gradient(white, white) padding-box,
+      linear-gradient(225deg, #3b82f6, #22c55e) border-box;
+  }
+}
+
+/* Slow spin animation for the gear icon */
+@keyframes spin-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 6s linear infinite;
+}

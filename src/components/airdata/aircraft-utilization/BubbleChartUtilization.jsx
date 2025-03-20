@@ -128,15 +128,15 @@ export default function BubbleChartUtilization() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-2 text-gray-800">
+      <h2 className="text-md sm:text-2xl font-bold mb-2 text-gray-800">
         Aircraft Class Utilization (Bubble Chart)
       </h2>
-      <p className="text-gray-600 mb-6 text-sm">
+      <p className="text-gray-600 mb-6 text-xs sm:text-sm">
         Helps assess how efficiently the fleet is being used by showing the
         number of flights per aircraft and the average number of passengers
         carried.
       </p>
-      <div className="h-96 w-full" style={{ minHeight: "400px" }}>
+      <div className="h-80 sm:h-96 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart
             margin={{ top: 20, right: 30, bottom: 10, left: 80 }}
@@ -156,7 +156,7 @@ export default function BubbleChartUtilization() {
                 value="Average Flights per Aircraft"
                 position="bottom"
                 offset={5}
-                className="text-gray-600 font-medium text-sm"
+                className="text-gray-600 font-medium text-xs sm:text-sm"
               />
             </XAxis>
             <YAxis
@@ -174,7 +174,7 @@ export default function BubbleChartUtilization() {
                 angle={-90}
                 position="insideLeft"
                 offset={-20}
-                className="text-gray-600 font-medium text-sm"
+                className="text-gray-600 font-medium text-xs sm:text-sm"
               />
             </YAxis>
             <ZAxis
@@ -219,7 +219,7 @@ export default function BubbleChartUtilization() {
           </ScatterChart>
         </ResponsiveContainer>
       </div>
-      <div className="mt-6 text-sm text-gray-600 flex items-center justify-center">
+      <div className="mt-6 text-xs sm:text-sm text-gray-600 flex items-center justify-center">
         <div className="bg-gray-50 px-4 py-2 rounded-lg">
           <p>
             Note: Bubble size represents the number of aircraft in each class

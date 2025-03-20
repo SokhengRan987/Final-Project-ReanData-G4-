@@ -9,7 +9,6 @@ import Profile from "./pages/Profile.jsx";
 import ChangePassword from "./pages/ChangePassword.jsx";
 import Rootlayout from "./components/Rootlayout.jsx";
 
-import DistributionPerContinent from "./pages/DistributionPerContinent.jsx";
 import RootLayoutSideBar from "./components/RootLayoutSideBar.jsx";
 import BoardingStatistics from "./pages/airdata-visualization/BoardingStatistics.jsx";
 import HelpAndSupport from "./pages/HelpAndSupport.jsx";
@@ -62,6 +61,7 @@ import Login from "./auth/Login.jsx";
 import SignUp from "./auth/SignUp.jsx";
 import ForgetPassword from "./auth/ForgetPassword.jsx";
 import ResetPassword from "./auth/ResetPassword.jsx";
+import Card from "./components/CardAnimation/HeroBannerInLanding.jsx";
 
 createRoot(document.getElementById("root")).render(
   <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
@@ -74,6 +74,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="/forgetpassword" element={<ForgetPassword />} />
             <Route path="/resetpassword" element={<ResetPassword />} />
             <Route path="/" element={<Rootlayout />}>
+              <Route path="/hero" element={Card()}/>
               <Route index element={<LandingPage />} />
               <Route path="about-us" element={<About />} />
               <Route path="help&support" element={<HelpAndSupport />} />

@@ -125,7 +125,7 @@ const Documentation = () => {
             </div> 
 
             {/* Visualization Techniques */}
-            <div className="bg-[#3C55A5]/5 py-12">
+            <div className="py-12">
                 <div className="container mx-auto px-6 sm:px-6 lg:px-8 xl:px-36 w-full">
                     <h2 className="text-3xl font-bold text-center text-gray-800 mb-10" data-aos="fade-up">Visualization Techniques</h2>
                     

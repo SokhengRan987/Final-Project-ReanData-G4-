@@ -35,7 +35,7 @@ export default function ScatterPlotUtilization() {
   // Dynamic ZAxis range based on data
   const zRange = useMemo(() => {
     if (!processedData.length) return [20, 100];
-    const counts = processedData.map(d => d.z);
+    const counts = processedData.map((d) => d.z);
     return [Math.min(20, ...counts), Math.max(100, ...counts)];
   }, [processedData]);
 
@@ -84,7 +84,8 @@ export default function ScatterPlotUtilization() {
         <div className="bg-white p-4 border border-gray-300 rounded shadow">
           <p className="font-bold text-lg mb-1">{`Aircraft Class ${data.aircraftClass}`}</p>
           <p className="text-gray-600 mb-2">
-            {classDescriptions[data.aircraftClass] || "No description available"}
+            {classDescriptions[data.aircraftClass] ||
+              "No description available"}
           </p>
           <div className="space-y-1">
             <p>
@@ -102,7 +103,8 @@ export default function ScatterPlotUtilization() {
               <span className="font-medium">Avg Range:</span> {data.avgRange} km
             </p>
             <p>
-              <span className="font-medium">Avg Velocity:</span> {data.avgVelocity} km/h
+              <span className="font-medium">Avg Velocity:</span>{" "}
+              {data.avgVelocity} km/h
             </p>
           </div>
         </div>
@@ -124,9 +126,9 @@ export default function ScatterPlotUtilization() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-2 text-gray-800">
+      <h3 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">
         Aircraft Class Utilization
-      </h2>
+      </h3>
       <p className="text-gray-600 mb-6 text-sm">
         Helps assess how efficiently the fleet is being used by showing the
         number of flights per aircraft and the average number of passengers
@@ -190,7 +192,8 @@ export default function ScatterPlotUtilization() {
               wrapperStyle={{ paddingTop: 20 }}
               formatter={(value) => (
                 <span style={{ color: "#4B5563", padding: "0 8px" }}>
-                  {value} - {classDescriptions[value.replace("Class ", "")] || ""}
+                  {value} -{" "}
+                  {classDescriptions[value.replace("Class ", "")] || ""}
                 </span>
               )}
             />

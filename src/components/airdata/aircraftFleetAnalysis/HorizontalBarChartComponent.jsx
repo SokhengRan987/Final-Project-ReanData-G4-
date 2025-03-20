@@ -18,7 +18,11 @@ const AircraftFleetAnalysisComponent = () => {
   const { data, error, isLoading } = useGetAircraftFleetAnalysisQuery();
 
   if (isLoading) {
-    return <div><Loader/></div>
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   if (error) {
@@ -57,8 +61,10 @@ const AircraftFleetAnalysisComponent = () => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-white p-2 border border-gray-300 shadow-md">
-          <p className="font-medium">{payload[0].name}</p>
-          <p>Number of Aircraft : {payload[0].value.toLocaleString()}</p>
+          <p className="font-medium text-sm sm:text-md">{payload[0].name}</p>
+          <p className="text-sm sm:text-md">
+            Number of Aircraft : {payload[0].value.toLocaleString()}
+          </p>
         </div>
       );
     }
@@ -66,35 +72,37 @@ const AircraftFleetAnalysisComponent = () => {
   };
 
   return (
-    <div>
-      <ResponsiveContainer width="100%" height={400}>
-        <BarChart
-          data={formattedData}
-          layout="vertical"
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-        >
-          <CartesianGrid
-            strokeDasharray="3 3"
-            horizontal={true}
-            vertical={false}
-          />
-          <XAxis type="number" domain={[0, "dataMax + 5"]} />
-          <YAxis
-            type="category"
-            dataKey="name"
-            tick={{ fill: "#666" }}
-            width={100}
-          />
-          <Tooltip content={<CustomTooltip />} />
-          <Legend wrapperStyle={{ bottom: 0 }} />
-          <Bar dataKey="value" name="Number of Aircraft">
-            {formattedData.map((entry) => (
-              <Cell key={entry.name} fill={colors[entry.name] || "#8884d8"} />
-            ))}
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
+    <section>
+      <div className="h-72 sm:h-80 md:h-96 w-full">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            data={formattedData}
+            layout="vertical"
+            margin={{ top: 5, right: 10, left: -20, bottom: 5 }}
+          >
+            <CartesianGrid
+              strokeDasharray="3 3"
+              horizontal={true}
+              vertical={false}
+            />
+            <XAxis type="number" domain={[0, "dataMax + 5"]} />
+            <YAxis
+              type="category"
+              dataKey="name"
+              tick={{ fill: "#666", fontSize: 12 }}
+              width={100}
+            />
+            <Tooltip content={<CustomTooltip />} />
+            <Legend wrapperStyle={{ bottom: 0 }} />
+            <Bar dataKey="value" name="Number of Aircraft">
+              {formattedData.map((entry) => (
+                <Cell key={entry.name} fill={colors[entry.name] || "#8884d8"} />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </section>
   );
 };
 

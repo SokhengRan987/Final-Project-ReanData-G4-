@@ -73,7 +73,7 @@ export default function AirportDistributionAnalysis() {
   console.log(airportData);
 
   return (
-    <div className="my-8 px-4 sm:px-6 lg:px-8">
+    <div className="my-6">
       {/* Container for the entire page */}
       <div className="max-w-screen-xl mx-auto">
         {/* Charts Section */}
@@ -83,7 +83,7 @@ export default function AirportDistributionAnalysis() {
           data-aos-delay="100" // Slight delay for smooth entry
         >
           <div className="w-full" data-aos="zoom-in" data-aos-delay="200">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">
               Countries and Cities Served
             </h2>
             <BarChart />

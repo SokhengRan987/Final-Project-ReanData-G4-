@@ -19,9 +19,9 @@ export default function AircraftFleetAnalysis() {
   }, []);
 
   return (
-    <div className="my-8 px-4 sm:px-6 lg:px-8">
+    <div className="my-6">
       {/* Container for the entire page */}
-      <div className="max-w-screen-xl mx-auto">
+      <div className="w-full max-w-screen-xl mx-auto">
         {/* Charts Section */}
         <section
           className="grid grid-rows-1 lg:grid-rows-2 gap-6 border-2 border-gray-100 rounded-[20px] p-6 bg-white shadow-sm"
@@ -29,13 +29,13 @@ export default function AircraftFleetAnalysis() {
           data-aos-delay="100" // Slight delay for smooth entry
         >
           <div className="w-full" data-aos="zoom-in" data-aos-delay="200">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+            <h2 className="text-lg sm:text-2xl font-medium text-gray-600 mb-4">
               Airport Statistics
             </h2>
             <AircraftRangeVelocityChart />
           </div>
           <div className="w-full">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+            <h2 className="text-lg sm:text-2xl font-medium text-gray-600 mb-4">
               PreCheck Usage
             </h2>
             <HorizontalBarChartComponent />
@@ -44,29 +44,29 @@ export default function AircraftFleetAnalysis() {
 
         {/* Analysis and Storytelling Section */}
         <section className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-visible">
-          <div className="border-2 border-blue-100 rounded-[20px] p-6 bg-blue-50 shadow-sm">
-            <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient">
+          <div className="border-2 border-blue-100 rounded-[20px] p-6 shadow-sm">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-clip-text text-transparent bg-[length:200%_200%] animate-gradient">
               Analysis
             </h3>
-            <div className="space-y-3 text-gray-700">
+            <div className="text-sm leading-6 sm:text-lg sm:leading-8 space-y-3 text-gray-700">
               <p>
                 The aircraft count per class helps determine the fleet size in
                 each category.
               </p>
               <p>
-                <span className="font-semibold">Avg Range</span> and{" "}
-                <span className="font-semibold">Avg Velocity</span>
+                <span className="font-medium">Avg Range</span> and{" "}
+                <span className="font-medium">Avg Velocity</span> {" "}
                 provide insights into the fleet's capabilities in terms of speed
                 and distance.
               </p>
             </div>
           </div>
 
-          <div className="border-2 border-blue-100 rounded-[20px] p-6 bg-blue-50 shadow-sm">
-            <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient">
+          <div className="border-2 border-blue-100 rounded-[20px] p-6 shadow-sm">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">
               Storytelling
             </h3>
-            <p className="text-gray-700">
+            <p className="text-sm leading-6 sm:text-lg sm:leading-8 space-y-3 text-gray-700">
               The aircraft fleet analysis provides insights into the strength
               and diversity of the fleet. For example, a large number of certain
               classes may indicate a focus on specific routes, while greater
