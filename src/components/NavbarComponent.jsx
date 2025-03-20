@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../img/reandata.png";
 import { useNavigate } from "react-router-dom";
 
@@ -7,11 +7,38 @@ export default function NavbarComponent() {
   const location = useLocation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [profileData, setProfileData] = useState(null); // State for profile data
   const navigate = useNavigate();
 
-  // Handle button click
+
+  const storedData = localStorage.getItem("userData");
+  const userDataInitial = storedData ? JSON.parse(storedData) : {};
+  const hasAccessToken = !!localStorage.getItem("accessToken"); // Check if logged in
+
+  const [userData, setUserData] = useState({
+    profileImage: userDataInitial.profileImage || "https://via.placeholder.com/40",
+  });
+
+  // Handle "Get Started" button click
+  const handleGetStartedClick = () => {
+    if (hasAccessToken) {
+      navigate("/boarding-statistics");
+    } else {
+      navigate("/login");
+    }
+    setDropdownOpen(false); // Close dropdown on mobile
+  };
+
+  // Handle "Login" button click
   const handleLoginRedirect = () => {
     navigate("/login");
+    setDropdownOpen(false); // Close dropdown on mobile
+  };
+
+  // Handle "Profile" navigation
+  const handleProfileRedirect = () => {
+    navigate("/profile"); // Adjust this route to your actual profile page
+    setDropdownOpen(false); // Close dropdown on mobile
   };
 
   // Scroll progress effect
@@ -22,7 +49,6 @@ export default function NavbarComponent() {
       const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
       setScrollProgress(progress);
     };
-
     window.addEventListener("scroll", updateScrollProgress);
     return () => window.removeEventListener("scroll", updateScrollProgress);
   }, []);
@@ -41,7 +67,6 @@ export default function NavbarComponent() {
         setDropdownOpen(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [dropdownOpen]);
@@ -79,19 +104,33 @@ export default function NavbarComponent() {
 
         {/* Right-side Buttons (Desktop) */}
         <div className="hidden md:flex md:order-2 space-x-3 md:space-x-2 rtl:space-x-reverse">
-          <NavLink
-            to="/login"
-            className="text-white bg-[#3C55A5] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-[20px] text-sm px-4 py-2"
-            onClick={handleLoginRedirect} // Trigger routing on click
-          >
-            Login
-          </NavLink>
-          <NavLink
-            to="/boarding-statistics"
+          <button
+            onClick={handleGetStartedClick}
             className="text-white bg-[#22B04B] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-[20px] text-sm px-4 py-2"
           >
-            Get started
-          </NavLink>
+            Get Started
+          </button>
+          {!hasAccessToken ? (
+            <NavLink
+              to="/login"
+              className="text-white bg-[#3C55A5] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-[20px] text-sm px-4 py-2"
+              onClick={handleLoginRedirect}
+            >
+              Login
+            </NavLink>
+          ) : (
+            <NavLink
+              to="/profile"
+              className="flex items-center justify-center w-10 h-10 bg-[#3C55A5] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-full text-sm"
+              onClick={handleProfileRedirect}
+            >
+              <img
+                src={userData.profileImage || "https://via.placeholder.com/40"} // Fallback image
+                alt="Profile"
+                className="w-full h-full object-cover rounded-full"
+              />
+            </NavLink>
+          )}
         </div>
 
         {/* Mobile Menu Toggle Button */}
@@ -178,23 +217,37 @@ export default function NavbarComponent() {
                 Help & Support
               </NavLink>
             </li>
+           
 
             {/* Login and Get Started Buttons (Mobile) */}
             <li className="md:hidden mt-4 flex">
-              <NavLink
-                to="/login"
-                className="block text-center text-white bg-[#3C55A5] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-[20px] text-sm px-4 py-2 mr-2"
-                onClick={() => setDropdownOpen(false)}
-              >
-                Login
-              </NavLink>
-              <NavLink
-                to="/boarding-statistics"
+              {!hasAccessToken ? (
+                <NavLink
+                  to="/login"
+                  className="block text-center text-white bg-[#3C55A5] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-[20px] text-sm px-4 py-2 mr-2"
+                  onClick={handleLoginRedirect}
+                >
+                  Login
+                </NavLink>
+              ) : (
+                <NavLink
+                  to="/profile"
+                  className="flex items-center justify-center w-10 h-10 bg-[#3C55A5] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-full text-sm mr-2"
+                  onClick={handleProfileRedirect}
+                >
+                  <img
+                    src={profileData?.profileImage || "https://via.placeholder.com/40"} // Fallback image
+                    alt="Profile"
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </NavLink>
+              )}
+              <button
+                onClick={handleGetStartedClick}
                 className="block text-center text-white bg-[#22B04B] opacity-80 hover:opacity-100 hover:scale-105 duration-300 transition-all ease-in-out font-medium rounded-[20px] text-sm px-4 py-2"
-                onClick={() => setDropdownOpen(false)}
               >
-                Get started
-              </NavLink>
+                Get Started
+              </button>
             </li>
           </ul>
         </div>

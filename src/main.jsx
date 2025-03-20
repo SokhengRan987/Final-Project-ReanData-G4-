@@ -14,7 +14,7 @@ import BoardingStatistics from "./pages/airdata-visualization/BoardingStatistics
 import HelpAndSupport from "./pages/HelpAndSupport.jsx";
 import Documentation from "./pages/Documentation.jsx";
 import LandingPage from "./pages/LadingPage.jsx";
-import DataSet from "./pages/DataSet.jsx";
+import DataSet from "./pages/DataSet.jsx";import App from "./App.jsx"
 import About from "./pages/About.jsx";
 import AircraftFleetAnalysis from "./pages/airdata-visualization/AircraftFleetAnalysis.jsx";
 import Aircraft from "./pages/airdata/table/Aircraft.jsx";

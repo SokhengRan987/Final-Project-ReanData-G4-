@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SideBar from "../components/Sidebar";
 import { Outlet } from "react-router-dom";
 import NavbarSlidComponent from "./NavbarSlidComponent";
-import MobileSlidComponent from "../components/MobileSlidComponent ";
+import MobileSlidComponent from "../components/MobileSlidComponent.jsx";
 import { Menu } from "lucide-react";
 
 export default function RootLayoutSlidBar() {
