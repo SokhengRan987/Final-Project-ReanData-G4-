@@ -245,9 +245,9 @@ export default function LandingPage() {
         data-aos-duration="900"
         data-aos-delay="200"
       >
-        <div className="max-w-screen-xl mx-auto sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between">
-            <div className="text-center md:text-left">
+        <div className="w-full max-w-screen-xl mx-auto">
+          <div className="flex flex-col justify-between">
+            <div className="text-center md:text-left mb-4">
               <h1 className="text-3xl text-start text-slate-800 sm:text-4xl md:text-5xl xl:text-6xl font-medium tracking-tight mb-4">
                 Ready to Start Your Data Learning {" "}
                 <span className="bg-gradient-to-r from-blue-400 to-green-300 bg-clip-text text-transparent bg-[length:200%_200%] animate-gradient">

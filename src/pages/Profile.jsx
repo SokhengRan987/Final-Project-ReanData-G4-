@@ -234,7 +234,7 @@ const Profile = () => {
           animateIn ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}
       >
-        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-text-100">
+        <div className="bg-white rounded-3xl shadow-sm overflow-hidden border border-text-100">
           <div className="relative h-56 overflow-hidden bg-primary-500">
             <div className="absolute inset-0">
               {[...Array(30)].map((_, i) => (

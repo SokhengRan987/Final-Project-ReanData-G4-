@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../img/reandata.png";
-import { useNavigate } from "react-router-dom";
-
 export default function NavbarComponent() {
   const location = useLocation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
