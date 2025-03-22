@@ -49,7 +49,7 @@ export default function ContinentBarChart() {
     chartData?.reduce((sum, item) => sum + item.cities_served, 0) || 0;
 
   return (
-    <div className="p-4">
+    <div className="">
       <div className="flex justify-between mb-4">
         <div className="text-center px-4">
           <p className="text-xl font-bold text-blue-600">{totalCountries}</p>
@@ -61,11 +61,11 @@ export default function ContinentBarChart() {
         </div>
       </div>
 
-      <div className="h-96">
-        <ResponsiveContainer width="100%" height={350}>
+      <div className="h-72 sm:h-80 md:h-96">
+        <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={chartData}
-            margin={{ top: 10, right: 30, left: 0, bottom: 20 }}
+            margin={{ top: 10, right: 5, left: -15, bottom: 20 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis

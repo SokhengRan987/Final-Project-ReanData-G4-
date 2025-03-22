@@ -207,17 +207,26 @@ const Profile = () => {
 
       setIsEditing(false);
       console.log("Profile data saved:", profileData);
+      window.location.reload();
     } catch (err) {
       console.error("Update failed:", err);
     }
   };
 
-  const handleProfileClick = () => {
-    if (isLoggedIn) {
-      fileInputRef.current.value = "";
+   // Profile image click handler
+   const handleProfileClick = () => {
+    if (
+      userUuid &&
+      isValidUuid(userUuid) &&
+      localStorage.getItem("accessToken") &&
+      isEditing // Only allow clicking when in edit mode
+    ) {
       fileInputRef.current.click();
+    } else if (!userUuid || !localStorage.getItem("accessToken")) {
+      navigate("/login");
     }
   };
+
 
   const isLoggedIn = !!userUuid;
 
@@ -341,10 +350,10 @@ const Profile = () => {
             </div>
 
             {isLoggedIn && isEditing && (
-              <div className="mt-8 md:mt-10">
+              <div className="mt-8 md:mt-10 ">
                 <div
                   className={`transition-all duration-500 ${
-                    isEditing ? "opacity-100 scale-100" : "opacity-0 scale-95"
+                    isEditing ? "opacity-100 scale-100 " : "opacity-0 scale-95"
                   }`}
                 >
                   <form onSubmit={handleSubmit} className="w-full mx-auto">

@@ -76,7 +76,7 @@ export default function Login() {
             return;
           }
 
-          navigate("/boarding-statistics");
+          navigate("/dashboard");
           // Remove window.location.reload() to avoid unnecessary reloads
         } else {
           setErrors({ apiError: "Invalid email or password" });

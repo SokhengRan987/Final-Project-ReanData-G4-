@@ -11,7 +11,12 @@ import {
 import Loader from "../../loading/Loader";
 
 const AirportDistributionChart = ({ data }) => {
-  if (!data || data.length === 0) return <div><Loader/></div>;
+  if (!data || data.length === 0)
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
 
   // Define the order of continents for consistent x-axis mapping
   const continents = ["NA", "AS", "EU", "AF", "SA", "OC"];
@@ -53,41 +58,43 @@ const AirportDistributionChart = ({ data }) => {
   };
 
   return (
-    <ResponsiveContainer width="100%" height={400}>
-      <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-        <XAxis
-          type="category"
-          dataKey="continent"
-          name="Continent"
-          allowDuplicatedCategory={false}
-          tick={{ fill: "#666" }}
-        />
-        <YAxis
-          type="number"
-          dataKey="y"
-          name="Airport Density"
-          domain={[0, "auto"]}
-          tick={{ fill: "#666" }}
-        />
-        <Tooltip content={<CustomTooltip />} />
-        <Legend />
-        {continents.map((continent) => {
-          const continentData = mappedData.filter(
-            (item) => item.continent === continent
-          );
-          return continentData.length > 0 ? (
-            <Scatter
-              key={continent}
-              name={continent}
-              data={continentData}
-              fill={colors[continent]}
-              shape="circle"
-              legendType="circle"
-            />
-          ) : null;
-        })}
-      </ScatterChart>
-    </ResponsiveContainer>
+    <div className="h-72 sm:h-80 md:h-96">
+      <ResponsiveContainer width="100%" height="100%">
+        <ScatterChart margin={{ top: 20, right: 0, bottom: 5, left: -15 }}>
+          <XAxis
+            type="category"
+            dataKey="continent"
+            name="Continent"
+            allowDuplicatedCategory={false}
+            tick={{ fill: "#666" }}
+          />
+          <YAxis
+            type="number"
+            dataKey="y"
+            name="Airport Density"
+            domain={[0, "auto"]}
+            tick={{ fill: "#666" }}
+          />
+          <Tooltip content={<CustomTooltip />} />
+          <Legend />
+          {continents.map((continent) => {
+            const continentData = mappedData.filter(
+              (item) => item.continent === continent
+            );
+            return continentData.length > 0 ? (
+              <Scatter
+                key={continent}
+                name={continent}
+                data={continentData}
+                fill={colors[continent]}
+                shape="circle"
+                legendType="circle"
+              />
+            ) : null;
+          })}
+        </ScatterChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 

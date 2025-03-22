@@ -112,8 +112,8 @@ const TimeBasedBoardingAnalysis = () => {
 
   return (
     <div className="w-full">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">Boarding Analysis by Hour</h2>
+      <h2 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">Boarding Analysis by Hour</h2>
+      <div className="flex justify-end mb-6">
         <div className="flex space-x-2">
           <button
             className={`px-4 py-2 rounded-[20px] ${
@@ -162,7 +162,7 @@ const TimeBasedBoardingAnalysis = () => {
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               data={sortedData}
-              margin={{ top: 5, right: 30, left: 20, bottom: 10 }}
+              margin={{ top: 5, right: 5, left: 2, bottom: 10 }}
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis

@@ -77,7 +77,7 @@ const DataSet = () => {
     <main className="font-roboto flex flex-col bg-gray-100 min-h-screen">
       {/* Hero Section */}
       <section className="w-full py-8 md:py-16 bg-gradient-to-r from-[#17203F] via-[#23315F] to-[#3C55A5] text-white text-center">
-        <div className="container mx-auto px-4 py-4 md:py-8 max-w-4xl">
+        <div className="container mx-auto px-4 py-4 md:py-8 max-w-screen-xl">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">
             Real-Time Air and Food & Beverage Data Analytics
           </h1>
@@ -111,7 +111,7 @@ const DataSet = () => {
 
         {/* First Content Section */}
         <section className="w-[90%] sm:w-full mx-auto py-6 md:py-10 bg-gray-100 text-white">
-          <div className="container mx-auto sm:px-[6.5rem]">
+          <div className="container mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-center gap-3 md:gap-5">
               <div
                 className="w-full md:w-1/2 px-2 md:px-4 mb-2 md:mb-4"
@@ -148,7 +148,7 @@ const DataSet = () => {
 
         {/* Second Content Section */}
         <section className="w-[90%] sm:w-full mx-auto py-6 md:py-10 bg-gray-100 md:px-6 text-white">
-          <div className="container mx-auto sm:px-[6.5rem]">
+          <div className="container mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-center gap-3 md:gap-5">
               <div
                 className="w-full md:w-1/2 rounded-lg px-2 md:px-4 mb-2 md:mb-4"
@@ -184,7 +184,7 @@ const DataSet = () => {
 
         {/* Data Sources & Collection Section */}
         <section className="w-[90%] sm:w-full mx-auto py-6 md:py-10 bg-gray-100 md:px-6 text-white">
-          <div className="container mx-auto sm:px-[7.5rem] text-center md:text-left">
+          <div className="container mx-auto text-center md:text-left">
             <h2
               className="text-center text-[#3C55A5] text-2xl md:text-3xl lg:text-[38px] font-bold mb-6 leading-loose"
               style={{ lineHeight: "1" }}
@@ -488,7 +488,7 @@ const DataSet = () => {
         <div className="">
           <section className="w-[90%] sm:w-full mx-auto px-2 sm:px-36 md:px-6 text-white">
             <div className="container mx-auto sm:px-[7.5rem] text-center md:text-left">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                 {steps.map((step, index) => (
                   <div
                     key={index}

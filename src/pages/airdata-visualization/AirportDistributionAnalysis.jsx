@@ -70,19 +70,14 @@ export default function AirportDistributionAnalysis() {
       countries: airport.countries_served,
       cities: airport.cities_served,
     })) || [];
-  console.log(airportData);
 
   return (
     <div className="my-6">
       {/* Container for the entire page */}
       <div className="max-w-screen-xl mx-auto">
         {/* Charts Section */}
-        <section
-          className="grid grid-rows-1 lg:grid-rows-2 gap-6 border-2 border-gray-100 rounded-[20px] p-6 bg-white shadow-sm"
-          data-aos="fade-up" // Animation for the charts section
-          data-aos-delay="100" // Slight delay for smooth entry
-        >
-          <div className="w-full" data-aos="zoom-in" data-aos-delay="200">
+        <section className="grid grid-rows-1 lg:grid-rows-2 gap-6 border-2 border-gray-100 rounded-[20px] p-6 bg-white shadow-sm">
+          <div className="w-full">
             <h2 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">
               Countries and Cities Served
             </h2>
@@ -99,10 +94,10 @@ export default function AirportDistributionAnalysis() {
         {/* Analysis and Storytelling Section */}
         <section className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-visible">
           <div className="border-2 border-blue-100 rounded-[20px] p-6 shadow-sm">
-            <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">
               Analysis
             </h3>
-            <div className="space-y-3 text-gray-700">
+            <div className="text-sm leading-6 sm:text-lg sm:leading-8 space-y-3 text-gray-700">
               <p>
                 <span className="font-semibold">Airports per Continent: </span>
                 Helps us understand airport density in different regions.
@@ -117,10 +112,10 @@ export default function AirportDistributionAnalysis() {
           </div>
 
           <div className="border-2 border-blue-100 rounded-[20px] p-6 shadow-sm">
-            <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient">
               Storytelling
             </h3>
-            <p className="text-gray-700">
+            <p className="text-sm leading-6 sm:text-lg sm:leading-8 space-y-3 text-gray-700">
               The airport distribution analysis shows where the network is most
               concentrated and how widespread the services are globally. It
               provides a view of the airport's international reach and helps
