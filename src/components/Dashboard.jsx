@@ -9,7 +9,7 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("Overview");
 
   return (
-    <div className="min-h-screen w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 my-4 sm:my-8">
+    <div className="min-h-screen w-full max-w-screen-xl mx-auto my-6 overflow-hidden">
       {/* Header Section */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-4 sm:gap-0">
         <h3 className="dashboard-title text-xl sm:text-2xl md:text-3xl font-medium flex-1">

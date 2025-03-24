@@ -16,7 +16,7 @@ export default function InternationalFoodPreference() {
   }, []);
 
   return (
-    <div className="my-8 px-4 sm:px-6 lg:px-8">
+    <div className="my-6">
       {/* Container for the entire page */}
       <div className="max-w-screen-xl mx-auto">
         {/* Charts Section */}
@@ -36,7 +36,7 @@ export default function InternationalFoodPreference() {
         {/* Storytelling Section */}
         <section className="mt-8 overflow-visible">
           <div className="border-2 border-blue-100 rounded-[20px] p-6 shadow-sm">
-            <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">
               Storytelling
             </h3>
             <p className="text-gray-700">

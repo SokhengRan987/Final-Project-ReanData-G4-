@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 
@@ -7,6 +7,22 @@ import GroupedBarChart from "../../components/foodAndBeverages/averageSpendings/
 
 export default function AverageSpending() {
   const [selectedGraph, setSelectedGraph] = useState("scatter"); // Default to ScatterPlot
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     AOS.init({
@@ -29,8 +45,13 @@ export default function AverageSpending() {
     }
   };
 
+  const chartOptions = [
+    { id: "bar", label: "Bar Chart" },
+    { id: "scatter", label: "Scatter Plot" },
+  ];
+
   return (
-    <div className="my-8 px-4 sm:px-6 lg:px-8">
+    <div className="my-6">
       {/* Container for the entire page */}
       <div className="max-w-screen-xl mx-auto">
         {/* Charts Section */}
@@ -40,41 +61,89 @@ export default function AverageSpending() {
           data-aos-delay="100"
         >
           <h2 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">
-              Average Spending by Value Priority
-            </h2>
-          {/* Graph Selection Toggle */}
+            Average Spending by Value Priority
+          </h2>
+
+          {/* Chart Type Toggle - Dropdown for mobile, Buttons for larger screens */}
           <div className="flex justify-end mb-4">
-            <div className="inline-flex shadow-sm">
+            {/* Mobile Dropdown */}
+            <div className="md:hidden relative" ref={dropdownRef}>
               <button
-                type="button" // Added for accessibility
-                onClick={() => setSelectedGraph("scatter")}
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="flex items-center justify-between w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-[20px] shadow-sm hover:bg-gray-50 focus:outline-none"
+              >
+                {chartOptions.find((option) => option.id === setSelectedGraph)
+                  ?.label || "Select Chart Type"}
+                <svg
+                  className={`w-4 h-4 ml-2 transition-transform ${
+                    dropdownOpen ? "transform rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+
+              {/* Dropdown menu */}
+              {dropdownOpen && (
+                <div className="absolute right-0 z-10 w-48 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg">
+                  <ul className="py-1">
+                    {chartOptions.map((option) => (
+                      <li key={option.id}>
+                        <button
+                          onClick={() => {
+                            setSelectedGraph(option.id);
+                            setDropdownOpen(false);
+                          }}
+                          className={`block w-full text-left px-4 py-2 text-sm ${
+                            selectedGraph === option.id
+                              ? "bg-blue-500 text-white"
+                              : "text-gray-700 hover:bg-gray-50"
+                          }`}
+                        >
+                          {option.label}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+
+            {/* Desktop Button Group */}
+            <div className="hidden md:inline-flex shadow-sm">
+              <button
+                onClick={() => setSelectedGraph("bar")}
                 className={`px-4 py-2 text-sm rounded-l-[20px] font-medium ${
+                  selectedGraph === "bar"
+                    ? "bg-blue-500 text-white"
+                    : "bg-white text-gray-700 hover:bg-gray-50"
+                } border border-gray-200`}
+              >
+                Grouped Bar Chart
+              </button>
+              <button
+                onClick={() => setSelectedGraph("scatter")}
+                className={`px-4 py-2 text-sm rounded-r-[20px] font-medium ${
                   selectedGraph === "scatter"
                     ? "bg-blue-500 text-white"
                     : "bg-white text-gray-700 hover:bg-gray-50"
                 } border border-gray-200`}
-                aria-label="Show Scatter Plot"
               >
                 Scatter Plot
-              </button>
-              <button
-                type="button"
-                onClick={() => setSelectedGraph("bar")}
-                className={`px-4 py-2 text-sm font-medium ${
-                  selectedGraph === "bar"
-                    ? "bg-blue-500 text-white"
-                    : "bg-white text-gray-700 hover:bg-gray-50"
-                } border border-gray-200 rounded-r-[20px]`}
-                aria-label="Show Grouped Bar Chart"
-              >
-                Grouped Bar Chart
               </button>
             </div>
           </div>
 
           {/* Chart Title */}
-          <div className="w-full" data-aos="zoom-in" data-aos-delay="75">
-          </div>
+          <div className="w-full" data-aos="zoom-in" data-aos-delay="75"></div>
 
           {/* Render Selected Graph */}
           <div className="w-full">
@@ -86,10 +155,12 @@ export default function AverageSpending() {
         {/* Storytelling Section */}
         <section className="mt-8 overflow-visible">
           <div className="border-2 border-blue-100 rounded-[20px] p-6 shadow-sm">
-            <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">
               Storytelling
             </h3>
-            <p className="text-gray-700">{getStorytellingText()}</p>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              {getStorytellingText()}
+            </p>
           </div>
         </section>
       </div>

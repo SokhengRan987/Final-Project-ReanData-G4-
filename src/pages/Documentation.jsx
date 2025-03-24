@@ -16,9 +16,9 @@ const Documentation = () => {
     }, []);
 
     return (
-        <div className="flex flex-col min-h-screen bg-gray-100">
+        <div className="flex flex-col min-h-screen bg-gray-100 overflow-hidden">
             
-            <div className="w-full py-8 md:py-16 bg-gradient-to-r from-[#17203F] via-[#23315F] to-[#3C55A5] text-white text-center">
+            {/* <div className="w-full py-8 md:py-16 bg-gradient-to-r from-[#17203F] via-[#23315F] to-[#3C55A5] text-white text-center">
               <div className="container mx-auto px-4 py-4 md:py-8 max-w-4xl">
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">How To Use Dataset</h1>
                 <p className="text-sm md:text-base text-slate-100 mb-4 md:mb-8 max-w-2xl mx-auto">
@@ -26,7 +26,7 @@ const Documentation = () => {
                   data types, creating, and collaborating.
                 </p>
               </div>
-            </div>
+            </div> */}
             
              {/* Quick Start Guide */}
             <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8 xl:px-36 w-full">
@@ -314,14 +314,14 @@ const Documentation = () => {
             </div>
 
             {/* Call to Action */}
-            <div className="bg-gradient-to-r from-[#17203F] via-[#23315F] to-[#3C55A5] py-16">
+            {/* <div className="bg-gradient-to-r from-[#17203F] via-[#23315F] to-[#3C55A5] py-16">
                 <div className="container mx-auto px-6 text-center sm:px-6 lg:px-8 xl:px-16 w-full">
                     <h2 className="text-3xl font-bold text-white mb-4">Ready to Transform Your Data?</h2>
                     <p className="text-white mb-8 max-w-2xl mx-auto">
                         Unlock the full potential of your datasets with our powerful visualization tools
                     </p>
                 </div>
-            </div>
+            </div> */}
 
         </div>
     );

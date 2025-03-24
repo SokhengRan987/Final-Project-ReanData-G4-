@@ -220,8 +220,8 @@ const TableComponent = ({
   const showingRecords = data?.length || 0;
 
   return (
-    <div className="container w-full mx-auto p-2 sm:p-4">
-      <div className="bg-white rounded-lg border shadow-sm overflow-hidden">
+    <div className="container w-full mx-auto p-2">
+      <div className="bg-white rounded-lg border shadow-sm">
         <div className="p-3 sm:p-4 border-b bg-gray-50">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
             <div className="flex items-center gap-2 w-full sm:w-1/3">

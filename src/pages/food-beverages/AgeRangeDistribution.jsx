@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 
@@ -8,6 +8,22 @@ import DoughnutChart from "../../components/foodAndBeverages/ageRangeDistributio
 
 export default function AgeRangeDistribution() {
   const [chartType, setChartType] = useState("bar"); // State to manage chart type
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    }
+    
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     AOS.init({
@@ -20,8 +36,15 @@ export default function AgeRangeDistribution() {
     AOS.refresh();
   }, []);
 
+  // Chart options for dropdown and buttons
+  const chartOptions = [
+    { id: "bar", label: "Bar Chart" },
+    { id: "pie", label: "Pie Chart" },
+    { id: "doughnut", label: "Doughnut Chart" }
+  ];
+
   return (
-    <div className="my-8 px-4 sm:px-6 lg:px-8">
+    <div className="my-6">
       {/* Container for the entire page */}
       <div className="max-w-screen-xl mx-auto">
         {/* Charts Section */}
@@ -33,9 +56,54 @@ export default function AgeRangeDistribution() {
           <h2 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">
             Age Range Distribution
           </h2>
-          {/* Chart Type Toggle */}
-          <div className="flex justify-end ​​​mb-4">
-            <div className="inline-flex shadow-sm">
+          
+          {/* Chart Type Toggle - Dropdown for mobile, Buttons for larger screens */}
+          <div className="flex justify-end mb-4">
+            {/* Mobile Dropdown */}
+            <div className="md:hidden relative" ref={dropdownRef}>
+              <button
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="flex items-center justify-between w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-[20px] shadow-sm hover:bg-gray-50 focus:outline-none"
+              >
+                {chartOptions.find(option => option.id === chartType)?.label || "Select Chart Type"}
+                <svg 
+                  className={`w-4 h-4 ml-2 transition-transform ${dropdownOpen ? 'transform rotate-180' : ''}`} 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {/* Dropdown menu */}
+              {dropdownOpen && (
+                <div className="absolute right-0 z-10 w-48 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg">
+                  <ul className="py-1">
+                    {chartOptions.map((option) => (
+                      <li key={option.id}>
+                        <button
+                          onClick={() => {
+                            setChartType(option.id);
+                            setDropdownOpen(false);
+                          }}
+                          className={`block w-full text-left px-4 py-2 text-sm ${
+                            chartType === option.id
+                              ? "bg-blue-500 text-white"
+                              : "text-gray-700 hover:bg-gray-50"
+                          }`}
+                        >
+                          {option.label}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+            
+            {/* Desktop Button Group */}
+            <div className="hidden md:inline-flex shadow-sm">
               <button
                 onClick={() => setChartType("bar")}
                 className={`px-4 py-2 text-sm rounded-l-[20px] font-medium ${
@@ -83,10 +151,10 @@ export default function AgeRangeDistribution() {
         {/* Storytelling Section */}
         <section className="mt-8 overflow-visible">
           <div className="border-2 border-blue-100 rounded-[20px] p-6 shadow-sm">
-            <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-300 bg-[length:200%_250%] bg-clip-text text-transparent animate-gradient">
               Storytelling
             </h3>
-            <p className="text-gray-700">
+            <p className="text-gray-700 text-lg leading-relaxed">
               This graph helps identify the distribution of users across
               different age ranges, providing insight into the survey's target
               demographic. A pie or doughnut chart effectively shows the

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
+import helpAndSupport from "../img/cc.gif"
+
 
 function HelpAndSupport() {
   const [formData, setFormData] = useState({
@@ -231,8 +233,8 @@ function HelpAndSupport() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   type="submit"
-                  className={`bg-[#3C55A5] text-white font-medium py-2 sm:py-3 px-6 sm:px-10 mt-4 text-sm sm:text-base md:text-lg rounded-full transition duration-300 ${
-                    !userQuestion || questionSubmitting ? "cursor-not-allowed opacity-50" : "hover:bg-green-600"
+                  className={`bg-[#2040a7] text-white font-medium py-2 sm:py-3 px-6 sm:px-10 mt-4 text-sm sm:text-base md:text-lg rounded-full transition duration-300 ${
+                    !userQuestion || questionSubmitting ? "cursor-not-allowed opacity-75" : "hover:bg-[#3c5ac0]"
                   }`}
                   disabled={!userQuestion || questionSubmitting}
                 >
@@ -305,7 +307,7 @@ function HelpAndSupport() {
             className="w-full md:w-1/2 flex justify-center"
           >
             <img
-              src="./src/assets/cc.gif"
+              src = {helpAndSupport}
               alt="Support illustration"
               className="w-full max-w-xs sm:max-w-sm md:max-w-md transform scale-x-[-1] rounded-lg"
             />
@@ -387,10 +389,9 @@ function HelpAndSupport() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 type="submit"
-                className={`bg-[#3C55A5] text-white font-medium py-2 sm:py-3 px-6 sm:px-10 text-sm sm:text-base md:text-lg rounded-full transition duration-300 ${
+                className={`bg-[#2040a7] text-white font-medium py-2 sm:py-3 px-6 sm:px-10 text-sm sm:text-base md:text-lg rounded-full transition duration-300 ${
                   !formData.name || !formData.email || !formData.message || contactSubmitting
-                    ? "cursor-not-allowed opacity-50"
-                    : "hover:bg-green-500"
+                  ?"cursor-not-allowed opacity-75" : "hover:bg-[#3c5ac0]"
                 }`}
                 disabled={!formData.name || !formData.email || !formData.message || contactSubmitting}
               >

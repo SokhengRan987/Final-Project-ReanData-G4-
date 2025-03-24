@@ -76,7 +76,7 @@ const DataSet = () => {
   return (
     <main className="font-roboto flex flex-col bg-gray-100 min-h-screen">
       {/* Hero Section */}
-      <section className="w-full py-8 md:py-16 bg-gradient-to-r from-[#17203F] via-[#23315F] to-[#3C55A5] text-white text-center">
+      {/* <section className="w-full py-8 md:py-16 bg-gradient-to-r from-[#17203F] via-[#23315F] to-[#3C55A5] text-white text-center">
         <div className="container mx-auto px-4 py-4 md:py-8 max-w-screen-xl">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">
             Real-Time Air and Food & Beverage Data Analytics
@@ -87,41 +87,41 @@ const DataSet = () => {
             heights of success
           </p>
         </div>
-      </section>
-      <section className="w-[90%] max-w-screen-xl sm:w-full mx-auto py-6 md:py-10 bg-gray-100 overflow-hidden">
+      </section> */}
+      <section className="w-[95%] max-w-screen-xl mx-auto overflow-hidden">
         {/* Subtitle Section */}
-        <section className=" text-white">
+        <section className="text-center sm:text-start">
           <div
-            className="container text-center"
+            className="container"
             data-aos="fade-up"
             data-aos-duration="1000"
             data-aos-delay="200"
           >
             <p
-              className="text-[#22B04B] text-xl md:text-2xl lg:text-[32px] font-bold"
+              className="text-[#22B04B] text-xl md:text-2xl lg:text-[32px] font-bold mt-8"
               style={{ lineHeight: "1.5" }}
             >
               Get to know about
             </p>
-            <h2 className="text-[#3C55A5] font-bold text-2xl sm:text-3xl md:text-5xl lg:text-[38px] leading-tight">
-              Airline data & Food Beverage data
+            <h2 className="text-[#3C55A5] font-semibold text-xl sm:text-2xl md:text-3xl xl:text-5xl lg:text-[38px] leading-6">
+              Airdata and Food & Beverages
             </h2>
           </div>
         </section>
 
         {/* First Content Section */}
-        <section className="w-[90%] sm:w-full mx-auto py-6 md:py-10 bg-gray-100 text-white">
-          <div className="container mx-auto">
+        <section className="w-[90%] sm:w-full mx-auto py-6 md:py-10">
+          <div className="mx-auto bg-transparent">
             <div className="flex flex-col md:flex-row justify-between items-center gap-3 md:gap-5">
               <div
-                className="w-full md:w-1/2 px-2 md:px-4 mb-2 md:mb-4"
+                className="w-full md:w-1/2 mb-2 md:mb-4"
                 data-aos="fade-right"
                 data-aos-delay="100"
               >
-                <h2 className="text-[#3C55A5] text-xl md:text-2xl lg:text-[32px] font-bold mb-2 md:mb-3 tracking-tight">
-                  Airline Data
+                <h2 className="text-[#3C55A5] font-semibold text-xl sm:text-2xl md:text-3xl xl:text-5xl lg:text-[38px] leading-6">
+                  Airdata
                 </h2>
-                <p className="text-[#334155] text-sm md:text-base lg:text-lg text-justify tracking-tight leading-tight">
+                <p className="text-[#334155] text-[16px] md:text-base lg:text-lg text-justify leading-6">
                   Airline data refers to the collection of structured and
                   unstructured information related to airline operations,
                   including flight schedules, passenger details, ticket prices,
@@ -132,14 +132,14 @@ const DataSet = () => {
                 </p>
               </div>
               <div
-                className="w-full md:w-1/2 rounded-lg px-2 md:px-4 mb-2 md:mb-4"
+                className="w-full md:w-1/2 mb-2 md:mb-4"
                 data-aos="fade-left"
                 data-aos-delay="300"
               >
                 <img
                   src={AirlineData}
                   alt="Airline data analytics"
-                  className="w-full h-auto rounded"
+                  className="w-full h-auto rounded-[20px]"
                 />
               </div>
             </div>
@@ -147,29 +147,29 @@ const DataSet = () => {
         </section>
 
         {/* Second Content Section */}
-        <section className="w-[90%] sm:w-full mx-auto py-6 md:py-10 bg-gray-100 md:px-6 text-white">
+        <section className="w-[90%] sm:w-full mx-auto py-6 md:py-10 bg-gray-100 text-white">
           <div className="container mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-center gap-3 md:gap-5">
               <div
-                className="w-full md:w-1/2 rounded-lg px-2 md:px-4 mb-2 md:mb-4"
+                className="w-full md:w-1/2 mb-2 md:mb-4"
                 data-aos="fade-right"
                 data-aos-delay="100"
               >
                 <img
                   src={FoodAndBeverage}
                   alt="Food and beverage display with fresh produce"
-                  className="w-full h-auto rounded"
+                  className="w-full h-auto rounded-[20px]"
                 />
               </div>
               <div
-                className="w-full md:w-1/2 px-2 md:px-4 mb-2 md:mb-4"
+                className="w-full md:w-1/2 mb-2 md:mb-4"
                 data-aos="fade-left"
                 data-aos-delay="300"
               >
-                <h2 className="text-[#3C55A5] text-xl md:text-2xl lg:text-[32px] font-bold mb-2 md:mb-3 tracking-tight">
+                <h2 className="text-[#3C55A5] font-semibold text-xl sm:text-2xl md:text-3xl xl:text-5xl lg:text-[38px] leading-6">
                   Food & Beverages
                 </h2>
-                <p className="text-[#334155] text-sm md:text-base lg:text-lg text-justify tracking-tight leading-tight">
+                <p className="text-[#334155] text-[16px] md:text-base lg:text-lg text-justify leading-6">
                   Food and Beverage data refers to the collection of information
                   related to the production, distribution, consumption, and
                   sales of food and beverages. This data is used by restaurants,
@@ -186,7 +186,7 @@ const DataSet = () => {
         <section className="w-[90%] sm:w-full mx-auto py-6 md:py-10 bg-gray-100 md:px-6 text-white">
           <div className="container mx-auto text-center md:text-left">
             <h2
-              className="text-center text-[#3C55A5] text-2xl md:text-3xl lg:text-[38px] font-bold mb-6 leading-loose"
+              className="text-[#3C55A5] font-semibold text-xl sm:text-2xl md:text-3xl xl:text-5xl lg:text-[38px] leading-6"
               style={{ lineHeight: "1" }}
             >
               Data Sources & Collection
@@ -200,10 +200,10 @@ const DataSet = () => {
 
             <div
               data-aos="fade-left"
-              className="mb-8 p-6 rounded-lg shadow-sm transition-all hover:shadow-md h-auto max-w-[100rem] mx-auto"
+              className="mb-8 p-6 rounded-lg transition-all text-start hover:shadow-sm h-auto mx-auto bg-white"
             >
               <div className="p-4">
-                <p className="text-[#334155] text-sm md:text-base lg:text-[18px] leading-relaxed">
+                <p className="text-[#334155] text-[16px] md:text-base lg:text-[18px] leading-relaxed">
                   We collected data from{" "}
                   <span className="font-semibold">
                     Postgres_Air by Hettie-D
@@ -214,7 +214,7 @@ const DataSet = () => {
                   participants shared insights based on their personal
                   experiences.
                 </p>
-                <p className="text-[#334155] text-sm md:text-base lg:text-[18px] leading-relaxed mt-4">
+                <p className="text-[#334155] text-[16px] md:text-base lg:text-[18px] leading-relaxed mt-4">
                   To maintain data integrity, we cleaned and processed the
                   collected information, ensuring it remains free from
                   inconsistencies and is ready for analysis.
@@ -223,12 +223,12 @@ const DataSet = () => {
             </div>
 
             <div className="mb-10">
-              <h3 className="text-[#22B04B] font-bold text-xl md:text-1xl lg:text-[30px] mb-2 leading-loose">
+              <h3 className="text-[#22B04B] font-bold text-xl lg:text-[30px] mb-2 leading-loose">
                 Data Sources
               </h3>
               <div
                 data-aos="fade-right"
-                className="mb-12 p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white max-w-[100rem] mx-auto overflow-hidden"
+                className="mb-12 p-4 rounded-xl transition-all duration-300 hover:shadow-sm hover:-translate-y-1 bg-white mx-auto overflow-hidden"
               >
                 {/* Header Section */}
                 <div className="flex flex-col md:flex-row md:items-center md:gap-6 mb-8">
@@ -249,8 +249,8 @@ const DataSet = () => {
                     <div className="w-20 h-1 bg-[#3C55A5] rounded-full mb-4 mx-auto md:mx-0"></div>
                   </div>
                 </div>
-                <div className="bg-gray-50 p-6 rounded-lg">
-                  <p className="text-[#334155] text-base lg:text-lg leading-relaxed">
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <p className="text-[#334155] text-[16px] text-start sm:text-lg leading-6">
                     A comprehensive structured dataset used for advanced
                     analytics and performance experiments in the aviation
                     industry. This database provides rich information about
@@ -343,7 +343,7 @@ const DataSet = () => {
               </div>
               <div
                 data-aos="fade-left"
-                className="mb-12 py-8 px-4 rounded-xl shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1 bg-white max-w-[100rem] mx-auto overflow-hidden"
+                className="mb-12 py-8 px-4 rounded-xl transition-all duration-300 hover:shadow-sm hover:-translate-y-1 bg-white max-w-[100rem] mx-auto overflow-hidden"
               >
                 <div className="flex flex-col md:flex-row-reverse md:items-start gap-10">
                   {/* Image Section (Right) */}
@@ -368,7 +368,7 @@ const DataSet = () => {
                   <div className="md:w-2/3">
                     {/* Logo and Title in same row */}
                     <div className="flex items-center mb-6">
-                      <div className="h-12 w-12 sm:h-16 sm:w-16 bg-[#22B04B] text-white rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold shadow-md mr-4">
+                      <div className="h-12 w-12 sm:h-16 sm:w-16 bg-[#22B04B] text-white rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold hover:shadow-sm mr-4">
                         F&B
                       </div>
                       <h3 className="text-[#1E293B] font-bold text-[17px] sm:text-xl md:text-2xl lg:text-3xl">
@@ -380,7 +380,7 @@ const DataSet = () => {
                     <div className="w-20 h-1 bg-[#22B04B] rounded-full mb-6 opacity-70"></div>
 
                     {/* Description */}
-                    <div className="bg-gray-50 p-6 rounded-lg mb-6">
+                    <div className="bg-gray-50 p-4 rounded-lg mb-6">
                       <p className="text-[#334155] text-start sm:text-base md:text-lg mb-4 leading-relaxed">
                         Our comprehensive food and beverage dataset is collected
                         through meticulously designed
@@ -460,9 +460,10 @@ const DataSet = () => {
                       <h4 className="text-[#22B04B] font-semibold text-lg mb-2">
                         Survey Methodology
                       </h4>
-                      <p className="text-gray-600 text-sm sm:text-[16px]">
+                      <p className="text-gray-600 text-start text-sm sm:text-[16px] leading-6">
                         Our surveys target diverse demographic groups across
-                        multiple routes and airlines, with over <span className="font-semibold">100</span>  responses
+                        multiple routes and airlines, with over{" "}
+                        <span className="font-semibold">100</span> responses
                         collected. Results undergo rigorous statistical analysis
                         and validation before integration with our broader
                         dataset.
@@ -476,7 +477,7 @@ const DataSet = () => {
         </section>
 
         {/* Steps Section */}
-        <section className="w-[90%] sm:w-full mx-auto py-8 bg-gray-100">
+        <section className="w-[90%] sm:w-full mx-auto mt-4 bg-gray-100">
           <div className="container mx-auto">
             <div className="">
               <h2 className="text-center text-[#3C55A5] text-2xl md:text-3xl lg:text-[38px] font-bold leading-loose">
@@ -485,7 +486,7 @@ const DataSet = () => {
             </div>
           </div>
         </section>
-        <div className="">
+        <div className="my-8">
           <section className="w-[90%] sm:w-full mx-auto px-2 sm:px-36 md:px-6 text-white">
             <div className="container mx-auto sm:px-[7.5rem] text-center md:text-left">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">

@@ -43,6 +43,7 @@ const teamMembersData = [
   {
     name: "CHHENG PANHARATH",
     image: rath,
+    role: "Leader, Frontend, UX/UI, Java",
     social: {
       facebook: "https://www.facebook.com/share/18xv46WYaB/",
       github: "https://github.com/Panharoth06",
@@ -50,6 +51,7 @@ const teamMembersData = [
   },
   {
     name: "CHAING POLIN",
+    role: "Co-Leader, Frontend, UX/UI",
     image: lin,
     social: {
       facebook: "https://www.facebook.com/tired.micky?mibextid=wwXIfr&rdid=rZ5QUD1il74F0Pyj&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F16Ch8JJmWb%2F%3Fmibextid%3DwwXIfr#",
@@ -59,6 +61,7 @@ const teamMembersData = [
   {
     name: "RAN SOKHENG",
     image: sokheng,
+    role: "Document Researcher, Frontend",
     social: {
       facebook: "https://www.facebook.com/share/1X7RzdGqiR/?mibextid=wwXIfr", 
       github: "https://github.com/SokhengRan987",
@@ -67,6 +70,7 @@ const teamMembersData = [
   {
     name: "CHAO VANTHOUNG",
     image:thoung,
+    role: "Frontend, UX/UI, Java",
     social: {
       facebook: "https://www.facebook.com/van.thoung.7/", 
       github: "https://github.com/ChaoVanThoung",
@@ -75,6 +79,7 @@ const teamMembersData = [
   {
     name: "ROEURM DARA",
     image: dara,
+    role: "Frontend, UX/UI",
     social: {
       facebook: "https://www.facebook.com/share/1Bsy1xwTM9/?mibextid=wwXIfr", 
       github: "https://github.com/Roeurmdara",
@@ -83,6 +88,7 @@ const teamMembersData = [
   {
     name: "SIM SREYKA",
     image: sreyka,
+    role: "Frontend, UX/UI, Presenter",
     social: {
       facebook: "https://www.facebook.com/share/1B1Thb4dnd/", 
       github: "https://github.com/Sreykasim",
@@ -91,6 +97,7 @@ const teamMembersData = [
   {
     name: "LENG SAROTH",
     image:saroth,
+    role: "Frontend, UX/UI",
     social: {
       facebook: "https://www.facebook.com/share/15PQCrwgBo/?mibextid=wwXIfr", 
       github: "https://github.com/it-roth",
@@ -98,6 +105,7 @@ const teamMembersData = [
   },
   {
     name: "SOUN VICHEUT",
+    role: "Frontend, UX/UI",
     image: vichet,
     social: {
       facebook: "#",
@@ -106,6 +114,7 @@ const teamMembersData = [
   },
   {
     name: "VAVON VUOCHNEAT",
+    role: "Frontend, UX/UI",
     image:
       "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80",
     social: {
@@ -121,7 +130,7 @@ export default function About() {
       <main className="max-w-screen-2xl mx-auto">
         {/* Hero Carousel Section */}
         <section>
-          <div className="h-[400px] sm:h-64 xl:h-[400px] 2xl:h-[490px]">
+          <div className="h-[400px] sm:h-64 xl:h-[400px] 2xl:h-[490px] overflow-hidden">
             <Carousel
               onSlideChange={(index) => console.log("onSlideChange()", index)}
               indicators={true}
@@ -475,7 +484,7 @@ export default function About() {
                   <h3 className="text-2xl font-bold text-gray-800 mb-1">
                     {member.name}
                   </h3>
-                  <p className="text-gray-600 mb-1">Student</p>
+                  <p className="text-gray-600 mb-1 uppercase">{member.role}</p>
 
                   {/* Role Badge */}
                   <div className="bg-blue-100 text-blue-700 px-3 py-1 rounded-md text-sm font-medium uppercase tracking-wide mb-4">

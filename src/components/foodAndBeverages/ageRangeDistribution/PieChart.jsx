@@ -1,10 +1,43 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import Loader from '../../loading/Loader';
 import { useGetAgeRangeDistributionQuery } from '../../../redux/service/food-beverages/ageRangeDistribution';
 
 export default function AgeRangePieChart() {
   const { data: apiData, error, isLoading } = useGetAgeRangeDistributionQuery();
+  const [chartLayout, setChartLayout] = useState({
+    legendPosition: 'right',
+    outerRadius: 150
+  });
+
+  // Handle responsive layout adjustments
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setChartLayout({
+          legendPosition: 'bottom',
+          outerRadius: 100
+        });
+      } else if (window.innerWidth < 768) {
+        setChartLayout({
+          legendPosition: 'right',
+          outerRadius: 120
+        });
+      } else {
+        setChartLayout({
+          legendPosition: 'right',
+          outerRadius: 150
+        });
+      }
+    };
+
+    // Initial setup and event listener
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Process and standardize the messy age range data
   const processedData = useMemo(() => {
@@ -93,13 +126,9 @@ export default function AgeRangePieChart() {
       const data = payload[0].payload;
       const percentage = ((data.value / totalCount) * 100).toFixed(1);
       return (
-        <div className="custom-tooltip" style={{
-          backgroundColor: 'white',
-          padding: '10px',
-          border: '1px solid #ccc'
-        }}>
-          <p>{`${data.name}: ${data.value} customers`}</p>
-          <p>{`(${percentage}%)`}</p>
+        <div className="custom-tooltip bg-white p-2 border border-gray-200 shadow-md rounded text-sm">
+          <p className="font-medium">{`${data.name}: ${data.value} customers`}</p>
+          <p className="text-gray-600">{`(${percentage}%)`}</p>
         </div>
       );
     }
@@ -109,24 +138,26 @@ export default function AgeRangePieChart() {
   // Custom legend formatter
   const renderLegend = (props) => {
     const { payload } = props;
+    
+    if (!payload || payload.length === 0) return null;
+    
+    // Determine legend layout based on screen size
+    const isHorizontal = chartLayout.legendPosition === 'bottom';
+    
     return (
-      <ul style={{ listStyle: 'none', padding: 0 }}>
-        {payload.map((entry, index) => {
-          const percentage = ((entry.payload.value / totalCount) * 100).toFixed(1);
-          return (
-            <li key={`item-${index}`} style={{ marginBottom: '5px' }}>
-              <span style={{
-                display: 'inline-block',
-                width: '10px',
-                height: '10px',
-                backgroundColor: entry.color,
-                marginRight: '5px'
-              }}></span>
-              {`${entry.value}: ${entry.payload.value} (${percentage}%)`}
-            </li>
-          );
-        })}
-      </ul>
+      <div className={`text-xs sm:text-sm ${isHorizontal ? 'pt-4 flex flex-wrap justify-center gap-x-4' : ''}`}>
+        <ul className={`list-none p-0 m-0 ${isHorizontal ? 'flex flex-wrap gap-x-4 gap-y-2 justify-center' : ''}`}>
+          {payload.map((entry, index) => {
+            const percentage = ((entry.payload.value / totalCount) * 100).toFixed(1);
+            return (
+              <li key={`item-${index}`} className={`mb-1 ${isHorizontal ? 'inline-flex items-center' : ''}`}>
+                <span className="inline-block w-3 h-3 mr-1" style={{ backgroundColor: entry.color }}></span>
+                {`${entry.value}: ${entry.payload.value} (${percentage}%)`}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     );
   };
 
@@ -136,28 +167,29 @@ export default function AgeRangePieChart() {
 
   if (error) {
     return (
-      <div className="error-container">
-        <h3>Error loading age range distribution data</h3>
+      <div className="error-container p-4 text-center text-red-600">
+        <h3 className="font-bold mb-2">Error loading age range distribution data</h3>
         <p>Please try again later or contact support if the problem persists.</p>
       </div>
     );
   }
 
-  if (!processedData) {
-    return <div>No data available</div>;
+  if (!processedData || processedData.length === 0) {
+    return <div className="text-center p-4 text-gray-500">No data available</div>;
   }
 
   return (
-    <div className="chart-container" style={{ width: '100%', margin: 'auto', maxWidth: '700px' }}>
-      <ResponsiveContainer width="100%" height={450}>
-        <PieChart>
+    <div className="flex flex-col h-72 w-full sm:h-80 md:h-96 max-w-2xl mx-auto px-2 md:px-4">
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart margin={{ top: 20, right: 0, bottom: 0, left: 0 }}>
           <Pie
             data={processedData}
             dataKey="value"
             nameKey="name"
             cx="50%"
             cy="50%"
-            outerRadius={150}
+            outerRadius={chartLayout.outerRadius}
+            // innerRadius={chartLayout.outerRadius * 0.4}
             animationDuration={1200}
             animationBegin={0}
             labelLine={false}
@@ -171,9 +203,9 @@ export default function AgeRangePieChart() {
           </Pie>
           <Tooltip content={<CustomTooltip />} />
           <Legend 
-            layout="vertical"
-            align="right"
-            verticalAlign="middle"
+            layout={chartLayout.legendPosition === 'bottom' ? 'horizontal' : 'vertical'}
+            align={chartLayout.legendPosition === 'bottom' ? 'center' : 'right'}
+            verticalAlign={chartLayout.legendPosition === 'bottom' ? 'bottom' : 'middle'}
             content={renderLegend}
           />
         </PieChart>

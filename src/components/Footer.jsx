@@ -20,14 +20,14 @@ export default function Footer() {
                 />
               </a>
 
-              <h3 className="font-medium text-indigo-600 text-xl">Rean Data PlatForm</h3>
+              <h3 className="font-medium text-[#3f5aa8] text-xl">ReanData PlatForm</h3>
             </div>
 
             {/* Features Section */}
             <div>
               <h2 className="text-lg font-bold mb-6 text-gray-800 relative inline-block">
                 Features
-                <span className="absolute -bottom-2 left-0 w-12 h-1 bg-indigo-500"></span>
+                <span className="absolute -bottom-2 left-0 w-12 h-1 bg-[#3f5aa8]"></span>
               </h2>
               <ul className="space-y-4">
                 {[
@@ -39,11 +39,11 @@ export default function Footer() {
                   <li key={item.name}>
                     <a
                       href={item.link}
-                      className="text-gray-600 hover:text-indigo-600 transition-colors duration-200 flex items-center gap-2 group"
+                      className="text-gray-600 hover:text-[#3f5aa8] transition-colors duration-200 flex items-center gap-2 group"
                     >
                       <ChevronRight
                         size={16}
-                        className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 text-indigo-600"
+                        className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 text-[#5677dd]"
                       />
                       {item.name}
                     </a>
@@ -54,24 +54,24 @@ export default function Footer() {
             <div>
               <h2 className="text-lg font-bold mb-6 text-gray-800 relative inline-block">
                 Contact Us
-                <span className="absolute -bottom-2 left-0 w-12 h-1 bg-indigo-500"></span>
+                <span className="absolute -bottom-2 left-0 w-12 h-1 bg-[#3f5aa8]"></span>
               </h2>
               <ul className="space-y-5">
                 <li>
                   <a
                     href="mailto:reandata.istad@gmail.com"
-                    className="text-gray-600 hover:text-indigo-600 transition-colors duration-200 flex items-start gap-3 group"
+                    className="text-gray-600 hover:text-[#3f5aa8] transition-colors duration-200 flex items-start gap-3 group"
                   >
-                    <Mail size={18} className="text-indigo-500 mt-0.5" />
+                    <Mail size={18} className="text-[#3f5aa8] mt-0.5" />
                     <span>reandata.istad@gmail.com</span>
                   </a>
                 </li>
                 <li>
                   <a
                     href="tel:+85577554335"
-                    className="text-gray-600 hover:text-indigo-600 transition-colors duration-200 flex items-start gap-3 group"
+                    className="text-gray-600 hover:text-[#3f5aa8] transition-colors duration-200 flex items-start gap-3 group"
                   >
-                    <Phone size={18} className="text-indigo-500 mt-0.5" />
+                    <Phone size={18} className="text-[#3f5aa8] mt-0.5" />
                     <span>(+855) 77 554 335</span>
                   </a>
                 </li>
@@ -82,7 +82,7 @@ export default function Footer() {
             <div>
               <h2 className="text-lg font-bold mb-6 text-gray-800 relative inline-block">
                 Organized By
-                <span className="absolute -bottom-2 left-0 w-12 h-1 bg-indigo-500"></span>
+                <span className="absolute -bottom-2 left-0 w-12 h-1 bg-[#3f5aa8]"></span>
               </h2>
               <div className="space-y-6">
                 <a href="https://www.cstad.edu.kh/" target="_blank" rel="noopener noreferrer" className="group block">
@@ -93,7 +93,7 @@ export default function Footer() {
                       alt="Istad Logo"
                     />
                   </div>
-                  <div className="flex items-center text-sm text-indigo-600 mt-3 group-hover:text-indigo-800 transition-colors">
+                  <div className="flex items-center text-sm text-[#3f5aa8] mt-3 group-hover:text-[#5677dd] transition-colors">
                     <span>Visit ISTAD website</span>
                     <ArrowUpRight size={14} className="ml-1" />
                   </div>
@@ -104,18 +104,18 @@ export default function Footer() {
 
           {/* Bottom Section */}
           <div className="border-t border-gray-200">
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
-              <div className="flex flex-col sm:flex-row items-center gap-4">
+            <div className="flex flex-row justify-between items-center gap-6">
+              <div className="flex flex-row items-center gap-4">
                 <span className="text-sm text-gray-500">
                   © {new Date().getFullYear()}{" "}
                   <a
                     href="#"
-                    className="text-indigo-600 hover:text-indigo-800 font-medium transition-colors duration-200"
+                    className="text-[#3f5aa8] hover:text-[#5677dd] font-medium transition-colors duration-200"
                   >
                     Reandata™
                   </a>
                 </span>
-                <span className="hidden sm:block text-gray-400">|</span>
+                <span className="text-gray-400">|</span>
                 <span className="text-sm text-gray-500">All Rights Reserved</span>
               </div>
               <div className="mt-6 text-center sm:text-right">

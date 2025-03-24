@@ -74,12 +74,12 @@ export default function AverageSpendingByPriorityChart() {
         <BarChart 
           data={processedData}
           layout="vertical"
-          margin={{ top: 5, right: 20, left: 20, bottom: 20 }}
+          margin={{ top: 5, right: 0, left: -15, bottom: 20 }}
         >
           <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
           <XAxis 
             type="number"
-            domain={[0, 'dataMax + 2']}
+            domain={[0, 'dataMax + 3']}
             tickCount={7}
           >
             <Label value="Average Spending ($)" position="bottom" offset={0} />

@@ -69,7 +69,8 @@ export default function Aircraft() {
       const validOffset = Math.floor(newOffset / limit) * limit;
       setOffset(validOffset);
       window.scrollTo({
-        top: document.querySelector(".bg-white.rounded-lg")?.offsetTop - 100 || 0,
+        top:
+          document.querySelector(".bg-white.rounded-lg")?.offsetTop - 100 || 0,
         behavior: "smooth",
       });
     },
@@ -102,8 +103,8 @@ export default function Aircraft() {
   const rangeCount = getUniqueCount(aircraftData, "range");
 
   return (
-    <main className="flex-1 p-5">
-      <div className="mb-6">
+    <main className="my-6 overflow-hidden">
+      <div className="">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
           <div className="flex items-center">
             <div className="bg-blue-100 p-3 rounded-lg mr-4">
@@ -139,9 +140,7 @@ export default function Aircraft() {
           <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
             <div className="flex justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-500">
-                  Models
-                </p>
+                <p className="text-sm font-medium text-gray-500">Models</p>
                 <p className="text-2xl font-semibold mt-1">
                   {isLoading ? "—" : modelCount}
                 </p>
@@ -154,9 +153,7 @@ export default function Aircraft() {
           <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
             <div className="flex justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-500">
-                  Codes
-                </p>
+                <p className="text-sm font-medium text-gray-500">Codes</p>
                 <p className="text-2xl font-semibold mt-1">
                   {isLoading ? "—" : codeCount}
                 </p>
@@ -169,9 +166,7 @@ export default function Aircraft() {
           <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
             <div className="flex justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-500">
-                  Ranges
-                </p>
+                <p className="text-sm font-medium text-gray-500">Ranges</p>
                 <p className="text-2xl font-semibold mt-1">
                   {isLoading ? "—" : rangeCount}
                 </p>
@@ -183,27 +178,28 @@ export default function Aircraft() {
           </div>
         </div>
       </div>
-
-      <div className="bg-white rounded-lg border border-gray-200 shadow-sm mb-6">
-        <TableComponent
-          columns={columns}
-          data={aircraftData}
-          isLoading={isLoading || isFetching}
-          isFetching={isFetching}
-          error={
-            isError
-              ? error?.message || error?.data?.message || "Unknown error"
-              : null
-          }
-          offset={offset}
-          setOffset={handlePageChange}
-          recordsPerPage={limit}
-          totalRecords={totalCount}
-          totalPages={totalPages}
-          onFilterChange={handleFilterChange}
-          initialFilters={filters}
-        />
-      </div>
+      <section className="max-w-[90%] sm:max-w-screen-xl">
+        <div className="bg-white rounded-lg border border-gray-200 shadow-sm mb-6">
+          <TableComponent
+            columns={columns}
+            data={aircraftData}
+            isLoading={isLoading || isFetching}
+            isFetching={isFetching}
+            error={
+              isError
+                ? error?.message || error?.data?.message || "Unknown error"
+                : null
+            }
+            offset={offset}
+            setOffset={handlePageChange}
+            recordsPerPage={limit}
+            totalRecords={totalCount}
+            totalPages={totalPages}
+            onFilterChange={handleFilterChange}
+            initialFilters={filters}
+          />
+        </div>
+      </section>
     </main>
   );
 }
