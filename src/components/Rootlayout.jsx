@@ -1,14 +1,18 @@
-import React from 'react'
-import NavbarComponent from './NavbarComponent'
-import Footer from './Footer'
-import { Outlet } from 'react-router'
+import React from 'react';
+import NavbarComponent from './NavbarComponent';
+import Footer from './Footer';
+import { Outlet } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 
-export default function Rootlayout() {
+export default function RootLayout() {
   return (
-    <>
-        <NavbarComponent/>
-        <Outlet/>
-        <Footer/>
-    </>
-  )
+    <div className="root-layout">
+      <NavbarComponent />
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
+      <Analytics />
+    </div>
+  );
 }
